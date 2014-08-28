@@ -1,5 +1,3 @@
-
-
 ---metadata
 title              = a simple example of MaTiSSe.py usage
 subtitle           = a bad-showacase of the basic features of MaTiSSe.py
@@ -18,46 +16,68 @@ session_short      = HPS3
 logo               = images/logo.png
 ---endmetadata
 
----theme
-slide_width            = 900px
-slide_height           = 700px
-slide_border_radius    = 10px
-slide_background_color = white
-slide_color            = rgb(102,102,102)
-slide_font_size        = 100%
+---theme_slide_global
+width            = 900px
+height           = 700px
+border_radius    = 10px
+background_color = white
+color            = rgb(102,102,102)
+font_size        = 100%
+---endtheme_slide_global
 
-slide_content_width            = 100%
-slide_content_height           = 100%
-slide_content_background_color = white
-slide_content_color            = rgb(102,102,102)
-slide_content_border_radius    = 0 0 0 0
+---theme_slide_content
+width            = 100%
+height           = 100%
+background_color = white
+color            = rgb(102,102,102)
+border_radius    = 10px
+---endtheme_slide_content
 
-header                        = True
-slide_header_height           = 10%
-slide_header_background_color = #4788B3
-slide_header_color            = white
-slide_header_border_radius    = 10px 10px 0 0
-slide_header_elements         = ['slidetitle','logo']
+---theme_slide_header_1
+height           = 10%
+background_color = #4788B3
+color            = white
+border_radius    = 10px 10px 0 0
+elements         = ['slidetitle','logo']
+---endtheme_slide_header_1
 
-footer                        = False
-slide_footer_height           = 10%
-slide_footer_background_color = #86B2CF
-slide_footer_color            = white
+---theme_slide_header_2
+height           = 3%
+background_color = red
+color            = white
+border_radius    = 0
+elements         = ['slidetitle','logo']
+---endtheme_slide_header_2
 
-sidebarL                        = False
-slide_sidebarL_width            = 10%
-slide_sidebarL_height           = 80%
-slide_sidebarL_background_color = linear-gradient(#4788B3,#86B2CF)
-slide_sidebarL_color            = white
-slide_sidebarL_border_radius    = 0 0 0 0
+---theme_slide_footer_1
+height           = 10%
+background_color = #86B2CF
+color            = white
+---endtheme_slide_footer_1
 
-sidebarR                        = True
-slide_sidebarR_width            = 10%
-slide_sidebarR_height           = 90%
-slide_sidebarR_background_color = linear-gradient(#4788B3,#86B2CF)
-slide_sidebarR_color            = white
-slide_sidebarR_border_radius    = 0 0 10px 0
----endtheme
+---theme_slide_sidebar_1
+position         = L
+width            = 10%
+background_color = linear-gradient(#4788B3,#86B2CF)
+color            = white
+border_radius    = 0 0 0 0
+---endtheme_slide_sidebar_1
+
+---theme_slide_sidebar_3
+position         = L
+width            = 10%
+background_color = red
+color            = white
+border_radius    = 0
+---endtheme_slide_sidebar_3
+
+---theme_slide_sidebar_2
+position         = R
+width            = 10%
+background_color = linear-gradient(#4788B3,#86B2CF)
+color            = white
+border_radius    = 0
+---endtheme_slide_sidebar_2
 
 # Introduction
 
