@@ -14,98 +14,145 @@ conference_short   = NS2014
 session            = Third High Performance Sleeping, HPS3
 session_short      = HPS3
 logo               = images/logo.png
+max_time           = 10
+dirs_to_copy       = ['images']
 ---endmetadata
 
 ---theme_slide_global
 width            = 900px
 height           = 700px
-border_radius    = 10px
-background_color = white
+border-radius    = 10px
+background       = green
 color            = rgb(102,102,102)
-font_size        = 100%
+font-size        = 100%
+slide-transition = horizontal
 ---endtheme_slide_global
 
 ---theme_slide_content
-width            = 100%
-height           = 100%
-background_color = white
-color            = rgb(102,102,102)
-border_radius    = 10px
+background    = white
+color         = rgb(102,102,102)
+padding       = 2%
 ---endtheme_slide_content
 
 ---theme_slide_header_1
-height           = 10%
-background_color = #4788B3
-color            = white
-border_radius    = 10px 10px 0 0
-elements         = ['slidetitle','logo']
+height        = 6%
+background    = #4788B3
+color         = white
+border-radius = 10px 10px 0 0
+elements      = [['slidetitle','font-variant:small-caps;font-size:180%;padding:2%'], &&
+                 ['logo','float:right;height:100%']]
 ---endtheme_slide_header_1
 
----theme_slide_header_2
-height           = 3%
-background_color = red
-color            = white
-border_radius    = 0
-elements         = ['slidetitle','logo']
----endtheme_slide_header_2
-
 ---theme_slide_footer_1
-height           = 10%
-background_color = #86B2CF
-color            = white
+height     = 6%
+background = #86B2CF
+color      = white
+elements   = [['timer','controls;font-size:70%;font-variant:small-caps;padding:1% 1%;float:right'],&&
+              ['total_slides_number','float:right;padding:1% 1%'],&&
+              ['|custom| of ','float:right;padding:1% 0%'],       &&
+              ['slidenumber','float:right;padding:1% 1%'],        &&
+              ['|custom|slide ','float:right;padding:1% 0%']]
 ---endtheme_slide_footer_1
 
+
 ---theme_slide_sidebar_1
-position         = L
-width            = 10%
-background_color = linear-gradient(#4788B3,#86B2CF)
-color            = white
-border_radius    = 0 0 0 0
+position      = R
+width         = 20%
+background    = linear-gradient(#4788B3,#86B2CF)
+color         = white
+border-radius = 0
+elements      = [['title','font-weight:bold;font-variant:small-caps;font-size:105%;padding:5%;display:inline-block'],                               &&
+                 ['authors','font-variant:small-caps;font-size:90%;padding:5%;display:inline-block'],                                               &&
+                 ['affiliations','margin-top:4%;margin-bottom:10%;font-variant:small-caps;font-size:70%;white-space:pre-wrap;padding:5%;display:inline-block'],&&
+                 ['toc','font-variant:small-caps;font-size:90%;white-space:pre-wrap;padding:5%;display:inline-block']]
 ---endtheme_slide_sidebar_1
-
----theme_slide_sidebar_3
-position         = L
-width            = 10%
-background_color = red
-color            = white
-border_radius    = 0
----endtheme_slide_sidebar_3
-
----theme_slide_sidebar_2
-position         = R
-width            = 10%
-background_color = linear-gradient(#4788B3,#86B2CF)
-color            = white
-border_radius    = 0
----endtheme_slide_sidebar_2
 
 # Introduction
 
-## Motivation
+## MaTiSSe.py, what is?
+
+### The Acronym
+
+_MaTiSSe.py_ means **Ma**rkdown **T**o **I**mpressive **S**cientific **S**lid**e**s
+
+It is basically a very simple and stupid (KISS) presentation maker based on simple `markdown` syntax.
+
+For example the markdown code of this slide is:
+
+```
+_MaTiSSe.py_ means **Ma**rkdown **T**o **I**mpressive **S**cientific **S**lid**e**s
+
+It is basically a very simple and stupid (KISS) presentation maker based on simple `markdown` syntax.
+```
+
+All other elements (headers, footers, sidebars, etc...) are handled by MaTiSSe.py once you have setup the theme of your presentation. 
+
+The real cool feature is that for setting up your theme (as the one of the presentation you are reading) **you do not need to be a html-css guru!**
 
 ### Why?
-We love html-based slides with cool effects (by means of `impress.js`, `reveal.js` etc...) but we need more structured slides style for long, scientific presentation. Our ideal talk-makes must have:
+There are tons of markdown to html presentation tools. Why yet another presenter? 
 
-* simple syntax as markdown;
-* html slides output;
-* latex equation support;
-* cool effects;
+Essentially, because other tools are designed for _hackers_ for producing short, essentially **not structured** presentation with cools effects. 
+
+We also love html-based slides with cool effects, but we need more structured slides style for long, scientific presentation with support for *sections*, *subsections*, *TOC*, etc... 
+
+MaTiSSe.py should:
+
+* use simple markdown source to produce high-quality html-based presentation;
+* support structured, long presentations:
+    + presentation metadata; 
+    + sections and subsections; 
+    + toc; 
+    + countdown timer; 
+    + navigation-controls; 
+    + ...
+* support non structured, short and impressive presentations;
+* support latex equations (both offline and online);
+* support for easy theming;
+* provide an output quality comparable to latex-beamer standard, but:
+    + be faster than latex compilation;
+    + be easier than latex programming;
+* support cool effects as the modern _prezi_-like tools have.
 
 ### For whom?
-Scientific researchers used to write presentation with beamer-latex that want to introduce the cool effects of modern html-based presentations to their high-quality scientific slides.
+---slide
+font-size = 110%
+color = red
+slide-transition = vertical
+---endslide
 
-## Requirements
+Scientific researchers (at least the brave ones) are used to write presentation with _latex-beamer_. 
+
+_LaTeX_ is great and the **beamer** class quality is incredible, however some drawbacks can be highlighted:
+
+1. the compilation of an even small presentation can be _time consuming_;
+2. latex _programming_ can be very inflexible frustrating the presenter;
+3. the pdf output has great quality but it behaves not so well with multimedia content; 
+4. it is rather complicated to introduce _prezi_-like effects.
+
+MaTiSSe.py is designed for scientific researchers that want retain the best of _latex-beamer_ and _prezi_ worlds together. 
+
+## Getting started
 
 ### How it works?
-You write a markdown and MaTiSSe.py creates an impressive presentation even if you are a boring scientific researcher by means of nice html slides powered by:
+You write your presentation in markdown and MaTiSSe.py creates an impressive presentation even if you are a boring scientific researcher.
 
-* Python:
-    + [x] `yattag` module;
-    + [x] `markdown` module;
+
+### Requirements
+MaTiSSe.py relies on other great python module for making its magic:
+
+* Python 2.7+ or Python 3.x;
+    + required modules:
+        + `sys`;
+        + `os`;
+        + `argparse`;
+        + `re`;
+        + `yattag`;
+        + `markdown`;
+    + optional modules:
+        + `multiprocessing`;
 * Javascript:
-    + [x] `impress.js`;
-    + [ ] `jmpress.js`;
-    + [ ] `reveal.js`;
+    + `impress.js`;
 
 # API
 
