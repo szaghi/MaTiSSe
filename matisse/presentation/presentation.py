@@ -16,11 +16,11 @@ except ImportError :
   sys.stderr.write("Error: can't import module 'yattag'")
   sys.exit(1)
 # MaTiSSe.py modules
-from .metadata import Metadata
+from ..utils.metadata import Metadata
 from .section import Section
-from .theme import Theme
+from ..theme.theme import Theme
 from .toc import TOC
-from .utils import __expr__,purge_codeblocks
+from ..utils.utils import __expr__,purge_codeblocks
 # regular expressions
 __regex_section__ = re.compile(r"[^#]#\s+"+__expr__)
 # class definition
@@ -28,15 +28,12 @@ class Presentation(object):
   """
   Object for handling the presentation.
   """
-  def __init__(self,
-               metadata = None,
-               theme    = None,
-               sections = None,
-               toc      = None):
-    self.metadata = metadata
-    self.theme    = theme
-    self.sections = sections
-    self.toc      = toc
+  def __init__(self,source):
+    self.metadata = None
+    self.theme    = None
+    self.sections = None
+    self.toc      = None
+    self.__get(source)
     return
   def __get_metadata(self,source):
     """
@@ -76,7 +73,7 @@ class Presentation(object):
     self.toc = TOC(self.sections)
     self.metadata.set_value('toc',str(self.toc))
     return
-  def get(self,source):
+  def __get(self,source):
     """
     Method for getting the presentation from source.
     """

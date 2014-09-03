@@ -5,10 +5,11 @@ This defines a subsection of the presentation.
 """
 # modules loading
 # standard library modules: these should be present in any recent python distribution
+from collections import OrderedDict
 import re
 # MaTiSSe.py modules
 from .slide import Slide
-from .utils import __expr__,purge_codeblocks
+from ..utils.utils import __expr__,purge_codeblocks
 # regular expressions
 __regex_slide__ = re.compile(r"[^#]###\s+"+__expr__)
 # class definition
@@ -16,13 +17,17 @@ class Subsection(object):
   """
   Subsection is an object that handles a single subsection, its attributes and methods.
   """
-  def __init__(self,raw_body='',number=0,title='',slides=None,data=None):
+  def __init__(self,raw_body='',number=0,title='',data=None):
     self.raw_body = raw_body
     self.number   = number
     self.title    = title
-    self.slides   = slides
-    self.data     = dict({'subsectiontitle'  : self.title,
-                          'subsectionnumber' : str(self.number)}.items()+data.items())
+    self.slides   = None
+    self.data     = OrderedDict()
+    if data:
+      for key,val in data.items():
+        self.data[key] = val
+    self.data['subsectiontitle' ] = self.title
+    self.data['subsectionnumber'] = str(self.number)
     return
   def get_slides(self,slides_number):
     """

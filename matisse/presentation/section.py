@@ -5,10 +5,11 @@ This defines a section of the presentation.
 """
 # modules loading
 # standard library modules: these should be present in any recent python distribution
+from collections import OrderedDict
 import re
 # MaTiSSe.py modules
 from .subsection import Subsection
-from .utils import __expr__,purge_codeblocks
+from ..utils.utils import __expr__,purge_codeblocks
 # regular expressions
 __regex_subsection__ = re.compile(r"[^#]##\s+"+__expr__)
 # class definition
@@ -16,16 +17,17 @@ class Section(object):
   """
   Object for handling a single section, its attributes and methods.
   """
-  def __init__(self,raw_body='',number=0,title='',subsections=None,data=None):
+  def __init__(self,raw_body='',number=0,title='',data=None):
     self.raw_body    = raw_body
     self.number      = number
     self.title       = title
-    self.subsections = subsections
+    self.subsections = None
+    self.data        = OrderedDict()
     if data:
-      self.data   = dict({'sectiontitle'  : self.title,
-                          'sectionnumber' : str(self.number)}.items()+data.items())
-    else:
-      self.data   = {'sectiontitle' : self.title,'sectionnumber' : str(self.number)}
+      for key,val in data.items():
+        self.data[key] = val
+    self.data['sectiontitle' ] = self.title
+    self.data['sectionnumber'] = str(self.number)
     return
   def get_subsections(self):
     """

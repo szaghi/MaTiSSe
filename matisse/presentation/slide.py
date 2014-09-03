@@ -5,6 +5,7 @@ This defines a slide of the presentation.
 """
 # modules loading
 # standard library modules: these should be present in any recent python distribution
+from collections import OrderedDict
 import sys
 # modules not in the standard library
 try:
@@ -26,11 +27,12 @@ class Slide(object):
     self.raw_body = raw_body
     self.number   = number
     self.title    = title
+    self.data     = OrderedDict()
     if data:
-      self.data   = dict({'slidetitle'  : self.title,
-                          'slidenumber' : str(self.number)}.items()+data.items())
-    else:
-      self.data   = {'slidetitle' : self.title,'slidenumber' : str(self.number)}
+      for key,val in data.items():
+        self.data[key] = val
+    self.data['slidetitle' ] = self.title
+    self.data['slidenumber'] = str(self.number)
 
     #self.override_data=Rawdata(regex_start=r'[-]{3}slide',regex_end=r'[-]{3}endslide')
     #self.override_data.get(raw_body)

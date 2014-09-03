@@ -18,6 +18,10 @@ max_time           = 10
 dirs_to_copy       = ['images']
 ---endmetadata
 
+---theme_canvas
+background = radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))
+---endtheme_canvas
+
 ---theme_slide_global
 width            = 900px
 height           = 700px
@@ -72,6 +76,10 @@ elements      = [['title','font-weight:bold;font-variant:small-caps;font-size:10
 ## MaTiSSe.py, what is?
 
 ### The Acronym
+
+#### Ciao
+##### Ciao Ciao
+###### Ciao Ciao Ciao
 
 _MaTiSSe.py_ means **Ma**rkdown **T**o **I**mpressive **S**cientific **S**lid**e**s
 

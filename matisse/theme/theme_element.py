@@ -1,28 +1,27 @@
 #!/usr/bin/env python
 """
 theme_element.py, module definition of ThemeElement class.
-This a base class for building the presentation Theme.
+This is a base class for building the presentation Theme.
 """
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 import copy
 import re
+# MaTiSSe.py modules
+from ..utils.rawdata import Rawdata
 # class definition
 class ThemeElement(object):
   """
   Object for handling a theme element.
   """
   def __init__(self,
-               raw_data,       # raw data extracted from source
-               data,           # dictionary containing data of element
-               css,            # css skeleton
-               padding = None, # element content padding
-               active = True): # element is active or not
-    self.raw_data = raw_data
-    self.data     = data
-    self.css      = css
-    self.padding  = padding
-    self.active   = active
+               data_tag): # tag enclosing the data settings
+    self.raw_data = Rawdata(regex_start=r'[-]{3}'+data_tag,regex_end=r'[-]{3}end'+data_tag)
+    self.data     = None
+    self.css      = ''
+    self.padding  = None
+    self.position = None
+    self.active   = True
     return
   def __str__(self):
     string = []
@@ -31,34 +30,37 @@ class ThemeElement(object):
         string = [ '  '+k+' = '+str(v)+'\n' for k,v in self.data.items()]
     return ''.join(string)
   def __deepcopy__(self):
-    return ThemeElement(raw_data = copy.deepcopy(self.raw_data),
-                        data     = copy.deepcopy(self.data),
-                        css      = copy.deepcopy(self.css),
-                        padding  = copy.deepcopy(self.padding),
-                        active   = copy.deepcopy(self.active))
+    return copy.deepcopy(self)
   def get_raw_data(self,source):
     """
     Method for getting raw data from source.
     """
     self.raw_data.get(source)
     return
-  def get_values(self):
+  def get_data(self,source):
     """
-    Method for getting values from raw data parsed from source.
+    Method for getting data values from raw data parsed from source.
+    The self.data dictionary must be previously created with defaults value:
+    only items previously defined obtain a value from raw data.
     """
-    for data in self.raw_data.data:
-      key = data[0].strip()
-      val = data[1].strip()
-      if key in self.data:
-        if key == 'padding': #special case for padding
-          self.padding = val
-          self.data[key] = val
-        elif isinstance(self.data[key], str):
-          self.data[key] = val
-        elif isinstance(self.data[key], list) or isinstance(self.data[key], bool):
-          self.data[key] = eval(val)
+    self.get_raw_data(source)
+    if self.raw_data.data:
+      if self.data:
+        for data in self.raw_data.data:
+          key = data[0].strip()
+          val = data[1].strip()
+          if key in self.data:
+            if key == 'padding':
+              self.padding = val
+            elif key == 'position':
+              self.position = val
+              self.data[key] = val
+            elif isinstance(self.data[key], str):
+              self.data[key] = val
+            elif isinstance(self.data[key], list) or isinstance(self.data[key], bool):
+              self.data[key] = eval(val)
       else:
-        self.data[key] = val
+        pass
     return
   def get_css(self):
     """
@@ -71,6 +73,24 @@ class ThemeElement(object):
           css += '\n  '+key+': '+val+';'
       css += '\n}\n'
     return css
+  def activate(self):
+    """
+    Method for activating the element.
+    """
+    self.active = True
+    return
+  def deactivate(self):
+    """
+    Method for deactivating the element.
+    """
+    self.active = False
+    return
+  def strip(self,source):
+    """
+    Method for striping theme element raw data from source.
+    """
+    strip_source = self.raw_data.strip(source)
+    return strip_source
   def put_elements(self,tag,doc,elements):
     """
     Method for putting defined elements into the current theme element.

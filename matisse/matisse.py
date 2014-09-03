@@ -15,8 +15,8 @@ import sys
 import os
 import argparse
 # MaTiSSe.py modules
-from .utils import make_output_tree
-from .presentation import Presentation
+from .utils.utils import make_output_tree
+from .presentation.presentation import Presentation
 # setting CLI
 __cliparser__ = argparse.ArgumentParser(prog=__appname__,description='MaTiSSe.py, Markdown To Impressive Scientific Slides')
 __cliparser__.add_argument('-v','--version',                    action='version',                                  help='Show version',version='%(prog)s '+__version__)
@@ -35,25 +35,18 @@ def main():
       print('Error: input file "'+cliargs.input+'" not found!')
       sys.exit(1)
     else:
-      # reading input source as single stream
       with open(cliargs.input,'r') as mdf:
         source = mdf.read()
-      # creating output tree
       if cliargs.output:
         output = cliargs.output
       else:
         output = os.path.splitext(os.path.basename(cliargs.input))[0]
       output = os.path.normpath(output)+"/"
       make_output_tree(output=output)
-      # creating a presentation object
-      presentation = Presentation()
-      # parsing the presentation contents from markdown source
-      presentation.get(source=source)
-      # save presentation to output
+      presentation = Presentation(source=source)
       presentation.save(output=output)
       if cliargs.print_preamble:
         pass
-# main loop
 if __name__ == '__main__':
   main()
 
