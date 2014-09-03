@@ -19,10 +19,11 @@ from .utils.utils import make_output_tree
 from .presentation.presentation import Presentation
 # setting CLI
 __cliparser__ = argparse.ArgumentParser(prog=__appname__,description='MaTiSSe.py, Markdown To Impressive Scientific Slides')
-__cliparser__.add_argument('-v','--version',                    action='version',                                  help='Show version',version='%(prog)s '+__version__)
-__cliparser__.add_argument('input',                             action='store',               default=None,        help='Input file name of markdown source to be parsed')
-__cliparser__.add_argument('-o','--output',      required=False,action='store',               default=None,        help='Output directory name containing the presentation files')
-__cliparser__.add_argument('--print-preamble',   required=False,action='store_true',          default=None,        help='Print the preamble data as parsed from source')
+__cliparser__.add_argument('-v','--version',                 action='version',                help='Show version',version='%(prog)s '+__version__)
+__cliparser__.add_argument('-i','--input',    required=False,action='store',     default=None,help='Input file name of markdown source to be parsed')
+__cliparser__.add_argument('-o','--output',   required=False,action='store',     default=None,help='Output directory name containing the presentation files')
+__cliparser__.add_argument('--print-preamble',required=False,action='store_true',default=None,help='Print the preamble data as parsed from source')
+__cliparser__.add_argument('--print-css',     required=False,action='store_true',default=None,help='Print the css as parsed from source (if done)')
 # global variables for tracking slide position
 __current_slide_position__ = [0,0] # x-y position in px
 def main():
@@ -46,7 +47,13 @@ def main():
       presentation = Presentation(source=source)
       presentation.save(output=output)
       if cliargs.print_preamble:
-        pass
+        print(presentation)
+      if cliargs.print_css:
+        print(presentation.get_css())
+  else:
+    if cliargs.print_css:
+      presentation = Presentation()
+      print(presentation.get_css())
 if __name__ == '__main__':
   main()
 

@@ -55,9 +55,7 @@ class ThemeSlide(ThemeElement):
           sidebar.adjust_dims(headers=self.headers,footers=self.footers)
     return
   def __str__(self):
-    string = 'Slide theme settings\n'
-
-    string += '\n  Global slide\n'
+    string = '\n  Global slide\n'
     string += super(ThemeSlide, self).__str__()
     if self.has_header():
       for i,header in enumerate(self.headers):

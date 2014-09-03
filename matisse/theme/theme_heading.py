@@ -20,11 +20,15 @@ class ThemeHeading(ThemeElement):
     self.number = number
     super(ThemeHeading, self).__init__(data_tag=r'theme_heading_'+str(self.number))
     self.data = OrderedDict()
-    self.data['margin'   ] = '0'
-    self.data['padding'  ] = '0'
-    self.data['border'   ] = '0'
-    self.data['font'     ] = 'inherit'
-    self.data['font-size'] =  __sizes__[self.number-1]
+    self.data['margin'         ] = '0'
+    self.data['padding'        ] = '0'
+    self.data['border'         ] = '0'
+    self.data['color'          ] = 'black'
+    self.data['background'     ] = 'inherit'
+    self.data['font'           ] = 'inherit'
+    self.data['font-size'      ] =  __sizes__[self.number-1]
+    self.data['text-decoration'] = 'inherit'
+    self.data['border-bottom'  ] = 'inherit'
     self.css = "\nh"+str(self.number)+" {"
     if source:
       self.get_data(source)

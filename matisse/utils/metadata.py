@@ -4,6 +4,7 @@ matisse_metadata.py, module definition of Metadata class.
 """
 # modules loading
 # standard library modules: these should be present in any recent python distribution
+from collections import OrderedDict
 import copy
 # MaTiSSe.py modules
 from .rawdata import Rawdata
@@ -22,31 +23,32 @@ class Metadata(object):
     if data:
       self.data = data
     else:
-      self.data = {'title'              : '',
-                   'subtitle'           : '',
-                   'authors'            : [],
-                   'authors_short'      : [],
-                   'emails'             : [],
-                   'affiliations'       : [],
-                   'affiliations_short' : [],
-                   'logo'               : '',
-                   'location'           : '',
-                   'location_short'     : '',
-                   'date'               : '',
-                   'conference'         : '',
-                   'conference_short'   : '',
-                   'session'            : '',
-                   'session_short'      : '',
-                   'max_time'           : 25,
-                   'total_slides_number': '',
-                   'dirs_to_copy'       : [],
-                   'toc'                : ''}
+      self.data = OrderedDict()
+      self.data['title'              ] = ''
+      self.data['subtitle'           ] = ''
+      self.data['authors'            ] = []
+      self.data['authors_short'      ] = []
+      self.data['emails'             ] = []
+      self.data['affiliations'       ] = []
+      self.data['affiliations_short' ] = []
+      self.data['logo'               ] = ''
+      self.data['location'           ] = ''
+      self.data['location_short'     ] = ''
+      self.data['date'               ] = ''
+      self.data['conference'         ] = ''
+      self.data['conference_short'   ] = ''
+      self.data['session'            ] = ''
+      self.data['session_short'      ] = ''
+      self.data['max_time'           ] = 25
+      self.data['total_slides_number'] = ''
+      self.data['dirs_to_copy'       ] = []
+      self.data['toc'                ] = ''
     return
   def __str__(self):
     string = []
     if self.data:
       string = [ '  '+k+' = '+str(v)+'\n' for k,v in self.data.items()]
-    return ''.join(string)
+    return 'Metadata\n'+''.join(string)
   def __deepcopy__(self):
     return Metadata(rawdata = copy.deepcopy(self.raw_data),
                     data    = copy.deepcopy(self.data))

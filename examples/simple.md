@@ -22,6 +22,25 @@ dirs_to_copy       = ['images']
 background = radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))
 ---endtheme_canvas
 
+---theme_selector_code
+font-family = Courier, monospace
+background  = rgba(0,0,0,0.05)
+---endtheme_selector_code
+
+---theme_selector_pre-code
+display        = block 
+margin         = 1%
+padding        = 1%
+white-space    = pre-wrap 
+background     = rgba(0,0,0,0.05)
+box-shadow     = 4px 4px 6px rgba(0, 0, 0, .1)
+border-radius  = 10px 10px 10px 10px
+---endtheme_selector_pre-code
+
+---theme_heading_4
+border-bottom   = 1px solid #4788B3
+---endtheme_heading_4
+
 ---theme_slide_global
 width            = 900px
 height           = 700px
@@ -43,7 +62,7 @@ height        = 6%
 background    = #4788B3
 color         = white
 border-radius = 10px 10px 0 0
-elements      = [['slidetitle','font-variant:small-caps;font-size:180%;padding:2%'], &&
+elements      = [['slidetitle','font-variant:small-caps;font-size:180%;padding:2%'],&&
                  ['logo','float:right;height:100%']]
 ---endtheme_slide_header_1
 
@@ -52,12 +71,11 @@ height     = 6%
 background = #86B2CF
 color      = white
 elements   = [['timer','controls;font-size:70%;font-variant:small-caps;padding:1% 1%;float:right'],&&
-              ['total_slides_number','float:right;padding:1% 1%'],&&
-              ['|custom| of ','float:right;padding:1% 0%'],       &&
-              ['slidenumber','float:right;padding:1% 1%'],        &&
+              ['total_slides_number','float:right;padding:1% 1%'],                                 &&
+              ['|custom| of ','float:right;padding:1% 0%'],                                        &&
+              ['slidenumber','float:right;padding:1% 1%'],                                         &&
               ['|custom|slide ','float:right;padding:1% 0%']]
 ---endtheme_slide_footer_1
-
 
 ---theme_slide_sidebar_1
 position      = R
@@ -65,8 +83,8 @@ width         = 20%
 background    = linear-gradient(#4788B3,#86B2CF)
 color         = white
 border-radius = 0
-elements      = [['title','font-weight:bold;font-variant:small-caps;font-size:105%;padding:5%;display:inline-block'],                               &&
-                 ['authors','font-variant:small-caps;font-size:90%;padding:5%;display:inline-block'],                                               &&
+elements      = [['title','font-weight:bold;font-variant:small-caps;font-size:105%;padding:5%;display:inline-block'],                                          &&
+                 ['authors','font-variant:small-caps;font-size:90%;padding:5%;display:inline-block'],                                                          &&
                  ['affiliations','margin-top:4%;margin-bottom:10%;font-variant:small-caps;font-size:70%;white-space:pre-wrap;padding:5%;display:inline-block'],&&
                  ['toc','font-variant:small-caps;font-size:90%;white-space:pre-wrap;padding:5%;display:inline-block']]
 ---endtheme_slide_sidebar_1

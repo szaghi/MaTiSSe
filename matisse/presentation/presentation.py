@@ -28,13 +28,22 @@ class Presentation(object):
   """
   Object for handling the presentation.
   """
-  def __init__(self,source):
+  def __init__(self,source=None):
     self.metadata = None
     self.theme    = None
     self.sections = None
     self.toc      = None
-    self.__get(source)
+    if source:
+      self.__get(source)
+    else:
+      self.metadata = Metadata()
+      self.theme    = Theme()
     return
+  def __str__(self):
+    string = 'Presentation preamble\n'
+    string += str(self.metadata)
+    string += str(self.theme)
+    return string
   def __get_metadata(self,source):
     """
     Method for getting the presentation metadata.
@@ -87,6 +96,12 @@ class Presentation(object):
         slides_number = subsection.get_slides(slides_number=slides_number)
     self.metadata.set_value('total_slides_number',slides_number)
     return
+  def get_css(self):
+    """
+    Method for creating the css theme.
+    The returned string contains the css theme.
+    """
+    return self.theme.get_css()
   def to_html(self):
     """
     Method for producing and html string document form presentation object.
