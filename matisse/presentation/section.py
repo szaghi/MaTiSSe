@@ -25,7 +25,7 @@ class Section(object):
     self.data        = OrderedDict()
     if data:
       for key,val in data.items():
-        self.data[key] = val
+        self.data[key] = val[0]
     self.data['sectiontitle' ] = self.title
     self.data['sectionnumber'] = str(self.number)
     return
@@ -53,11 +53,11 @@ class Section(object):
                                            title    = subsec[0],
                                            data     = self.data))
     return
-  def to_html(self,tag,doc,theme):
+  def to_html(self,doc,theme,toc):
     """
     Method for converting section slides content into html format.
     """
     if self.subsections:
       for subsection in self.subsections:
-        subsection.to_html(tag,doc,theme)
+        subsection.to_html(doc=doc,theme=theme,toc=toc)
     return

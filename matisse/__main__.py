@@ -1,3 +1,5 @@
 #!/usr/bin/env python
-from .MaTiSSe import main
-main()
+"""wrapper for extracting matisse.main() function"""
+from .matisse import main
+if __name__ == '__main__' :
+  main()

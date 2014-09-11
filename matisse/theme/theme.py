@@ -6,14 +6,26 @@ This defines the theme of the presentation.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 import re
-import copy
 # MaTiSSe.py modules
-from .theme_canvas import ThemeCanvas
-from .theme_heading import ThemeHeading
-from .theme_selector import ThemeSelector
-from .theme_slide import ThemeSlide
+from .canvas import Canvas
+from .heading import Heading
+from .selector import Selector
+from .slide.slide import Slide
+from ..utils.utils import purge_overriding_slide_themes
 # default theme settings
 __default_css__ = """
+.toc-section .emph {
+  background: rgba(200,200,200,0.25);
+  margin: 3%;
+}
+.toc-subsection .emph {
+  background: rgba(200,200,200,0.25);
+  margin: 3%;
+}
+.toc-slide .emph {
+  background: rgba(200,200,200,0.25);
+  margin: 3%;
+}
 b, strong { font-weight: bold }
 i, em { font-style: italic }
 a {
@@ -60,28 +72,38 @@ input[type=button] {
 """
 # class definition
 class Theme(object):
-  """
-  Theme is an object that handles the presentation theme, its attributes and methods.
-  """
+  """Theme is an object that handles the presentation theme, its attributes and methods."""
   def __init__(self,source=None):
+    """
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Attributes
+    ----------
+    canvas: Canvas object
+      convas over which all elements are rendered
+    headings: list
+      list of ThemeElement objects for handling style of html headings (h1,h2,...h6)
+    titlepage: none
+    slide: Slide object
+      base theme of slides
+    selectors: list
+      list of ThemeElement objects for handling user defined custom selectors (e.g. <code> tags)
+    """
+    self.canvas = Canvas()
+    self.headings = []
+    for hds in range(6):
+      self.headings.append(Heading(number=hds+1))
+    self.tittlepage = None
+    self.slide = Slide()
+    self.selectors = []
     if source:
-      self.canvas = ThemeCanvas(source=source)
-      self.headings = []
-      for hds in range(6):
-        self.headings.append(ThemeHeading(number=hds+1,source=source))
-      self.tittlepage = None
-      self.slide = ThemeSlide(source=source)
-      self.selectors = []
-      self.__get_selectors(source=source)
-    else:
-      self.canvas = ThemeCanvas()
-      self.headings = []
-      for hds in range(6):
-        self.headings.append(ThemeHeading(number=hds+1))
-      self.tittlepage = None
-      self.slide = ThemeSlide()
-      self.selectors = []
+      purged_source = purge_overriding_slide_themes(source)
+      self.get(source=purged_source)
     return
+
   def __str__(self):
     string = 'Theme settings\n'
     string += '  Canvas\n'
@@ -94,38 +116,145 @@ class Theme(object):
       string += '\n  selector '+selector.name+'\n'
       string += str(selector)
     return string
-  def __deepcopy__(self):
-    return copy.deepcopy(self)
+
   def __get_selectors(self,source):
-    """
-    Method for getting the definition of user-defined custom selectors.
+    """Method for getting the definition of user-defined custom selectors.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
     """
     number = source.count('theme_selector_')/2
     if number>0:
-      # collecting the user-defined selectors names
       sel_regex = re.compile(r'[-]{3}theme_selector_(?P<name>[a-zA-Z][a-zA-Z0-9_\-]*)')
       names = []
       for match in re.finditer(sel_regex,source):
         names.append(match.group('name'))
       for name in names:
-        self.selectors.append(ThemeSelector(name=name,source=source))
+        self.selectors.append(Selector(name=name,source=source))
     return
-  def get_css(self):
+
+  def check_specials(self):
+    """Method for checking specials data entries.
+    The main theme has not special entries, not being a subclass of ThemeElement.
+    However the check_specials method of other contained theme elements is called.
     """
-    Method for creating the css theme.
-    The returned string contains the css theme.
-    """
-    css = __default_css__
-    css += self.canvas.get_css()
+    self.canvas.check_specials()
     for hds in self.headings:
-      css += hds.get_css()
-    css += self.slide.get_css()
-    for sls in self.selectors:
-      css += sls.get_css()
-    return css
-  def strip(self,source):
+      hds.check_specials()
+    self.slide.check_specials()
+    if len(self.selectors)>0:
+      for selector in self.selectors:
+        selector.check_specials()
+    return
+
+  def get(self,source):
+    """Method for getting data values from source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
     """
-    Method for striping theme raw data from source.
+    self.canvas.get(source=source)
+    for hds in self.headings:
+      hds.get(source=source)
+    self.slide.get(source=source)
+    self.__get_selectors(source=source)
+    self.check_specials()
+    return
+
+  def set_from(self,other):
+    """Method for setting theme using data of other theme.
+
+    Parameters
+    ----------
+    other : Theme object
+    """
+    self.canvas.set_from(other=other.canvas)
+    for hds,head in enumerate(self.headings):
+      head.set_from(other=other.headings[hds])
+    self.slide.set_from(other=other.slide)
+    self.check_specials()
+    return
+
+  def update(self,source):
+    """Method for updating data from source without creating new data.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+    """
+    self.canvas.get(source=source)
+    for hds in self.headings:
+      hds.get(source=source)
+    self.slide.update(source=source)
+    if len(self.selectors)>0:
+      for slr in self.selectors:
+        slr.get(source=source)
+    self.check_specials()
+    return
+
+  def get_custom(self,chk_specials=False):
+    """Method returning only the data that have been set by users (customized) overriding default values.
+
+    Parameters
+    ----------
+    chk_specials : bool, optional
+      if activated handle special entries differently from standard ones
+    """
+    custom = self.slide.get_custom(chk_specials=chk_specials)
+    custom['canvas'] = self.canvas.data.get_custom(chk_specials=chk_specials)
+    for hds in self.headings:
+      custom['h'+str(hds.number)] = hds.data.get_custom(chk_specials=chk_specials)
+    if len(self.selectors)>0:
+      for selector in self.selectors:
+        custom['slide-selector_'+selector.name] = selector.data.get_custom(chk_specials=chk_specials)
+    return custom
+
+  def get_css(self,only_custom=False,as_list=False):
+    """Method for creating the css theme. The returned string contains the css theme.
+
+    Parameters
+    ----------
+    only_custom : bool, optional
+      consider only (user) customized data
+    as_list : bool, optional
+      return a list instead of a string
+
+    Returns
+    -------
+    str
+      a string containing the css code of the theme if as_list = False
+    list
+      a list of one string containing the css code of the theme if as_list = True
+    """
+    css = [__default_css__]
+    css.append(self.canvas.get_css(only_custom=only_custom))
+    for hds in self.headings:
+      css.append(hds.get_css(only_custom=only_custom))
+    css.append(self.slide.get_css(only_custom=only_custom))
+    for sls in self.selectors:
+      css.append(sls.get_css(only_custom=only_custom))
+    if as_list:
+      return css
+    else:
+      return ''.join(css)
+
+  def strip(self,source):
+    """Method for striping theme raw data from source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      source without the theme data
     """
     strip_source = self.canvas.strip(source)
     if len(self.headings)>0:

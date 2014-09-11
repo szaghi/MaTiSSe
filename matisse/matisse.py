@@ -15,15 +15,18 @@ import sys
 import os
 import argparse
 # MaTiSSe.py modules
+from .config import __config__
 from .utils.utils import make_output_tree
 from .presentation.presentation import Presentation
 # setting CLI
 __cliparser__ = argparse.ArgumentParser(prog=__appname__,description='MaTiSSe.py, Markdown To Impressive Scientific Slides')
-__cliparser__.add_argument('-v','--version',                 action='version',                help='Show version',version='%(prog)s '+__version__)
-__cliparser__.add_argument('-i','--input',    required=False,action='store',     default=None,help='Input file name of markdown source to be parsed')
-__cliparser__.add_argument('-o','--output',   required=False,action='store',     default=None,help='Output directory name containing the presentation files')
-__cliparser__.add_argument('--print-preamble',required=False,action='store_true',default=None,help='Print the preamble data as parsed from source')
-__cliparser__.add_argument('--print-css',     required=False,action='store_true',default=None,help='Print the css as parsed from source (if done)')
+__cliparser__.add_argument('-v','--version',                 action='version',                 help='Show version',version='%(prog)s '+__version__)
+__cliparser__.add_argument('-i','--input',    required=False,action='store',     default=None, help='Input file name of markdown source to be parsed')
+__cliparser__.add_argument('-o','--output',   required=False,action='store',     default=None, help='Output directory name containing the presentation files')
+__cliparser__.add_argument('--print-preamble',required=False,action='store_true',default=None, help='Print the preamble data as parsed from source')
+__cliparser__.add_argument('--print-css',     required=False,action='store_true',default=None, help='Print the css as parsed from source (if done)')
+__cliparser__.add_argument('--verbose',       required=False,action='store_true',default=False,help='More verbose printing messages (default no)')
+__cliparser__.add_argument('--indented',      required=False,action='store_true',default=False,help='Indent html output file (default no, may corrupt TOC rendering)')
 # global variables for tracking slide position
 __current_slide_position__ = [0,0] # x-y position in px
 def main():
@@ -31,6 +34,10 @@ def main():
   Main function.
   """
   cliargs = __cliparser__.parse_args()
+  __config__.verbose = cliargs.verbose
+  __config__.indented = cliargs.indented
+  if __config__.is_verbose():
+    print(__config__)
   if cliargs.input:
     if not os.path.exists(cliargs.input):
       print('Error: input file "'+cliargs.input+'" not found!')
@@ -44,6 +51,8 @@ def main():
         output = os.path.splitext(os.path.basename(cliargs.input))[0]
       output = os.path.normpath(output)+"/"
       make_output_tree(output=output)
+      if __config__.is_verbose():
+        print('Parsing source '+cliargs.input)
       presentation = Presentation(source=source)
       presentation.save(output=output)
       if cliargs.print_preamble:

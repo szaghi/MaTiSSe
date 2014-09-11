@@ -62,8 +62,9 @@ height        = 6%
 background    = #4788B3
 color         = white
 border-radius = 10px 10px 0 0
+padding       = 1%
 elements      = [['slidetitle','font-variant:small-caps;font-size:180%;padding:2%'],&&
-                 ['logo','float:right;height:100%']]
+                 ['logo','float:right;height:90%;']]
 ---endtheme_slide_header_1
 
 ---theme_slide_footer_1
@@ -142,9 +143,21 @@ MaTiSSe.py should:
 
 ### For whom?
 ---slide
-font-size = 110%
-color = red
+---theme_slide_global
 slide-transition = vertical
+data-z           = -2000
+data-scale       = 2
+data-rotate      = 90
+data-rotate-y    = 30
+---endtheme_slide_global
+
+---theme_slide_content
+background = rgba(200,200,200,0.9)
+---endtheme_slide_content
+
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1
 ---endslide
 
 Scientific researchers (at least the brave ones) are used to write presentation with _latex-beamer_. 
@@ -237,3 +250,10 @@ endfunction fo
 * reveal.js;
 * impress.js;
 * latex;
+
+### $overview
+---slide
+---theme_slide_global
+data-scale       = 10
+---endtheme_slide_global
+---endslide

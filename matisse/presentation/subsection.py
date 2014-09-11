@@ -29,7 +29,7 @@ class Subsection(object):
     self.data['subsectiontitle' ] = self.title
     self.data['subsectionnumber'] = str(self.number)
     return
-  def get_slides(self,slides_number):
+  def get_slides(self,slides_number,theme):
     """
     Method for getting the slides contained into the subsection.
     """
@@ -45,18 +45,20 @@ class Subsection(object):
         self.slides.append(Slide(raw_body = self.raw_body[slide[2]+1:slides[sdn+1][1]],
                                  number   = slides_number,
                                  title    = slide[0],
-                                 data     = self.data))
+                                 data     = self.data,
+                                 theme    = theme))
       else:
         self.slides.append(Slide(raw_body = self.raw_body[slide[2]+1:],
                                  number   = slides_number,
                                  title    = slide[0],
-                                 data     = self.data))
+                                 data     = self.data,
+                                 theme    = theme))
     return slides_number
-  def to_html(self,tag,doc,theme):
+  def to_html(self,doc,theme,toc):
     """
     Method for converting section slides content into html format.
     """
     if self.slides:
       for slide in self.slides:
-        slide.to_html(tag,doc,theme)
+        slide.to_html(doc=doc,theme=theme,toc=toc)
     return
