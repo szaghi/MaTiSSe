@@ -7,13 +7,28 @@ This defines the theme of the presentation.
 # standard library modules: these should be present in any recent python distribution
 import re
 # MaTiSSe.py modules
+from .box import get_themes as box_get_themes
+from .box import strip_themes as box_strip_themes
 from .canvas import Canvas
 from .heading import Heading
 from .selector import Selector
 from .slide.slide import Slide
-from ..utils.utils import purge_overriding_slide_themes
+from ..utils.source_editor import SourceEditor
+# global variables
+__source_editor__ = SourceEditor()
 # default theme settings
 __default_css__ = """
+figure {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+figcaption {
+  font-variant: small-caps;
+  font-size: 120%;
+  font-style: italic;
+}
 .toc-section .emph {
   background: rgba(200,200,200,0.25);
   margin: 3%;
@@ -73,12 +88,16 @@ input[type=button] {
 # class definition
 class Theme(object):
   """Theme is an object that handles the presentation theme, its attributes and methods."""
-  def __init__(self,source=None):
+  def __init__(self,source=None,defaults=False):
     """
     Parameters
     ----------
     source : str
       string (as single stream) containing the source
+    defaults : bool, optional
+      flag for activatin the creation of a presentation istance
+      having one of each element available with the default
+      settings
 
     Attributes
     ----------
@@ -97,11 +116,12 @@ class Theme(object):
     for hds in range(6):
       self.headings.append(Heading(number=hds+1))
     self.tittlepage = None
-    self.slide = Slide()
+    self.slide = Slide(defaults=defaults)
     self.selectors = []
     if source:
-      purged_source = purge_overriding_slide_themes(source)
-      self.get(source=purged_source)
+      self.get(source=__source_editor__.purge_overtheme(source))
+    elif defaults:
+      self.selectors.append(Selector(name='def-sel'))
     return
 
   def __str__(self):
@@ -163,6 +183,7 @@ class Theme(object):
     self.slide.get(source=source)
     self.__get_selectors(source=source)
     self.check_specials()
+    box_get_themes(source)
     return
 
   def set_from(self,other):
@@ -214,6 +235,17 @@ class Theme(object):
         custom['slide-selector_'+selector.name] = selector.data.get_custom(chk_specials=chk_specials)
     return custom
 
+  def get_options(self):
+    """Method for getting the available data options."""
+    string = []
+    string.append(self.canvas.get_options())
+    for hds in self.headings:
+      string.append(hds.get_options())
+    string.append(self.slide.get_options())
+    for sls in self.selectors:
+      string.append(sls.get_options())
+    return ''.join(string)
+
   def get_css(self,only_custom=False,as_list=False):
     """Method for creating the css theme. The returned string contains the css theme.
 
@@ -264,4 +296,5 @@ class Theme(object):
     if len(self.selectors)>0:
       for sls in self.selectors:
         strip_source = sls.strip(strip_source)
+    strip_source = box_strip_themes(strip_source)
     return strip_source

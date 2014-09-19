@@ -6,20 +6,15 @@ This defines a slide of the presentation.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 from collections import OrderedDict
-import sys
-# modules not in the standard library
-try:
-  import markdown
-  #__md__ = markdown.Markdown(output_format='html5',extensions=['fenced_code','footnotes','tables','smart_strong','codehilite(noclasses=True,pygments_style=vim)','toc'])
-  #__md__ = markdown.Markdown(output_format='html5',extensions=['fenced_code','footnotes','tables','smart_strong','codehilite','toc'])
-  __md__ = markdown.Markdown(output_format='html5',extensions=['fenced_code','footnotes','tables','smart_strong'])
-except ImportError :
-  sys.stderr.write("Error: can't import module 'markdown'")
-  sys.exit(1)
 # MaTiSSe.py modules
 from ..config import __config__
+#from ..theme.image import Image
+from ..theme.box import parse as box_parse
+from ..theme.slide.position import Position
 from ..theme.theme import Theme
-from ..utils.utils import get_over_slide_theme,strip_overriding_slide_themes
+from ..utils.source_editor import SourceEditor
+# global variables
+__source_editor__ = SourceEditor()
 # class definition
 class Slide(object):
   """
@@ -29,27 +24,29 @@ class Slide(object):
     """
     Parameters
     ----------
-    raw_body: str, optional
+    raw_body : str, optional
       string containing the body of the slide in raw format
-    number: int, optional
+    number : int, optional
       slide number in global numeration
-    title: str, optional
+    title : str, optional
       slide title
-    data: OrderedDict object
+    data : OrderedDict object
       slide metadata
 
     Attributes
     ----------
-    raw_body: str, optional
+    raw_body : str, optional
       string containing the body of the slide in raw format
-    number: int, optional
+    number : int, optional
       slide number in global numeration
-    title: str, optional
+    title : str, optional
       slide title
-    data: OrderedDict object
+    data : OrderedDict object
       slide metadata
-    overtheme: Theme object
+    overtheme : Theme object
       overriding theme of the current slide
+    pos : Position object
+      slide position
     """
     self.raw_body = raw_body
     self.number   = number
@@ -61,6 +58,7 @@ class Slide(object):
     self.data['slidetitle' ] = self.title
     self.data['slidenumber'] = str(self.number)
     self.overtheme = None
+    self.pos = Position()
     self.__get_overtheme(theme=theme)
     return
 
@@ -72,13 +70,13 @@ class Slide(object):
     theme: Theme object, optional
       base theme used to set other overtheme data not being defined
     """
-    source = get_over_slide_theme(source=self.raw_body)
+    source = __source_editor__.get_overtheme(source=self.raw_body)
     if source:
       self.overtheme = Theme(source=source)
       if theme:
         self.overtheme.set_from(other=theme)
       self.overtheme.slide.adjust_dims()
-      self.raw_body = strip_overriding_slide_themes(self.raw_body)
+      self.raw_body = __source_editor__.strip_overtheme(self.raw_body)
       if __config__.is_verbose():
         print('Found overriding theme for slide n. '+str(self.number))
         print(self.get_css(only_custom=True))
@@ -105,7 +103,7 @@ class Slide(object):
     else:
       return ''
 
-  def to_html(self,position,doc,theme,toc):
+  def to_html(self,position,doc,theme,toc,current):
     """Method for converting slide content into html format.
 
     Parameters
@@ -116,8 +114,10 @@ class Slide(object):
       the main html doc
     theme : Theme object
       the base theme
-    toc : str
-      table of contents
+    toc : TOC object
+      presentation Table of Contents
+    current : list
+      [section number,subsection number,slide number]
     """
     with doc.tag('div'):
       doc.attr(('id','slide-'+str(self.number)))
@@ -142,16 +142,18 @@ class Slide(object):
         doc.attr(('data-rotate-z',str(position.rotation[2])))
         # inserting elements
         for header in actual_theme.headers.values():
-          header.to_html(doc=doc,metadata=self.data,toc=toc)
+          header.to_html(doc=doc,metadata=self.data,toc=toc,current=current)
         for sidebar in actual_theme.sidebars.values():
           if sidebar.position == 'L':
-            sidebar.to_html(doc=doc,metadata=self.data,toc=toc)
-        actual_theme.content.to_html(doc=doc,padding=actual_theme.content.padding,content='\n'+__md__.convert(self.raw_body))
+            sidebar.to_html(doc=doc,metadata=self.data,toc=toc,current=current)
+        #actual_theme.content.to_html(doc=doc,padding=actual_theme.content.padding,content='\n'+__md__.convert(self.raw_body))
+        #actual_theme.content.to_html(doc=doc,padding=actual_theme.content.padding,content='\n'+__md__.convert(Image().parse(source=self.raw_body)))
+          actual_theme.content.to_html(doc=doc,padding=actual_theme.content.padding,content='\n'+__source_editor__.md_convert(box_parse(source=self.raw_body)))
         for sidebar in actual_theme.sidebars.values():
           if sidebar.position == 'R':
-            sidebar.to_html(doc=doc,metadata=self.data,toc=toc)
+            sidebar.to_html(doc=doc,metadata=self.data,toc=toc,current=current)
         for footer in actual_theme.footers.values():
-          footer.to_html(doc=doc,metadata=self.data,toc=toc)
+          footer.to_html(doc=doc,metadata=self.data,toc=toc,current=current)
       else:
         doc.attr(('class','step overview'))
         doc.attr(('style',''))

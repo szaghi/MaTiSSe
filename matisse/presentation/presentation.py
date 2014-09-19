@@ -19,11 +19,14 @@ except ImportError :
 # MaTiSSe.py modules
 from ..config import __config__
 from ..data.data import Data
+from ..theme.slide.position import Position
 from ..theme.theme import Theme
-from ..theme.slide.slide import SlidePosition
-from ..utils.utils import __expr__,purge_codeblocks
+from ..utils.utils import __expr__
+from ..utils.source_editor import SourceEditor
 from .section import Section
 from .toc import TOC
+# global variables
+__source_editor__ = SourceEditor()
 # regular expressions
 __regex_section__ = re.compile(r"[^#]#\s+"+__expr__)
 # class definition
@@ -31,26 +34,33 @@ class Presentation(object):
   """
   Object for handling the presentation.
   """
-  def __init__(self,source=None):
+  def __init__(self,source=None,defaults=False):
     """
     Parameters
     ----------
-    source : str
+    source : str, optional
       string (as single stream) containing the source
+    defaults : bool, optional
+      flag for activatin the creation of a presentation istance
+      having one of each element available with the default
+      settings
 
     Attributes
     ----------
-    metadata: Data object
+    metadata : Data object
       presentation metadata
-    theme: Theme object
-    sections: list
+    theme : Theme object
+    sections : list
       list of sections composing the presentation
-    toc: TOC object
+    toc : TOC object
       presentation Table of Contents
-    pos: SlidePosition object
+    pos : Position object
       position of the current slide
+    min_pos : Position object
+      minimum position reached by all slides
+    max_pos : Position object
+      maximum position reached by all slides
     """
-
     self.metadata = Data(regex_start='[-]{3}metadata',regex_end='[-]{3}endmetadata',special_keys=['__all__'])
     self.metadata.data['title'              ] = ['',  False]
     self.metadata.data['subtitle'           ] = ['',  False]
@@ -71,22 +81,36 @@ class Presentation(object):
     self.metadata.data['total_slides_number'] = ['',  False]
     self.metadata.data['dirs_to_copy'       ] = [[],  False]
     self.metadata.data['toc'                ] = ['',  False]
-    self.theme = Theme()
+    self.theme = Theme(defaults=defaults)
     self.sections = None
     self.toc = TOC()
-    self.pos = SlidePosition()
+    self.pos = Position()
+    self.min_pos = Position()
+    self.max_pos = Position()
     if source:
       self.__get(source)
     return
+
   def __str__(self):
     string = 'Presentation preamble\n'
     string += str(self.metadata)
     string += str(self.theme)
     return string
+
   def __get_metadata(self,source):
-    """
-    Method for getting the presentation metadata.
+    """Method for getting the presentation metadata.
+
     Return the source without the metadata.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      source without metadata
     """
     self.metadata.get(source)
     for key,val in self.metadata.data.items():
@@ -99,20 +123,36 @@ class Presentation(object):
             key == 'dirs_to_copy'):
           self.metadata.data[key] = [ast.literal_eval(str(val[0])),True]
     return self.metadata.strip(source)
+
   def __get_theme(self,source):
-    """
-    Method for getting the presentation theme.
+    """Method for getting the presentation theme.
+
     Return the source without the theme.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      source without theme data
     """
     self.theme.get(source)
     return self.theme.strip(source)
+
   def __get_sections(self,source):
-    """
-    Method for getting the sections contained into the source.
+    """Method for getting the sections contained into the source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
     """
     sections = []
     self.sections = []
-    purged_source = purge_codeblocks(source)
+    purged_source = __source_editor__.purge_codeblocks(source)
     for match in re.finditer(__regex_section__,purged_source):
       sections.append([match.group('expr'),match.start(),match.end()])
     if len(sections)==0:
@@ -125,9 +165,14 @@ class Presentation(object):
         else:
           self.sections.append(Section(raw_body=source[section[2]+1:],number=scs+1,title=section[0],data=self.metadata.data))
     return
+
   def __get(self,source):
-    """
-    Method for getting the presentation from source.
+    """Method for getting the presentation from source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
     """
     strip_source = self.__get_metadata(source=source)
     strip_source = self.__get_theme(source=strip_source)
@@ -147,9 +192,17 @@ class Presentation(object):
       print('\nTable of Contents')
       print(self.toc)
     return
+
+  def get_options(self):
+    """Method for getting the available data options."""
+    string = ['Presentation metadata']
+    string.append(self.metadata.get_options())
+    string.append(self.theme.get_options())
+    return ''.join(string)
+
   def get_css(self):
-    """
-    Method for creating the css theme.
+    """Method for creating the css theme.
+
     The returned string contains the css theme.
     """
     css = self.theme.get_css(only_custom=False)
@@ -161,10 +214,9 @@ class Presentation(object):
               for slide in subsection.slides:
                 css += slide.get_css(only_custom=True)
     return css
+
   def to_html(self):
-    """
-    Method for producing and html string document form presentation object.
-    """
+    """Method for producing and html string document form presentation object."""
     doc, tag, text = Doc().tagtext()
     doc.asis('<!DOCTYPE html>')
     with tag('html'):
@@ -177,6 +229,8 @@ class Presentation(object):
         doc.stag('meta',subtitle=self.metadata.data['subtitle'][0])
         doc.stag('link',rel='stylesheet', href='css/normalize.css')
         doc.stag('link',rel='stylesheet', href='css/theme.css')
+        if __config__.highlight:
+          doc.stag('link',rel='stylesheet', href='js/highlight/styles/'+__config__.highlight_style)
       with tag('body',onload="resetCountdown("+self.metadata.data['max_time'][0]+");"):
         with tag('div',id='impress'):
           for section in self.sections:
@@ -185,20 +239,53 @@ class Presentation(object):
                 slide.to_html(position = self.pos,
                               doc      = doc,
                               theme    = self.theme.slide,
-                              toc      = self.toc.pstr(html=True,current=[section.number,subsection.number,sld+1]))
+                              toc      = self.toc,
+                              current  = [section.number,subsection.number,sld+1])
         with tag('script'):
           doc.attr(src='js/countDown.js')
         with tag('script'):
           doc.attr(src='js/impress.js')
         with tag('script'):
           doc.asis('impress().init();')
+        if __config__.is_online_mathjax():
+          with tag('script'):
+            doc.attr(('type','text/javascript'))
+            doc.attr(src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML')
+        else:
+          with tag('script'):
+            doc.attr(('type','text/x-mathjax-config'))
+            doc.text("""
+              MathJax.Hub.Config({
+                extensions: ["tex2jax.js"],
+                jax: ["input/TeX", "output/HTML-CSS"],
+                tex2jax: {
+                  inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                  displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                  processEscapes: true
+                },
+                "HTML-CSS": { availableFonts: ["Neo-Euler"] }
+              });
+            """)
+          with tag('script'):
+            doc.attr(('type','text/javascript'))
+            doc.attr(src='js/MathJax/MathJax.js')
+        if __config__.highlight:
+          with tag('script'):
+            doc.attr(src='js/highlight/highlight.pack.js')
+          with tag('script'):
+            doc.text("""hljs.initHighlightingOnLoad();""")
     if __config__.is_indented():
       return indent(doc.getvalue())
     else:
       return doc.getvalue()
+
   def save(self,output):
-    """
-    Method for saving the html form of presentation into external file.
+    """Method for saving the html form of presentation into external file.
+
+    Parameters
+    ----------
+    output : str
+      output path
     """
     with open(output+'index.html','w') as html:
       html.write(self.to_html())

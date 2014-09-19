@@ -9,7 +9,9 @@ import ast
 import re
 # MaTiSSe.py modules
 from ..data.data import Data
-from ..utils.utils import  __regex_over_slide_theme__
+from ..utils.source_editor import  SourceEditor
+# global variables
+__source_editor__ = SourceEditor()
 # class definition
 class ThemeElement(object):
   """
@@ -41,7 +43,8 @@ class ThemeElement(object):
       for key in special_keys:
         _special_keys.append(key)
     self.data_tag     = data_tag
-    self.data         = Data(regex_start=r'[-]{3}'+data_tag,regex_end=r'[-]{3}end'+data_tag,skip=__regex_over_slide_theme__,special_keys=_special_keys)
+    self.data         = Data(regex_start=r'[-]{3}'+data_tag,regex_end=r'[-]{3}end'+data_tag,
+                             skip=__source_editor__.regex_overtheme,special_keys=_special_keys)
     self.class_name   = class_name
     self.active       = True
     self.data.data['width'        ] = ['',                            False]
@@ -142,7 +145,7 @@ class ThemeElement(object):
     """
     return self.data.strip(source)
 
-  def put_elements(self,doc,metadata,toc=None):
+  def put_elements(self,doc,metadata,toc=None,current=None):
     """Method for putting defined elements into the current theme element.
 
     Parameters
@@ -150,9 +153,10 @@ class ThemeElement(object):
     doc : yattag.Doc object
       the currently open yattag.Doc object
     metadata: Data object
-    toc: TOC object, optional
-    -------
-    str
+    toc : TOC object, optional
+      presentation Table of Contents
+    current : list, optional
+      [section number,subsection number,slide number]
     """
     if 'elements' in self.data.data:
       for element in self.data.data['elements'][0]:
@@ -195,8 +199,12 @@ class ThemeElement(object):
                 doc.asis(re.sub(r'\|custom\|','',elem))
               else:
                 if elem == 'toc':
+                  if isinstance(element,list) and len(element)>=3:
+                    deep = element[2]
+                  else:
+                    deep = 1
                   if toc:
-                    value = toc
+                    value = toc.pstr(html=True,current=current,deep=deep)
                 elif isinstance(metadata[elem],list):
                   value = ' , '.join(metadata[elem])
                 else:
@@ -204,7 +212,7 @@ class ThemeElement(object):
                 doc.asis(value)
     return
 
-  def to_html(self,doc,style=None,padding=None,content=None,metadata=None,toc=None):
+  def to_html(self,doc,style=None,padding=None,content=None,metadata=None,toc=None,current=None):
     """
     Method for inserting element contents into html.
 
@@ -219,8 +227,10 @@ class ThemeElement(object):
     content: str, optional
       content of the element as raw string
     metadata: Data object
-    toc: str, optional
-      str(toc), toc being a TOC object
+    toc : TOC object, optional
+      presentation Table of Contents
+    current : tuple, optional
+      (section number,subsection number,slide number)
     """
     if self.active:
       if content or metadata:
@@ -234,10 +244,10 @@ class ThemeElement(object):
               if content:
                 doc.asis(content)
               if metadata:
-                self.put_elements(doc=doc,metadata=metadata,toc=toc)
+                self.put_elements(doc=doc,metadata=metadata,toc=toc,current=current)
           else:
             if content:
               doc.asis(content)
             if metadata:
-              self.put_elements(doc=doc,metadata=metadata,toc=toc)
+              self.put_elements(doc=doc,metadata=metadata,toc=toc,current=current)
     return

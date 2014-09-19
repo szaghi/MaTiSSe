@@ -34,6 +34,12 @@ class Footer(ThemeElement):
       self.check_specials()
     return
 
+  def get_options(self):
+    """Method for getting the available data options."""
+    string = ['\n\nSlide Footer']
+    string.append(self.data.get_options())
+    return ''.join(string)
+
   def get_css(self,only_custom=False,as_list=False):
     """Method for getting css from data.
 

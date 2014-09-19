@@ -92,6 +92,12 @@ class Content(ThemeElement):
     self.data.data['height'] = [str(s_h)+'%',True]
     return
 
+  def get_options(self):
+    """Method for getting the available data options."""
+    string = ['\n\nSlide Content']
+    string.append(self.data.get_options())
+    return ''.join(string)
+
   def get_css(self,only_custom=False,as_list=False):
     """Method for getting css from data.
 

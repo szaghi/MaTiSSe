@@ -21,8 +21,10 @@ class TOC(object):
     self.sections = []
     self.deep = deep
     return
+
   def __str__(self):
     return self.pstr()
+
   def pstr(self,html=False,current=None,deep=None):
     """Method powering __str__ obtaining a customizable pretty printer.
     Parameters
@@ -128,6 +130,7 @@ class TOC(object):
             for slide in subsection[2]:
               string += get_slide(section=section,subsection=subsection,slide=slide,html=html,current=current)
     return string
+
   def get(self,sections):
     """
     Method for building TOC from presentation sections.

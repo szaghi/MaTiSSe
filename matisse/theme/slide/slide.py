@@ -7,88 +7,28 @@ This defines the theme of the slide element.
 # standard library modules: these should be present in any recent python distribution
 # MaTiSSe.py modules
 from ..theme_element import ThemeElement
-from ...utils.utils import  purge_source,__regex_over_slide_theme__
-from .header import Header
-from .footer import Footer
-from .sidebar import Sidebar
+from ...utils.source_editor import SourceEditor
 from .content import Content
+from .footer import Footer
+from .header import Header
+from .sidebar import Sidebar
+# global variables
+__source_editor__ = SourceEditor()
 # class definition
-class SlidePosition(object):
-  """
-  Object for handling slide position into the canvas.
-  """
-  def __init__(self):
-    self.position = [0,0,0] # x,y,z
-    self.rotation = [0,0,0] # around x,y,z
-    self.scale = 1
-    return
-  def __str__(self):
-    string = ['\nPosition (x,y,z) = '+','.join([str(p) for p in self.position])]
-    string.append('\nRotation (x,y,z) = '+','.join([str(r) for r in self.rotation]))
-    string.append('\nScale factor = '+str(self.scale))
-    return ''.join(string)
-  def set_position(self,theme,overtheme=None):
-    """
-    Method for getting positioning data inquiring the (base) theme and the eventually
-    present overriding one.
-    """
-    actual_theme = theme
-    if overtheme:
-      actual_theme = overtheme
-
-    scale = self.get_scale(theme=actual_theme)
-
-    self.rotation = self.get_rotation(theme=actual_theme)
-
-    self.position = self.get_position(theme=actual_theme,scale=scale)
-
-    self.scale = scale
-    return
-  @staticmethod
-  def get_scale(theme):
-    """
-    Method for computing the current slide scale factor.
-    """
-    return int(theme.data.data['data-scale'][0])
-  @staticmethod
-  def get_rotation(theme):
-    """
-    Method for computing the current slide scale factor.
-    """
-    rot = int(theme.data.data['data-rotate'][0])
-    rot_x = int(theme.data.data['data-rotate-x'][0])
-    rot_y = int(theme.data.data['data-rotate-y'][0])
-    rot_z = int(theme.data.data['data-rotate-z'][0])
-    if rot_z != 0:
-      rot = max(rot,rot_z)
-    return [rot_x,rot_y,rot]
-  def get_position(self,theme,scale):
-    """
-    Method for computing the current slide position.
-    """
-    pos_x = int(theme.data.data['data-x'][0])
-    pos_y = int(theme.data.data['data-y'][0])
-    pos_z = int(theme.data.data['data-z'][0])
-    slide_width = int(theme.data.data['width'][0].strip('px'))
-    slide_height = int(theme.data.data['height'][0].strip('px'))
-    slide_transition = theme.data.data['slide-transition'][0]
-    if slide_transition == 'horizontal':
-      pos_x = self.position[0] + slide_width*(max(self.scale,scale)+0.01)
-      pos_y = self.position[1]
-    elif slide_transition == 'vertical':
-      pos_x = self.position[0]
-      pos_y = self.position[1] + slide_height*(max(self.scale,scale)+0.01)
-    return [pos_x,pos_y,pos_z]
 class Slide(ThemeElement):
   """
   Object for handling the presentation theme slide, its attributes and methods.
   """
-  def __init__(self,source=None):
+  def __init__(self,source=None,defaults=False):
     """
     Parameters
     ----------
     source : str
       string (as single stream) containing the source
+    defaults : bool, optional
+      flag for activatin the creation of a presentation istance
+      having one of each element available with the default
+      settings
 
     Attributes
     ----------
@@ -123,6 +63,10 @@ class Slide(ThemeElement):
     self.data.data['data-z']           = ['0',         False]
     if source:
       self.get(source)
+    elif defaults:
+      self.headers['slide-header_1'] = Header(number=1)
+      self.footers['slide-footer_1'] = Footer(number=1)
+      self.sidebars['slide-sidebar_1'] = Sidebar(number=1)
     return
 
   def __str__(self):
@@ -146,9 +90,16 @@ class Slide(ThemeElement):
     Parameters
     ----------
     source : str
+
+    Returns
+    -------
+    bool
+      True is Slide has at least one header, False otherwise
+    int
+      number of headers (0 if Slide has not header at all)
     """
     if source:
-      number = purge_source(regex=__regex_over_slide_theme__,source=source).count('theme_slide_header')/2
+      number = __source_editor__.purge_overtheme(source=source).count('theme_slide_header')/2
     else:
       number = len(self.headers)
     return number>0,number
@@ -159,9 +110,16 @@ class Slide(ThemeElement):
     Parameters
     ----------
     source : str
+
+    Returns
+    -------
+    bool
+      True is Slide has at least one footer, False otherwise
+    int
+      number of footers (0 if Slide has not footer at all)
     """
     if source:
-      number = purge_source(regex=__regex_over_slide_theme__,source=source).count('theme_slide_footer')/2
+      number = __source_editor__.purge_overtheme(source=source).count('theme_slide_footer')/2
     else:
       number = len(self.footers)
     return number>0,number
@@ -172,9 +130,16 @@ class Slide(ThemeElement):
     Parameters
     ----------
     source : str
+
+    Returns
+    -------
+    bool
+      True is Slide has at least one sidebar, False otherwise
+    int
+      number of sidebars (0 if Slide has not sidebar at all)
     """
     if source:
-      number = purge_source(regex=__regex_over_slide_theme__,source=source).count('theme_slide_sidebar')/2
+      number = __source_editor__.purge_overtheme(source=source).count('theme_slide_sidebar')/2
     else:
       number = len(self.footers)
     return number>0,number
@@ -314,6 +279,11 @@ class Slide(ThemeElement):
     ----------
     chk_specials : bool, optional
       if activated handle special entries differently from standard ones
+
+    Returns
+    -------
+    dict
+      dictionary of customized data
     """
     custom = {}
     custom['slide-content'] = self.content.data.get_custom(chk_specials=chk_specials)
@@ -330,6 +300,22 @@ class Slide(ThemeElement):
         if sidebar.active:
           custom['slide-sidebar_'+str(sidebar.number)] = sidebar.data.get_custom(chk_specials=chk_specials)
     return custom
+
+  def get_options(self):
+    """Method for getting the available data options."""
+    string = ['\n\nSlide Global']
+    string.append(self.data.get_options())
+    if self.has_header():
+      for header in self.headers.values():
+        string.append(header.get_options())
+    if self.has_footer():
+      for footer in self.footers.values():
+        string.append(footer.get_options())
+    if self.has_sidebar():
+      for sidebar in self.sidebars.values():
+        string.append(sidebar.get_options())
+    string.append(self.content.get_options())
+    return ''.join(string)
 
   def get_css(self,only_custom=False,as_list=False):
     """Method for setting theme values. The theme skeleton is passed as string.

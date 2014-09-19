@@ -27,9 +27,15 @@ class Heading(ThemeElement):
     if source:
       self.get(source)
     return
+
+  def get_options(self):
+    """Method for getting the available data options."""
+    string = ['\n\nh'+str(self.number)]
+    string.append(self.data.get_options())
+    return ''.join(string)
+
   def get_css(self,only_custom=False,as_list=False):
-    """
-    Method for getting css from data.
+    """Method for getting css from data.
     """
     css = "\nh"+str(self.number)+" {"
     css += self.data.get_css(only_custom=only_custom)

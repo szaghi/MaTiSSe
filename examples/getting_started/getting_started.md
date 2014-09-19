@@ -18,87 +18,13 @@ max_time           = 10
 dirs_to_copy       = ['images']
 ---endmetadata
 
----theme_canvas
-background = radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))
----endtheme_canvas
-
----theme_selector_code
-font-family = Courier, monospace
-background  = rgba(0,0,0,0.05)
----endtheme_selector_code
-
----theme_selector_pre-code
-display        = block 
-margin         = 1%
-padding        = 1%
-white-space    = pre-wrap 
-background     = rgba(0,0,0,0.05)
-box-shadow     = 4px 4px 6px rgba(0, 0, 0, .1)
-border-radius  = 10px 10px 10px 10px
----endtheme_selector_pre-code
-
----theme_heading_4
-border-bottom   = 1px solid #4788B3
----endtheme_heading_4
-
----theme_slide_global
-width            = 900px
-height           = 700px
-border-radius    = 10px
-background       = green
-color            = rgb(102,102,102)
-font-size        = 100%
-slide-transition = horizontal
----endtheme_slide_global
-
----theme_slide_content
-background    = white
-color         = rgb(102,102,102)
-padding       = 2%
----endtheme_slide_content
-
----theme_slide_header_1
-height        = 6%
-background    = #4788B3
-color         = white
-border-radius = 10px 10px 0 0
-padding       = 1%
-elements      = [['slidetitle','font-variant:small-caps;font-size:180%;padding:2%'],&&
-                 ['logo','float:right;height:90%;']]
----endtheme_slide_header_1
-
----theme_slide_footer_1
-height     = 6%
-background = #86B2CF
-color      = white
-elements   = [['timer','controls;font-size:70%;font-variant:small-caps;padding:1% 1%;float:right'],&&
-              ['total_slides_number','float:right;padding:1% 1%'],                                 &&
-              ['|custom| of ','float:right;padding:1% 0%'],                                        &&
-              ['slidenumber','float:right;padding:1% 1%'],                                         &&
-              ['|custom|slide ','float:right;padding:1% 0%']]
----endtheme_slide_footer_1
-
----theme_slide_sidebar_1
-position      = R
-width         = 20%
-background    = linear-gradient(#4788B3,#86B2CF)
-color         = white
-border-radius = 0
-elements      = [['title','font-weight:bold;font-variant:small-caps;font-size:105%;padding:5%;display:inline-block'],                                          &&
-                 ['authors','font-variant:small-caps;font-size:90%;padding:5%;display:inline-block'],                                                          &&
-                 ['affiliations','margin-top:4%;margin-bottom:10%;font-variant:small-caps;font-size:70%;white-space:pre-wrap;padding:5%;display:inline-block'],&&
-                 ['toc','font-variant:small-caps;font-size:90%;white-space:pre-wrap;padding:5%;display:inline-block']]
----endtheme_slide_sidebar_1
+$include(main_theme.md)
 
 # Introduction
 
 ## MaTiSSe.py, what is?
 
 ### The Acronym
-
-#### Ciao
-##### Ciao Ciao
-###### Ciao Ciao Ciao
 
 _MaTiSSe.py_ means **Ma**rkdown **T**o **I**mpressive **S**cientific **S**lid**e**s
 
@@ -115,6 +41,204 @@ It is basically a very simple and stupid (KISS) presentation maker based on simp
 All other elements (headers, footers, sidebars, etc...) are handled by MaTiSSe.py once you have setup the theme of your presentation. 
 
 The real cool feature is that for setting up your theme (as the one of the presentation you are reading) **you do not need to be a html-css guru!**
+
+## Getting started
+
+### From markdown to html...
+
+# Customize the Theme
+
+## MaTiSSe.py Universe
+
+### MaTiSSe.py Universe
+
+The **universe** of MaTiSSe.py is composed by an _infinite canvas_ over which the presentation's slides are rendered:
+
+* **presentation** with its own options, having:
+    + one **canvas** with its own options over wich the slides are rendered:
+    + N **slide**(s) with their own options; each slide has: 
+        * $N_H$ **headers**, with $N_H \in [0,\infty]$; 
+        * $N_F$ **footers**, with $N_F \in [0,\infty]$; 
+        * $N_L$ left **sidebars**, with $N_L \in [0,\infty]$; 
+        * $N_R$ right **sidebars**, with $N_R \in [0,\infty]$; 
+        * 1 main **content**.
+
+$figure
+$content[padding:1% 5%;width:44%;box-shadow: 7px 7px 5px rgba(200,200,200,0.3);background:linear-gradient(rgba(184,55,0,0.8),rgba(230,126,0,0.8));border-radius:25px]{images/matisse-universe-no_bg.png}
+$caption[font-size:80%;color:#4788B3;]{ MaTiSSe.py Universe }
+$endfigure
+
+$box
+$style[font-variant:small-caps;box-shadow: 7px 7px 5px rgba(200,200,200,0.3);border-radius:20px]
+$caption(Note)[padding:0 2%;color:#4788B3;border-bottom:1px solid #4788B3;display:inline-block;]
+$content(note)[padding:0 2%;font-size:120%;]{a slide has always one *content* element whereas, *headers*, *footers* and *sidebars* are optional.}
+$endbox
+
+## Canvas Theme
+
+### Canvas container, available options and their setting
+
+Presently, the **canvas** container has only one option:
+
++ `background`, default `radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))`.
+
+$box
+$style[font-variant:small-caps;box-shadow: 7px 7px 5px rgba(200,200,200,0.3);border-radius:20px]
+$caption(Note)[padding:0 2%;color:#4788B3;border-bottom:1px solid #4788B3;display:inline-block;]
+$content(note)[padding:0 2%;font-size:120%;]{The canvas options are applied to the **body** html element. As a consequence it can be customized only at the beginning of the presentation for all slides: an eventual slide's overriding theme cannot change the canvas options!}
+$endbox
+
+To set the canvas options use the following syntax:
+
+```lua
+---theme_canvas
+background = #background_value
+---endtheme_canvas
+```
+
+The canvas you are viewing is made by:
+
+```lua
+---theme_canvas
+background = radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))
+---endtheme_canvas
+```
+
+$note
+$content{Such a theme data can placed anywhere inside your markdown source, however it has sense to place it at the beginning, inside the presentantion _preamble_, that is just a convention rather than a physical part of the markdown document.}
+$endnote
+
+## Headings Theme
+
+## Custom Selector Theme
+
+## Slide Theme
+
+### Slide container, available options
+
+The **slide** container has the following _user_ options:
+
++ `width           `, default `900px`;
++ `height          `, default `700px`;
++ `background      `, default `white`;
++ `border          `, default `0`;
++ `border-radius   `, default `0 0 0 0`;
++ `color           `, default `black`;
++ `font            `;
++ `font-size       `, default `100%`;
++ `font-family     `, default `Open Sans, Arial, sans-serif`;
++ `active          `, default `True`;
++ `slide-transition`, default `horizontal`;
++ `data-scale      `, default `1`;
++ `data-rotate     `, default `0`;
++ `data-rotate-x   `, default `0`;
++ `data-rotate-y   `, default `0`;
++ `data-rotate-z   `, default `0`;
++ `data-x          `, default `0`;
++ `data-y          `, default `0`;
++ `data-z          `, default `0`.
+
+The most part of options are standard `CSS` options. However some exceptions are present. Before read about them, we discuss how set the slide options.
+
+### Slide container, setting options
+
+To customize the _global_ options of **slide** container the syntax is the following
+```lua
+---theme_slide_global
+option_name1 = option_value1
+option_name2 = option_value2
+...
+---endtheme_slide_global
+```
+where `option_name` is one of the previously cited options, e.g. `height`, `background`, etc, while `option_value` is its value. The slide options **must** be enclosed into the tags `---theme_slide_global` and  `---endtheme_slide_global` otherwise they will not considered. Such a theme data can placed anywhere inside your markdown source, however it has sense to place it at the beginning inside the presentantion _preamble_, that is just a convention rather than a physical part of the markdown document. 
+
+The slide options of the slide you are reading is made by
+```lua
+---theme_slide_global
+width            = 900px
+height           = 700px
+border-radius    = 10px
+background       = green
+color            = rgb(102,102,102)
+font-size        = 100%
+slide-transition = horizontal
+---endtheme_slide_global
+```
+
+Let us now discuss about some of the special options.
+
+### Slide container, SLIDE-TRANSITION option
+
+The **slide-transition** option set the transition effect between subsequent slides. Presently, the available values for this options are:
+
++ `horizontal`: the slides are placed into a horizontal raw from left-to-right direction; this the default setting;
++ `-horizontal`: the slides are placed into a horizontal raw from right-to-left direction;
++ `vertical`: the slides are placed into a vertical column from top-to-bottom direction;
++ `-vertical`: the slides are placed into a vertical column from bottom-to-top direction;
++ `diagonal`: the slides are placed into a diagonal line from top/left-to-bottom/right direction;
++ `-diagonal`: the slides are placed into a diagonal line from bottom/right-to-top/left direction;
++ `diagonal-x`: the slides are placed into a diagonal line from top/right-to-bottom/left direction;
++ `diagonal-y`: the slides are placed into a diagonal line from bottom/left-to-top/right direction;
++ `absolute`: the slides are placed exactly where indicated by `data-x`, `data-y` and `data-z` options.
+
+The **absolute** transition mode has a practical use just for a _local-slide overriding theme_ that is the subject of a following subsection: if you set `slide-transition = absolute` in the preamble settings and you do **not** set the `data-x`, `data-y` and `data-z` values for each slide **all** slides will be placed in the same point... the canvas center!
+
+### Slide container, DATA-SCALE option
+
+The **data-scale** option set the scaling factor of the slides. By default it is set to `1`. This option has a practical use just for a _local-slide overriding theme_ that is the subject of a following subsection: changing its value in the preamble settings has no visual effect because all slides will be rendered with the same scaling factor. On the contrary, setting different scale for different slides using _local-slide overriding theme_ will produce a nice zooming effect...
+
+### Slide container, DATA-ROTATE, DATA-ROTATE-X/Y/Z options
+
+### MaTiSSe.py Universe: header element, available options
+
+The *header* element is designed to render data in a _single row_ rather than wrap the content into multilines.
+
+Header element has the following _user_ options:
+
++ `height       `,  preferably expressed in percent _of the slide height_;
++ `background   `, default `white`;
++ `border       `, default `0`;
++ `border-radius`, default `0 0 0 0`;
++ `color        `, default `black`
++ `font         `; 
++ `font-size    `, default `100%`;
++ `font-family  `, default `Open Sans, Arial, sans-serif`;
++ `elements     `, a list of objects to be inserted, e.g. slide-title, presentation-title, presentation-logo,etc...;
++ `active       `, default `True`.
+
+The most part of options are standard `CSS` options. The special thing is the `elements` option... but let it to the following!
+
+Note that the `width` is automatically set to `100%` and should not be customized from users.
+
+### MaTiSSe.py Universe: header element, setting options
+
+To customize the options of header n. _N_ the syntax is the following
+```lua
+---theme_slide_header_N
+option_name1 = option_value1
+option_name2 = option_value2
+...
+---endtheme_slide_header_N
+```
+where `option_name` is one of the previously cited options, e.g. `height`, `background`, etc, while `option_value` is its value. Each header is indicated by its own number: the numeration can be not strictly consecutive, e.g. you can start with header 2 instead of header 1. However, the insertion follows the number order, thus header 1, if present, is inserted **before** header 2. 
+
+The header of the slide you are reading is made by
+```lua
+---theme_slide_header_1
+height        = 6%
+background    = #4788B3
+color         = white
+border-radius = 10px 10px 0 0
+padding       = 1%
+elements      = [['slidetitle','font-variant:small-caps;font-size:180%;padding:2%'],&&
+                 ['logo','float:right;height:90%;']]
+---endtheme_slide_header_1
+```
+
+### MaTiSSe.py Universe: the `element` option
+
+
+
 
 ### Why?
 There are tons of markdown to html presentation tools. Why yet another presenter? 
@@ -144,7 +268,7 @@ MaTiSSe.py should:
 ### For whom?
 ---slide
 ---theme_slide_global
-slide-transition = vertical
+slide-transition = diagonal
 data-z           = -2000
 data-scale       = 2
 data-rotate      = 90
@@ -160,7 +284,7 @@ active = False
 ---endtheme_slide_sidebar_1
 ---endslide
 
-Scientific researchers (at least the brave ones) are used to write presentation with _latex-beamer_. 
+Scientific researchers \(at least the brave ones\) are used to write presentation with _latex-beamer_. 
 
 _LaTeX_ is great and the **beamer** class quality is incredible, however some drawbacks can be highlighted:
 
@@ -171,11 +295,19 @@ _LaTeX_ is great and the **beamer** class quality is incredible, however some dr
 
 MaTiSSe.py is designed for scientific researchers that want retain the best of _latex-beamer_ and _prezi_ worlds together. 
 
-## Getting started
-
 ### How it works?
 You write your presentation in markdown and MaTiSSe.py creates an impressive presentation even if you are a boring scientific researcher.
 
+Inline equation $\frac{1}{2}$ example.
+
+$$
+x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+$$
+
+\begin{align*}
+a=&1\\
+\int_{a}^{b}\frac{c}{d}\,dx=&2
+\end{align*}
 
 ### Requirements
 MaTiSSe.py relies on other great python module for making its magic:

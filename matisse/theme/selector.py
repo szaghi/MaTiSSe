@@ -22,21 +22,27 @@ class Selector(ThemeElement):
   def __init__(self,name,source=None):
     self.name = name
     super(Selector,self).__init__(data_tag=r'theme_selector_'+self.name)
-    self.data.data['display'        ] = ['',False]
-    self.data.data['margin'         ] = ['',False]
-    self.data.data['padding'        ] = ['',False]
-    self.data.data['text-decoration'] = ['',False]
-    self.data.data['border-bottom'  ] = ['',False]
-    self.data.data['border-radius'  ] = ['',False]
-    self.data.data['box-shadow'     ] = ['',False]
-    self.data.data['white-space'    ] = ['',False]
+    self.data.data['display'        ] = ['',    False]
+    self.data.data['margin'         ] = ['',    False]
+    self.data.data['padding'        ] = ['',    False]
+    self.data.data['text-decoration'] = ['',    False]
+    self.data.data['border-bottom'  ] = ['',    False]
+    self.data.data['box-shadow'     ] = ['',    False]
+    self.data.data['white-space'    ] = ['',    False]
+    self.data.data['overflow-x'     ] = ['auto',False]
     self._name = self.name.replace('-',' ')
     if source:
       self.get(source)
     return
+
+  def get_options(self):
+    """Method for getting the available data options."""
+    string = ['\n\nSelector '+self._name]
+    string.append(self.data.get_options())
+    return ''.join(string)
+
   def get_css(self,only_custom=False,as_list=False):
-    """
-    Method for getting css from data.
+    """Method for getting css from data.
     """
     css = "\n"+self._name+" {"
     css += self.data.get_css(only_custom=only_custom)

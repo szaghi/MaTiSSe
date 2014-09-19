@@ -9,7 +9,10 @@ from collections import OrderedDict
 import re
 # MaTiSSe.py modules
 from .slide import Slide
-from ..utils.utils import __expr__,purge_codeblocks
+from ..utils.utils import __expr__
+from ..utils.source_editor import SourceEditor
+# global variables
+__source_editor__ = SourceEditor()
 # regular expressions
 __regex_slide__ = re.compile(r"[^#]###\s+"+__expr__)
 # class definition
@@ -35,8 +38,7 @@ class Subsection(object):
     """
     slides = []
     self.slides = []
-    # remove code blocks from string parsed in searching slides
-    purged_source = purge_codeblocks(self.raw_body)
+    purged_source = __source_editor__.purge_codeblocks(self.raw_body)
     for match in re.finditer(__regex_slide__,purged_source):
       slides.append([match.group('expr'),match.start(),match.end()])
     for sdn,slide in enumerate(slides):
