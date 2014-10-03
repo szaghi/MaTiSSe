@@ -114,6 +114,18 @@ Requirements:
         + [yattag](http://www.yattag.org/);
 + a lot of patience with the author.
 
+As aforementioned MaTiSSe.py relies on other programs that are shipped within MaTiSSe.py itself. The author would like to thank the authors of these programs singularly:
+
+* for `prezi`-like effects MaTiSSe.py relies on:
+    + [impress.js](https://github.com/bartaz/impress.js/);
+* for LaTeX equation rendering MaTiSSe.py relies on:
+    + [MathJax](http://www.mathjax.org/);
+    + [md_mathjax](https://github.com/epsilony/md_mathjax);
+* for syntax highlighting MaTiSSe.py relies on:
+    + [highlight.js](https://highlightjs.org/);
+* for resetting the main CSS theme MaTiSSe.py relies on:
+    + [normalize.css](https://github.com/necolas/normalize.css);
+
 MaTiSSe.py is developed on a GNU/Linux architecture. For Windows architecture there is no support, however it should work out-of-the-box.
 
 Go to [Top](#top) or [Toc](#toc)
