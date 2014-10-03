@@ -12,44 +12,70 @@ try:
 except ImportError :
   sys.stderr.write("Error: can't import module 'yattag'")
   sys.exit(1)
-# MaTiSSe.py modules
-from ..data.data import Data
 # global variables
 # regular expressions
 __rebox__ = re.compile(r"\$box(?P<box>.*?)\$endbox",re.DOTALL)
-__refigure__ = re.compile(r"\$figure(?P<box>.*?)\$endfigure",re.DOTALL)
-__renote__ = re.compile(r"\$note(?P<box>.*?)\$endnote",re.DOTALL)
 __restl__ = re.compile(r"\$style\[(?P<style>.*?)\]",re.DOTALL)
 __rectn__ = re.compile(r"\$content(\((?P<ctn_type>.*?)\))*(\[(?P<ctn_options>.*?)\])*\{(?P<ctn>.*?)\}",re.DOTALL)
 __recap__ = re.compile(r"\$caption(\((?P<cap_type>.*?)\))*(\[(?P<cap_options>.*?)\])*(\{(?P<cap>.*?)\})*",re.DOTALL)
-# default attributes initialization (can be overridden by theme settings)
-__style__ = {'figure': None, 'table': None, 'note': None}
-__ctn_options__ = {'figure': None, 'table': None, 'note': None}
-#__cap_type__ = {'figure': 'Figure', 'table': 'Table', 'note': 'Note'}
-__cap_options__ = {'figure': None, 'table': None, 'note': None}
+__cap_type__    = {'figure': 'Figure', 'table': 'Table', 'note': 'Note', 'box': ''  }
 # classes definition
 class Box(object):
   """
-  Object for handling a box. It can contains anythings (figures, tables, text...). The syntax is:
+  Object for handling a box. It is an environment that can contains anythings (figures, tables, notes...).
+
+  The syntax is:
 
   $box
-  $style[background:green;]
-  $content(figure)[width:60%;]{images/matisse-universe.png}
-  $caption(Figure)[font-size:80%;]{MaTiSSe.py Universe}
+  $style[style_options]
+  $caption(caption_type)[caption_options]{caption}
+  $content(content_type)[content_options]{content}
   $endbox
+
+  Note:
+  1. "$style[...]" is optional; it defines the style's options for the whole box; "style_options" are valid
+     css syntax statements  (e.g. "font-variant:small-caps;");
+  2. "$caption(...)[...]{...}" is optional: it defines the box's caption; the "caption_type" defines the
+     caption prefixing "class" (e.g. "Fig." for figures): any sentences are valid; the "caption_options" defines
+     the style's options of only caption: they are valid css syntax statements (e.g.  "padding:0 2%;"); the
+     "caption" (inside the {} parenthesis) defines the caption text; note that "caption_type" and "caption_options"
+     are optional thus the following statements are valid:
+     + $caption[font-variant:small-caps;]{My caption without caption_type};
+     + $caption{My caption without caption_type and caption_options};
+  3. "$content(...)[...]{...}" is not optional: it defines the box's content; the "content_type" defines the type
+     of the content that can be 'figure', 'table', 'note' and 'box' for generic environments; the "content_options"
+     defines the style's options of only content: they are valid css syntax statements (e.g.  "padding:0 2%;"); the
+     "content" (inside the {} parenthesis) defines the content (being text, figures, tables, etc...); note that
+     "content_type" and "content_options" are optional thus the following statements are valid:
+     + $content[font-variant:small-caps;]{My content without content_type};
+     + $content{My content without content_type and content_options};
+
+  There some helper (sub)classes based on Box class for handling specific environments such Figure, Table and Note.
+
+  Note that the themes of box environments can be defined as all other theme elements in order to not have to repeat
+  the styling options for each box. To this aim this module provides the "get_themes" function. The definition of such
+  a theme can be stripped out by the function "strip_themes" also provided by this module.
+
+  See Also
+  --------
+  Figure
+  Table
+  Note
   """
-  def __init__(self,ctn_type=None):
+  def __init__(self,ctn_type='box'):
     """
     Parameters
     ----------
-    ctn_type : {'figure','table','note'}, optional
+    ctn_type : {'figure','table','note','box'}, optional
       box content type
 
     Attributes
     ----------
+    number : int
+      box number
     style : str
       box style
-    ctn_type : {'figure','table','note'}
+    ctn_type : {'figure','table','note','box'}
       box content type
     ctn_options : str
       box content options
@@ -62,18 +88,14 @@ class Box(object):
     cap : str
       box caption
     """
-    self.style = None
-    self.ctn_type = ctn_type
+    self.number      = 0
+    self.ctn_type    = ctn_type
+    self.style       = None
     self.ctn_options = None
-    self.ctn = None
-    self.cap_type = None
     self.cap_options = None
-    self.cap = None
-    if self.ctn_type:
-      self.style = __style__[self.ctn_type]
-      self.ctn_options = __ctn_options__[self.ctn_type]
-      #self.cap_type = __cap_type__[self.ctn_type]
-      self.cap_options = __cap_options__[self.ctn_type]
+    self.cap_type    = None
+    self.ctn         = None
+    self.cap         = None
     return
 
   def __str__(self):
@@ -98,7 +120,10 @@ class Box(object):
     if match:
       cap_type = match.group('cap_type')
       if cap_type:
-        self.cap_type = cap_type.strip()
+        if cap_type.lower() == 'none':
+          self.cap_type = None
+        else:
+          self.cap_type = cap_type.strip()
       cap_options = match.group('cap_options')
       if cap_options:
         self.cap_options = cap_options.strip()
@@ -137,19 +162,12 @@ class Box(object):
     str
       caption text
     """
-    if self.cap_type:
+    if self.cap_type and self.cap:
+      txt = self.cap_type+' '+str(self.number)+': '+self.cap
+    elif self.cap_type:
       txt = self.cap_type
-    else:
-      if self.ctn_type and self.ctn_type == 'figure':
-        txt = 'Figure'
-      elif self.ctn_type and self.ctn_type == 'table':
-        txt = 'Table'
-      elif self.ctn_type and self.ctn_type == 'note':
-        txt = 'Note'
-      else:
-        txt = ''
-    if self.cap:
-      txt += ': '+self.cap
+    elif self.cap:
+      txt = self.cap
     return txt
 
   def put_caption(self,doc):
@@ -161,102 +179,24 @@ class Box(object):
       yattag document where to put caption
     """
     if self.cap or self.cap_type:
-      if self.ctn_type and self.ctn_type == 'figure':
-        with doc.tag('figcaption'):
-          if self.cap_options:
-            doc.attr(style=self.cap_options)
-          doc.text(self.caption_txt())
-      elif self.ctn_type and self.ctn_type == 'table':
-        pass
-      elif self.ctn_type and self.ctn_type == 'note':
-        with doc.tag('div',klass='note caption'):
-          if self.cap_options:
-            doc.attr(style=self.cap_options)
-          doc.text(self.caption_txt())
-      else:
-        pass
+      with doc.tag('div',klass='box caption'):
+        if self.cap_options:
+          doc.attr(style=self.cap_options)
+        doc.text(self.caption_txt())
     return
 
   def to_html(self):
-    """Method for inserting image to the html doc."""
+    """Method for inserting box to the html doc."""
     doc = Doc()
     with doc.tag('div',markdown='1',klass='box'):
       if self.style:
         doc.attr(style=self.style)
-      if self.ctn_type:
-        if self.ctn_type == 'figure':
-          with doc.tag(self.ctn_type):
-            if self.ctn_options:
-              doc.stag('img',src=self.ctn,klass='image',style=self.ctn_options,alt='Figure-'+self.ctn)
-            else:
-              doc.stag('img',src=self.ctn,klass='image',style='width:100%;',alt='Figure-'+self.ctn)
-            self.put_caption(doc=doc)
-        elif self.ctn_type == 'table':
-          pass
-        elif self.ctn_type == 'note':
-          with doc.tag('div',klass='note'):
-            self.put_caption(doc=doc)
-            with doc.tag('div',klass='note content'):
-              if self.ctn_options:
-                doc.attr(style=self.ctn_options)
-              doc.text(self.ctn)
-      else:
-        pass
+      with doc.tag('div',klass='box content'):
+        if self.ctn_options:
+          doc.attr(style=self.ctn_options)
+        doc.text(self.ctn)
+      self.put_caption(doc=doc)
     return doc.getvalue()
-
-class Figure(Box):
-  """
-  Object for handling figure-box. It is a subclass of Box.
-  """
-  def __init__(self):
-    super(Figure,self).__init__(ctn_type='figure')
-    self.cap_type = 'Figure'
-
-class Note(Box):
-  """
-  Object for handling note-box. It is a subclass of Box.
-  """
-  def __init__(self):
-    super(Note,self).__init__(ctn_type='note')
-    self.cap_type = 'Note'
-
-# functions definition
-def get_themes(source):
-  """Method for getting themes definition of boxes styles.
-
-  Parameters
-  ----------
-  source : str
-    string (as single stream) containing the source
-  """
-  data = Data(regex_start=r'[-]{3}theme_box_note',regex_end=r'[-]{3}endtheme_box_note')
-  data.data['style'  ] = [None,False]
-  data.data['caption'] = [None,False]
-  data.data['content'] = [None,False]
-  data.get(source=source)
-  if data.data['style'][0]:
-    __style__['note'] = data.data['style'][0]
-  if data.data['content'][0]:
-    __ctn_options__['note'] = data.data['content'][0]
-  if data.data['caption'][0]:
-    __cap_options__['note'] = data.data['caption'][0]
-  return
-
-def strip_themes(source):
-  """Method for striping themes data from source.
-
-  Parameters
-  ----------
-  source : str
-    string (as single stream) containing the source
-
-  Returns
-  -------
-  str
-    source without the themes data
-  """
-  data = Data(regex_start=r'[-]{3}theme_box_note',regex_end=r'[-]{3}endtheme_box_note')
-  return data.strip(source)
 
 def parse(source):
   """Method for parsing source substituting boxes with their own html equivalent.
@@ -265,30 +205,15 @@ def parse(source):
   ----------
   source : str
     string (as single stream) containing the source
-  number : int, optional
-    number of image in the global numeration
 
   Returns
   -------
   str
     source string parsed
-  int
-    number of currently parsed images
   """
   parsed_source = source
-  # parsing generic boxes
   for match in re.finditer(__rebox__,parsed_source):
     box = Box()
     box.get(source=match.group('box'))
     parsed_source = re.sub(__rebox__,box.to_html(),parsed_source,1)
-  # parsing box-figures
-  for match in re.finditer(__refigure__,parsed_source):
-    figure = Figure()
-    figure.get(source=match.group('box'))
-    parsed_source = re.sub(__refigure__,figure.to_html(),parsed_source,1)
-  # parsing box-notes
-  for match in re.finditer(__renote__,parsed_source):
-    note = Note()
-    note.get(source=match.group('box'))
-    parsed_source = re.sub(__renote__,note.to_html(),parsed_source,1)
   return parsed_source

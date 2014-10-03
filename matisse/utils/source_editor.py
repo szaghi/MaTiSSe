@@ -16,6 +16,7 @@ except ImportError :
   sys.exit(1)
 #global variables
 __regex_codeblock__ = re.compile(r"(?P<cblock>[`]{3}.*?[`]{3})",re.DOTALL)
+__regex_codeinline__ = re.compile(r"(?P<cline>[`]{1}.*?[`]{1})",re.DOTALL)
 __regex_overtheme__ = re.compile(r"(?P<ostheme>[-]{3}slide(?P<block>.*?)[-]{3}endslide)",re.DOTALL)
 __regex_include__ = re.compile(r"\$include\((?P<include>.*?)\)")
 # class definition
@@ -31,14 +32,19 @@ class SourceEditor(object):
     """
     Attributes
     ----------
-    md : markdown.Markdown object
+    regex_codeblock : re.compile object
+    regex_codeinline : re.compile object
+    regex_overtheme : re.compile object
+    mkd : markdown.Markdown object
       markdown converter
     """
-    self.regex_codeblock =  __regex_codeblock__
-    self.regex_overtheme =  __regex_overtheme__
+    self.regex_codeblock  =  __regex_codeblock__
+    self.regex_codeinline =  __regex_codeinline__
+    self.regex_overtheme  =  __regex_overtheme__
     self.mkd = markdown.Markdown(output_format='html5',extensions=['smarty',
                                                                    'extra',
                                                                    MathJaxExtension()])
+    return
 
   def md_convert(self,source):
     """Method for converting markdown source to html.
@@ -53,7 +59,12 @@ class SourceEditor(object):
     str
       converted source
     """
-    return self.mkd.reset().convert(source)
+    p_start = '<p>'
+    p_end   = '</p>'
+    markup = self.mkd.reset().convert(source)
+    if markup.startswith(p_start) and markup.endswith(p_end):
+      markup = markup[len(p_start):-len(p_end)]
+    return markup
 
   @staticmethod
   def get(regex,source,group_name=None):
@@ -96,6 +107,21 @@ class SourceEditor(object):
       (first) matching code blocks of source; if nothing matches None is returned
     """
     return self.get(regex=__regex_codeblock__,group_name='cblock',source=source)
+
+  def get_codeinlines(self,source):
+    """Method for getting code inlines from a source string.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      (first) matching code blocks of source; if nothing matches None is returned
+    """
+    return self.get(regex=__regex_codeinline__,group_name='cline',source=source)
 
   def get_overtheme(self,source):
     """Method for getting blocks of characters defining the overriding slide theme from a source string.
@@ -161,6 +187,39 @@ class SourceEditor(object):
       purged string
     """
     return self.purge(regex=__regex_codeblock__,group_name='cblock',source=source)
+
+  def purge_codeinlines(self,source):
+    """Method for removing code inlines from a source string and
+    replacing with an equivalent number of spaces as the removed characters.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      purged string
+    """
+    return self.purge(regex=__regex_codeinline__,group_name='cline',source=source)
+
+  def purge_codes(self,source):
+    """Method for removing code (blocks and inline) from a source string and
+    replacing with an equivalent number of spaces as the removed characters.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      purged string
+    """
+    source = self.purge_codeinlines(source=source)
+    return self.purge_codeblocks(source=source)
 
   def purge_overtheme(self,source):
     """Method for removing overriding slide themes blocks from a source string and
@@ -240,3 +299,9 @@ class SourceEditor(object):
           other_source = inc.read()
         inc_source = re.sub(__regex_include__,other_source,inc_source,1)
     return inc_source
+
+# global variables
+__initialized__ = False
+if not __initialized__:
+  __source_editor__ = SourceEditor()
+  __initialized__ = True

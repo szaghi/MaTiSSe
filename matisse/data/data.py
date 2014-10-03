@@ -9,9 +9,7 @@ from collections import OrderedDict
 import copy
 import re
 # MaTiSSe.py modules
-from ..utils.source_editor import SourceEditor
-# global variables
-__source_editor__ = SourceEditor()
+from ..utils.source_editor import __source_editor__
 # class definition
 class Data(object):
   """Object for handling data of presentation.
@@ -20,8 +18,15 @@ class Data(object):
   types:
 
   1. standard entries which can be safely converted to css format;
-  2. special entries whose key must inserted into the "special_keys" list and that are
-     not converted to css format.
+  2. special entries whose key must be inserted into the "special_keys" list and that
+     handeld differently from standard data.
+
+  Into the source the data must be defined with the following syntax:
+  regex_start
+  option_name1 = option_value1
+  option_name1 = option_value1
+  ...
+  regex_end
   """
   def __init__(self, regex_start = '', regex_end = '', skip = None, special_keys = None):
     """
@@ -31,8 +36,8 @@ class Data(object):
       regural expression starting the matching block of data
     regex_end : str, optional
       regural expression ending the matching block of data
-    skip : re.compile, optional
-      compiled regular expression of block to be skipped
+    skip : list, optional
+      list of re.compile (compiled regular expression) of block to be skipped
     special_keys : list, optional
       list of strings containing the special keys of data entries
 
@@ -41,8 +46,8 @@ class Data(object):
       regural expression starting the matching block of data
     regex_end : str
       regural expression ending the matching block of data
-    skip : re.compile
-      compiled regular expression of block to be skipped
+    skip : list
+      list of compiled regular expression of block to be skipped
     special_keys : list
       list of strings containing the special keys of data entries
     regex : re.compile
@@ -77,12 +82,42 @@ class Data(object):
     newone.data = copy.deepcopy(self.data, memo)
     return newone
 
-  def get(self,source):
-    """
-    Method for getting data from source.
+  def count(self,source):
+    """Method for computing the number of data definitions present into the source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    int
+      number of data definitions
     """
     if self.skip:
-      source = __source_editor__.purge(regex=self.skip,source=source)
+      for skip in self.skip:
+        source = __source_editor__.purge(regex=skip,source=source)
+    number = len(re.findall(self.regex,source))
+    return number
+
+  def set_all_custom(self):
+    """Method for setting all data as customized by user (useful for plain slides theme)."""
+    for data in self.data:
+      self.data[data][1] = True
+    return
+
+  def get(self,source):
+    """Method for getting data from source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+    """
+    if self.skip:
+      for skip in self.skip:
+        source = __source_editor__.purge(regex=skip,source=source)
     matching = self.regex.search(source)
     if matching:
       raw = matching.group('rdata')
@@ -107,8 +142,12 @@ class Data(object):
     return ''.join(string)
 
   def get_css(self,only_custom=False):
-    """
-    Method for getting css from data.
+    """Method for getting css from data.
+
+    Parameters
+    ----------
+    only_custom : bool, optional
+      consider only (user) customized data
     """
     css = ''
     for key,val in self.data.items():
@@ -124,8 +163,12 @@ class Data(object):
     return css
 
   def get_custom(self,chk_specials=False):
-    """
-    Method returning only the data that have been set by users (customized) overriding default values.
+    """Method returning only the data that have been set by users (customized) overriding default values.
+
+    Parameters
+    ----------
+    chk_specials : bool, optional
+      if activated handle special entries differently from standard ones
     """
     custom = copy.deepcopy(self)
     for key,val in custom.data.items():
@@ -140,9 +183,13 @@ class Data(object):
     return custom
 
   def merge(self,otherdata):
-    """
-    Method merging otherdata with self. Only data that are not customized is updated with the otherdata data
+    """Method merging otherdata with self. Only data that are not customized is updated with the otherdata data
     if they have been customized.
+
+    Parameters
+    ----------
+    otherdata : Data object
+      other data to be merged with self
     """
     for key,val in self.data.items():
       if not val[1]:
@@ -151,15 +198,38 @@ class Data(object):
     return
 
   def strip(self,source):
+    """Method for striping raw data from source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      source without the raw data
     """
-    Method for striping raw data from source.
-    """
-    strip_source = source
     if self.skip:
-      regex = re.compile(r"(?!"+str(self.skip.pattern)+")",re.DOTALL)
+      strip_source = source
+      pattern = '|'.join([ skip.pattern for skip in self.skip ])
+      regex = re.compile(pattern+r"|(?P<strip>"+self.regex.pattern+r")",re.DOTALL)
+      matches = []
       for match in re.finditer(regex,strip_source):
-        sub = ' '*len(match.group())
-        strip_source = re.sub(regex,sub,strip_source,1)
+        if match.group('strip'):
+          matches.append([match.start(),match.end()])
+      if len(matches)>0:
+        strip = ''
+        for mtc,match in enumerate(matches):
+          if mtc == 0:
+            start = 0
+          else:
+            start = matches[mtc-1][1]+1
+          if match[0]!=start:
+            strip += strip_source[start:match[0]-1]
+        if matches[-1][1]<len(strip_source):
+          strip += strip_source[matches[-1][1]+1:]
+        strip_source = strip
     else:
       strip_source = re.sub(self.regex,'',source)
-    return strip_source
+    return strip_source.strip()

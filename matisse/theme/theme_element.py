@@ -9,24 +9,26 @@ import ast
 import re
 # MaTiSSe.py modules
 from ..data.data import Data
-from ..utils.source_editor import  SourceEditor
-# global variables
-__source_editor__ = SourceEditor()
+from ..utils.source_editor import __source_editor__
 # class definition
 class ThemeElement(object):
   """
   Object for handling a theme element.
   """
-  def __init__(self, data_tag, special_keys = None, class_name = None):
+  def __init__(self, data_tag, skip = None, special_keys = None, class_name = None):
     """
     Parameters
     ----------
     data_tag : str
       tag name enclosing the data
+    skip : list, optional
+      list of re.compile (compiled regular expression) of block to be skipped
     special_keys : list, optional
       list of special entries that must be handled differently from the standard ones
     class_name : str, optional
       name of the 'css class' corresponding to the theme element
+    set_all_custom : bool, optional
+      set all option as customized from users (useful for plain slides theme)
 
     Attributes
     ----------
@@ -38,26 +40,21 @@ class ThemeElement(object):
     active : bool
       flag for inquiring if the current theme element is active or not
     """
-    _special_keys = ['elements','active']
+    _skip = [__source_editor__.regex_overtheme,__source_editor__.regex_codeblock,__source_editor__.regex_codeinline]
+    if skip:
+      for skp in skip:
+        _skip.append(skp)
+    _special_keys = ['metadata','active']
     if special_keys:
       for key in special_keys:
         _special_keys.append(key)
     self.data_tag     = data_tag
     self.data         = Data(regex_start=r'[-]{3}'+data_tag,regex_end=r'[-]{3}end'+data_tag,
-                             skip=__source_editor__.regex_overtheme,special_keys=_special_keys)
+                             skip=_skip,special_keys=_special_keys)
     self.class_name   = class_name
     self.active       = True
-    self.data.data['width'        ] = ['',                            False]
-    self.data.data['height'       ] = ['',                            False]
-    self.data.data['background'   ] = ['white',                       False]
-    self.data.data['border'       ] = ['0',                           False]
-    self.data.data['border-radius'] = ['0 0 0 0',                     False]
-    self.data.data['color'        ] = ['black',                       False]
-    self.data.data['font'         ] = ['',                            False]
-    self.data.data['font-size'    ] = ['100%',                        False]
-    self.data.data['font-family'  ] = ['Open Sans, Arial, sans-serif',False]
-    self.data.data['elements'     ] = [[],                            False]
-    self.data.data['active'       ] = [True,                          False]
+    self.data.data['metadata'] = [[],  False]
+    self.data.data['active'  ] = [True,False]
     return
 
   def __str__(self):
@@ -91,17 +88,22 @@ class ThemeElement(object):
       self.check_specials()
     return
 
+  def set_all_custom(self):
+    """Method for setting all data as customized by user (useful for plain slides theme)."""
+    self.data.set_all_custom()
+    return
+
   def check_specials(self):
     """
     Method for checking special data entries.
     All theme elements have the following special entries:
-    1. elements
+    1. metadata
     2. active
     Other particular special entries must be handled into the subclass method.
     """
     for key,val in self.data.data.items():
       if val[1]:
-        if key == 'elements':
+        if key == 'metadata':
           self.data.data[key] = [ast.literal_eval(str(val[0])),True]
         elif key == 'active':
           self.active = ast.literal_eval(str(val[0]))
@@ -126,10 +128,14 @@ class ThemeElement(object):
     list
       a list of one string containing the css code of the element if as_list = True
     """
-    if as_list:
-      return [self.data.get_css(only_custom=only_custom)]
+    if self.class_name:
+      css = '\n.'+self.class_name+' {'+self.data.get_css(only_custom=only_custom)+'\n}\n'
     else:
-      return self.data.get_css(only_custom=only_custom)
+      css = self.data.get_css(only_custom=only_custom)
+    if as_list:
+      return [css]
+    else:
+      return css
 
   def strip(self,source):
     """Method for striping theme element data from source.
@@ -145,74 +151,115 @@ class ThemeElement(object):
     """
     return self.data.strip(source)
 
-  def put_elements(self,doc,metadata,toc=None,current=None):
-    """Method for putting defined elements into the current theme element.
+  @staticmethod
+  def put_logo(doc,metadata,style):
+    """Method for putting logo element.
 
     Parameters
     ----------
     doc : yattag.Doc object
       the currently open yattag.Doc object
-    metadata: Data object
-    toc : TOC object, optional
-      presentation Table of Contents
-    current : list, optional
-      [section number,subsection number,slide number]
+    metadata : OrderedDict object
+      dictionary of metadata
+    style : str
+      style applied to element
     """
-    if 'elements' in self.data.data:
-      for element in self.data.data['elements'][0]:
-        if isinstance(element,list):
-          elem = element[0]
-          style = element[1]
-        else:
-          elem = element
-          style = None
-        custom = re.search(r'\|custom\|',elem)
-        if elem in metadata or custom or elem == 'timer':
-          if elem == 'logo':
-            if style:
-              doc.stag('img',src=metadata[elem],alt=metadata[elem],style=style)
-            else:
-              doc.stag('img',src=metadata[elem],alt=metadata[elem])
-          elif elem == 'timer':
-            with doc.tag('span',klass='timercontainer'):
-              if style:
-                doc.attr(style=style)
-              else:
-                doc.attr(style='')
-              with doc.tag('div',klass='countDown'):
-                with doc.tag('div'):
-                  doc.attr(klass='timer')
-                if style:
-                  if 'controls' in style:
-                    with doc.tag('div',klass='timercontrols'):
-                      with doc.tag('input',type='button'):
-                        doc.attr(klass='btn reset',onclick='resetCountdown('+metadata['max_time']+');',value=' &#10227; ',title='reset')
-                      with doc.tag('input',type='button'):
-                        doc.attr(klass='btn stop',onclick='stopCountdown();',value=' &#9724; ',title='pause')
-                      with doc.tag('input',type='button'):
-                        doc.attr(klass='btn start',onclick='startCountdown();',value=' &#9654; ',title='start')
-          else:
-            with doc.tag('span'):
-              if style:
-                doc.attr(('style',style))
-              if custom:
-                doc.asis(re.sub(r'\|custom\|','',elem))
-              else:
-                if elem == 'toc':
-                  if isinstance(element,list) and len(element)>=3:
-                    deep = element[2]
-                  else:
-                    deep = 1
-                  if toc:
-                    value = toc.pstr(html=True,current=current,deep=deep)
-                elif isinstance(metadata[elem],list):
-                  value = ' , '.join(metadata[elem])
-                else:
-                  value = str(metadata[elem])
-                doc.asis(value)
+    if style:
+      doc.stag('img',src=metadata['logo'],alt=metadata['logo'],style=style)
+    else:
+      doc.stag('img',src=metadata['logo'],alt=metadata['logo'])
     return
 
-  def to_html(self,doc,style=None,padding=None,content=None,metadata=None,toc=None,current=None):
+  @staticmethod
+  def put_timer(doc,metadata,style):
+    """Method for putting timer element.
+
+    Parameters
+    ----------
+    doc : yattag.Doc object
+      the currently open yattag.Doc object
+    metadata : OrderedDict object
+      dictionary of metadata
+    style : str
+      style applied to element
+    """
+    with doc.tag('span',klass='timercontainer'):
+      if style:
+        doc.attr(style=style)
+      with doc.tag('div',klass='countDown'):
+        with doc.tag('div'):
+          doc.attr(klass='timer')
+        if style:
+          if 'controls' in style:
+            with doc.tag('div',klass='timercontrols'):
+              with doc.tag('input',type='button'):
+                doc.attr(klass='btn reset',onclick='resetCountdown('+metadata['max_time']+');',value=' &#10227; ',title='reset')
+              with doc.tag('input',type='button'):
+                doc.attr(klass='btn stop',onclick='stopCountdown();',value=' &#9724; ',title='pause')
+              with doc.tag('input',type='button'):
+                doc.attr(klass='btn start',onclick='startCountdown();',value=' &#9654; ',title='start')
+    return
+
+  @staticmethod
+  def put_toc(doc,style,deep):
+    """Method for putting TOC element.
+
+    Parameters
+    ----------
+    doc : yattag.Doc object
+      the currently open yattag.Doc object
+    style : str
+      style applied to element
+    deep : int
+      depth of Table of Contents
+    """
+    with doc.tag('div'):
+      if style:
+        doc.attr(('style',style))
+      doc.asis('$toc('+str(deep)+')')
+    return
+
+  def put_metadata(self,doc,metadata):
+    """Method for putting metadata elements into the current theme element.
+
+    Parameters
+    ----------
+    doc : yattag.Doc object
+      the currently open yattag.Doc object
+    metadata : OrderedDict object
+      dictionary of metadata
+    """
+    for element in self.data.data['metadata'][0]:
+      elem = element
+      style = None
+      deep = 1
+      if isinstance(element,list):
+        elem = element[0]
+        style = element[1]
+        if len(element)>=3:
+          deep = element[2]
+      if elem == 'logo' and elem in metadata:
+        self.put_logo(doc=doc,metadata=metadata,style=style)
+      elif elem == 'timer' and 'max_time' in metadata:
+        self.put_timer(doc=doc,metadata=metadata,style=style)
+      elif elem == 'toc':
+        self.put_toc(doc=doc,style=style,deep=deep)
+      else:
+        custom = re.search(r'\|custom\|',elem)
+        with doc.tag('span'):
+          if style:
+            doc.attr(('style',style))
+          if custom:
+            doc.asis(re.sub(r'\|custom\|','',elem))
+          elif elem in metadata:
+            if isinstance(metadata[elem],list):
+              value = ' , '.join(metadata[elem])
+            else:
+              value = str(metadata[elem])
+            doc.asis(value)
+    return
+
+  def to_html(self,doc,style=None,content=None,metadata=None):
     """
     Method for inserting element contents into html.
 
@@ -226,11 +273,8 @@ class ThemeElement(object):
       activate internal element padded container
     content: str, optional
       content of the element as raw string
-    metadata: Data object
-    toc : TOC object, optional
-      presentation Table of Contents
-    current : tuple, optional
-      (section number,subsection number,slide number)
+    metadata : OrderedDict object
+      dictionary of metadata
     """
     if self.active:
       if content or metadata:
@@ -239,15 +283,8 @@ class ThemeElement(object):
             doc.attr(klass=self.class_name)
           if style:
             doc.attr(style=style)
-          if padding:
-            with doc.tag('div',klass='padding',style='padding:'+padding+';'):
-              if content:
-                doc.asis(content)
-              if metadata:
-                self.put_elements(doc=doc,metadata=metadata,toc=toc,current=current)
-          else:
-            if content:
-              doc.asis(content)
-            if metadata:
-              self.put_elements(doc=doc,metadata=metadata,toc=toc,current=current)
+          if content:
+            doc.asis(content)
+          if metadata:
+            self.put_metadata(doc=doc,metadata=metadata)
     return

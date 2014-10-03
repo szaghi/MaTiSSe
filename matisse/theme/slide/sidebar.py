@@ -31,9 +31,13 @@ class Sidebar(ThemeElement):
     self.number = number
     self.position = None
     super(Sidebar,self).__init__(data_tag=r'theme_slide_sidebar_'+str(self.number),special_keys=['position'],class_name='slide-sidebar_'+str(self.number))
-    self.data.data['width'        ] = ['0%',         False]
-    self.data.data['height'       ] = ['100%',       False]
-    self.data.data['position'     ] = [self.position,False]
+    self.data.data['display'    ] = ['block',                       False]
+    self.data.data['width'      ] = ['0%',                          False]
+    self.data.data['height'     ] = ['100%',                        False]
+    self.data.data['font-size'  ] = ['100%',                        False]
+    self.data.data['font-family'] = ['Open Sans, Arial, sans-serif',False]
+    self.data.data['position'   ] = [self.position,                 False]
+    self.data.data['overflow'   ] = ['hidden',                      False]
     if source:
       self.get(source)
       self.check_specials()
@@ -111,7 +115,7 @@ class Sidebar(ThemeElement):
     list
       a list of one string containing the css code of the element if as_list = True
     """
-    css = "\n.slide-sidebar_"+str(self.number)+" {\n  float: left;\n  padding: 0;"
+    css = "\n.slide-sidebar_"+str(self.number)+" {\n  float: left;"
     css += self.data.get_css(only_custom=only_custom)
     css += "\n}\n"
     if as_list:

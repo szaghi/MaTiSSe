@@ -28,7 +28,12 @@ class Header(ThemeElement):
     """
     self.number = number
     super(Header,self).__init__(data_tag=r'theme_slide_header_'+str(self.number),class_name='slide-header_'+str(self.number))
-    self.data.data['height'] = ['0%',False]
+    self.data.data['display'    ] = ['block',                       False]
+    self.data.data['width'      ] = ['100%',                        False]
+    self.data.data['height'     ] = ['0%',                          False]
+    self.data.data['font-size'  ] = ['100%',                        False]
+    self.data.data['font-family'] = ['Open Sans, Arial, sans-serif',False]
+    self.data.data['overflow'   ] = ['hidden',                      False]
     if source:
       self.get(source)
       self.check_specials()
@@ -58,7 +63,7 @@ class Header(ThemeElement):
     list
       a list of one string containing the css code of the element if as_list = True
     """
-    css = "\n.slide-header_"+str(self.number)+" {\n  padding:0;"
+    css = "\n.slide-header_"+str(self.number)+" {"
     css += self.data.get_css(only_custom=only_custom)
     css += "\n}\n"
     if as_list:

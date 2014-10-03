@@ -10,7 +10,14 @@ import sys
 class MaTiSSeConfig(object):
   """
   Object handling MaTiSSe.py configuration
+
+  Attributes
+  ----------
+  __highlight_styles : list
+    list of available highlight.js styles
   """
+  __highlight_styles = []
+
   def __init__(self):
     """
     Attributes
@@ -27,13 +34,18 @@ class MaTiSSeConfig(object):
     highlight_style : str
       css style file for highlight.js; the list of available styles can be print by
       'str_highlight_styles' method
+    toc_at_sec_beginning : bool
+      insert a slide with TOC at the beginning of each section (default false)
+    toc_at_subsec_beginning : bool
+      insert a slide with TOC at the beginning of each subsection (default false)
     """
     self.verbose = False
     self.indented = False
     self.online_mathjax = False
     self.highlight = True
     self.highlight_style = 'github.css'
-    self.__highlight_styles = []
+    self.toc_at_sec_beginning = None
+    self.toc_at_subsec_beginning = None
     self.__get_highlight_styles()
     self.__check_highlight_style()
     if self.verbose:
@@ -50,20 +62,23 @@ class MaTiSSeConfig(object):
       string.append('\n  LaTeX equations rendering by means offline, local copy of MathJax')
     if self.highlight:
       string.append('\n  Highlight.js style: '+self.highlight_style)
+    string.append('\n  Insert TOC at sections beginning: '+str(self.toc_at_sec_beginning))
+    string.append('\n  Insert TOC at subsections beginning: '+str(self.toc_at_subsec_beginning))
     return ''.join(string)
 
-  def __get_highlight_styles(self):
+  @staticmethod
+  def __get_highlight_styles():
     """Method for getting the available highlight.js styles."""
     hilite_styles = os.path.join(os.path.dirname(__file__), 'utils/js/highlight/styles')
     for css in os.listdir(hilite_styles):
       if css.endswith(".css"):
-        self.__highlight_styles.append(css)
+        MaTiSSeConfig.__highlight_styles.append(css)
     return
 
   def __check_highlight_style(self):
     """Method for checking if the selected highlight.js style is available."""
     if self.highlight_style != 'disable':
-      avail = (self.highlight_style in self.__highlight_styles)
+      avail = (self.highlight_style in MaTiSSeConfig.__highlight_styles)
       if not avail:
         sys.stderr.write("Error: the selected highlight.js style '"+self.highlight_style+"' is not available")
         sys.stderr.write("\nRestore the default value 'github.css'\n")
@@ -99,17 +114,27 @@ class MaTiSSeConfig(object):
       string.append(style)
     return '\n  '.join(string)+'\n'
 
-  def is_verbose(self):
-    """Method inquiring verbose mode."""
-    return self.verbose
+  def update(self,cliargs):
+    """Method for updating config state from command line arguments.
 
-  def is_indented(self):
-    """Method inquiring indent mode."""
-    return self.indented
+    Parameters
+    ----------
+    cliargs : argparse parsed object
+      command line arguments parsed
+    """
+    self.verbose = cliargs.verbose
+    self.indented = cliargs.indented
+    self.online_mathjax = cliargs.online_MathJax
+    self.set_highlight_style(style = cliargs.highlight_style)
+    self.toc_at_sec_beginning = cliargs.toc_at_sec_beginning
+    self.toc_at_subsec_beginning = cliargs.toc_at_subsec_beginning
+    return
 
-  def is_online_mathjax(self):
-    """Method inquiring MathJax mode."""
-    return self.online_mathjax
+  def printf(self):
+    """Method for printing config data. It checks verbosity."""
+    if self.verbose:
+      print(self)
+    return
 
 # global variables
 __initialized__ = False

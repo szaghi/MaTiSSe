@@ -19,17 +19,42 @@ class Selector(ThemeElement):
   name = 'pre-span' defines a nested selector for the <pre><span>...</span></pre>
   selectors resulting in a css like "pre span {...}".
   """
+  data_tag = r'theme_selector_'
+
+  @classmethod
+  def count(cls,source):
+    """Method for computing the number of custom selectors defined into the source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+    """
+    sel = ThemeElement(data_tag=Selector.data_tag)
+    return sel.data.count(source)
+
   def __init__(self,name,source=None):
     self.name = name
-    super(Selector,self).__init__(data_tag=r'theme_selector_'+self.name)
-    self.data.data['display'        ] = ['',    False]
-    self.data.data['margin'         ] = ['',    False]
-    self.data.data['padding'        ] = ['',    False]
-    self.data.data['text-decoration'] = ['',    False]
-    self.data.data['border-bottom'  ] = ['',    False]
-    self.data.data['box-shadow'     ] = ['',    False]
-    self.data.data['white-space'    ] = ['',    False]
-    self.data.data['overflow-x'     ] = ['auto',False]
+    super(Selector,self).__init__(data_tag=Selector.data_tag+self.name)
+    self.data.data['display'        ] = ['inherit',False]
+    self.data.data['margin'         ] = ['inherit',False]
+    self.data.data['padding'        ] = ['inherit',False]
+    self.data.data['background'     ] = ['inherit',False]
+    self.data.data['color'          ] = ['inherit',False]
+    self.data.data['font'           ] = ['inherit',False]
+    self.data.data['font-weight'    ] = ['inherit',False]
+    self.data.data['font-size'      ] = ['inherit',False]
+    self.data.data['font-family'    ] = ['inherit',False]
+    self.data.data['text-decoration'] = ['inherit',False]
+    self.data.data['text-transform' ] = ['inherit',False]
+    self.data.data['text-shadow'    ] = ['inherit',False]
+    self.data.data['letter-spacing' ] = ['inherit',False]
+    self.data.data['line-height'    ] = ['inherit',False]
+    self.data.data['border'         ] = ['inherit',False]
+    self.data.data['border-radius'  ] = ['inherit',False]
+    self.data.data['box-shadow'     ] = ['inherit',False]
+    self.data.data['white-space'    ] = ['inherit',False]
+    self.data.data['overflow-x'     ] = ['inherit',False]
     self._name = self.name.replace('-',' ')
     if source:
       self.get(source)

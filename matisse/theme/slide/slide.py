@@ -6,14 +6,12 @@ This defines the theme of the slide element.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 # MaTiSSe.py modules
-from ..theme_element import ThemeElement
-from ...utils.source_editor import SourceEditor
 from .content import Content
 from .footer import Footer
 from .header import Header
 from .sidebar import Sidebar
-# global variables
-__source_editor__ = SourceEditor()
+from ..theme_element import ThemeElement
+from ...utils.source_editor import __source_editor__
 # class definition
 class Slide(ThemeElement):
   """
@@ -50,17 +48,19 @@ class Slide(ThemeElement):
                                              'data-scale',
                                              'data-rotate','data-rotate-x','data-rotate-y','data-rotate-z',
                                              'data-x','data-y','data-z'])
-    self.data.data['width'           ] = ['900px',     False]
-    self.data.data['height'          ] = ['700px',     False]
-    self.data.data['slide-transition'] = ['horizontal',False]
-    self.data.data['data-scale']       = ['1',         False]
-    self.data.data['data-rotate']      = ['0',         False]
-    self.data.data['data-rotate-x']    = ['0',         False]
-    self.data.data['data-rotate-y']    = ['0',         False]
-    self.data.data['data-rotate-z']    = ['0',         False]
-    self.data.data['data-x']           = ['0',         False]
-    self.data.data['data-y']           = ['0',         False]
-    self.data.data['data-z']           = ['0',         False]
+    self.data.data['width'           ] = ['900px',                       False]
+    self.data.data['height'          ] = ['700px',                       False]
+    self.data.data['font-size'       ] = ['100%',                        False]
+    self.data.data['font-family'     ] = ['Open Sans, Arial, sans-serif',False]
+    self.data.data['slide-transition'] = ['horizontal',                  False]
+    self.data.data['data-scale'      ] = ['1',                           False]
+    self.data.data['data-rotate'     ] = ['0',                           False]
+    self.data.data['data-rotate-x'   ] = ['0',                           False]
+    self.data.data['data-rotate-y'   ] = ['0',                           False]
+    self.data.data['data-rotate-z'   ] = ['0',                           False]
+    self.data.data['data-x'          ] = ['0',                           False]
+    self.data.data['data-y'          ] = ['0',                           False]
+    self.data.data['data-z'          ] = ['0',                           False]
     if source:
       self.get(source)
     elif defaults:
@@ -177,6 +177,7 @@ class Slide(ThemeElement):
     ----------
     other : ThemeSlide object
     """
+
     self.content.set_from(other=other.content)
 
     if other.has_header():
@@ -204,6 +205,17 @@ class Slide(ThemeElement):
           self.sidebars[sidebar].set_from(other=other.sidebars[sidebar])
 
     self.check_specials()
+    return
+
+  def set_all_custom(self):
+    """Method for setting all data as customized by user (useful for plain slides theme)."""
+    self.content.set_all_custom()
+    for hds in self.headers:
+      self.headers[hds].set_all_custom()
+    for ftr in self.footers:
+      self.footers[ftr].set_all_custom()
+    for sbr in self.sidebars:
+      self.sidebars[sbr].set_all_custom()
     return
 
   def update(self,source):

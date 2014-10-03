@@ -17,13 +17,22 @@ class Heading(ThemeElement):
   def __init__(self,number,source=None):
     self.number = number
     super(Heading,self).__init__(data_tag=r'theme_heading_'+str(self.number))
-    self.data.data['margin'         ] = ['0',                      False]
-    self.data.data['padding'        ] = ['0',                      False]
+    self.data.data['margin'         ] = ['inherit',                False]
+    self.data.data['padding'        ] = ['inherit',                False]
     self.data.data['background'     ] = ['inherit',                False]
+    self.data.data['color'          ] = ['inherit',                False]
     self.data.data['font'           ] = ['inherit',                False]
+    self.data.data['font-weight'    ] = ['inherit',                False]
     self.data.data['font-size'      ] = [ __sizes__[self.number-1],False]
+    self.data.data['font-family'    ] = ['inherit',                False]
     self.data.data['text-decoration'] = ['inherit',                False]
-    self.data.data['border-bottom'  ] = ['inherit',                False]
+    self.data.data['text-transform' ] = ['inherit',                False]
+    self.data.data['text-shadow'    ] = ['inherit',                False]
+    self.data.data['letter-spacing' ] = ['inherit',                False]
+    self.data.data['line-height'    ] = ['inherit',                False]
+    self.data.data['border'         ] = ['inherit',                False]
+    self.data.data['border-radius'  ] = ['inherit',                False]
+    self.data.data['box-shadow'     ] = ['inherit',                False]
     if source:
       self.get(source)
     return

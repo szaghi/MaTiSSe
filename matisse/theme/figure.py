@@ -1,0 +1,155 @@
+#!/usr/bin/env python
+"""
+figure.py, module definition of Figure class.
+"""
+# modules loading
+# standard library modules: these should be present in any recent python distribution
+import re
+import sys
+# modules not in the standard library
+try:
+  from yattag import Doc
+except ImportError :
+  sys.stderr.write("Error: can't import module 'yattag'")
+  sys.exit(1)
+# MaTiSSe.py modules
+from .box import Box
+from .theme_element import ThemeElement
+# global variables
+# regular expressions
+__refigure__ = re.compile(r"\$figure(?P<box>.*?)\$endfigure",re.DOTALL)
+# classes definition
+class Figure(Box):
+  """
+  Object for handling figure-box. It is a subclass of Box.
+
+  The syntax is:
+
+  $figure
+  $style[style_options]
+  $caption[caption_options]{caption}
+  $content[content_options]{content}
+  $endfigure
+
+  Note that differently from Box class:
+  1. the "content_type" and "caption_type" are automatically set to "figure" and "Figure" respectively; anyhow they can be still
+     specified inside the $figure/$endfigure environment;
+  2. no matter the order of $caption / $content statements, the caption is always placed below the content;
+
+  Attributes
+  ----------
+  figures_number : int
+    global number of figures (equals to the number of Figure instances)
+  theme: ThemeElement object
+    global theme of Figure boxes
+  """
+  figures_number = 0
+  theme = ThemeElement(data_tag=r'theme_figure')
+  theme.data.data['style'  ] = [None,False]
+  theme.data.data['caption'] = [None,False]
+  theme.data.data['content'] = [None,False]
+
+  def __init__(self):
+    """
+    Attributes
+    ----------
+    number : int
+      number of figure
+    """
+    super(Figure,self).__init__(ctn_type='figure')
+    self.cap_type = 'Figure'
+    Figure.figures_number += 1
+    self.number = Figure.figures_number
+
+  @classmethod
+  def get_theme(cls,source):
+    """Method for getting theme definition figure boxes.
+
+    The syntax is:
+
+    ---theme_figure
+    style   = style_options
+    caption = caption_options
+    content = content_options
+    ---endtheme_figure
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+    """
+    cls.theme.get(source=source)
+    return
+
+  @classmethod
+  def strip_theme(cls,source):
+    """Method for striping theme data from source.
+
+    Parameters
+    ----------
+    source : str
+      string (as single stream) containing the source
+
+    Returns
+    -------
+    str
+      source without the themes data
+    """
+    return cls.theme.strip(source=source)
+
+  def put_caption(self,doc):
+    """Method for inserting caption into doc.
+
+    Parameters
+    ----------
+    doc : yattag.Doc object
+      yattag document where to put caption
+    """
+    if self.cap or self.cap_type:
+      with doc.tag('figcaption'):
+        if self.cap_options:
+          doc.attr(style=self.cap_options)
+        elif Figure.theme.data.data['caption'][0]:
+          doc.attr(style=Figure.theme.data.data['caption'][0])
+        doc.text(self.caption_txt())
+    return
+
+  def to_html(self):
+    """Method for inserting box to the html doc."""
+    doc = Doc()
+    with doc.tag('div',markdown='1',klass='figure'):
+      doc.attr(('id','Figure-'+str(self.number)))
+      if self.style:
+        doc.attr(style=self.style)
+      elif Figure.theme.data.data['style'][0]:
+        doc.attr(style=Figure.theme.data.data['style'][0])
+      with doc.tag(self.ctn_type):
+        if self.ctn_options:
+          doc.stag('img',src=self.ctn,klass='image',style=self.ctn_options,alt='Figure-'+self.ctn)
+        elif Figure.theme.data.data['content'][0]:
+          doc.stag('img',src=self.ctn,klass='image',style=Figure.theme.data.data['content'][0],alt='Figure-'+self.ctn)
+        else:
+          doc.stag('img',src=self.ctn,klass='image',style='width:100%;',alt='Figure-'+self.ctn)
+        self.put_caption(doc=doc)
+
+    return doc.getvalue()
+
+def parse(source):
+  """Method for parsing source substituting figures with their own html equivalent.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+
+  Returns
+  -------
+  str
+    source string parsed
+  """
+  parsed_source = source
+  for match in re.finditer(__refigure__,parsed_source):
+    figure = Figure()
+    figure.get(source=match.group('box'))
+    parsed_source = re.sub(__refigure__,figure.to_html(),parsed_source,1)
+  return parsed_source

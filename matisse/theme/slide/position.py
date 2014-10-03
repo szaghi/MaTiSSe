@@ -3,12 +3,6 @@
 position.py, module definition of Position class.
 This defines the position features of the slide element.
 """
-# modules loading
-# standard library modules: these should be present in any recent python distribution
-# MaTiSSe.py modules
-from ...utils.source_editor import SourceEditor
-# global variables
-__source_editor__ = SourceEditor()
 # class definition
 class Position(object):
   """
