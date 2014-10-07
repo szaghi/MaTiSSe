@@ -7,13 +7,8 @@ This defines the presentation metadata object.
 # standard library modules: these should be present in any recent python distribution
 import ast
 import re
-import sys
 # modules not in the standard library
-try:
-  from yattag import Doc
-except ImportError :
-  sys.stderr.write("Error: can't import module 'yattag'")
-  sys.exit(1)
+from yattag import Doc
 # MaTiSSe.py modules
 from ..data.data import Data
 # class definition

@@ -82,6 +82,7 @@ def main():
       presentation.save(output=output)
       pprint(presentation=presentation,cliargs=cliargs)
   else:
+    presentation = None
     if cliargs.print_preamble or cliargs.print_css or cliargs.print_options:
       presentation = Presentation(defaults=True)
     pprint(presentation=presentation,cliargs=cliargs)

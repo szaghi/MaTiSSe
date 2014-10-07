@@ -5,14 +5,11 @@ figure.py, module definition of Figure class.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 import re
-import sys
 # modules not in the standard library
-try:
-  from yattag import Doc
-except ImportError :
-  sys.stderr.write("Error: can't import module 'yattag'")
-  sys.exit(1)
+from yattag import Doc
 # MaTiSSe.py modules
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import illuminate_protected as illuminate
 from .box import Box
 from .theme_element import ThemeElement
 # global variables
@@ -49,8 +46,13 @@ class Figure(Box):
   theme.data.data['caption'] = [None,False]
   theme.data.data['content'] = [None,False]
 
-  def __init__(self):
+  def __init__(self,source=None):
     """
+    Parameters
+    ----------
+    source : str, optional
+      string (as single stream) containing the source
+
     Attributes
     ----------
     number : int
@@ -60,6 +62,9 @@ class Figure(Box):
     self.cap_type = 'Figure'
     Figure.figures_number += 1
     self.number = Figure.figures_number
+    if source:
+      self.get(source=source)
+    return
 
   @classmethod
   def get_theme(cls,source):
@@ -147,9 +152,8 @@ def parse(source):
   str
     source string parsed
   """
-  parsed_source = source
-  for match in re.finditer(__refigure__,parsed_source):
-    figure = Figure()
-    figure.get(source=match.group('box'))
-    parsed_source = re.sub(__refigure__,figure.to_html(),parsed_source,1)
-  return parsed_source
+  protected, obfuscate_source = obfuscate(source = source)
+  for match in re.finditer(__refigure__,obfuscate_source):
+    figure = Figure(source=illuminate(source=match.group('box'),protected_contents=protected))
+    obfuscate_source = re.sub(__refigure__,figure.to_html(),obfuscate_source,1)
+  return illuminate(source=obfuscate_source,protected_contents=protected)

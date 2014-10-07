@@ -6,13 +6,8 @@ This defines the Table of Contents of the presentation.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 import re
-import sys
 # modules not in the standard library
-try:
-  from yattag import Doc
-except ImportError :
-  sys.stderr.write("Error: can't import module 'yattag'")
-  sys.exit(1)
+from yattag import Doc
 # global variables
 # regular expressions
 __retoc__ = re.compile(r"\$toc(\((?P<deep>[1-3])\))*",re.DOTALL)

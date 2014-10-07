@@ -5,14 +5,11 @@ note.py, module definition of Note class.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 import re
-import sys
 # modules not in the standard library
-try:
-  from yattag import Doc
-except ImportError :
-  sys.stderr.write("Error: can't import module 'yattag'")
-  sys.exit(1)
+from yattag import Doc
 # MaTiSSe.py modules
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import illuminate_protected as illuminate
 from .box import Box
 from .theme_element import ThemeElement
 # global variables
@@ -49,8 +46,13 @@ class Note(Box):
   theme.data.data['caption'] = [None,False]
   theme.data.data['content'] = [None,False]
 
-  def __init__(self):
+  def __init__(self,source=None):
     """
+    Parameters
+    ----------
+    source : str, optional
+      string (as single stream) containing the source
+
     Attributes
     ----------
     number : int
@@ -60,6 +62,9 @@ class Note(Box):
     self.cap_type = 'Note'
     Note.notes_number += 1
     self.number = Note.notes_number
+    if source:
+      self.get(source=source)
+    return
 
   @classmethod
   def get_theme(cls,source):
@@ -128,7 +133,8 @@ class Note(Box):
           doc.attr(style=self.ctn_options)
         elif Note.theme.data.data['content'][0]:
           doc.attr(style=Note.theme.data.data['content'][0])
-        doc.text(self.ctn)
+        #doc.text(self.ctn)
+        doc.asis(self.ctn)
     return doc.getvalue()
 
 def parse(source):
@@ -144,9 +150,8 @@ def parse(source):
   str
     source string parsed
   """
-  parsed_source = source
-  for match in re.finditer(__renote__,parsed_source):
-    note = Note()
-    note.get(source=match.group('box'))
-    parsed_source = re.sub(__renote__,note.to_html(),parsed_source,1)
-  return parsed_source
+  protected, obfuscate_source = obfuscate(source = source)
+  for match in re.finditer(__renote__,obfuscate_source):
+    note = Note(source=illuminate(source=match.group('box'),protected_contents=protected))
+    obfuscate_source = re.sub(__renote__,note.to_html(),obfuscate_source,1)
+  return illuminate(source=obfuscate_source,protected_contents=protected)

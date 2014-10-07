@@ -8,13 +8,8 @@ This defines the Presentation object.
 import os
 import re
 from shutil import copytree,rmtree
-import sys
 # modules not in the standard library
-try:
-  from yattag import Doc,indent
-except ImportError :
-  sys.stderr.write("Error: can't import module 'yattag'")
-  sys.exit(1)
+from yattag import Doc,indent
 # MaTiSSe.py modules
 from ..config import __config__
 from ..theme.slide.position import Position

@@ -1,7 +1,7 @@
 ---metadata
 title              = Getting Started to play with MaTiSSe.py
 subtitle           = a bad-showcase of MaTiSSe.py features 
-authors            = ['Stefano Zaghi','Jhon Doe']
+authors            = ['Stefano Zaghi','John Doe']
 authors_short      = ['S. Zaghi','J. Doe']
 emails             = ['stefano.zaghi@gmail.com','jdoe@lost.com']
 affiliations       = ['NERD Laboratory, The World Most Uncool Research Center','LOST Institute, Missed People Research Institute']
@@ -53,6 +53,46 @@ $endbox
 # Introduction
 
 ## MaTiSSe.py, what is?
+
+### The Columns environment
+It is often useful subdivide the contents into columns, e.g. to place comments aside figures. MaTiSSe.py provides an
+environment for such a contents layout. The syntax is:
+```bash
+$columns
+$column[column1_options]
+column1_contents
+$endcolumn
+$column[column2_options]
+column2_contents
+$endcolumn
+...
+$endcolumns
+```
+#### Example
+
+$columns
+
+$column[width:60%;padding-right:1%;border-right:1px solid #4788B3;]
+This two columns environment has been made by means of the following code:
+
+```
+$columns
+$column[width:60%;padding-right:1%;border-right:1px solid #4788B3;]
+This two columns...
+
+$column[width:40%;padding-left:1%;]
+...
+$endcolumns
+```
+
+$column[width:40%;padding-left:1%;]
+$note
+$content{
+The column *options* can contain any css style options, however to the options *display:block;float:left;* are automatically added. Moreover, the user should always specify the *width* option for avoiding unpredictable output.
+}
+$endnote
+
+$endcolumns
 
 ### The Acronym
 
@@ -114,7 +154,6 @@ Let me be clear: MaTiSSe.py is designed for **scientific researchers**, _at leas
 3. the pdf output has great quality, but it behaves not so well with multimedia content; 
 4. it is rather complicated to introduce _prezi_-like effects.
 5. themes handling is very cumbersome, i.e. inner/outer themes = a nightmare; 
-6. it is rather complicated to introduce _prezi_-like effects.
 
 MaTiSSe.py is designed for scientific researchers that want retain the best of _LaTeX-beamer_ and _prezi_ worlds together overcoming the above listed drawbacks. 
 

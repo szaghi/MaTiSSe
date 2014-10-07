@@ -8,17 +8,14 @@ import os
 import re
 import sys
 # modules not in the standard library
-try:
-  import markdown
-  from ..md_mathjax.mdx_mathjax import MathJaxExtension
-except ImportError :
-  sys.stderr.write("Error: can't import module 'markdown'")
-  sys.exit(1)
+import markdown
+from ..md_mathjax.mdx_mathjax import MathJaxExtension
 #global variables
 __regex_codeblock__ = re.compile(r"(?P<cblock>[`]{3}.*?[`]{3})",re.DOTALL)
 __regex_codeinline__ = re.compile(r"(?P<cline>[`]{1}.*?[`]{1})",re.DOTALL)
 __regex_overtheme__ = re.compile(r"(?P<ostheme>[-]{3}slide(?P<block>.*?)[-]{3}endslide)",re.DOTALL)
 __regex_include__ = re.compile(r"\$include\((?P<include>.*?)\)")
+__regex_protected__ = re.compile(r"(\$PROTECTED-(?P<num>[0-9]*))")
 # class definition
 class SourceEditor(object):
   """
@@ -299,6 +296,84 @@ class SourceEditor(object):
           other_source = inc.read()
         inc_source = re.sub(__regex_include__,other_source,inc_source,1)
     return inc_source
+
+def obfuscate_protected(source,re_protected):
+  """Method for obfuscating protected contents.
+
+  It can be often useful to temporarly obfuscate some blocks of contents for performing safely some tasks
+  and then re-introducing them.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+  re_protected : re.compile object
+    regular expression of protected block
+
+  Returns
+  -------
+  protected_contents : list
+    list of str containing the contents of protected blocks
+  str
+    source with protected contents obfuscated and replaced by a safe placeholder
+  """
+  obfuscate_source = source
+  protected_contents = []
+  for match in re.finditer(re_protected,source):
+    protected_contents.append([match.start(),match.end(),match.group()])
+    obfuscate_source = re.sub(re_protected,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
+  return protected_contents,obfuscate_source
+
+def obfuscate_codeblocks(source):
+  """Method for obfuscating codes contents.
+
+  It can be often useful to temporarly obfuscate codeblocks contents for performing safely some tasks
+  and then re-introducing them.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+
+  Returns
+  -------
+  protected_contents : list
+    list of str containing the contents of codeblocks
+  str
+    source with codeblocks contents obfuscated and replaced by a safe placeholder
+  """
+  obfuscate_source = source
+  protected_contents = []
+  for match in re.finditer(__regex_codeblock__,source):
+    protected_contents.append([match.start(),match.end(),match.group()])
+    obfuscate_source = re.sub(__regex_codeblock__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
+  return protected_contents,obfuscate_source
+
+def illuminate_protected(source,protected_contents):
+  """Method for re-insterting protected contents (illuminating previously obfuscated blocks).
+
+  It can be often useful to temporarly obfuscate some blocks of contents for performing safely some tasks
+  and then re-introducing (illuminating) them.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+  protected_contents : list
+    list of str containing the contents of protected blocks
+
+  Returns
+  -------
+  str
+    source with protected contents illuminated (reintroduced)
+  """
+  if len(protected_contents)>0:
+    illuminate_source = source
+    for match in re.finditer(__regex_protected__,illuminate_source):
+      illuminate_source = re.sub(__regex_protected__,protected_contents[int(match.group('num'))-1][2],illuminate_source,1)
+    return illuminate_source
+  else:
+    return source
 
 # global variables
 __initialized__ = False

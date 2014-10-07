@@ -5,20 +5,17 @@ box.py, module definition of Box class.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 import re
-import sys
 # modules not in the standard library
-try:
-  from yattag import Doc
-except ImportError :
-  sys.stderr.write("Error: can't import module 'yattag'")
-  sys.exit(1)
+from yattag import Doc
+# MaTiSSe.py modules
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import illuminate_protected as illuminate
 # global variables
 # regular expressions
 __rebox__ = re.compile(r"\$box(?P<box>.*?)\$endbox",re.DOTALL)
 __restl__ = re.compile(r"\$style\[(?P<style>.*?)\]",re.DOTALL)
 __rectn__ = re.compile(r"\$content(\((?P<ctn_type>.*?)\))*(\[(?P<ctn_options>.*?)\])*\{(?P<ctn>.*?)\}",re.DOTALL)
 __recap__ = re.compile(r"\$caption(\((?P<cap_type>.*?)\))*(\[(?P<cap_options>.*?)\])*(\{(?P<cap>.*?)\})*",re.DOTALL)
-__cap_type__    = {'figure': 'Figure', 'table': 'Table', 'note': 'Note', 'box': ''  }
 # classes definition
 class Box(object):
   """
@@ -50,7 +47,7 @@ class Box(object):
      + $content[font-variant:small-caps;]{My content without content_type};
      + $content{My content without content_type and content_options};
 
-  There some helper (sub)classes based on Box class for handling specific environments such Figure, Table and Note.
+  There are some helper (sub)classes based on Box class for handling specific environments such Figure, Table and Note.
 
   Note that the themes of box environments can be defined as all other theme elements in order to not have to repeat
   the styling options for each box. To this aim this module provides the "get_themes" function. The definition of such
@@ -62,12 +59,14 @@ class Box(object):
   Table
   Note
   """
-  def __init__(self,ctn_type='box'):
+  def __init__(self,ctn_type='box',source=None):
     """
     Parameters
     ----------
     ctn_type : {'figure','table','note','box'}, optional
       box content type
+    source : str, optional
+      string (as single stream) containing the source
 
     Attributes
     ----------
@@ -96,6 +95,8 @@ class Box(object):
     self.cap_type    = None
     self.ctn         = None
     self.cap         = None
+    if source:
+      self.get(source=source)
     return
 
   def __str__(self):
@@ -194,7 +195,8 @@ class Box(object):
       with doc.tag('div',klass='box content'):
         if self.ctn_options:
           doc.attr(style=self.ctn_options)
-        doc.text(self.ctn)
+        #doc.text(self.ctn)
+        doc.asis(self.ctn)
       self.put_caption(doc=doc)
     return doc.getvalue()
 
@@ -211,9 +213,8 @@ def parse(source):
   str
     source string parsed
   """
-  parsed_source = source
-  for match in re.finditer(__rebox__,parsed_source):
-    box = Box()
-    box.get(source=match.group('box'))
-    parsed_source = re.sub(__rebox__,box.to_html(),parsed_source,1)
-  return parsed_source
+  protected, obfuscate_source = obfuscate(source = source)
+  for match in re.finditer(__rebox__,obfuscate_source):
+    box = Box(source=illuminate(source=match.group('box'),protected_contents=protected))
+    obfuscate_source = re.sub(__rebox__,box.to_html(),obfuscate_source,1)
+  return illuminate(source=obfuscate_source,protected_contents=protected)

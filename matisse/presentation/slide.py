@@ -6,16 +6,12 @@ This defines a slide of the presentation.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 from collections import OrderedDict
-import sys
 # modules not in the standard library
-try:
-  from yattag import Doc
-except ImportError :
-  sys.stderr.write("Error: can't import module 'yattag'")
-  sys.exit(1)
+from yattag import Doc
 # MaTiSSe.py modules
 from ..config import __config__
 from ..theme.box import parse as box_parse
+from ..theme.columns import parse as columns_parse
 from ..theme.figure import parse as figure_parse
 from ..theme.note import parse as note_parse
 from ..theme.table import parse as table_parse
@@ -177,7 +173,8 @@ class Slide(object):
         for sidebar in actual_theme.sidebars.values():
           if sidebar.position == 'L':
             sidebar.to_html(doc=doc,metadata=self.data)
-        content = figure_parse(source=self.raw_body)
+        content = columns_parse(source=self.raw_body)
+        content = figure_parse(source=content)
         content = note_parse(source=content)
         content = table_parse(source=content)
         content = box_parse(source=content)
