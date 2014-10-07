@@ -85,7 +85,7 @@ class Columns(object):
     """Method for inserting columns to the html doc."""
     if self.number > 0:
       doc = Doc()
-      with doc.tag('div',klass='columns'):
+      with doc.tag('div',klass='columns',markdown='1'):
         for col,column in enumerate(self.columns):
           with doc.tag('div',klass='column',markdown='1'):
             doc.attr(('column-number',str(col+1)))

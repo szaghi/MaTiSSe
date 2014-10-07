@@ -54,46 +54,6 @@ $endbox
 
 ## MaTiSSe.py, what is?
 
-### The Columns environment
-It is often useful subdivide the contents into columns, e.g. to place comments aside figures. MaTiSSe.py provides an
-environment for such a contents layout. The syntax is:
-```bash
-$columns
-$column[column1_options]
-column1_contents
-$endcolumn
-$column[column2_options]
-column2_contents
-$endcolumn
-...
-$endcolumns
-```
-#### Example
-
-$columns
-
-$column[width:60%;padding-right:1%;border-right:1px solid #4788B3;]
-This two columns environment has been made by means of the following code:
-
-```
-$columns
-$column[width:60%;padding-right:1%;border-right:1px solid #4788B3;]
-This two columns...
-
-$column[width:40%;padding-left:1%;]
-...
-$endcolumns
-```
-
-$column[width:40%;padding-left:1%;]
-$note
-$content{
-The column *options* can contain any css style options, however to the options *display:block;float:left;* are automatically added. Moreover, the user should always specify the *width* option for avoiding unpredictable output.
-}
-$endnote
-
-$endcolumns
-
 ### The Acronym
 
 _MaTiSSe.py_ means **Ma**rkdown **T**o **I**mpressive **S**cientific **S**lid**e**s
@@ -165,40 +125,253 @@ $figure
 $content[padding:1% 5%;width:74%;box-shadow: 7px 7px 5px rgba(200,200,200,0.3);border-radius:25px]{images/types_of_editors.png}
 $caption(None){copyrights of http://xkcd.com/}
 $endfigure
+ 
+### Requirements
+
+$columns
+
+$column[width:50%;padding-rigth:1%;]
+
+##### Python dependencies
+MaTiSSe.py relies on other great python module for making its magic:
+
++ Python 2.7+ or Python 3.x;
+    + required modules that are into the standard library and should be present in any recent Python implementation:
+        + argparse;
+        + ast;
+        + collections;
+        + copy;
+        + os;
+        + re;
+        + shutil;
+        + sys;
+    + required modules that are not into the standard library:
+        + [markdown](https://pythonhosted.org/Markdown/);
+        + [yattag](http://www.yattag.org/);
+
+$column[width:50%;padding-left:1%;]
+
+##### External dependencies
+MaTiSSe.py relies on other programs that are shipped within MaTiSSe.py itself. The author would like to thank the authors of these programs singularly:
+
+* for `prezi`-like effects MaTiSSe.py relies on:
+    + [impress.js](https://github.com/bartaz/impress.js/);
+* for LaTeX equation rendering MaTiSSe.py relies on:
+    + [MathJax](http://www.mathjax.org/);
+    + [md_mathjax](https://github.com/epsilony/md_mathjax);
+* for syntax highlighting MaTiSSe.py relies on:
+    + [highlight.js](https://highlightjs.org/);
+* for resetting the main CSS theme MaTiSSe.py relies on:
+    + [normalize.css](https://github.com/necolas/normalize.css);
+ 
+$endcolumns
 
 ## Getting started
 
-### How it works?
-You write your presentation in markdown and MaTiSSe.py creates an impressive presentation even if you are a boring scientific researcher.
+### Manual Installation
+MaTiSSe.py is a complex program built-up by many python modules. However, a one-file-script wrapper is provided.
 
-Inline equation $\frac{1}{2}$ example.
+The tree structure of the MaTiSSe.py project is the following:
+```bash
+|-- CONTRIBUTING.md
+|-- examples
+|-- LICENSE.gpl3.md
+|-- logo
+|-- matisse
+|-- MaTiSSe.py
+|-- README.md
+|-- setup.py
+```
+`MaTiSSe.py` is the wrapper of `matisse/matisse.py`. To manual install just download the whole project tree and use the wrapper script.
 
-$$
-x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
-$$
-
-\begin{align*}
-a=&1\\
-\int_{a}^{b}\frac{c}{d}\,dx=&2
-\end{align*}
-
-### Requirements
-MaTiSSe.py relies on other great python module for making its magic:
-
-* Python 2.7+ or Python 3.x;
-    + required modules:
-        + `sys`;
-        + `os`;
-        + `argparse`;
-        + `re`;
-        + `yattag`;
-        + `markdown`;
-    + optional modules:
-        + `multiprocessing`;
-* Javascript:
-    + `impress.js`;
+It can be convenient to _clone_ the project:
+```bash
+git clone https://github.com/szaghi/MaTiSSe
+```
+and then make a link to the script where your environment can find it.
  
-### From markdown to html...
+$note
+$content{
+PIP installation is under developing.
+}
+$endnote
+
+After installation, you are ready to convert your markdown source into impressive html presentation...
+
+### How it works?
+You write your presentation in markdown and MaTiSSe.py creates an impressive presentation even if you are a *boring scientific researcher*. MaTiSSe.py is a no-WYSISWYG command line, CLI, tool. Printing the main help message:
+```bash
+MaTiSSe.py -h
+```
+will echo:
+```bash
+usage: MaTiSSe.py [-h] [-v] [-i INPUT] [-o OUTPUT] [-hs STYLE.CSS]
+                  [--toc-at-sec-beginning TOC-DEPTH]
+                  [--toc-at-subsec-beginning TOC-DEPTH] [--print-preamble]
+                  [--print-css] [--print-options] [--print-highlight-styles]
+                  [--verbose] [--indented] [--online-MathJax]
+
+MaTiSSe.py, Markdown To Impressive Scientific Slides
+
+optional arguments:
+  -h, --help            show this help message and exit
+...
+```  
+
+The basic usage is:
+```bash
+MaTiSse.py -i your_presentation.md
+```
+This command will generate a *new* directory into which the html presentation is created. To visualize the presentation open the **index.html** file just created with your preferred browser:
+```bash
+chromium index.html
+```
+
+### How it works? (continued)
+
+To generate the presentation you are reading I have used the following command line arguments:
+
+```bash
+MaTiSSe.py -i getting_started.md --indented --toc-at-subsec-beginning 2
+```
+That means:
+
++ process the source file `getting_started.md`;
++ indent the html output, `--indented`; 
++ insert a TOC at the beginning of each subsection with a depth of 2, `--toc-at-subsec-beginning 2`; 
+
+MaTiSSe.py will create a directory, named *getting_started*, into which the compiled html presentation is placed.
+
+$note
+$content{
+For a comprehensive explanation of the CLI arguments see the main documentation at the official GitHub [repository](https://github.com/szaghi/MaTiSSe)
+}
+$endnote
+
+Now you must learn how to write your markdown source... Writing a presentation with MaTiSSe.py means:
+
+1. write the contents in (extended) markdown syntax;
+2. define the theme of the presentation.
+
+In both the steps MaTiSSe.py is strongly friendly. 
+
+Firstly we see the MaTiSSe.py *flavored* markdown syntax.
+
+### MaTiSSe.py flavored markdown syntax: presentation metadata
+
+For long scientific presentation it is often useful to define some (meta)data in order to reuse theme inside the presentation itself. Such a data are defined into MaTiSSe.py as *metadata*. You can define the presentation metadata anywhere into your markdown source, however it has sense to place it at the beginning, inside the presentation _preamble_, that is just a convention rather than a physical part of the markdown document. The available metadata are:
+
+```lua
+title = 
+subtitle = 
+authors = []
+authors_short = []
+emails = []
+affiliations = []
+affiliations_short = []
+logo = 
+location = 
+location_short = 
+date = 
+conference = 
+conference_short = 
+session = 
+session_short = 
+max_time = 25
+dirs_to_copy = []
+```
+All metadata values are treated as string except the one with `[]` brackets that are list of strings. 
+
+### MaTiSSe.py flavored markdown syntax: presentation metadata (continued)
+
+To define the presentation metadata you must use a specific environment, i.e. `---metadata`-`---endmetadata`:
+```lua
+---metadata
+metadata_name1 = metadata_value1
+metadata_name2 = metadata_value2
+...
+---endmetadata
+```
+The metadata of this presentation is the following:
+```lua
+---metadata
+title              = Getting Started to play with MaTiSSe.py
+subtitle           = a bad-showcase of MaTiSSe.py features 
+authors            = ['Stefano Zaghi','John Doe']
+authors_short      = ['S. Zaghi','J. Doe']
+emails             = ['stefano.zaghi@gmail.com','jdoe@lost.com']
+affiliations       = ['NERD Laboratory, The World Most Uncool Research Center','LOST Institute, Missed People Research Institute']
+affiliations_short = ['NERD Laboratory','LOST Institute']
+location           = "Via dell'Isola del Giorno Prima 139, Utopia, Universo"
+location_short     = Utopia, Universo
+date               = 29th February, 2015
+conference         = Nhill Symposium 2015
+conference_short   = NS2015
+session            = Third High Performance Sleeping, HPS3
+session_short      = HPS3
+logo               = images/logo.png
+max_time           = 10
+dirs_to_copy       = ['images']
+---endmetadata
+```
+### Presentation structuring
+MaTiSSe.py supports the structuring of long presentation. As a matter of fact, for long scientific presentation, it is often useful to structure the talk into sections and/or subsections. Therefore, after the preamble, where typically the user defines theme and metadata, the presentation structuring starts:
+```md
+# First section
+## First subsection of first section
+### First slide of first subsection of first section
+```
+As you can see defining a section/subsection/slide is very simple: just use the h1/h2/h3 headings of markdown, respectively. The titles of these structures are available as metadata (e.g. `sectiontitle`, `sectionnumber`, `slidetitle`, etc...) and can be used inside other elements.
+
+Note that if you define at least one section all other subsections/slides before this section are omitted:
+```md
+## Bad placed subsection
+### Bad placed slide
+# First section
+## First subsection of first section
+### First slide of first subsection of first section
+```
+The same is valid if at least one subsection is defined. If `--verbose` is used this kind of  *issues* are highlighted into the standard output warnings, but the compilation is still completed.
+
+At this point, it is useful to define the MaTiSSe.py *universe*...
+
+### Presentation structuring (continued)
+ 
+The **universe** of MaTiSSe.py is composed by an _infinite canvas_ over which the presentation slides are rendered:
+
+$columns
+
+$column[width:32%;padding: 0 1%;]
+
+ciao 
+
+* **presentation** with its own options, having:
+    + one **canvas** with its own options over wich the slides are rendered:
+    + N **slide**(s) with their own options; each slide has: 
+        * $N_H$ **headers**, with $N_H \in [0,\infty]$; 
+        * $N_F$ **footers**, with $N_F \in [0,\infty]$; 
+        * $N_L$ left **sidebars**, with $N_L \in [0,\infty]$; 
+        * $N_R$ right **sidebars**, with $N_R \in [0,\infty]$; 
+        * 1 main **content**.
+
+$column[width:64%;padding-left:1%;]
+
+ciao 
+
+$figure
+$content[padding:1% 5%;width:98%;box-shadow: 5px 5px 3px rgba(200,200,200,0.3);border-radius:25px;]{images/matisse-universe-no_bg.png}
+$caption(none){MaTiSSe.py **Universe**}
+$endfigure
+
+ciao 
+
+$endcolumns
+
+ciao 
+
+$note
+$content{a slide has always one *content* element whereas, *headers*, *footers* and *sidebars* are optional.}
+$endnote
 
 # Customize the Theme
 
@@ -568,3 +741,44 @@ A slide is created by _h3 heading_ of markdown syntax, i.e.
 data-scale       = 10
 ---endtheme_slide_global
 ---endslide
+
+### The Columns environment
+It is often useful to subdivide the contents into columns, e.g. to place comments aside figures. MaTiSSe.py provides an
+environment for such a contents layout. The syntax is:
+```bash
+$columns
+$column[column1_options]
+column1_contents
+$endcolumn
+$column[column2_options]
+column2_contents
+$endcolumn
+...
+$endcolumns
+```
+#### Example
+
+$columns
+
+$column[width:60%;padding-right:1%;border-right:1px solid #4788B3;]
+This two columns environment has been made by means of the following code:
+
+```
+$columns
+$column[width:60%;padding-right:1%;border-right:1px solid #4788B3;]
+This two columns...
+
+$column[width:40%;padding-left:1%;]
+...
+$endcolumns
+```
+
+$column[width:40%;padding-left:1%;]
+$note
+$content{
+The column *options* can contain any css style options, however to the options *display:block;float:left;* are automatically added. Moreover, the user should always specify the *width* option for avoiding unpredictable output.
+}
+$endnote
+
+$endcolumns
+ 

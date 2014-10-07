@@ -173,8 +173,19 @@ class Slide(object):
         for sidebar in actual_theme.sidebars.values():
           if sidebar.position == 'L':
             sidebar.to_html(doc=doc,metadata=self.data)
+        if self.number == 14:
+          print('cazzo raw')
+          print(self.raw_body)
         content = columns_parse(source=self.raw_body)
+        if self.number == 14:
+          print('cazzo columns')
+          print(content)
         content = figure_parse(source=content)
+        if self.number == 14:
+          print('cazzo figure')
+          print(content)
+          print('cazzo converted')
+          print(__source_editor__.md_convert(content))
         content = note_parse(source=content)
         content = table_parse(source=content)
         content = box_parse(source=content)

@@ -59,8 +59,8 @@ class SourceEditor(object):
     p_start = '<p>'
     p_end   = '</p>'
     markup = self.mkd.reset().convert(source)
-    if markup.startswith(p_start) and markup.endswith(p_end):
-      markup = markup[len(p_start):-len(p_end)]
+    #if markup.startswith(p_start) and markup.endswith(p_end):
+      #markup = markup[len(p_start):-len(p_end)]
     return markup
 
   @staticmethod

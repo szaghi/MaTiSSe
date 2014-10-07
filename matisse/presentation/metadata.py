@@ -11,6 +11,7 @@ import re
 from yattag import Doc
 # MaTiSSe.py modules
 from ..data.data import Data
+from ..utils.source_editor import __source_editor__
 # class definition
 class Metadata(object):
   """
@@ -28,7 +29,8 @@ class Metadata(object):
     data : Data object
       presentation metadata
     """
-    self.data = Data(regex_start='[-]{3}metadata',regex_end='[-]{3}endmetadata',special_keys=['__all__'])
+    _skip = [__source_editor__.regex_codeblock,__source_editor__.regex_codeinline]
+    self.data = Data(regex_start='[-]{3}metadata',regex_end='[-]{3}endmetadata',skip=_skip,special_keys=['__all__'])
     self.data.data['title'              ] = ['',  False]
     self.data.data['subtitle'           ] = ['',  False]
     self.data.data['authors'            ] = [[],  False]
