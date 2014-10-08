@@ -23,8 +23,8 @@ from ..utils.source_editor import __source_editor__
 __p_css__ = {'p' : '\n  padding: 1% 0;'}
 __a_css__ = {'a' : '\n  color: inherit;\n  text-decoration: none;\n  transition: 0.5s;',
              'a:hover, a:focus' : '\n  background: rgba(255,255,255,1);\n  text-shadow: -1px -1px 2px rgba(100,100,100,0.5);'}
-__ul_css__ = {'ul' : '\n  padding-left: 4%;'}
-__ol_css__ = {'ol' : '\n  padding-left: 4%;'}
+__ul_css__ = {'ul' : '\n  padding-left: 2em;'}
+__ol_css__ = {'ol' : '\n  padding-left: 2em;'}
 __pre_css__ = {'pre' : '\n  display:flex;\n  padding: 1% 0;'}
 __input_btn_css__ = {'input[type=button]' : '\n  padding:0;\n  margin:0;\n  border:0 none;\n  background: rgba(0,0,0,0.01);'}
 __countDown_css__ = {'.countDown' : '\n  display: block;\n  padding: 0;\n  margin: 0;'}

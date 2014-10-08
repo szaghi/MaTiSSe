@@ -106,7 +106,7 @@ class Presentation(object):
           if section[1] != 0:
             self.get_remainder(source,section[1])
         if scs < len(sections)-1:
-          raw_body = source[section[2]+1:sections[scs+1][1]-1]
+          raw_body = source[section[2]+1:sections[scs+1][1]]
         else:
           raw_body = source[section[2]+1:]
         self.sections.append(Section(raw_body = raw_body, title = section[0], data = self.metadata.data.data))

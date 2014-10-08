@@ -8,11 +8,13 @@ import re
 # modules not in the standard library
 from yattag import Doc
 # MaTiSSe.py modules
-from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import __source_editor__ as seditor
 from ..utils.source_editor import illuminate_protected as illuminate
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import tokenize as generic_tokenize
 # global variables
 # regular expressions
-__rebox__ = re.compile(r"\$box(?P<box>.*?)\$endbox",re.DOTALL)
+__rebox__ = re.compile(r"(?P<box>\$box(?P<env>.*?)\$endbox)",re.DOTALL)
 __restl__ = re.compile(r"\$style\[(?P<style>.*?)\]",re.DOTALL)
 __rectn__ = re.compile(r"\$content(\((?P<ctn_type>.*?)\))*(\[(?P<ctn_options>.*?)\])*\{(?P<ctn>.*?)\}",re.DOTALL)
 __recap__ = re.compile(r"\$caption(\((?P<cap_type>.*?)\))*(\[(?P<cap_options>.*?)\])*(\{(?P<cap>.*?)\})*",re.DOTALL)
@@ -164,11 +166,11 @@ class Box(object):
       caption text
     """
     if self.cap_type and self.cap:
-      txt = self.cap_type+' '+str(self.number)+': '+self.cap
+      txt = self.cap_type+' '+str(self.number)+': '+seditor.md_convert(self.cap)
     elif self.cap_type:
       txt = self.cap_type
     elif self.cap:
-      txt = self.cap
+      txt = seditor.md_convert(self.cap)
     return txt
 
   def put_caption(self,doc):
@@ -183,22 +185,37 @@ class Box(object):
       with doc.tag('div',klass='box caption'):
         if self.cap_options:
           doc.attr(style=self.cap_options)
-        doc.text(self.caption_txt())
+        doc.asis(self.caption_txt())
     return
 
   def to_html(self):
     """Method for inserting box to the html doc."""
     doc = Doc()
-    with doc.tag('div',markdown='1',klass='box'):
+    with doc.tag('div',klass='box'):
       if self.style:
         doc.attr(style=self.style)
       with doc.tag('div',klass='box content'):
         if self.ctn_options:
           doc.attr(style=self.ctn_options)
-        #doc.text(self.ctn)
         doc.asis(self.ctn)
       self.put_caption(doc=doc)
     return doc.getvalue()
+
+def tokenize(source):
+  """Method for tokenizing source tagging boxes environments.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+
+  Returns
+  -------
+  list
+    list of tokens whose elements are ['type',source_part]; type is 'box' for box environments and
+    'unknown' for anything else
+  """
+  return generic_tokenize(source=source,re_part=__rebox__,name_part='box')
 
 def parse(source):
   """Method for parsing source substituting boxes with their own html equivalent.
@@ -215,6 +232,6 @@ def parse(source):
   """
   protected, obfuscate_source = obfuscate(source = source)
   for match in re.finditer(__rebox__,obfuscate_source):
-    box = Box(source=illuminate(source=match.group('box'),protected_contents=protected))
+    box = Box(source=illuminate(source=match.group('env'),protected_contents=protected))
     obfuscate_source = re.sub(__rebox__,box.to_html(),obfuscate_source,1)
   return illuminate(source=obfuscate_source,protected_contents=protected)

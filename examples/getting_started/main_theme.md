@@ -79,7 +79,7 @@ caption = font-size:80%;color:#4788B3;
 ---endtheme_figure
 
 ---theme_note
-style   = font-variant:small-caps;box-shadow: 7px 7px 5px rgba(200,200,200,0.3);border-radius:20px
+style   = display:inline-block;font-variant:small-caps;box-shadow: 7px 7px 5px rgba(200,200,200,0.3);border-radius:20px
 caption = padding:0 2%;color:#4788B3;border-bottom:1px solid #4788B3;display:inline-block;
 content = padding:0 2%;font-size:120%;
 ---endtheme_note

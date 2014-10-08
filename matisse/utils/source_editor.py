@@ -56,8 +56,8 @@ class SourceEditor(object):
     str
       converted source
     """
-    p_start = '<p>'
-    p_end   = '</p>'
+    #p_start = '<p>'
+    #p_end   = '</p>'
     markup = self.mkd.reset().convert(source)
     #if markup.startswith(p_start) and markup.endswith(p_end):
       #markup = markup[len(p_start):-len(p_end)]
@@ -374,6 +374,44 @@ def illuminate_protected(source,protected_contents):
     return illuminate_source
   else:
     return source
+
+def tokenize(source,re_part,name_part):
+  """Method for tokenizing source tagging parts of the source.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+  re_part : re.compile object
+    regex matching parts to be tokenized
+  name_part : str
+    name of parts matched
+
+  Returns
+  -------
+  list
+    list of tokens whose elements are ['name',source_part]; name is name_part for parts matching re_part and
+    'unknown' for anything else
+  """
+  protected, obfuscate_source = obfuscate_codeblocks(source = source)
+  matches = []
+  for match in re.finditer(re_part,obfuscate_source):
+    matches.append([match.start(),match.end(),illuminate_protected(source=match.group(),protected_contents=protected)])
+  if len(matches)>0:
+    tokens = []
+    for mtc,match in enumerate(matches):
+      if mtc == 0:
+        start = 0
+      else:
+        start = matches[mtc-1][1]+1
+      if match[0]!=start:
+        tokens.append(['unknown',illuminate_protected(source=obfuscate_source[start:match[0]],protected_contents=protected)])
+      tokens.append([name_part,match[2]])
+    if matches[-1][1]<len(obfuscate_source):
+      tokens.append(['unknown',illuminate_protected(source=obfuscate_source[matches[-1][1]+1:],protected_contents=protected)])
+  else:
+    tokens = [['unknown',source]]
+  return tokens
 
 # global variables
 __initialized__ = False

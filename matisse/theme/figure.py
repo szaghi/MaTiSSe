@@ -10,11 +10,12 @@ from yattag import Doc
 # MaTiSSe.py modules
 from ..utils.source_editor import obfuscate_codeblocks as obfuscate
 from ..utils.source_editor import illuminate_protected as illuminate
+from ..utils.source_editor import tokenize as generic_tokenize
 from .box import Box
 from .theme_element import ThemeElement
 # global variables
 # regular expressions
-__refigure__ = re.compile(r"\$figure(?P<box>.*?)\$endfigure",re.DOTALL)
+__refigure__ = re.compile(r"(?P<figure>\$figure(?P<env>.*?)\$endfigure)",re.DOTALL)
 # classes definition
 class Figure(Box):
   """
@@ -116,13 +117,13 @@ class Figure(Box):
           doc.attr(style=self.cap_options)
         elif Figure.theme.data.data['caption'][0]:
           doc.attr(style=Figure.theme.data.data['caption'][0])
-        doc.text(self.caption_txt())
+        doc.asis(self.caption_txt())
     return
 
   def to_html(self):
     """Method for inserting box to the html doc."""
     doc = Doc()
-    with doc.tag('div',markdown='1',klass='figure'):
+    with doc.tag('div',klass='figure'):
       doc.attr(('id','Figure-'+str(self.number)))
       if self.style:
         doc.attr(style=self.style)
@@ -136,8 +137,23 @@ class Figure(Box):
         else:
           doc.stag('img',src=self.ctn,klass='image',style='width:100%;',alt='Figure-'+self.ctn)
         self.put_caption(doc=doc)
-
     return doc.getvalue()
+
+def tokenize(source):
+  """Method for tokenizing source tagging figures environments.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+
+  Returns
+  -------
+  list
+    list of tokens whose elements are ['type',source_part]; type is 'figure' for figure environments and
+    'unknown' for anything else
+  """
+  return generic_tokenize(source=source,re_part=__refigure__,name_part='figure')
 
 def parse(source):
   """Method for parsing source substituting figures with their own html equivalent.
@@ -154,6 +170,6 @@ def parse(source):
   """
   protected, obfuscate_source = obfuscate(source = source)
   for match in re.finditer(__refigure__,obfuscate_source):
-    figure = Figure(source=illuminate(source=match.group('box'),protected_contents=protected))
+    figure = Figure(source=illuminate(source=match.group('env'),protected_contents=protected))
     obfuscate_source = re.sub(__refigure__,figure.to_html(),obfuscate_source,1)
   return illuminate(source=obfuscate_source,protected_contents=protected)

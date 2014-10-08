@@ -8,13 +8,15 @@ import re
 # modules not in the standard library
 from yattag import Doc
 # MaTiSSe.py modules
-from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import __source_editor__ as seditor
 from ..utils.source_editor import illuminate_protected as illuminate
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import tokenize as generic_tokenize
 from .box import Box
 from .theme_element import ThemeElement
 # global variables
 # regular expressions
-__retable__ = re.compile(r"\$table(?P<box>.*?)\$endtable",re.DOTALL)
+__retable__ = re.compile(r"\$table(?P<env>.*?)\$endtable",re.DOTALL)
 # classes definition
 class Table(Box):
   """
@@ -116,13 +118,13 @@ class Table(Box):
           doc.attr(style=self.cap_options)
         elif Table.theme.data.data['caption'][0]:
           doc.attr(style=Table.theme.data.data['caption'][0])
-        doc.text(self.caption_txt())
+        doc.asis(self.caption_txt())
     return
 
   def to_html(self):
     """Method for inserting box to the html doc."""
     doc = Doc()
-    with doc.tag('div',markdown='1',klass='table'):
+    with doc.tag('div',klass='table'):
       if self.style:
         doc.attr(style=self.style)
       elif Table.theme.data.data['style'][0]:
@@ -133,9 +135,24 @@ class Table(Box):
           doc.attr(style=self.ctn_options)
         elif Table.theme.data.data['content'][0]:
           doc.attr(style=Table.theme.data.data['content'][0])
-        #doc.text(self.ctn)
-        doc.asis(self.ctn)
+        doc.asis(seditor.md_convert(self.ctn))
     return doc.getvalue()
+
+def tokenize(source):
+  """Method for tokenizing source tagging tables environments.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+
+  Returns
+  -------
+  list
+    list of tokens whose elements are ['type',source_part]; type is 'table' for note environments and
+    'unknown' for anything else
+  """
+  return generic_tokenize(source=source,re_part=__retable__,name_part='table')
 
 def parse(source):
   """Method for parsing source substituting figures with their own html equivalent.
@@ -152,6 +169,6 @@ def parse(source):
   """
   protected, obfuscate_source = obfuscate(source = source)
   for match in re.finditer(__retable__,obfuscate_source):
-    table = Table(source=illuminate(source=match.group('box'),protected_contents=protected))
+    table = Table(source=illuminate(source=match.group('env'),protected_contents=protected))
     obfuscate_source = re.sub(__retable__,table.to_html(),obfuscate_source,1)
   return illuminate(source=obfuscate_source,protected_contents=protected)

@@ -32,7 +32,6 @@ class Titlepage(Slide):
     plain : bool
       flag for resetting the slide style to plain
     """
-    super(Titlepage,self).__init__(title='titlepage')
     self.found = False
     self.plain = plain
     if source:
@@ -61,6 +60,7 @@ class Titlepage(Slide):
     match = re.search(__regex_titlepage__,source)
     if match:
       self.found = True
+      super(Titlepage,self).__init__(title='titlepage')
       if match.group('plain') and str(match.group('plain')).lower() == 'plain':
         self.plain = True
         self.overtheme = Theme(set_all_custom=True)

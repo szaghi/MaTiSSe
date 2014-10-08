@@ -341,9 +341,7 @@ The **universe** of MaTiSSe.py is composed by an _infinite canvas_ over which th
 
 $columns
 
-$column[width:32%;padding: 0 1%;]
-
-ciao 
+$column[width:45%;padding: 0 1%;]
 
 * **presentation** with its own options, having:
     + one **canvas** with its own options over wich the slides are rendered:
@@ -354,20 +352,14 @@ ciao
         * $N_R$ right **sidebars**, with $N_R \in [0,\infty]$; 
         * 1 main **content**.
 
-$column[width:64%;padding-left:1%;]
-
-ciao 
+$column[width:55%;padding-left:1%;]
 
 $figure
-$content[padding:1% 5%;width:98%;box-shadow: 5px 5px 3px rgba(200,200,200,0.3);border-radius:25px;]{images/matisse-universe-no_bg.png}
+$content[padding:1% 5%;width:100%;box-shadow: 5px 5px 3px rgba(200,200,200,0.3);border-radius:15px;]{images/matisse-universe-no_bg.png}
 $caption(none){MaTiSSe.py **Universe**}
 $endfigure
 
-ciao 
-
 $endcolumns
-
-ciao 
 
 $note
 $content{a slide has always one *content* element whereas, *headers*, *footers* and *sidebars* are optional.}

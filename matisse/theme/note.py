@@ -8,13 +8,15 @@ import re
 # modules not in the standard library
 from yattag import Doc
 # MaTiSSe.py modules
-from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import __source_editor__ as seditor
 from ..utils.source_editor import illuminate_protected as illuminate
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import tokenize as generic_tokenize
 from .box import Box
 from .theme_element import ThemeElement
 # global variables
 # regular expressions
-__renote__ = re.compile(r"\$note(?P<box>.*?)\$endnote",re.DOTALL)
+__renote__ = re.compile(r"(?P<note>\$note(?P<env>.*?)\$endnote)",re.DOTALL)
 # classes definition
 class Note(Box):
   """
@@ -116,13 +118,13 @@ class Note(Box):
           doc.attr(style=self.cap_options)
         elif Note.theme.data.data['caption'][0]:
           doc.attr(style=Note.theme.data.data['caption'][0])
-        doc.text(self.caption_txt())
+        doc.asis(self.caption_txt())
     return
 
   def to_html(self):
     """Method for inserting box to the html doc."""
     doc = Doc()
-    with doc.tag('div',markdown='1',klass='note'):
+    with doc.tag('div',klass='note'):
       if self.style:
         doc.attr(style=self.style)
       elif Note.theme.data.data['style'][0]:
@@ -133,9 +135,24 @@ class Note(Box):
           doc.attr(style=self.ctn_options)
         elif Note.theme.data.data['content'][0]:
           doc.attr(style=Note.theme.data.data['content'][0])
-        #doc.text(self.ctn)
-        doc.asis(self.ctn)
+        doc.asis(seditor.md_convert(self.ctn))
     return doc.getvalue()
+
+def tokenize(source):
+  """Method for tokenizing source tagging notes environments.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+
+  Returns
+  -------
+  list
+    list of tokens whose elements are ['type',source_part]; type is 'note' for note environments and
+    'unknown' for anything else
+  """
+  return generic_tokenize(source=source,re_part=__renote__,name_part='note')
 
 def parse(source):
   """Method for parsing source substituting figures with their own html equivalent.
@@ -152,6 +169,6 @@ def parse(source):
   """
   protected, obfuscate_source = obfuscate(source = source)
   for match in re.finditer(__renote__,obfuscate_source):
-    note = Note(source=illuminate(source=match.group('box'),protected_contents=protected))
+    note = Note(source=illuminate(source=match.group('env'),protected_contents=protected))
     obfuscate_source = re.sub(__renote__,note.to_html(),obfuscate_source,1)
   return illuminate(source=obfuscate_source,protected_contents=protected)
