@@ -136,87 +136,6 @@ class Slide(object):
       doc.attr(('subsectionnumber',self.data['subsectionnumber']))
     return
 
-  @staticmethod
-  def subtokenize(tokens,tokenize,subtokens_name):
-    """Method for sub-tokenizing a previous (master) tokenization.
-
-    Parameters
-    ----------
-    tokens : list
-      list of master tokens
-    tokenize : function
-      for for tokenizing
-    subtokens_name : str
-      name of the subtokens tag to be inserted into the master tokens into the elements that
-      have been subtokenized
-
-    Returns
-    -------
-    list
-      list of subtokens which each element is [index_in_master_tokens,subtokens]
-    """
-    subtokens = []
-    for tkn,token in enumerate(tokens):
-      if token[0]=='unknown':
-        toks = tokenize(source=token[1])
-        if len(toks)>1:
-          subtokens.append([tkn,toks])
-          tokens[tkn] = [subtokens_name]
-    return subtokens
-
-  @staticmethod
-  def merge_subtokens(tokens,subtokens,tkn):
-    """Method for merge subtokens into tokens.
-
-    Parameters
-    ----------
-    tokens : list
-      list of tokens
-    subtokens : list
-      list of subtokens
-    tkn : int
-      token index
-    """
-    for sub_token in subtokens:
-      if sub_token[0] == tkn:
-        for tok in sub_token[1]:
-          tokens.append(tok)
-        break
-    return
-
-  def raw_body_tokenize(self):
-    """Method for tokenizing raw_body.
-
-    The tokens hierarchy is the following:
-
-    + columns environments can contain anything (also other environments);
-    + box(figure/table/note) environments can contain box or markdown data, but no other environments;
-    + markdown data without MaTiSSe.py environments;
-
-    Returns
-    -------
-    list
-      list of tokens whose elements are ['type',source_part]
-    """
-    c_tokens = columns.tokenize(source=self.raw_body)
-    b_tokens = self.subtokenize(tokens=c_tokens,tokenize=box.tokenize,   subtokens_name='box tokens'   )
-    f_tokens = self.subtokenize(tokens=c_tokens,tokenize=figure.tokenize,subtokens_name='figure tokens')
-    t_tokens = self.subtokenize(tokens=c_tokens,tokenize=table.tokenize, subtokens_name='table tokens' )
-    n_tokens = self.subtokenize(tokens=c_tokens,tokenize=note.tokenize,  subtokens_name='note tokens'  )
-    tokens = []
-    for tkn,token in enumerate(c_tokens):
-      if token[0]=='columns' or token[0]=='unknown':
-        tokens.append(token)
-      elif token[0]=='box tokens':
-        self.merge_subtokens(tokens=tokens,subtokens=b_tokens,tkn=tkn)
-      elif token[0]=='figure tokens':
-        self.merge_subtokens(tokens=tokens,subtokens=f_tokens,tkn=tkn)
-      elif token[0]=='table tokens':
-        self.merge_subtokens(tokens=tokens,subtokens=t_tokens,tkn=tkn)
-      elif token[0]=='note tokens':
-        self.merge_subtokens(tokens=tokens,subtokens=n_tokens,tkn=tkn)
-    return tokens
-
   def raw_body_parse(self):
     """Method for parsing raw_body.
 
@@ -225,21 +144,17 @@ class Slide(object):
     str
       string containing the parsed raw_body
     """
-    tokens = self.raw_body_tokenize()
+    tokens = columns.tokenize(source=self.raw_body)
     parsed_body = ''
     for token in tokens:
       if token[0] == 'unknown':
-        parsed_body += '\n'+seditor.md_convert(source=token[1])
+        content = box.parse(token[1])
+        content = figure.parse(content)
+        content = table.parse(content)
+        content = note.parse(content)
+        parsed_body += '\n'+seditor.md_convert(content)
       elif token[0]=='columns':
         parsed_body += '\n'+columns.parse(source=token[1])
-      elif token[0]=='box':
-        parsed_body += '\n'+box.parse(source=token[1])
-      elif token[0]=='figure':
-        parsed_body += '\n'+figure.parse(source=token[1])
-      elif token[0]=='table':
-        parsed_body += '\n'+table.parse(source=token[1])
-      elif token[0]=='note':
-        parsed_body += '\n'+note.parse(source=token[1])
     return parsed_body
 
   def to_html(self,position,theme):
@@ -281,12 +196,6 @@ class Slide(object):
             sidebar.to_html(doc=doc,metadata=self.data)
         if self.number == 2:
           self.raw_body_parse()
-        #content = columns.parse(source=self.raw_body)
-        #content = figure.parse(source=content)
-        #content = note.parse(source=content)
-        #content = table.parse(source=content)
-        #content = box.parse(source=content)
-        #actual_theme.content.to_html(doc=doc,content='\n'+seditor.md_convert(content))
         actual_theme.content.to_html(doc=doc,content='\n'+self.raw_body_parse())
         for sidebar in actual_theme.sidebars.values():
           if sidebar.position == 'R':

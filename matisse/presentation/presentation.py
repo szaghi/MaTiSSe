@@ -14,7 +14,7 @@ from yattag import Doc,indent
 from ..config import __config__
 from ..theme.slide.position import Position
 from ..theme.theme import Theme
-from ..utils.source_editor import __source_editor__
+from ..utils.source_editor import __source_editor__ as seditor
 from .metadata import Metadata
 from .regexs import  __regex_section__
 from .section import Section
@@ -94,7 +94,7 @@ class Presentation(object):
     """
     sections = []
     self.sections = []
-    purged_source = __source_editor__.purge_codes(source)
+    purged_source = seditor.purge_codes(source)
     for match in re.finditer(__regex_section__,purged_source):
       sections.append([match.group('expr'),match.start(),match.end()])
     if len(sections)==0:

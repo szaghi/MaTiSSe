@@ -50,6 +50,22 @@ class Position(object):
     return int(theme.data.data['data-scale'][0])
 
   @staticmethod
+  def get_offset(theme):
+    """Method for computing the current slide offset factor.
+
+    Parameters
+    ----------
+    theme : Theme object
+      current global theme
+
+    Returns
+    -------
+    int
+      offset factor
+    """
+    return int(theme.data.data['data-offset'][0])
+
+  @staticmethod
   def get_rotation(theme):
     """Method for computing the current slide scale factor.
 
@@ -71,7 +87,7 @@ class Position(object):
       rot = max(rot,rot_z)
     return [rot_x,rot_y,rot]
 
-  def get_position(self,theme,scale):
+  def get_position(self,theme,scale,offset):
     """Method for computing the current slide position.
 
     Parameters
@@ -80,6 +96,8 @@ class Position(object):
       current global theme
     scale : int
       factor scaling of previous slide
+    offset : int
+      offset factor
 
     Returns
     -------
@@ -95,36 +113,36 @@ class Position(object):
     if slide_transition == 'absolute':
       pass
     elif slide_transition == 'horizontal':
-      pos_x = self.position[0] + slide_width*(max(self.scale,scale)+self.offset/100.0)
+      pos_x = self.position[0] + slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1]
       #pos_z = self.position[2]
     elif slide_transition == '-horizontal':
-      pos_x = self.position[0] - slide_width*(max(self.scale,scale)+self.offset/100.0)
+      pos_x = self.position[0] - slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1]
       #pos_z = self.position[2]
     elif slide_transition == 'vertical':
       pos_x = self.position[0]
-      pos_y = self.position[1] + slide_height*(max(self.scale,scale)+self.offset/100.0)
+      pos_y = self.position[1] + slide_height*(max(self.scale,scale)+offset/100.0)
       #pos_z = self.position[2]
     elif slide_transition == '-vertical':
       pos_x = self.position[0]
-      pos_y = self.position[1] - slide_height*(max(self.scale,scale)+self.offset/100.0)
+      pos_y = self.position[1] - slide_height*(max(self.scale,scale)+offset/100.0)
       #pos_z = self.position[2]
     elif slide_transition == 'diagonal':
-      pos_x = self.position[0] + slide_width*(max(self.scale,scale)+self.offset/100.0)
-      pos_y = self.position[1] + slide_height*(max(self.scale,scale)+self.offset/100.0)
+      pos_x = self.position[0] + slide_width*(max(self.scale,scale)+offset/100.0)
+      pos_y = self.position[1] + slide_height*(max(self.scale,scale)+offset/100.0)
       #pos_z = self.position[2]
     elif slide_transition == '-diagonal':
-      pos_x = self.position[0] - slide_width*(max(self.scale,scale)+self.offset/100.0)
-      pos_y = self.position[1] - slide_height*(max(self.scale,scale)+self.offset/100.0)
+      pos_x = self.position[0] - slide_width*(max(self.scale,scale)+offset/100.0)
+      pos_y = self.position[1] - slide_height*(max(self.scale,scale)+offset/100.0)
       #pos_z = self.position[2]
     elif slide_transition == 'diagonal-x':
-      pos_x = self.position[0] - slide_width*(max(self.scale,scale)+self.offset/100.0)
-      pos_y = self.position[1] + slide_height*(max(self.scale,scale)+self.offset/100.0)
+      pos_x = self.position[0] - slide_width*(max(self.scale,scale)+offset/100.0)
+      pos_y = self.position[1] + slide_height*(max(self.scale,scale)+offset/100.0)
       #pos_z = self.position[2]
     elif slide_transition == 'diagonal-y':
-      pos_x = self.position[0] + slide_width*(max(self.scale,scale)+self.offset/100.0)
-      pos_y = self.position[1] - slide_height*(max(self.scale,scale)+self.offset/100.0)
+      pos_x = self.position[0] + slide_width*(max(self.scale,scale)+offset/100.0)
+      pos_y = self.position[1] - slide_height*(max(self.scale,scale)+offset/100.0)
       #pos_z = self.position[2]
     return [pos_x,pos_y,pos_z]
 
@@ -143,10 +161,12 @@ class Position(object):
       actual_theme = overtheme
 
     scale = self.get_scale(theme=actual_theme)
+    offset = self.get_offset(theme=actual_theme)
 
     self.rotation = self.get_rotation(theme=actual_theme)
 
-    self.position = self.get_position(theme=actual_theme,scale=scale)
+    self.position = self.get_position(theme=actual_theme,scale=scale,offset=offset)
 
     self.scale = scale
+    self.offset = offset
     return

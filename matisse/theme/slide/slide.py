@@ -47,7 +47,8 @@ class Slide(ThemeElement):
                                special_keys=['slide-transition',
                                              'data-scale',
                                              'data-rotate','data-rotate-x','data-rotate-y','data-rotate-z',
-                                             'data-x','data-y','data-z'])
+                                             'data-x','data-y','data-z',
+                                             'data-offset'])
     self.data.data['width'           ] = ['900px',                       False]
     self.data.data['height'          ] = ['700px',                       False]
     self.data.data['font-size'       ] = ['100%',                        False]
@@ -61,6 +62,7 @@ class Slide(ThemeElement):
     self.data.data['data-x'          ] = ['0',                           False]
     self.data.data['data-y'          ] = ['0',                           False]
     self.data.data['data-z'          ] = ['0',                           False]
+    self.data.data['data-offset'     ] = ['1',                           False]
     if source:
       self.get(source)
     elif defaults:
@@ -251,16 +253,19 @@ class Slide(ThemeElement):
     5. data-rotate-y
     6. data-rotate-z
     7. data-x
-    8. data-y']
+    8. data-y
     9. data-z
+    10. data-offset
+
     The check_specials method of other contained elements is called.
     """
     for key,val in self.data.data.items():
       if val[1]:
         if (key == 'slide-transition' or
             key == 'data-scale' or
-            key =='data-rotate' or key =='data-rotate-x' or key =='data-rotate-y' or key =='data-rotate-z' or
-            key =='data-x' or key =='data-y' or key =='data-z'):
+            key == 'data-rotate' or key == 'data-rotate-x' or key == 'data-rotate-y' or key == 'data-rotate-z' or
+            key == 'data-x' or key == 'data-y' or key == 'data-z' or
+            key == 'data-offset'):
           self.data.data[key] = [val[0],True]
     self.content.check_specials()
     if self.has_header():

@@ -12,6 +12,7 @@ import markdown
 from ..md_mathjax.mdx_mathjax import MathJaxExtension
 #global variables
 __regex_codeblock__ = re.compile(r"(?P<cblock>[`]{3}.*?[`]{3})",re.DOTALL)
+__regex_codeblock_html__ = re.compile(r"(?P<cblock>\<code.*?\<\/code\>)",re.DOTALL)
 __regex_codeinline__ = re.compile(r"(?P<cline>[`]{1}.*?[`]{1})",re.DOTALL)
 __regex_overtheme__ = re.compile(r"(?P<ostheme>[-]{3}slide(?P<block>.*?)[-]{3}endslide)",re.DOTALL)
 __regex_include__ = re.compile(r"\$include\((?P<include>.*?)\)")
@@ -266,7 +267,9 @@ class SourceEditor(object):
     str
       stripped string
     """
-    return self.strip(regex=__regex_overtheme__,source=source)
+    protected, obfuscate_source = obfuscate_codeblocks(source = source)
+    obfuscate_source = self.strip(regex=__regex_overtheme__,source=obfuscate_source)
+    return illuminate_protected(source=obfuscate_source,protected_contents=protected)
 
   @staticmethod
   def includes(source):
@@ -285,8 +288,8 @@ class SourceEditor(object):
     str
       source with included other sources
     """
-    inc_source = source
-    for match in re.finditer(__regex_include__,inc_source):
+    protected, obfuscate_source = obfuscate_codeblocks(source = source)
+    for match in re.finditer(__regex_include__,obfuscate_source):
       include_file = match.group('include')
       if not os.path.exists(include_file):
         sys.stderr.write('Error: cannot include "'+include_file+'"')
@@ -294,8 +297,8 @@ class SourceEditor(object):
       else:
         with open(include_file,'r') as inc:
           other_source = inc.read()
-        inc_source = re.sub(__regex_include__,other_source,inc_source,1)
-    return inc_source
+        obfuscate_source = re.sub(__regex_include__,other_source,obfuscate_source,1)
+    return illuminate_protected(source=obfuscate_source,protected_contents=protected)
 
 def obfuscate_protected(source,re_protected):
   """Method for obfuscating protected contents.
@@ -325,7 +328,7 @@ def obfuscate_protected(source,re_protected):
   return protected_contents,obfuscate_source
 
 def obfuscate_codeblocks(source):
-  """Method for obfuscating codes contents.
+  """Method for obfuscating codeblocks contents.
 
   It can be often useful to temporarly obfuscate codeblocks contents for performing safely some tasks
   and then re-introducing them.
@@ -347,6 +350,40 @@ def obfuscate_codeblocks(source):
   for match in re.finditer(__regex_codeblock__,source):
     protected_contents.append([match.start(),match.end(),match.group()])
     obfuscate_source = re.sub(__regex_codeblock__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
+  for match in re.finditer(__regex_codeblock_html__,source):
+    protected_contents.append([match.start(),match.end(),match.group()])
+    obfuscate_source = re.sub(__regex_codeblock_html__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
+  return protected_contents,obfuscate_source
+
+def obfuscate_codes(source):
+  """Method for obfuscating codes contents.
+
+  It can be often useful to temporarly obfuscate codes contents for performing safely some tasks
+  and then re-introducing them.
+
+  Parameters
+  ----------
+  source : str
+    string (as single stream) containing the source
+
+  Returns
+  -------
+  protected_contents : list
+    list of str containing the contents of codes
+  str
+    source with codes contents obfuscated and replaced by a safe placeholder
+  """
+  obfuscate_source = source
+  protected_contents = []
+  for match in re.finditer(__regex_codeblock__,source):
+    protected_contents.append([match.start(),match.end(),match.group()])
+    obfuscate_source = re.sub(__regex_codeblock__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
+  for match in re.finditer(__regex_codeblock_html__,source):
+    protected_contents.append([match.start(),match.end(),match.group()])
+    obfuscate_source = re.sub(__regex_codeblock_html__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
+  for match in re.finditer(__regex_codeinline__,source):
+    protected_contents.append([match.start(),match.end(),match.group()])
+    obfuscate_source = re.sub(__regex_codeinline__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
   return protected_contents,obfuscate_source
 
 def illuminate_protected(source,protected_contents):

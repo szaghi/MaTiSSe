@@ -105,7 +105,7 @@ MaTiSSe.py has a too much long list of features. Here the main features are list
 * [x] `latex equations` support;
 * [x] `scientific contents` support: 
     * [x] `figures` with fully customizable environment; 
-    * [x] `tables` with fully customizable environment; 
+    * [ ] `tables` with fully customizable environment; 
     * [x] `notes` with fully customizable environment; 
     * [x] `code listings` with syntax highlighting;
     * [x] `columns` fully customizable environment; 
@@ -119,11 +119,19 @@ Go to [Top](#top) or [Toc](#toc)
 ## <a name="todos"></a>Todos
 MaTiSSe.py is under development. Presently the most part of improvement efforts are devoted to:
 
-+ documentation;
-+ navigation control;
-+ progress bar;
-+ `jmpress.js` support;
-+ replicate all the useful features of LaTeX-beamer approach;
++ documentation:
+    + main README.md documentation;
+    + comprehensive getting started presentation example;
+    + cool prezi-like small presentations examples;
++ MaTiSSe.py features implementing:
+  + implement a more complete navigation controls;
+  + implement a themeable progress bar;
+  + complete the table environment;
+  + `jmpress.js` support;
+  + `note handouts` support;
++ general improvements:
+  + replicate all the useful features of LaTeX-beamer approach;
+  + refactor the quick and dirty current API;
 + any feature request is welcome.
 
 Go to [Top](#top) or [Toc](#toc)
@@ -341,7 +349,74 @@ In both the steps MaTiSSe.py is strongly friendly.
 
 ### <a name="writing-markdown"></a>Writing the markdown source
 
-#### Presentation metadata
+#### MaTiSSe.py flavored markdown syntax
+
+##### Presentation structuring
+MaTiSSe.py supports the structuring of long presentation. As a matter of fact, for long scientific presentation, it is often useful to structure the talk into sections and/or subsections. Therefore, after the preamble, where typically the user defines theme and metadata, the presentation structuring starts:
+```md
+# First section
+
+## First subsection of first section
+
+### First slide of first subsection of first section
+
+...
+```
+As you can see defining a section/subsection/slide is very simple: just use the h1/h2/h3 headings of markdown, respectively. The titles of these structures are available as metadata (e.g. `sectiontitle`, `sectionnumber`, `slidetitle`, etc...) and can be used inside other elements.
+
+Note that if you define at least one section all other subsections/slides before this section are omitted:
+```md
+## Bad placed subsection
+
+### Bad placed slide
+
+# First section
+
+## First subsection of first section
+
+### First slide of first subsection of first section
+
+...
+```
+The same is valid if at least one subsection is defined. If `--verbose` is used this kind of  *issues* are highlighted into the standard output warnings, but the compilation is still completed. Note that you can define no sections/subsections:
+```md
+### First slide of unstructured presentation
+
+### Second slide of unstructured presentation
+
+...
+```
+This is a valid unstructured presentation with no sections/subsections. 
+
+The use of h1/h2/h3 headings precludes to insert such a title into the slides contents. However there other 3 headings (h4/h5/h6) that should be enough.
+
+At this point, it is useful to define the MaTiSSe.py *universe*
+
+![universe](examples/getting_started/images/matisse-universe-no_bg.png)
+
+Basically there is an *infinite canvas* over which the presentation is rendered. The main element of the presentation object is obviously the slide. The slide element is composed by:
+
+* *N_H* **headers**, with *N_H* being an arbitrary number; 
+* *N_F* **footers**, with *N_F* being an arbitrary number;
+* *N_L* left **sidebars**, with *N_L* being an arbitrary number;
+* *N_R* right **sidebars**, with *N_R* being an arbitrary number;
+* *1* main **content**.
+
+All the code after a slide title will be inserted into the **slide content** element, whereas the contents of headers, footers and sidebars are defined by the slide theme. These latter elements are by default disabled, thus the slide content occupies the 100% of the slide surface:
+```md
+### Example of slide contents
+
+#### This is a h4 title example
+This contents is placed into the **content** element of the slide that is the only one being enabled by default.
+
+##### This is a h5 title example
+This placed below the previous h4-titled paragraph. Note that an empty line defines a new paragraph into the html output. 
+```
+The headers, footers and sidebars are treated into the **Theming** section, while in the following is discussed only the slide contents writing.
+
+Into the slide content you can place any valid markdown source. Note that the markdown used by MaTiSSe.py is an extended version of the [original one](http://daringfireball.net/projects/markdown/), that is very similar to the one used by github, the so called [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). Indeed, the syntax supported by MaTiSSe.py is even more extended with respect the github flavored syntax: MaTiSSe.py supports latex equations and some specific environments (e.g. figure, note, table, columns, etc...). The markdown source is parsed by means of **markdown** python module: for more informations on the supported syntax see [Python-Markdown](https://pythonhosted.org/Markdown/). Here the focus is placed on the MaTiSSe.py specific syntax.
+
+##### Presentation metadata
 For long scientific presentation it is often useful to define some (meta)data in order to reuse theme inside the presentation itself. Such a data are defined into MaTiSSe.py as *metadata*. You can define the presentation metadata anywhere into your markdown source, however it has sense to place it at the beginning, inside the presentation _preamble_, that is just a convention rather than a physical part of the markdown document. The available metadata are:
 ```lua
 title = 
@@ -409,82 +484,26 @@ The metadata should be auto-explicative, whereas the last two merit a comment:
 
 Other two metadata are available, but do not need to be assigned a value:
 
-+ `toc`: this the Table of Contents which is automatically built up; its using is shown in the following;
-+ `total_slides_number`: this the total number of slide which is automatically built up; its using is shown in the following;
++ `toc`: this the Table of Contents which is automatically built up;
++ `sectiontitle`: the title of each section that is obtained parsing your source;
++ `sectionnumber`: the number of each section that is obtained parsing your source;
++ `subsectiontitle`: the title of each subsection that is obtained parsing your source;
++ `subsectionnumber`: the number of each subsection that is obtained parsing your source;
++ `slidetitle`: the title of each slide that is obtained parsing your source;
++ `slidenumber`: the number of each slide that is obtained parsing your source;
++ `total_slides_number`: this the total number of slide which is automatically built up;
 
-All the metadata can be used inside the presentation as shown in the following.
+All the metadata can be used inside the presentation. Two possibilities are available:
+1. use a metadata inside the theme definition; e.g. it is common to use `slidetile` inside the header of the slide;
+2. place the metadata directly into the slide contents using the `$metadata[style]` notation, where the `[style]` is the css style for rendering the metadata value and it is optional; e.g. `$autors[font-size:120%]` will be replaced by the name of the authors rendered with a font size 20% larger than the other slide contents one.
+ 
 
-#### Presentation structuring
-MaTiSSe.py supports the structuring of long presentation. As a matter of fact, for long scientific presentation, it is often useful to structure the talk into sections and/or subsections. Therefore, after the preamble, where typically the user defines theme and metadata, the presentation structuring starts:
-```md
-# First section
-
-## First subsection of first section
-
-### First slide of first subsection of first section
-
-...
-```
-As you can see defining a section/subsection/slide is very simple: just use the h1/h2/h3 headings of markdown, respectively. The titles of these structures are available as metadata (e.g. `sectiontitle`, `sectionnumber`, `slidetitle`, etc...) and can be used inside other elements.
-
-Note that if you define at least one section all other subsections/slides before this section are omitted:
-```md
-## Bad placed subsection
-
-### Bad placed slide
-
-# First section
-
-## First subsection of first section
-
-### First slide of first subsection of first section
-
-...
-```
-The same is valid if at least one subsection is defined. If `--verbose` is used this kind of  *issues* are highlighted into the standard output warnings, but the compilation is still completed. Note that you can define no sections/subsections:
-```md
-### First slide of unstructured presentation
-
-### Second slide of unstructured presentation
-
-...
-```
-This is a valid unstructured presentation with no sections/subsections. 
-
-The use of h1/h2/h3 headings precludes to insert such a title into the slides contents. However there other 3 headings (h4/h5/h6) that should be enough.
-
-At this point, it is useful to define the MaTiSSe.py *universe*
-
-![universe](examples/getting_started/images/matisse-universe-no_bg.png)
-
-Basically there is an *infinite canvas* over which the presentation is rendered. The main element of the presentation object is obviously the slide. The slide element is composed by:
-
-* *N_H* **headers**, with *N_H* being an arbitrary number; 
-* *N_F* **footers**, with *N_F* being an arbitrary number;
-* *N_L* left **sidebars**, with *N_L* being an arbitrary number;
-* *N_R* right **sidebars**, with *N_R* being an arbitrary number;
-* *1* main **content**.
-
-All the code after a slide title will be inserted into the **slide content** element, whereas the contents of headers, footers and sidebars are defined by the slide theme. These latter elements are by default disabled, thus the slide content occupies the 100% of the slide surface:
-```md
-### Example of slide contents
-
-#### This is a h4 title example
-This contents is placed into the **content** element of the slide that is the only one being enabled by default.
-
-##### This is a h5 title example
-This placed below the previous h4-titled paragraph. Note that an empty line defines a new paragraph into the html output. 
-```
-The headers, footers and sidebars are treated into the **Theming** section, while in the following is discussed only the slide contents writing.
-
-Into the slide content you can place any valid markdown source. Note that the markdown used by MaTiSSe.py is an extended version of the [original one](http://daringfireball.net/projects/markdown/), that is very similar to the one used by github, the so called [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/). Indeed, the syntax supported by MaTiSSe.py is even more extended with respect the github flavored syntax: MaTiSSe.py supports latex equations and some specific environments (e.g. figure, note, table, columns, etc...). The markdown source is parsed by means of **markdown** python module: for more informations on the supported syntax see [Python-Markdown](https://pythonhosted.org/Markdown/). Here the focus is placed on the MaTiSSe.py specific syntax.
-
-#### Code listings
+##### Code listings
 The code listings is accomplished very similarly to the github flavored markdown approach. Just use fenced code blocks or in-line codes. Just remember that the syntax highlighting is achieved by means of [highlight.js](https://highlightjs.org/): only the languages supported by `highlight.js` are supported.
 
 Note also that presently the code blocks defined by simple indentation, as the original markdown [definition](http://daringfireball.net/projects/markdown/syntax#precode) is not completely supported.
 
-#### LaTeX equations
+##### LaTeX equations
 For scientific contents equations environments are mandatory. The *de facto* standard of equations typesetting is LaTeX. MaTiSSe.py supports LaTeX equations! Just type your equations as you do into your LaTeX source:
 
 ```md
@@ -498,7 +517,9 @@ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
 $$
 ```
 
-#### Box environment
+##### Special Environments
+
+###### Box environment
 One of the environments provided by MaTiSSe.py is a generic *box*. It is designed to contains any contents you want to be rendered with a different theme with respect other paragraph. The syntax is the following:
 
 ```md
@@ -529,11 +550,11 @@ $caption(Mybox)[font-size:90%;color:white;]{An example of a generic Box}
 $content[font-size:120%;color:white;]{This box has a grey background with white colored text. The caption has a 90% (with respect the slide content font-size) font-size, whereas the box contents itself has a 120% font-size.}
 $endbox
 ```
-This example defines a box having a grey background with white colored text. The caption has a 90% (with respect the slide content font-size) font-size, whereas the box contents itself has a 120% font-size.}
+This example defines a box having a grey background with white colored text. The caption has a 90% (with respect the slide content font-size) font-size, whereas the box contents itself has a 120% font-size.
 
 Note that the themes of box environments can be defined, as all other theme elements, once for all into the preamble in order to not have to repeat the styling options for each box. The syntax for defining the boxes styles is commented into the theming section in the following. 
 
-#### Figure environment
+###### Figure environment
 The *figure* environment is a subclass of box one that is specialized for rendering figures. The syntax is the following:
 ```md
 $figure
@@ -559,7 +580,7 @@ This example defines a figure with a shadowed box and a caption without a prefix
 
 Note that, as all other box subclass, the themes of figure environments can be defined once for all into the preamble in order to not have to repeat the styling options for each figure. The syntax for defining the figures styles is commented into the theming section in the following. 
 
-#### Note environment
+###### Note environment
 The *note* environment is a subclass of box one that is specialized for rendering notes. The syntax is the following:
 ```md
 $note
@@ -588,20 +609,18 @@ a slide has always one *content* element whereas, *headers*, *footers* and *side
 
 Note that, as all other box subclass, the themes of note environments can be defined once for all into the preamble in order to not have to repeat the styling options for each note. The syntax for defining the notes styles is commented into the theming section in the following. 
  
-#### Table environment
+###### Table environment
 To be written.
 
-#### Columns environment
+###### Columns environment
 It is often useful to subdivide the contents into columns, e.g. to place comments aside figures. MaTiSSe.py provides an environment for such a contents layout. The syntax is:
 
 ```md
 $columns
 $column[column1_options]
 column1_contents
-$endcolumn
 $column[column2_options]
 column2_contents
-$endcolumn
 ...
 $endcolumns
 ```
@@ -627,10 +646,10 @@ $endcolumns
 ```
 This example defines a two columns contents separated by a vertical line with the left column being large 60% of the slide content width, while the right one is 40% wide.
 
-#### Titlepage
+##### Titlepage
 To be written.
 
-#### Including external files
+##### Including external files
 It is common to split long presentation into multiple files. These file can be included into the main source by
 
 ```md

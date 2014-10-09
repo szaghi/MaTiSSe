@@ -29,7 +29,7 @@ background       = green
 color            = rgb(102,102,102)
 font-size        = 100%
 slide-transition = horizontal
-offset           = 2
+data-offset      = 200
 ---endtheme_slide_global
 
 ---theme_slide_content

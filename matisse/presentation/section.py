@@ -9,7 +9,7 @@ from collections import OrderedDict
 import re
 # MaTiSSe.py modules
 from ..config import __config__
-from ..utils.source_editor import __source_editor__
+from ..utils.source_editor import __source_editor__ as seditor
 from .regexs import  __regex_subsection__
 from .subsection import Subsection
 # class definition
@@ -89,7 +89,7 @@ class Section(object):
     """Method for getting the subsections contained into the section."""
     subsections = []
     self.subsections = []
-    purged_source = __source_editor__.purge_codes(self.raw_body)
+    purged_source = seditor.purge_codes(self.raw_body)
     for match in re.finditer(__regex_subsection__,purged_source):
       subsections.append([match.group('expr'),match.start(),match.end()])
     if len(subsections)==0:

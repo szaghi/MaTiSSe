@@ -11,7 +11,9 @@ import re
 from yattag import Doc
 # MaTiSSe.py modules
 from ..data.data import Data
-from ..utils.source_editor import __source_editor__
+from ..utils.source_editor import __source_editor__ as seditor
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import illuminate_protected as illuminate
 # class definition
 class Metadata(object):
   """
@@ -29,7 +31,7 @@ class Metadata(object):
     data : Data object
       presentation metadata
     """
-    _skip = [__source_editor__.regex_codeblock,__source_editor__.regex_codeinline]
+    _skip = [seditor.regex_codeblock,seditor.regex_codeinline]
     self.data = Data(regex_start='[-]{3}metadata',regex_end='[-]{3}endmetadata',skip=_skip,special_keys=['__all__'])
     self.data.data['title'              ] = ['',  False]
     self.data.data['subtitle'           ] = ['',  False]
@@ -171,13 +173,13 @@ class Metadata(object):
     str
       source string parsed
     """
-    parsed_source = source
+    protected, obfuscate_source = obfuscate(source = source)
     for meta in self.data.data:
       if meta !='toc':
         regex = re.compile(r"\$"+meta+r"(\[(?P<style>.*?)\])*",re.DOTALL)
-        for match in re.finditer(regex,parsed_source):
+        for match in re.finditer(regex,obfuscate_source):
           style = None
           if match.group('style'):
             style = str(match.group('style'))
-          parsed_source = re.sub(regex,self.to_html(metadata=meta,style=style),parsed_source,1)
-    return parsed_source
+          obfuscate_source = re.sub(regex,self.to_html(metadata=meta,style=style),obfuscate_source,1)
+    return illuminate(source=obfuscate_source,protected_contents=protected)

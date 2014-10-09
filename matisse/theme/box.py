@@ -11,6 +11,7 @@ from yattag import Doc
 from ..utils.source_editor import __source_editor__ as seditor
 from ..utils.source_editor import illuminate_protected as illuminate
 from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+#from ..utils.source_editor import obfuscate_codes as obfuscate
 from ..utils.source_editor import tokenize as generic_tokenize
 # global variables
 # regular expressions
@@ -60,7 +61,14 @@ class Box(object):
   Figure
   Table
   Note
+
+  Attributes
+  ----------
+  boxes_number : int
+    global number of boxes (equals to the number of Box instances)
   """
+  boxes_number = 0
+
   def __init__(self,ctn_type='box',source=None):
     """
     Parameters
@@ -97,6 +105,9 @@ class Box(object):
     self.cap_type    = None
     self.ctn         = None
     self.cap         = None
+    if self.ctn_type == 'box':
+      Box.boxes_number += 1
+      self.number = Box.boxes_number
     if source:
       self.get(source=source)
     return

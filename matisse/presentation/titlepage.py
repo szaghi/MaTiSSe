@@ -9,7 +9,9 @@ object for writing a slide with a style very different from others.
 import re
 # MaTiSSe.py modules
 from ..theme.theme import Theme
-from .regexs import __regex_titlepage__, __regex_endtitlepage__
+from ..utils.source_editor import __source_editor__ as seditor
+from .regexs import __regex_titlepage__ as re_titlepage
+from .regexs import __regex_endtitlepage__ as re_endtitlepage
 from .slide import Slide
 # class definition
 class Titlepage(Slide):
@@ -57,7 +59,8 @@ class Titlepage(Slide):
     str
       source without titlepage
     """
-    match = re.search(__regex_titlepage__,source)
+    purged_source = seditor.purge_codes(source)
+    match = re.search(re_titlepage,purged_source)
     if match:
       self.found = True
       super(Titlepage,self).__init__(title='titlepage')
@@ -65,7 +68,7 @@ class Titlepage(Slide):
         self.plain = True
         self.overtheme = Theme(set_all_custom=True)
       end = -1
-      endmatch = re.search(__regex_endtitlepage__,source[match.end():])
+      endmatch = re.search(re_endtitlepage,source[match.end():])
       if endmatch:
         end = endmatch.start()+match.end()
       self.raw_body = source[match.end():end]

@@ -17,7 +17,7 @@ import sys
 # MaTiSSe.py modules
 from .config import __config__
 from .presentation.presentation import Presentation
-from .utils.source_editor import __source_editor__
+from .utils.source_editor import __source_editor__ as seditor
 from .utils.utils import make_output_tree
 # setting CLI
 __cliparser__ = argparse.ArgumentParser(prog=__appname__,description='MaTiSSe.py, Markdown To Impressive Scientific Slides')
@@ -69,7 +69,7 @@ def main():
     else:
       with open(cliargs.input,'r') as mdf:
         source = mdf.read()
-      source = __source_editor__.includes(source=source)
+      source = seditor.includes(source=source)
       if cliargs.output:
         output = cliargs.output
       else:
