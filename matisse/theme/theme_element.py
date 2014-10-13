@@ -246,9 +246,11 @@ class ThemeElement(object):
         self.put_toc(doc=doc,style=style,deep=deep)
       else:
         custom = re.search(r'\|custom\|',elem)
-        with doc.tag('span'):
+        with doc.tag('div'):
+          style_txt = 'float:left;'
           if style:
-            doc.attr(('style',style))
+            style_txt += style
+          doc.attr(('style',style_txt))
           if custom:
             doc.asis(re.sub(r'\|custom\|','',elem))
           elif elem in metadata:

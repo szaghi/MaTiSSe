@@ -15,6 +15,8 @@ from ..config import __config__
 from ..theme.slide.position import Position
 from ..theme.theme import Theme
 from ..utils.source_editor import __source_editor__ as seditor
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import illuminate_protected as illuminate
 from .metadata import Metadata
 from .regexs import  __regex_section__
 from .section import Section
@@ -120,9 +122,11 @@ class Presentation(object):
     source : str
       string (as single stream) containing the source
     """
-    strip_source = self.metadata.get(source=source)
+    protected, obfuscate_source = obfuscate(source = source)
+    strip_source = self.metadata.get(source=obfuscate_source)
     strip_source = self.__get_theme(source=strip_source)
     strip_source = self.titlepage.get(source=strip_source)
+    strip_source = illuminate(source=strip_source,protected_contents=protected)
     self.__get_sections(source=strip_source)
     for section in self.sections:
       section.get_subsections()

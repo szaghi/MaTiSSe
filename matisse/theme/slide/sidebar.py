@@ -115,7 +115,7 @@ class Sidebar(ThemeElement):
     list
       a list of one string containing the css code of the element if as_list = True
     """
-    css = "\n.slide-sidebar_"+str(self.number)+" {\n  float: left;"
+    css = "\n .slide-sidebar_"+str(self.number)+" {\n  float: left;"
     css += self.data.get_css(only_custom=only_custom)
     css += "\n}\n"
     if as_list:

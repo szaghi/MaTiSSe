@@ -11,7 +11,7 @@ from .footer import Footer
 from .header import Header
 from .sidebar import Sidebar
 from ..theme_element import ThemeElement
-from ...utils.source_editor import __source_editor__
+from ...utils.source_editor import __source_editor__ as seditor
 # class definition
 class Slide(ThemeElement):
   """
@@ -101,7 +101,9 @@ class Slide(ThemeElement):
       number of headers (0 if Slide has not header at all)
     """
     if source:
-      number = __source_editor__.purge_overtheme(source=source).count('theme_slide_header')/2
+      purged_source = seditor.purge_overtheme(source=source)
+      purged_source = seditor.purge_codeblocks(source=purged_source)
+      number = purged_source.count('theme_slide_header')/2
     else:
       number = len(self.headers)
     return number>0,number
@@ -121,7 +123,9 @@ class Slide(ThemeElement):
       number of footers (0 if Slide has not footer at all)
     """
     if source:
-      number = __source_editor__.purge_overtheme(source=source).count('theme_slide_footer')/2
+      purged_source = seditor.purge_overtheme(source=source)
+      purged_source = seditor.purge_codeblocks(source=purged_source)
+      number = purged_source.count('theme_slide_footer')/2
     else:
       number = len(self.footers)
     return number>0,number
@@ -141,10 +145,51 @@ class Slide(ThemeElement):
       number of sidebars (0 if Slide has not sidebar at all)
     """
     if source:
-      number = __source_editor__.purge_overtheme(source=source).count('theme_slide_sidebar')/2
+      purged_source = seditor.purge_overtheme(source=source)
+      purged_source = seditor.purge_codeblocks(source=purged_source)
+      number = purged_source.count('theme_slide_sidebar')/2
     else:
-      number = len(self.footers)
+      number = len(self.sidebars)
     return number>0,number
+
+  def loop_over_headers(self):
+    """Method for looping over headers dictionary returning each header in
+    oredered numeration.
+
+    Returns
+    -------
+    Header object
+    """
+    has, number = self.has_header()
+    if has:
+      for hdr in range(number):
+        yield self.headers['slide-header_'+str(hdr+1)]
+
+  def loop_over_footers(self):
+    """Method for looping over footers dictionary returning each footer in
+    oredered numeration.
+
+    Returns
+    -------
+    Footer object
+    """
+    has, number = self.has_footer()
+    if has:
+      for ftr in range(number):
+        yield self.footers['slide-footer_'+str(ftr+1)]
+
+  def loop_over_sidebars(self):
+    """Method for looping over sidebars dictionary returning each sidebar in
+    oredered numeration.
+
+    Returns
+    -------
+    Sidebar object
+    """
+    has, number = self.has_sidebar()
+    if has:
+      for sbr in range(number):
+        yield self.sidebars['slide-sidebar_'+str(sbr+1)]
 
   def get(self,source):
     """Method for getting data values from source.

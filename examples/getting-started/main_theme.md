@@ -2,6 +2,7 @@
 background = radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))
 ---endtheme_canvas
 
+
 ---theme_toc
 font-variant = small-caps
 ---endtheme_toc
@@ -44,7 +45,7 @@ padding       = 1% 2%
 background    = #4788B3
 color         = white
 border-radius = 10px 10px 0 0
-metadata      = [['slidetitle','font-variant:small-caps;font-size:150%;'],&&
+metadata      = [['slidetitle','float:left;font-variant:small-caps;font-size:150%;'],&&
                  ['logo','float:right;height:100%;']]
 ---endtheme_slide_header_1
 

@@ -114,7 +114,8 @@ class Slide(object):
     if self.overtheme:
       css = self.overtheme.slide.get_css(only_custom=only_custom,as_list=True)
     if len(css)>0:
-      return ''.join(['\n#slide-'+str(self.number)+' '+c[1:] for c in css])
+      #return ''.join(['\n#slide-'+str(self.number)+' '+c[1:] for c in css])
+      return ''.join(['\n#slide-'+str(self.number)+c[1:] for c in css])
     else:
       return ''
 
@@ -189,18 +190,18 @@ class Slide(object):
         doc.attr(('data-rotate-y',str(position.rotation[1])))
         doc.attr(('data-rotate-z',str(position.rotation[2])))
         # inserting elements
-        for header in actual_theme.headers.values():
+        for header in actual_theme.loop_over_headers():
           header.to_html(doc=doc,metadata=self.data)
-        for sidebar in actual_theme.sidebars.values():
+        for sidebar in actual_theme.loop_over_sidebars():
           if sidebar.position == 'L':
             sidebar.to_html(doc=doc,metadata=self.data)
         if self.number == 2:
           self.raw_body_parse()
         actual_theme.content.to_html(doc=doc,content='\n'+self.raw_body_parse())
-        for sidebar in actual_theme.sidebars.values():
+        for sidebar in actual_theme.loop_over_sidebars():
           if sidebar.position == 'R':
             sidebar.to_html(doc=doc,metadata=self.data)
-        for footer in actual_theme.footers.values():
+        for footer in actual_theme.loop_over_footers():
           footer.to_html(doc=doc,metadata=self.data)
       else:
         doc.attr(('class','step overview'))

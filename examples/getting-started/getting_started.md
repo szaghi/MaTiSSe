@@ -76,6 +76,48 @@ $note
 $content{The real cool feature is that for setting up your theme, as the one of the presentation you are reading, **you do not need to be a html-css guru!**}
 $endnote
 
+
+### Prezi-effect
+---slide
+---theme_slide_global
+background    = white
+border-radius = 50%
+data-offset   = 200
+---endtheme_slide_global
+
+---theme_slide_content
+border-radius = 50%
+padding       = 15% 20%
+font-size     = 200%
+---endtheme_slide_content
+
+---theme_slide_header_1
+active = False
+---endtheme_slide_header_1
+
+---theme_slide_footer_1
+active = False
+---endtheme_slide_footer_1
+
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1
+---endslide
+
+The *elliptic* theme of this slide is made just
+
+```lua
+---theme_slide_global
+border-radius = 50%
+---endtheme_slide_global
+
+---theme_slide_content
+border-radius = 50%
+---endtheme_slide_content
+```
+
+This is not so complicated, rigth?
+
 ### Why?
 
 There are tons of markdown to html presentation tools. **Why yet another presenter?** 
@@ -365,7 +407,11 @@ session_short =
 max_time = 25
 dirs_to_copy = []
 ```
-All metadata values are treated as string except the one with `[]` brackets that are list of strings. 
+$note
+$content{
+All metadata values are treated as string except the one with `[]` brackets that are list of strings. To split long metadata definitions use the symbol `&&` as line continuation.
+}
+$endnote
 
 ### Presentation metadata (continued)
 
@@ -385,7 +431,8 @@ subtitle           = a bad-showcase of MaTiSSe.py features
 authors            = ['Stefano Zaghi','John Doe']
 authors_short      = ['S. Zaghi','J. Doe']
 emails             = ['stefano.zaghi@gmail.com','jdoe@lost.com']
-affiliations       = ['NERD Laboratory, The World Most Uncool Research Center','LOST Institute, Missed People Research Institute']
+affiliations       = ['NERD Laboratory, The World Most Uncool Research Center',&&
+                      'LOST Institute, Missed People Research Institute']
 affiliations_short = ['NERD Laboratory','LOST Institute']
 location           = "Via dell'Isola del Giorno Prima 139, Utopia, Universo"
 location_short     = Utopia, Universo
@@ -399,6 +446,7 @@ max_time           = 10
 dirs_to_copy       = ['images']
 ---endmetadata
 ```
+
 ### Presentation metadata (continued)
 Besides the presentation metada above described, that are the ones whose value must be set by the user, there are many other metadata whose values are automatically computed by MaTiSSe.py. The following is a not complete list of such metadata:
 
@@ -706,7 +754,7 @@ Do you are interested to learn how complex was to set the theme of this presenta
 ## MaTiSSe.py Universe
 
 ### MaTiSSe.py Universe (again)
-I known, you have just seen the universe of MaTiSSe.py, this just a recall... The customizable theme elements are:
+I known, you have just seen the universe of MaTiSSe.py, this is just a recall... The customizable theme elements are:
 
 * **presentation** with its own options, having:
     + one **canvas** with its own options over wich the slides are rendered:
@@ -728,13 +776,15 @@ In the following subsections we will see how to customize each element.
 
 ### Canvas container, available options and their setting
 
-Presently, the **canvas** container has only one option:
+Presently, the **canvas** container has only one default option:
 
 + `background`, default `radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))`.
 
 $note
 $content{The canvas options are applied to the **body** html element. As a consequence it can be customized only at the beginning of the presentation for all slides: an eventual slide overriding theme cannot change the canvas options!}
 $endnote
+
+You can define other css options, however the background seems to be only with a sense for a canvas container.
 
 To set the canvas options use the following syntax:
 
@@ -766,7 +816,7 @@ $endnote
 
 ### Headings, available options
 
-The **headings** themes, that are 6, have the following _user_ options:
+The **headings** themes, that are 6, have the following default _user_ options:
 
 + `width`;
 + `height`;
@@ -807,7 +857,7 @@ $endnote
 
 ### Custom Selector, available options
 
-The **custom** selector has the following _user_ options:
+The **custom** selector has the following default _user_ options:
 
 + `width          `;
 + `height         `;
@@ -975,7 +1025,6 @@ The **slide** container has the following default _user_ options:
 + `font            `;
 + `font-size       `, default `100%`;
 + `font-family     `, default `Open Sans, Arial, sans-serif`;
-+ `active          `, default `True`;
 + `slide-transition`, default `horizontal`;
 + `data-scale      `, default `1`;
 + `data-rotate     `, default `0`;
@@ -985,6 +1034,7 @@ The **slide** container has the following default _user_ options:
 + `data-x          `, default `0`;
 + `data-y          `, default `0`;
 + `data-z          `, default `0`.
++ `data-offset     `, default `1`.
 
 The most part of options are standard `CSS` options. However some exceptions are present. Before read about them, we discuss how set the slide options.
 
@@ -1284,10 +1334,41 @@ metadata      = [['title','font-weight:bold;font-variant:small-caps;font-size:10
 ---endtheme_slide_sidebar_1
 ```
 
-## Slide-Overtheme 
+### Metadata option
+
+In the previous slides we learn that `metadata` can be used inside the theme definition. Considering a generic theme element, the syntax is the following:
+
+```lua
+metadata = [list_of_metadata]
+```
+where the *list_of_metadata* is the list of the metadata used into the theme element. Each metadata can be styled or it can inherit the style from its element container. For example:
+
+```lua
+metadata = ['slidetile', &&
+           ['logo','float:right;']]
+```
+defines 2 metadata:
+
+1. `'slidetitle'` that ha no special style;
+2. `['logo','float:right;']` that has its own special style, i.e. `float:right`.
+
+$note
+$content{
+To define a styled metadata use a list where the second element is the css style.
+}
+$endnote
+
+The `toc` metadata is a special case. If styled it can accept a third optional value:
+
+```lua
+metadata = [ ['toc','float:right;','2'] ]
+```
+This third optional value, `2`, indicates the TOC depth.
+
+## Slide-Overriding theme 
 
 ### Changing the Slide Theme on-the-fly
-A very nice MaTiSSe.py feature is the possibility to define a theme locally to each slide and change the theme **on-the-fly**. The syntax is the following:
+A very nice MaTiSSe.py feature is the possibility to define a theme locally to each slide, the so called *slide overtheme*, and change the theme **on-the-fly**. The syntax is the following:
 
 ```lua
 ### Slide Title
@@ -1295,7 +1376,9 @@ A very nice MaTiSSe.py feature is the possibility to define a theme locally to e
 any valid slide-level theme
 ---endslide 
 ```
-just put the slide themes into a <code>---slide/---endslide</code> environment after the slide title and the slide will be rendered with its own theme. If you do not believe me... look the following slide!
+just put the slide themes into a <code>---slide/---endslide</code> environment after the slide title and the slide will be rendered with its own theme. 
+
+If you do not believe me, look the following slide!
 
 ### Changing the Slide Theme on-the-fly (continued)
 ---slide
@@ -1318,7 +1401,7 @@ active = False
 
 ##### Where is the right sidebar?
 ##### Why the font family is comic-like?
-##### Why slide has been rotated, scaled...?
+##### Why the slide has been rotated, scaled...?
 
 Because this slide has the following overtheme:
 
@@ -1350,6 +1433,11 @@ active = False
 
 ### Sapienza Theme
 ---slide
+---theme_slide_global
+data-offset = 200
+background  = white
+---endtheme_slide_global
+
 ---theme_slide_header_1
 background = white
 color      = #822433
@@ -1357,25 +1445,40 @@ metadata   = [['slidetitle','font-variant:small-caps;font-size:150%;']]
 ---endtheme_slide_header_1
 
 ---theme_slide_footer_1
+height     = 3%
+width      = 90%
+float      = right
+background = #822433
+metadata   = []
+---endtheme_slide_footer_1
+
+---theme_slide_footer_2
 height     = 6%
 padding    = 1% 2%
 background = #822433
+color      = white
 metadata   = [['title','padding:0 1%;'],                           &&
               ['date','padding:0 1%;'],                            &&
               ['total_slides_number','float:right;padding:0 1%;'], &&
               ['|custom| of ','float:right;'],                     &&
               ['slidenumber','float:right;padding:0 1%;'],         &&
               ['|custom|slide ','float:right;']]
----endtheme_slide_footer_1
-
+---endtheme_slide_footer_2
+ 
 ---theme_slide_sidebar_1
 active = False
 ---endtheme_slide_sidebar_1
 ---endslide 
  
-Theme definition: 
+Slide Overtheme definition: 
 
 ```lua
+---slide 
+---theme_slide_global
+data-offset = 200
+background  = white
+---endtheme_slide_global
+
 ---theme_slide_header_1
 background = white
 color      = #822433
@@ -1383,17 +1486,518 @@ metadata   = [['slidetitle','font-variant:small-caps;font-size:150%;']]
 ---endtheme_slide_header_1
 
 ---theme_slide_footer_1
+height     = 3%
+width      = 90%
+float      = right
+background = #822433
+metadata   = []
+---endtheme_slide_footer_1
+
+```
+
+### Sapienza Theme (continued)
+---slide
+---theme_slide_global
+data-offset = 200
+background  = white
+---endtheme_slide_global
+
+---theme_slide_header_1
+background = white
+color      = #822433
+metadata   = [['slidetitle','font-variant:small-caps;font-size:150%;']]
+---endtheme_slide_header_1
+
+---theme_slide_footer_1
+height     = 3%
+width      = 90%
+float      = right
+background = #822433
+metadata   = []
+---endtheme_slide_footer_1
+
+---theme_slide_footer_2
 height     = 6%
 padding    = 1% 2%
 background = #822433
+color      = white
 metadata   = [['title','padding:0 1%;'],                           &&
               ['date','padding:0 1%;'],                            &&
               ['total_slides_number','float:right;padding:0 1%;'], &&
               ['|custom| of ','float:right;'],                     &&
               ['slidenumber','float:right;padding:0 1%;'],         &&
-              ['|custom|slide ','float:right;']] 
----endtheme_slide_footer_1
+              ['|custom|slide ','float:right;']]
+---endtheme_slide_footer_2
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1
+---endslide 
+ 
+```lua
+---theme_slide_footer_2
+height     = 6%
+padding    = 1% 2%
+background = #822433
+color      = white
+metadata   = [['title','padding:0 1%;'],                           &&
+              ['date','padding:0 1%;'],                            &&
+              ['total_slides_number','float:right;padding:0 1%;'], &&
+              ['|custom| of ','float:right;'],                     &&
+              ['slidenumber','float:right;padding:0 1%;'],         &&
+              ['|custom|slide ','float:right;']]
+---endtheme_slide_footer_2
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1 
+---endslide 
 ```
+
+## Beamer Themes
+
+### Beamer Themes
+
+MaTiSSe.py has been greatly inspired by LaTeX-Beamer class. 
+
+###### MaTiSSe.py author has used LaTeX-Beamer for many years and truly loves it. 
+
+LaTeX-Beamer is widely used in the scientific community. Therefore MaTiSSe.py *should* offer support for LaTeX-Beamer community. In particular the reproduction of LaTeX-Beamer themes should be as easy as possible. 
+
+In the following slide we try to reproduce some of the most used LaTeX-Beamer theme.
+
+For each theme the **overtheme** definition is reported as code listings.
+
+$note
+$content{
+Into each listing the tags <code>---slide</code>/<code>---endslide</code> are omitted because it is implicitly assumed that the listing can be referred to both *main* and *over* slide theme.
+}
+$endnote
+
+### Bergen
+---slide
+
+---theme_slide_header_1
+width         = 75%
+height        = 10%
+background    = white
+color         = black
+float         = right
+border-radius = 0
+metadata      = [['slidetitle','font-size:150%;']]
+---endtheme_slide_header_1 
+ 
+---theme_slide_footer_1
+active = False
+---endtheme_slide_footer_1 
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1 
+ 
+---theme_slide_sidebar_2
+position   = L
+width      = 25%
+background = #272586
+color      = white
+min-height = 100%
+metadata   = [['toc','font-size:120%;text-align:right;line-height:500%;padding:30% 5%;float:right',1]]
+---endtheme_slide_sidebar_2 
+
+---endslide
+
+Theme definition:
+```lua
+---theme_slide_header_1
+width         = 75%
+height        = 10%
+background    = white
+color         = black
+float         = right
+metadata      = [['slidetitle','font-size:150%;']]
+---endtheme_slide_header_1 
+ 
+---theme_slide_sidebar_1
+position   = L
+width      = 25%
+background = #272586
+color      = white
+min-height = 100%
+metadata   = [['toc','font-size:120%;text-align:right;line-height:500%;padding:30% 5%;float:right',1]]
+---endtheme_slide_sidebar_1 
+```
+
+### Madrid
+---slide
+
+---theme_slide_header_1
+height        = 10%
+background    = #3333B3
+metadata      = [['slidetitle','font-size:150%;']]
+---endtheme_slide_header_1 
+
+---theme_slide_footer_1
+height     = 6%
+background = #3333B3
+padding    = 0
+metadata   = [['authors_short','float:left;height:100%;width:20%;padding:1% 2%;background: #191959;'],       &&
+              ['title','float:left;font-size:80%;height:100%;width:35%;padding:1% 2%;background: #262686;'], &&
+              ['date','float:left;font-size:80%;height:100%;width:35%;padding:1% 2%;background: #3333B3;'],  &&
+              ['total_slides_number','float:right;padding:0 1%;'],                                           &&
+              ['|custom| / ','float:right;'],                                                                &&
+              ['slidenumber','float:right;padding:0 1%;']]
+---endtheme_slide_footer_1 
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1  
+
+---endslide
+
+Theme definition:
+```lua
+---theme_slide_header_1
+height        = 10%
+background    = #3333B3
+metadata      = [['slidetitle','font-size:150%;']]
+---endtheme_slide_header_1 
+
+---theme_slide_footer_1
+height     = 6%
+background = #3333B3
+padding    = 0
+metadata   = [['authors_short','float:left;height:100%;width:20%;padding:1% 2%;background: #191959;'],       &&
+              ['title','float:left;font-size:80%;height:100%;width:35%;padding:1% 2%;background: #262686;'], &&
+              ['date','float:left;font-size:80%;height:100%;width:35%;padding:1% 2%;background: #3333B3;'],  &&
+              ['total_slides_number','float:right;padding:0 1%;'],                                           &&
+              ['|custom| / ','float:right;'],                                                                &&
+              ['slidenumber','float:right;padding:0 1%;']]
+---endtheme_slide_footer_1  
+```
+ 
+### Antibes
+---slide
+
+---theme_slide_header_1
+height        = 4%
+background    = black
+color         = white
+padding       = 1% 2%
+metadata      = [['title','font-size:90%;']]
+---endtheme_slide_header_1 
+
+ ---theme_slide_header_2
+height        = 4%
+background    = #191959
+color         = white
+padding       = 1% 4%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['sectiontitle','font-size:90%;']]
+---endtheme_slide_header_2
+
+ ---theme_slide_header_3
+height        = 4%
+background    = #262686
+color         = white
+padding       = 1% 6%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['subsectiontitle','font-size:90%;']]
+---endtheme_slide_header_3
+
+---theme_slide_header_4
+height        = 6%
+background    = #3333B2
+color         = white
+padding       = 1% 2%
+metadata      = [['slidetitle','font-size:160%;']]
+---endtheme_slide_header_4
+
+---theme_slide_footer_1
+active = False
+---endtheme_slide_footer_1 
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1
+
+---endslide
+
+Theme definition:
+```lua
+---theme_slide_header_1
+height        = 3%
+background    = black
+color         = white
+padding       = 1% 2%
+metadata      = [['title','font-size:90%;']]
+---endtheme_slide_header_1 
+
+ ---theme_slide_header_2
+height        = 3%
+background    = #191959
+color         = white
+padding       = 1% 4%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['sectiontitle','font-size:90%;']]
+---endtheme_slide_header_2
+
+```
+### Antibes (continued)
+---slide
+
+---theme_slide_header_1
+height        = 4%
+background    = black
+color         = white
+padding       = 1% 2%
+metadata      = [['title','font-size:90%;']]
+---endtheme_slide_header_1 
+
+---theme_slide_header_2
+height        = 4%
+background    = #191959
+color         = white
+padding       = 1% 4%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['sectiontitle','font-size:90%;']]
+---endtheme_slide_header_2
+
+---theme_slide_header_3
+height        = 4%
+background    = #262686
+color         = white
+padding       = 1% 6%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['subsectiontitle','font-size:90%;']]
+---endtheme_slide_header_3
+
+---theme_slide_header_4
+height        = 6%
+background    = #3333B2
+color         = white
+padding       = 1% 2%
+metadata      = [['slidetitle','font-size:160%;']]
+---endtheme_slide_header_4
+
+---theme_slide_footer_1
+active = False
+---endtheme_slide_footer_1 
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1
+
+---endslide
+
+Theme definition:
+```lua
+---theme_slide_header_3
+height        = 3%
+background    = #262686
+color         = white
+padding       = 1% 6%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['subsectiontitle','font-size:90%;']]
+---endtheme_slide_header_3
+
+ ---theme_slide_header_4
+height        = 7%
+background    = #3333B2
+color         = white
+padding       = 1% 2%
+metadata      = [['slidetitle','font-size:180%;']]
+---endtheme_slide_header_4
+``` 
+
+### Montpellier
+---slide
+
+---theme_slide_header_1
+height        = 6%
+background    = white
+color         = black
+padding       = 1% 2%
+border-top    = 8px solid #9999D9
+border-radius = 0
+metadata      = [['title','font-size:90%;']]
+---endtheme_slide_header_1 
+
+---theme_slide_header_2
+height        = 6%
+background    = white
+color         = #9999D9
+padding       = 1% 4%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['sectiontitle','font-size:90%;']]
+---endtheme_slide_header_2
+
+---theme_slide_header_3
+height        = 6%
+background    = white
+color         = #9999D9
+padding       = 1% 6%
+border-bottom = 8px solid #9999D9
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['subsectiontitle','font-size:90%;']]
+---endtheme_slide_header_3
+
+---theme_slide_header_4
+height        = 8%
+background    = white
+color         = #9999D9
+padding       = 1% 2%
+metadata      = [['slidetitle','font-size:160%;']]
+---endtheme_slide_header_4
+
+---theme_slide_footer_1
+active = False
+---endtheme_slide_footer_1 
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1
+
+---endslide
+
+Theme definition:
+```lua
+---theme_slide_header_1
+height        = 6%
+background    = white
+color         = black
+padding       = 1% 2%
+border-top    = 8px solid #9999D9
+border-radius = 0
+metadata      = [['title','font-size:90%;']]
+---endtheme_slide_header_1 
+
+---theme_slide_header_2
+height        = 6%
+background    = white
+color         = #9999D9
+padding       = 1% 4%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['sectiontitle','font-size:90%;']]
+---endtheme_slide_header_2
+``` 
+ 
+### Montpellier (continued)
+---slide
+
+---theme_slide_header_1
+height        = 6%
+background    = white
+color         = black
+padding       = 1% 2%
+border-top    = 8px solid #9999D9
+border-radius = 0
+metadata      = [['title','font-size:90%;']]
+---endtheme_slide_header_1 
+
+---theme_slide_header_2
+height        = 6%
+background    = white
+color         = #9999D9
+padding       = 1% 4%
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['sectiontitle','font-size:90%;']]
+---endtheme_slide_header_2
+
+---theme_slide_header_3
+height        = 6%
+background    = white
+color         = #9999D9
+padding       = 1% 6%
+border-bottom = 8px solid #9999D9
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['subsectiontitle','font-size:90%;']]
+---endtheme_slide_header_3
+
+---theme_slide_header_4
+height        = 8%
+background    = white
+color         = #9999D9
+padding       = 1% 2%
+metadata      = [['slidetitle','font-size:160%;']]
+---endtheme_slide_header_4
+
+---theme_slide_footer_1
+active = False
+---endtheme_slide_footer_1 
+ 
+---theme_slide_sidebar_1
+active = False
+---endtheme_slide_sidebar_1
+
+---endslide
+
+Theme definition:
+```lua
+---theme_slide_header_3
+height        = 6%
+background    = white
+color         = #9999D9
+padding       = 1% 6%
+border-bottom = 8px solid #9999D9
+metadata      = [['|custom|&#208;','float:left;font-size:90%'],&&
+                 ['subsectiontitle','font-size:90%;']]
+---endtheme_slide_header_3
+
+---theme_slide_header_4
+height        = 6%
+background    = white
+color         = #9999D9
+padding       = 1% 2%
+metadata      = [['slidetitle','font-size:160%;']]
+---endtheme_slide_header_4 
+``` 
+ 
+### Berkeley
+---slide
+
+---theme_slide_header_1
+height        = 10%
+background    = #3333B2
+color         = white
+padding       = 0
+metadata      = [['|custom|.','float:left;height:100%;width:20%;color:#262686;background:#262686;'],&&
+                 ['slidetitle','float:left;padding:1% 2%;font-size:190%;']]
+---endtheme_slide_header_1 
+
+---theme_slide_footer_1
+active = False
+---endtheme_slide_footer_1 
+ 
+---theme_slide_sidebar_1
+position   = L
+background = #3333B2
+---endtheme_slide_sidebar_1
+
+---endslide
+
+Theme definition:
+```lua
+---theme_slide_header_1
+height        = 10%
+background    = #3333B2
+color         = white
+padding       = 0
+metadata      = [['|custom|.','float:left;height:100%;width:20%;color:#262686;background:#262686;'],&&
+                 ['slidetitle','float:left;padding:1% 2%;font-size:190%;']]
+---endtheme_slide_header_1
+
+---theme_slide_sidebar_1
+position      = L
+width         = 20%
+padding       = 1% 2%
+background = #3333B2
+color         = white
+metadata      = [['title','font-weight:bold;font-variant:small-caps;font-size:105%;display:inline-block'],                                          &&
+                 ['authors','font-variant:small-caps;font-size:90%;display:inline-block'],                                                          &&
+                 ['affiliations','margin-top:4%;margin-bottom:10%;font-variant:small-caps;font-size:70%;white-space:pre-wrap;display:inline-block'],&&
+                 ['toc','font-size:70%;',2]]
+---endtheme_slide_sidebar_1 
+``` 
 
 ### $overview
 ---slide

@@ -62,7 +62,7 @@ class Footer(ThemeElement):
     list
       a list of one string containing the css code of the theme if as_list = True
     """
-    css = "\n.slide-footer_"+str(self.number)+" {\n  clear: both;"
+    css = "\n .slide-footer_"+str(self.number)+" {\n  clear: both;"
     css += self.data.get_css(only_custom=only_custom)
     css += "\n}\n"
     if as_list:

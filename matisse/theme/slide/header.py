@@ -63,7 +63,7 @@ class Header(ThemeElement):
     list
       a list of one string containing the css code of the element if as_list = True
     """
-    css = "\n.slide-header_"+str(self.number)+" {"
+    css = "\n .slide-header_"+str(self.number)+" {"
     css += self.data.get_css(only_custom=only_custom)
     css += "\n}\n"
     if as_list:
