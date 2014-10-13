@@ -4,14 +4,13 @@
 ### <a name="top">MaTiSSe.py, Markdown To Impressive Scientifiic Slides
 A very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
 
-![shot01](screenshots/01.png)![shot02](screenshots/02.png)
-![shot03](screenshots/03.png)![shot04](screenshots/04.png)
 
 ## <a name="toc">Table of Contents
 * [Team Members](#team-members)
     + [Contributors](#contributors)
 * [Why?](#why)
 * [Main features](#main-features)
+* [A Taste of MaTiSSe.py](#taste)
 * [Todos](#todos)
 * [Requirements](#requirements)
 * [Install](#install)
@@ -119,6 +118,22 @@ MaTiSSe.py has a too much long list of features. Here the main features are list
 
 Go to [Top](#top) or [Toc](#toc)
 
+## <a name="taste"></a>A Taste of MaTiSSe.py
+Just fews screenshots form the `getting started` presentation.
+
+### The Titlepage
+![shot01](screenshots/01.png)
+
+### Figure environment
+![shot02](screenshots/02.png)
+
+### LaTeX Equations support
+![shot03](screenshots/03.png)
+
+### LaTeX-Beamer Themes support
+![shot04](screenshots/04.png)
+
+Go to [Top](#top) or [Toc](#toc)
 ## <a name="todos"></a>Todos
 MaTiSSe.py is under development. Presently the most part of improvement efforts are devoted to:
 
@@ -395,7 +410,7 @@ The use of h1/h2/h3 headings precludes to insert such a title into the slides co
 
 At this point, it is useful to define the MaTiSSe.py *universe*
 
-![universe](examples/getting_started/images/matisse-universe-no_bg.png)
+![universe](examples/getting-started/images/matisse-universe-no_bg.png)
 
 Basically there is an *infinite canvas* over which the presentation is rendered. The main element of the presentation object is obviously the slide. The slide element is composed by:
 
@@ -771,7 +786,7 @@ I known, you have just seen the universe of MaTiSSe.py, this is just a recall...
       * *N_R* right **sidebars**, with *N_R* being an arbitrary number;
       * *1* main **content**.
 
-![universe](examples/getting_started/images/matisse-universe-no_bg.png)
+![universe](examples/getting-started/images/matisse-universe-no_bg.png)
 
 In the following we will see how to customize each element.
 
