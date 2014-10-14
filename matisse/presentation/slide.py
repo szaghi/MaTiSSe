@@ -6,6 +6,7 @@ This defines a slide of the presentation.
 # modules loading
 # standard library modules: these should be present in any recent python distribution
 from collections import OrderedDict
+import re
 # modules not in the standard library
 from yattag import Doc
 # MaTiSSe.py modules
@@ -18,6 +19,8 @@ from ..theme import table
 from ..theme.slide.position import Position
 from ..theme.theme import Theme
 from ..utils.source_editor import __source_editor__ as seditor
+from ..utils.source_editor import obfuscate_codeblocks as obfuscate
+from ..utils.source_editor import illuminate_protected as illuminate
 # global variables
 # class definition
 class Slide(object):
@@ -30,6 +33,12 @@ class Slide(object):
     global number of slides (equals to the number of Slide instances)
   """
   slides_number = 0
+
+  @classmethod
+  def reset(cls):
+    """Method resetting Slide to initial values."""
+    cls.slides_number = 0
+    return
 
   def __init__(self,raw_body='',title='',data=None,theme=None,local_number=1):
     """
@@ -137,6 +146,51 @@ class Slide(object):
       doc.attr(('subsectionnumber',self.data['subsectionnumber']))
     return
 
+  def metadata_to_html(self,metadata,style=None):
+    """Method for converting slide level metadata to html.
+
+    Parameters
+    ----------
+    metadata : str
+      metadata key
+    style : str, optional
+      css style of metadata tag
+
+    Returns
+    -------
+    str
+      html string containing the metadata
+    """
+    doc = Doc()
+    with doc.tag('span',klass='metadata'):
+      if style:
+        doc.attr(style=style)
+      doc.asis(self.data[metadata])
+    return doc.getvalue()
+
+  def parse_metadata(self):
+    """Method for parsing metadata of slide level that are not parsed from presentation metadata parsing.
+
+    The slide level metadata are:
+    + sectiontitle: the title of each section that is obtained parsing your source;
+    + sectionnumber: the number of each section that is obtained parsing your source;
+    + subsectiontitle: the title of each subsection that is obtained parsing your source;
+    + subsectionnumber: the number of each subsection that is obtained parsing your source;
+    + slidetitle: the title of each slide that is obtained parsing your source;
+    + slidenumber: the number of each slide that is obtained parsing your source.
+    """
+    protected, obfuscate_source = obfuscate(source = self.raw_body)
+    for meta in ['sectiontitle', 'sectionnumber', 'subsectiontitle', 'subsectionnumber', 'slidetitle', 'slidenumber']:
+      if meta !='toc':
+        regex = re.compile(r"\$"+meta+r"(\[(?P<style>.*?)\])*",re.DOTALL)
+        for match in re.finditer(regex,obfuscate_source):
+          style = None
+          if match.group('style'):
+            style = str(match.group('style'))
+          obfuscate_source = re.sub(regex,self.metadata_to_html(metadata=meta,style=style),obfuscate_source,1)
+    self.raw_body = illuminate(source=obfuscate_source,protected_contents=protected)
+    return
+
   def raw_body_parse(self):
     """Method for parsing raw_body.
 
@@ -145,6 +199,7 @@ class Slide(object):
     str
       string containing the parsed raw_body
     """
+    self.parse_metadata()
     tokens = columns.tokenize(source=self.raw_body)
     parsed_body = ''
     for token in tokens:

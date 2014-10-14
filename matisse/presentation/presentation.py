@@ -21,6 +21,7 @@ from .metadata import Metadata
 from .regexs import  __regex_section__
 from .section import Section
 from .slide import Slide
+from .subsection import Subsection
 from .titlepage import Titlepage
 from .toc import TOC
 # class definition
@@ -141,6 +142,14 @@ class Presentation(object):
     if __config__.verbose:
       print('\nTable of Contents')
       print(self.toc)
+    return
+
+  def reset(self):
+    """Method resetting presentation to initial values."""
+    self.theme.reset()
+    Section.reset()
+    Slide.reset()
+    Subsection.reset()
     return
 
   def get_remainder(self,source,end_remainder):

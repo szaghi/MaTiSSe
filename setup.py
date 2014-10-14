@@ -1,16 +1,8 @@
 #!/usr/bin/env python
 """Setup script for install MaTiSSe.py"""
+import re
 import sys
-try:
-  import re
-except:
-  print("The regular expression module 're' not found")
-  sys.exit(1)
-try:
-  from setuptools import setup,find_packages
-except:
-  print("The module 'setuptools' not found")
-  sys.exit(1)
+from setuptools import setup,find_packages
 # metadata from main source
 APPNAME = re.search(r'^__appname__\s*=\s*"(.*)"', open('MaTiSSe/MaTiSSe.py').read(), re.M).group(1)
 VERSION = re.search(r'^__version__\s*=\s*"(.*)"', open('MaTiSSe/MaTiSSe.py').read(), re.M).group(1)

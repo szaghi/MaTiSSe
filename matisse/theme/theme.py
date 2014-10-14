@@ -7,8 +7,7 @@ This defines the theme of the presentation.
 # standard library modules: these should be present in any recent python distribution
 import re
 # MaTiSSe.py modules
-#from .box import get_themes as box_get_themes
-#from .box import strip_themes as box_strip_themes
+from .box import Box
 from .canvas import Canvas
 from .figure import Figure
 from .heading import Heading
@@ -26,6 +25,7 @@ __a_css__ = {'a' : '\n  color: inherit;\n  text-decoration: none;\n  transition:
 __ul_css__ = {'ul' : '\n  padding-left: 2em;'}
 __ol_css__ = {'ol' : '\n  padding-left: 2em;'}
 __pre_css__ = {'pre' : '\n  display:flex;\n  padding: 1% 0;'}
+__columns_css__ = {'.columns:after' : '\n  visibility: hidden;\n  content:" ";\n  clear: both;\n display: block;'}
 __input_btn_css__ = {'input[type=button]' : '\n  padding:0;\n  margin:0;\n  border:0 none;\n  background: rgba(0,0,0,0.01);'}
 __countDown_css__ = {'.countDown' : '\n  display: block;\n  padding: 0;\n  margin: 0;'}
 __timer_css__ = {'.timer' : '\n  display:table-row;',
@@ -39,6 +39,7 @@ __default_css__.append(''.join(['\n'+sel+' {'+__a_css__[sel]+'\n}'         for s
 __default_css__.append(''.join(['\n'+sel+' {'+__ul_css__[sel]+'\n}'        for sel in __ul_css__       ]))
 __default_css__.append(''.join(['\n'+sel+' {'+__ol_css__[sel]+'\n}'        for sel in __ol_css__       ]))
 __default_css__.append(''.join(['\n'+sel+' {'+__pre_css__[sel]+'\n}'       for sel in __pre_css__      ]))
+__default_css__.append(''.join(['\n'+sel+' {'+__columns_css__[sel]+'\n}'   for sel in __columns_css__]))
 __default_css__.append(''.join(['\n'+sel+' {'+__input_btn_css__[sel]+'\n}' for sel in __input_btn_css__]))
 __default_css__.append(''.join(['\n'+sel+' {'+__countDown_css__[sel]+'\n}' for sel in __countDown_css__]))
 __default_css__.append(''.join(['\n'+sel+' {'+__timer_css__[sel]+'\n}'     for sel in __timer_css__    ]))
@@ -126,6 +127,15 @@ class Theme(object):
         names.append(match.group('name'))
       for name in names:
         self.selectors.append(Selector(name=name,source=source))
+    return
+
+  @staticmethod
+  def reset():
+    """Method resetting theme to initial values."""
+    Box.reset()
+    Figure.reset()
+    Table.reset()
+    Note.reset()
     return
 
   def check_specials(self):

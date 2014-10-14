@@ -27,6 +27,12 @@ pre {
   display:flex;
   padding: 1% 0;
 }
+.columns:after {
+  visibility: hidden;
+  content:" ";
+  clear: both;
+ display: block;
+}
 input[type=button] {
   padding:0;
   margin:0;

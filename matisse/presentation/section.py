@@ -24,6 +24,12 @@ class Section(object):
   """
   sections_number = 0
 
+  @classmethod
+  def reset(cls):
+    """Method resetting Section to initial values."""
+    cls.sections_number = 0
+    return
+
   def __init__(self,raw_body='',title='',data=None):
     """
     Parameters

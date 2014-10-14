@@ -154,7 +154,7 @@ class Metadata(object):
     if metadata == 'logo':
       self.put_logo(doc=doc,style=style)
     else:
-      with doc.tag('div',klass='metadata'):
+      with doc.tag('span',klass='metadata'):
         if style:
           doc.attr(style=style)
         doc.asis(self.get_value(metadata))

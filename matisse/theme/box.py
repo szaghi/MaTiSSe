@@ -69,6 +69,12 @@ class Box(object):
   """
   boxes_number = 0
 
+  @classmethod
+  def reset(cls):
+    """Method resetting Box to initial values."""
+    cls.boxes_number = 0
+    return
+
   def __init__(self,ctn_type='box',source=None):
     """
     Parameters
@@ -177,11 +183,11 @@ class Box(object):
       caption text
     """
     if self.cap_type and self.cap:
-      txt = self.cap_type+' '+str(self.number)+': '+seditor.md_convert(self.cap)
+      txt = self.cap_type+' '+str(self.number)+': '+seditor.md_convert(source=self.cap,no_p=True)
     elif self.cap_type:
       txt = self.cap_type
     elif self.cap:
-      txt = seditor.md_convert(self.cap)
+      txt = seditor.md_convert(source=self.cap,no_p=True)
     return txt
 
   def put_caption(self,doc):

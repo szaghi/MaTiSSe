@@ -44,24 +44,27 @@ class SourceEditor(object):
                                                                    MathJaxExtension()])
     return
 
-  def md_convert(self,source):
+  def md_convert(self,source,no_p=False):
     """Method for converting markdown source to html.
 
     Parameters
     ----------
     source : str
       string (as single stream) containing the source
+    no_p : bool, optional
+      if True the converted contents is not inserted into the <p></p> tags
 
     Returns
     -------
     str
       converted source
     """
-    #p_start = '<p>'
-    #p_end   = '</p>'
     markup = self.mkd.reset().convert(source)
-    #if markup.startswith(p_start) and markup.endswith(p_end):
-      #markup = markup[len(p_start):-len(p_end)]
+    if no_p:
+      p_start = '<p>'
+      p_end   = '</p>'
+      if markup.startswith(p_start) and markup.endswith(p_end):
+        markup = markup[len(p_start):-len(p_end)]
     return markup
 
   @staticmethod

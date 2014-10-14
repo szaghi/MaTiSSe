@@ -25,8 +25,8 @@ $include(main_theme.md)
 $box
 $style[width:100%;height:35%;background:#4788B3;font-family:'Comic Sans MS', cursive, sans-serif;]
 $content[color:white;text-align:center;]{
-$title[font-size:200%;padding-top:2%;]
-$subtitle[font-size:120%;padding-top:2%;] 
+$title[display:block;font-size:200%;padding-top:2%;]
+$subtitle[display:block;font-size:120%;padding-top:2%;] 
 $logo[height:50px;] 
 }
 $endbox
@@ -34,19 +34,19 @@ $endbox
 $box
 $style[width:100%;font-family:'Comic Sans MS', cursive, sans-serif;]
 $content[text-align:center;]{
-a presentation by $authors[font-size:150%]
-$emails[font-size:90%;]
-$affiliations
+a presentation by $authors[display:block;font-size:150%]
+$emails[display:block;font-size:90%;]
+$affiliations[display:block;]
 }
 $endbox
 
 $box
 $style[width:100%;padding-top:2%;font-family:'Comic Sans MS', cursive, sans-serif;]
 $content[text-align:center;color:#4788B3;]{
-$conference[font-size:150%;]
-$session[font-size:120%;]
-$location[font-size:90%;text-align:right;padding-right:5%;padding-top:5%;]
-$date[font-size:90%;text-align:right;padding-right:5%;]
+$conference[display:block;font-size:150%;]
+$session[display:block;font-size:120%;]
+$location[display:block;font-size:90%;text-align:right;padding-right:5%;padding-top:5%;]
+$date[display:block;font-size:90%;text-align:right;padding-right:5%;]
 }
 $endbox
 

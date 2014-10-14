@@ -48,6 +48,16 @@ class Table(Box):
   theme.data.data['caption'] = [None,False]
   theme.data.data['content'] = [None,False]
 
+  @classmethod
+  def reset(cls):
+    """Method resetting Table to initial values."""
+    cls.tables_number = 0
+    cls.theme = ThemeElement(data_tag=r'theme_table')
+    cls.theme.data.data['style'  ] = [None,False]
+    cls.theme.data.data['caption'] = [None,False]
+    cls.theme.data.data['content'] = [None,False]
+    return
+
   def __init__(self,source=None):
     """
     Parameters

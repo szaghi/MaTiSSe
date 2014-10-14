@@ -500,7 +500,7 @@ The metadata should be auto-explicative, whereas the last two merit a comment:
 + `max_time`: this indicates the time (in minutes) you have for your presentation; this value is used to the countdown timer if you used it inside the presentation (e.g. it can be useful to visualize the remaining time for terminating in time your talk);
 + `dirs_to_copy`: this list contains the directories that will be copied into the output directory; as a matter of fact, it is common to place some contents (images, videos, tables, etc...) into subdirectories of your root presentation: MaTiSSe.py uses relative paths thus such subdirectories must be copied into the output path.
 
-Other two metadata are available, but do not need to be assigned a value:
+Other metadata are available, but do not need to be assigned a value:
 
 + `toc`: this the Table of Contents which is automatically built up;
 + `sectiontitle`: the title of each section that is obtained parsing your source;
