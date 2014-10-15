@@ -196,22 +196,33 @@ MaTiSSe.py is a complex program built-up by many python modules. However, a one-
 
 The tree structure of the MaTiSSe.py project is the following:
 ```bash
+├── build.py
+├── build.pyc
 ├── CONTRIBUTING.md
 ├── examples
+│   └──...
 ├── LICENSE.gpl3.md
 ├── logo
-├── matisse
-├── MaTiSSe.py
+│   └──...
 ├── README.md
-└── setup.py
+├── release
+│   ├── MaTiSSe-vx.x.x
+│   │   ├── matisse
+│   │   ├── MaTiSSe.py
+│   │   └── setup.py
+│   └── reports-MaTiSSe-vx.x.x
+│       └──...
+├── screenshots
+│   └──...
+└── src
+    └──...
 ```
-`MaTiSSe.py` is the wrapper of `matisse/matisse.py`. To manual install just download the whole project tree and use the wrapper script.
+What you need for a manual installation if the subdirectory `MaTiSSe-vx.x.x` under the `release` directory (chose the version `x.x.x` you want). Just copy this subdirectory and make a link to the wrapper script `MaTiSSe.py` where your environment can find it.
 
 It can be convenient to _clone_ the project:
 ```bash
 git clone https://github.com/szaghi/MaTiSSe
 ```
-and then make a link to the script where your environment can find it.
 
 Go to [Top](#top) or [Toc](#toc)
 
