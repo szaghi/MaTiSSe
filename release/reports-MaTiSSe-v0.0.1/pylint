@@ -1,0 +1,184 @@
+************* Module matisse.md_mathjax.mdx_mathjax
+C: 11, 0: Missing class docstring (missing-docstring)
+C: 31, 0: Missing class docstring (missing-docstring)
+C: 34, 0: Missing class docstring (missing-docstring)
+C: 37, 0: Missing class docstring (missing-docstring)
+C: 40, 0: Missing class docstring (missing-docstring)
+C: 44, 0: Missing class docstring (missing-docstring)
+C: 51, 0: Invalid function name "makeExtension" (invalid-name)
+C: 51, 0: Missing function docstring (missing-docstring)
+************* Module matisse.presentation.titlepage
+W: 21, 2: __init__ method from base class 'Slide' is not called (super-init-not-called)
+************* Module matisse.theme.slide.slide
+R: 16, 0: Too many public methods (21/20) (too-many-public-methods)
+C: 11, 0: Missing class docstring (missing-docstring)
+C: 31, 0: Missing class docstring (missing-docstring)
+C: 34, 0: Missing class docstring (missing-docstring)
+C: 37, 0: Missing class docstring (missing-docstring)
+C: 40, 0: Missing class docstring (missing-docstring)
+C: 44, 0: Missing class docstring (missing-docstring)
+C: 51, 0: Invalid function name "makeExtension" (invalid-name)
+C: 51, 0: Missing function docstring (missing-docstring)
+C: 11, 0: Missing class docstring (missing-docstring)
+C: 31, 0: Missing class docstring (missing-docstring)
+C: 34, 0: Missing class docstring (missing-docstring)
+C: 37, 0: Missing class docstring (missing-docstring)
+C: 40, 0: Missing class docstring (missing-docstring)
+C: 44, 0: Missing class docstring (missing-docstring)
+C: 51, 0: Invalid function name "makeExtension" (invalid-name)
+C: 51, 0: Missing function docstring (missing-docstring)
+W: 21, 2: __init__ method from base class 'Slide' is not called (super-init-not-called)
+W: 21, 2: __init__ method from base class 'Slide' is not called (super-init-not-called)
+R: 16, 0: Too many public methods (21/20) (too-many-public-methods)
+R: 16, 0: Too many public methods (21/20) (too-many-public-methods)
+R: 16, 0: Too many public methods (21/20) (too-many-public-methods)
+
+
+Report
+======
+7650 statements analysed.
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |24     |24       |=          |
++-----------+-------+---------+-----------+
+|refactor   |4      |4        |=          |
++-----------+-------+---------+-----------+
+|warning    |3      |3        |=          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++-------------------------------+------+--------+---------+-----------+
+|module                         |error |warning |refactor |convention |
++===============================+======+========+=========+===========+
+|matisse.presentation.titlepage |0.00  |33.33   |0.00     |0.00       |
++-------------------------------+------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++------------------------+------------+
+|message id              |occurrences |
++========================+============+
+|missing-docstring       |21          |
++------------------------+------------+
+|too-many-public-methods |4           |
++------------------------+------------+
+|super-init-not-called   |3           |
++------------------------+------------+
+|invalid-name            |3           |
++------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 9.96/10 (previous run: 9.96/10, +0.00)
+
+External dependencies
+---------------------
+::
+
+    markdown (matisse.md_mathjax.mdx_mathjax,matisse.utils.source_editor)
+      \-inlinepatterns (matisse.md_mathjax.mdx_mathjax)
+      \-util (matisse.md_mathjax.mdx_mathjax)
+    matisse 
+      \-config (matisse.presentation.presentation,matisse.matisse,matisse.presentation.slide,matisse.utils.utils,matisse.presentation.section,matisse.presentation.subsection)
+      \-data 
+      | \-data (matisse.presentation.metadata,matisse.theme.theme_element)
+      \-matisse (matisse.__main__,MaTiSSe)
+      \-md_mathjax 
+      | \-mdx_mathjax (matisse.utils.source_editor)
+      \-presentation 
+      | \-metadata (matisse.presentation.presentation)
+      | \-presentation (matisse.matisse)
+      | \-regexs (matisse.presentation.presentation,matisse.presentation.section,matisse.presentation.titlepage,matisse.presentation.subsection)
+      | \-section (matisse.presentation.presentation)
+      | \-slide (matisse.presentation.presentation,matisse.presentation.titlepage,matisse.presentation.subsection)
+      | \-subsection (matisse.presentation.section,matisse.presentation.presentation)
+      | \-titlepage (matisse.presentation.presentation)
+      | \-toc (matisse.presentation.presentation)
+      \-theme 
+      | \-box (matisse.theme.columns,matisse.theme.theme,matisse.presentation.slide,matisse.theme.table,matisse.theme.figure,matisse.theme.note)
+      | \-canvas (matisse.theme.theme)
+      | \-columns (matisse.presentation.slide)
+      | \-figure (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
+      | \-heading (matisse.theme.theme)
+      | \-note (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
+      | \-selector (matisse.theme.theme)
+      | \-slide 
+      | | \-footer (matisse.theme.slide.slide)
+      | | \-header (matisse.theme.slide.slide)
+      | | \-position (matisse.presentation.slide,matisse.presentation.presentation)
+      | | \-sidebar (matisse.theme.slide.slide)
+      | | \-slide (matisse.theme.theme)
+      | \-table (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
+      | \-theme (matisse.presentation.slide,matisse.presentation.titlepage,matisse.presentation.presentation)
+      | \-theme_element (matisse.theme.slide.content,matisse.theme.slide.sidebar,matisse.theme.canvas,matisse.theme.slide.footer,matisse.theme.slide.slide,matisse.theme.table,matisse.theme.figure,matisse.theme.toc,matisse.theme.note,matisse.theme.slide.header,matisse.theme.heading,matisse.theme.selector)
+      | \-toc (matisse.theme.theme)
+      \-utils 
+        \-source_editor (matisse.theme.box,matisse.theme.columns,matisse.theme.theme_element,matisse.data.data,matisse.theme.theme,matisse.presentation.presentation,matisse.matisse,matisse.presentation.slide,matisse.theme.slide.slide,matisse.theme.table,matisse.theme.figure,matisse.presentation.metadata,matisse.theme.note,matisse.presentation.section,matisse.presentation.titlepage,matisse.presentation.subsection)
+        \-utils (matisse.matisse,matisse.presentation.regexs)
+    yattag (matisse.theme.columns,matisse.presentation.presentation,matisse.presentation.slide,matisse.theme.table,matisse.presentation.toc,matisse.theme.figure,matisse.presentation.metadata,matisse.theme.note,matisse.theme.box)
+
+
+
+Duplication
+-----------
+
++-------------------------+-------+---------+-----------+
+|                         |now    |previous |difference |
++=========================+=======+=========+===========+
+|nb duplicated lines      |12386  |12386    |=          |
++-------------------------+-------+---------+-----------+
+|percent duplicated lines |74.704 |74.704   |=          |
++-------------------------+-------+---------+-----------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |8014   |47.30 |8014     |=          |
++----------+-------+------+---------+-----------+
+|docstring |7257   |42.83 |7257     |=          |
++----------+-------+------+---------+-----------+
+|comment   |360    |2.12  |360      |=          |
++----------+-------+------+---------+-----------+
+|empty     |1312   |7.74  |1312     |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |114    |114        |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |113    |113        |=          |84.07       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |663    |663        |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |55     |55         |=          |94.55       |5.45     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
