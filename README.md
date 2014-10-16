@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/szaghi/MaTiSSe.png)](https://travis-ci.org/szaghi/MaTiSSe)
 [![Coverage Status](https://img.shields.io/coveralls/szaghi/MaTiSSe.svg)](https://coveralls.io/r/szaghi/MaTiSSe)
+[![Ready in backlog](https://badge.waffle.io/matisse/matisse.png?label=ready&title=Ready)](https://waffle.io/matisse/matisse)
+[![Open bugs](https://badge.waffle.io/matisse/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/matisse/matisse)
 
 # MaTiSSe.py
 ### <a name="top">MaTiSSe.py, Markdown To Impressive Scientifiic Slides
