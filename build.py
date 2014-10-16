@@ -25,7 +25,7 @@ def initialize(project):
   project.build_depends_on('coverage')
   project.build_depends_on('pylint')
   #project.build_depends_on('re')
-  project.build_depends_on('unittest')
+  #project.build_depends_on('unittest')
   project.depends_on('markdown')
   project.depends_on('yattag')
 
