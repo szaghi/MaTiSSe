@@ -9,3 +9,6 @@ install:
 
 script:
   - pyb --verbose
+
+after_success:
+  - coveralls

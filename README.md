@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/szaghi/MaTiSSe.png)](https://travis-ci.org/szaghi/MaTiSSe)
+[![Coverage Status](https://img.shields.io/coveralls/szaghi/MaTiSSe.svg)](https://coveralls.io/r/szaghi/MaTiSSe)
 
 # MaTiSSe.py
 ### <a name="top">MaTiSSe.py, Markdown To Impressive Scientifiic Slides
