@@ -6,6 +6,7 @@ python:
 install:
   - pip install pybuilder
   - pyb install_dependencies --verbose
+  - pip install python-coveralls
 
 script:
   - pyb --verbose
