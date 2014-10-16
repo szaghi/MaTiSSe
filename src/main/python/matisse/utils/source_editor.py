@@ -9,7 +9,7 @@ import re
 import sys
 # modules not in the standard library
 import markdown
-from ..md_mathjax.mdx_mathjax import MathJaxExtension
+from .mdx_mathjax import MathJaxExtension
 #global variables
 __regex_codeblock__ = re.compile(r"(?P<cblock>[`]{3}.*?[`]{3})",re.DOTALL)
 __regex_codeblock_html__ = re.compile(r"(?P<cblock>\<code.*?\<\/code\>)",re.DOTALL)
