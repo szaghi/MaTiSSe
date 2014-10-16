@@ -103,7 +103,7 @@ class Slide(ThemeElement):
     if source:
       purged_source = seditor.purge_overtheme(source=source)
       purged_source = seditor.purge_codeblocks(source=purged_source)
-      number = purged_source.count('theme_slide_header')/2
+      number = int(purged_source.count('theme_slide_header')/2)
     else:
       number = len(self.headers)
     return number>0,number
@@ -125,7 +125,7 @@ class Slide(ThemeElement):
     if source:
       purged_source = seditor.purge_overtheme(source=source)
       purged_source = seditor.purge_codeblocks(source=purged_source)
-      number = purged_source.count('theme_slide_footer')/2
+      number = int(purged_source.count('theme_slide_footer')/2)
     else:
       number = len(self.footers)
     return number>0,number
@@ -147,7 +147,7 @@ class Slide(ThemeElement):
     if source:
       purged_source = seditor.purge_overtheme(source=source)
       purged_source = seditor.purge_codeblocks(source=purged_source)
-      number = purged_source.count('theme_slide_sidebar')/2
+      number = int(purged_source.count('theme_slide_sidebar')/2)
     else:
       number = len(self.sidebars)
     return number>0,number

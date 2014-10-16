@@ -4,15 +4,13 @@ matisse                                 0      0   100%
 matisse.config                         72     35    51%   52, 56-67, 83-89, 100-102, 112-115, 125-131, 135-137
 matisse.data                            0      0   100%   
 matisse.data.data                     113     50    56%   68-71, 74-76, 79-83, 106-108, 129-130, 139-142, 152-163, 173-183, 194-198, 227, 229, 234
-matisse.md_mathjax                      0      0   100%   
-matisse.md_mathjax.mdx_mathjax         38      9    76%   17, 19, 24-29, 52
 matisse.presentation                    0      0   100%   
 matisse.presentation.metadata          83     31    63%   56, 60-62, 93-95, 110-117, 131-136, 153-161, 181-184
 matisse.presentation.presentation     175     51    71%   68-71, 111, 144-145, 167-177, 181-184, 191-201, 222-225, 240-242, 267, 279-290
 matisse.presentation.regexs            11      0   100%   
 matisse.presentation.section           55     12    78%   82-92, 108
 matisse.presentation.slide            138     27    80%   99-106, 122-129, 234, 249, 251-252, 257-258, 260-267
-matisse.presentation.subsection        62     11    82%   80-88, 105, 108
+matisse.presentation.subsection        63     11    83%   80-88, 105, 108
 matisse.presentation.titlepage         35     16    54%   40, 44-47, 65-75
 matisse.presentation.toc               88     55    38%   43, 64-76, 99-111, 136-148, 163-175, 206-213
 matisse.theme                           0      0   100%   
@@ -35,7 +33,8 @@ matisse.theme.theme                   172     77    55%   87, 89, 91-96, 100-112
 matisse.theme.theme_element           130     80    38%   45-46, 61-64, 83-89, 93-94, 107, 109-110, 131-138, 167-171, 186-201, 216-220, 232-262, 287, 291
 matisse.theme.toc                     130     59    55%   29, 34-36, 41-47, 67, 72-74, 79-85, 105, 110-112, 117-123, 142, 168-171, 181-182, 205-210, 214-219, 224-234
 matisse.utils                           0      0   100%   
+matisse.utils.mdx_mathjax              38      9    76%   17, 19, 24-29, 52
 matisse.utils.source_editor           137     53    61%   91-94, 110, 125, 166-173, 258, 273-275, 294-304, 326-331, 354-355, 357-358, 379-390, 411-414, 446, 451
 matisse.utils.utils                    29     23    21%   19-48
 -----------------------------------------------------------------
-TOTAL                                2410    968    60%   
+TOTAL                                2411    968    60%   

@@ -120,5 +120,6 @@ class Subsection(object):
       data = OrderedDict()
       data['first_of_sec'] = first_of_sec
       data['first_of_subsec'] = first_of_subsec
-      self.slides.append(Slide(raw_body = raw_body, title = slide[0], data = OrderedDict(self.data.items() + data.items()), theme = theme, local_number = sdn + 1))
+      data.update(self.data)
+      self.slides.append(Slide(raw_body = raw_body, title = slide[0], data = data, theme = theme, local_number = sdn + 1))
     return
