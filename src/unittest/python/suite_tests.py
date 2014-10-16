@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 """Testing columns environment"""
+import sys
 import unittest
 from matisse.presentation.presentation import Presentation
 
+__pyver__ = str(sys.version_info.major)+'.'+str(sys.version_info.minor)+'.'+str(sys.version_info.micro)
 class SuiteTest(unittest.TestCase):
   """Testing MaTiSSe.py Presentation with columns environment."""
   def test_slides(self):
@@ -10,7 +12,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/slides/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/slides/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/slides/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_subsections(self):
@@ -18,7 +20,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/subsections/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/subsections/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/subsections/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_sections(self):
@@ -26,7 +28,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/sections/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/sections/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/sections/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_boxes(self):
@@ -34,7 +36,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/boxes/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/boxes/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/boxes/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_figures(self):
@@ -42,7 +44,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/figures/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/figures/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/figures/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_notes(self):
@@ -50,7 +52,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/notes/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/notes/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/notes/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_columns(self):
@@ -58,7 +60,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/columns/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/columns/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/columns/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_columns_figures(self):
@@ -66,7 +68,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/columns_and_figures/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/columns_and_figures/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/columns_and_figures/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
   def test_columns_figures_notes(self):
@@ -74,7 +76,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     source = open('src/unittest/python/columns_and_figures_and_notes/test.md').read()
     talk = Presentation(source=source)
-    self.assertEqual(open('src/unittest/python/columns_and_figures_and_notes/test/index.html').read(),talk.to_html())
+    self.assertEqual(open('src/unittest/python/columns_and_figures_and_notes/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
 if __name__ == "__main__":
