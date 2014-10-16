@@ -4,7 +4,6 @@
 ### <a name="top">MaTiSSe.py, Markdown To Impressive Scientifiic Slides
 A very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
 
-
 ## <a name="toc">Table of Contents
 * [Team Members](#team-members)
     + [Contributors](#contributors)
@@ -15,6 +14,7 @@ A very simple and stupid (KISS) presentation maker based on simple `markdown` sy
 * [Requirements](#requirements)
 * [Install](#install)
     + [Manual Installation](#manual-install)
+    + [PyPI Installation, the Python Package Index](#pip-install)
 * [Getting Help](#help)
 * [Copyrights](#copyrights)
 * [Usage](#usage)
@@ -223,6 +223,8 @@ It can be convenient to _clone_ the project:
 ```bash
 git clone https://github.com/szaghi/MaTiSSe
 ```
+### <a name="pip-install"></a>Using, PyPI the Python Package Index
+Under developing.
 
 Go to [Top](#top) or [Toc](#toc)
 
