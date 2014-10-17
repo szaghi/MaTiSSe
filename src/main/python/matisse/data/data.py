@@ -61,7 +61,7 @@ class Data(object):
     self.regex_end    = regex_end
     self.skip         = skip
     self.special_keys = special_keys
-    self.regex        = re.compile(r"(?P<rdata>"+regex_start+r".*?"+regex_end+")",re.DOTALL)
+    self.regex        = re.compile(r"(?P<rdata>"+regex_start+r"(?P<opts>.*?)"+regex_end+")",re.DOTALL)
     self.data         = OrderedDict()
 
   def __str__(self):
@@ -94,6 +94,11 @@ class Data(object):
     -------
     int
       number of data definitions
+
+    >>> mydata = Data('---mydata','---endmydata')
+    >>> source = '---mydata option1 = val1---endmydata---mydata option2 = val2---endmydata'
+    >>> mydata.count(source)
+    2
     """
     if self.skip:
       for skip in self.skip:
@@ -114,13 +119,20 @@ class Data(object):
     ----------
     source : str
       string (as single stream) containing the source
+
+    >>> mydata = Data('---mydata','---endmydata')
+    >>> source = '---mydata option1 = val1 ---endmydata'
+    >>> mydata.get(source)
+    >>> mydata.data['option1'][0]
+    'val1'
     """
     if self.skip:
       for skip in self.skip:
         source = __source_editor__.purge(regex=skip,source=source)
     matching = self.regex.search(source)
     if matching:
-      raw = matching.group('rdata')
+      #raw = matching.group('rdata')
+      raw = matching.group('opts')
       raw = re.sub(r'\&\& *\n','',raw)
       raw = raw.split('\n')
       for i,rdata in enumerate(raw):
@@ -135,7 +147,19 @@ class Data(object):
     return
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    Returns
+    -------
+    str
+      string with option_names = values pairs (without True/False custom tag)
+
+    >>> mydata = Data('---mydata','---endmydata')
+    >>> source = '---mydata option1 = val1 ---endmydata'
+    >>> mydata.get(source)
+    >>> mydata.get_options()
+    '\\noption1 = val1'
+    """
     string = []
     for key,val in self.data.items():
       string.append('\n'+key+' = '+str(val[0]))
@@ -148,6 +172,17 @@ class Data(object):
     ----------
     only_custom : bool, optional
       consider only (user) customized data
+
+    Returns
+    -------
+    str
+      sting containing the css style options based on the data options
+
+    >>> mydata = Data('---mydata','---endmydata')
+    >>> source = '---mydata option1 = val1 ---endmydata'
+    >>> mydata.get(source)
+    >>> mydata.get_css()
+    '\\n  option1: val1;'
     """
     css = ''
     for key,val in self.data.items():
@@ -169,6 +204,17 @@ class Data(object):
     ----------
     chk_specials : bool, optional
       if activated handle special entries differently from standard ones
+
+    Returns
+    -------
+    list
+      list of only customized options
+
+    >>> mydata = Data('---mydata','---endmydata')
+    >>> source = '---mydata option1 = val1 ---endmydata'
+    >>> mydata.get(source)
+    >>> str(mydata.get_custom())
+    "  option1 : ['val1', True]\\n"
     """
     custom = copy.deepcopy(self)
     for key,val in custom.data.items():
@@ -190,6 +236,17 @@ class Data(object):
     ----------
     otherdata : Data object
       other data to be merged with self
+
+    >>> mydata = Data('---mydata','---endmydata')
+    >>> source = '---mydata option1 = val1 ---endmydata'
+    >>> mydata.get(source)
+    >>> mydata.data['option2'] = ['unset',False]
+    >>> otherdata = Data('---mydata','---endmydata')
+    >>> source = '---mydata option2 = val2 ---endmydata'
+    >>> otherdata.get(source)
+    >>> mydata.merge(otherdata)
+    >>> mydata.data['option2'][0]
+    'val2'
     """
     for key,val in self.data.items():
       if not val[1]:
@@ -209,6 +266,11 @@ class Data(object):
     -------
     str
       source without the raw data
+
+    >>> mydata = Data('---mydata','---endmydata')
+    >>> source = 'other contents---mydata option1 = val1 ---endmydata'
+    >>> mydata.strip(source)
+    'other contents'
     """
     if self.skip:
       strip_source = source

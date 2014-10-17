@@ -70,117 +70,27 @@ body {
 }
 
 h1 {
-  margin: inherit;
-  padding: inherit;
-  background: inherit;
-  color: inherit;
-  font: inherit;
-  font-weight: inherit;
   font-size: 220%;
-  font-family: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-  text-shadow: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  border: inherit;
-  border-radius: inherit;
-  box-shadow: inherit;
 }
 
 h2 {
-  margin: inherit;
-  padding: inherit;
-  background: inherit;
-  color: inherit;
-  font: inherit;
-  font-weight: inherit;
   font-size: 200%;
-  font-family: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-  text-shadow: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  border: inherit;
-  border-radius: inherit;
-  box-shadow: inherit;
 }
 
 h3 {
-  margin: inherit;
-  padding: inherit;
-  background: inherit;
-  color: inherit;
-  font: inherit;
-  font-weight: inherit;
   font-size: 180%;
-  font-family: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-  text-shadow: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  border: inherit;
-  border-radius: inherit;
-  box-shadow: inherit;
 }
 
 h4 {
-  margin: inherit;
-  padding: inherit;
-  background: inherit;
-  color: inherit;
-  font: inherit;
-  font-weight: inherit;
   font-size: 160%;
-  font-family: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-  text-shadow: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  border: inherit;
-  border-radius: inherit;
-  box-shadow: inherit;
 }
 
 h5 {
-  margin: inherit;
-  padding: inherit;
-  background: inherit;
-  color: inherit;
-  font: inherit;
-  font-weight: inherit;
   font-size: 140%;
-  font-family: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-  text-shadow: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  border: inherit;
-  border-radius: inherit;
-  box-shadow: inherit;
 }
 
 h6 {
-  margin: inherit;
-  padding: inherit;
-  background: inherit;
-  color: inherit;
-  font: inherit;
-  font-weight: inherit;
   font-size: 120%;
-  font-family: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-  text-shadow: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  border: inherit;
-  border-radius: inherit;
-  box-shadow: inherit;
 }
 
 .slide {

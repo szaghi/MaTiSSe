@@ -69,6 +69,12 @@ class ThemeElement(object):
     ----------
     source : str
       string (as single stream) containing the source
+
+    >>> elem = ThemeElement('header')
+    >>> source = '---header option1 = val1 ---endheader'
+    >>> elem.get(source)
+    >>> elem.data.data['option1'][0]
+    'val1'
     """
     self.data.get(source)
     return
@@ -79,6 +85,15 @@ class ThemeElement(object):
     Parameters
     ----------
     other : ThemeElement object
+
+    >>> elem1 = ThemeElement('header')
+    >>> elem1.data.data['option1'] = ['unset',False]
+    >>> elem2 = ThemeElement('header')
+    >>> source = '---header option1 = val1 ---endheader'
+    >>> elem2.get(source)
+    >>> elem1.set_from(elem2)
+    >>> elem1.data.data['option1'][0]
+    'val1'
     """
     if other.active:
       for key,val in self.data.data.items():
@@ -89,7 +104,14 @@ class ThemeElement(object):
     return
 
   def set_all_custom(self):
-    """Method for setting all data as customized by user (useful for plain slides theme)."""
+    """Method for setting all data as customized by user (useful for plain slides theme).
+
+    >>> elem = ThemeElement('header')
+    >>> elem.data.data['option1'] = ['unset',False]
+    >>> elem.set_all_custom()
+    >>> elem.data.data['option1'][1]
+    True
+    """
     self.data.set_all_custom()
     return
 
@@ -100,6 +122,12 @@ class ThemeElement(object):
     1. metadata
     2. active
     Other particular special entries must be handled into the subclass method.
+
+    >>> elem = ThemeElement('header')
+    >>> source = '---header metadata = ["slidetitle"] ---endheader'
+    >>> elem.get(source)
+    >>> eval(elem.data.data['metadata'][0])[0]
+    'slidetitle'
     """
     for key,val in self.data.data.items():
       if val[1]:
