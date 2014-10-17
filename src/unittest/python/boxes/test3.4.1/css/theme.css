@@ -44,17 +44,17 @@ input[type=button] {
   padding: 0;
   margin: 0;
 }
-.timercontrols {
-  display:table-row;
-}
 .timer {
   display:table-row;
 }
-.step {
-  position: relative;
+.timercontrols {
+  display:table-row;
 }
 .impress-enabled .step.active {
   opacity: 1;
+}
+.step {
+  position: relative;
 }
 .impress-enabled .step {
   margin: 0; 

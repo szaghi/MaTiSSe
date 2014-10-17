@@ -8,14 +8,14 @@
 p {
   padding: 1% 0;
 }
+a:hover, a:focus {
+  background: rgba(255,255,255,1);
+  text-shadow: -1px -1px 2px rgba(100,100,100,0.5);
+}
 a {
   color: inherit;
   text-decoration: none;
   transition: 0.5s;
-}
-a:hover, a:focus {
-  background: rgba(255,255,255,1);
-  text-shadow: -1px -1px 2px rgba(100,100,100,0.5);
 }
 ul {
   padding-left: 2em;
@@ -44,11 +44,17 @@ input[type=button] {
   padding: 0;
   margin: 0;
 }
+.timercontrols {
+  display:table-row;
+}
 .timer {
   display:table-row;
 }
-.timercontrols {
-  display:table-row;
+.impress-enabled .step.active {
+  opacity: 1;
+}
+.step {
+  position: relative;
 }
 .impress-enabled .step {
   margin: 0; 
@@ -58,12 +64,6 @@ input[type=button] {
   -ms-transition: opacity 1s; 
   -o-transition: opacity 1s; 
   transition: opacity 1s;
-}
-.step {
-  position: relative;
-}
-.impress-enabled .step.active {
-  opacity: 1;
 }
 body {
   background: radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));

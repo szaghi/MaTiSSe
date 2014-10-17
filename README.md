@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/szaghi/MaTiSSe.png)](https://travis-ci.org/szaghi/MaTiSSe)
 [![Coverage Status](https://img.shields.io/coveralls/szaghi/MaTiSSe.svg)](https://coveralls.io/r/szaghi/MaTiSSe)
-[![Ready in backlog](https://badge.waffle.io/matisse/matisse.png?label=ready&title=Ready)](https://waffle.io/matisse/matisse)
-[![Open bugs](https://badge.waffle.io/matisse/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/matisse/matisse)
+[![Ready in backlog](https://badge.waffle.io/szaghi/matisse.png?label=ready&title=Ready)](https://waffle.io/szaghi/matisse)
+[![Open bugs](https://badge.waffle.io/szaghi/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/matisse)
 
 # MaTiSSe.py
 ### <a name="top">MaTiSSe.py, Markdown To Impressive Scientifiic Slides
@@ -174,6 +174,8 @@ Requirements:
     + required modules that are not into the standard library:
         + [markdown](https://pythonhosted.org/Markdown/);
         + [yattag](http://www.yattag.org/);
+    + optional modules that are not into the standard library:
+        + [markdown-checklist](https://github.com/FND/markdown-checklist) installable via `pip install markdown-checklist`: a Python Markdown extension for lists of tasks with checkboxes;
 + a lot of patience with the author.
 
 As aforementioned MaTiSSe.py relies on other programs that are shipped within MaTiSSe.py itself. The author would like to thank the authors of these programs singularly:
@@ -189,6 +191,16 @@ As aforementioned MaTiSSe.py relies on other programs that are shipped within Ma
     + [normalize.css](https://github.com/necolas/normalize.css);
 
 MaTiSSe.py is developed on a GNU/Linux architecture. For Windows architecture there is no support, however it should work out-of-the-box.
+
+
+### Requirements for Presentation Rendering 
+MaTiSSe.py generates HTML output thus to visualize your presentation you need a *modern* HTML browser. In particular:
+
++ MaTiSSe.py is tested with Google Chrome/Chromium;
++ the browser must have JavaScripts enabled;
++ the browser should support `box-sizing: border-box` otherwise the built-in theme handling is compromised; IE6 and IE7 do not support `box-sizing` property, you are adviced.
+
+With modern webkit-based or moz-based browsers (Chrome, Safari, Opera, Firefox, etc...) HTML rendering of MaTiSSe.py output should work right. 
 
 Go to [Top](#top) or [Toc](#toc)
 

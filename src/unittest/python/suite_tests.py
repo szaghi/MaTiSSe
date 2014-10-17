@@ -3,6 +3,7 @@
 import sys
 import unittest
 from matisse.presentation.presentation import Presentation
+from matisse.utils.source_editor import __mdx_checklist__
 
 __pyver__ = str(sys.version_info.major)+'.'+str(sys.version_info.minor)+'.'+str(sys.version_info.micro)
 class SuiteTest(unittest.TestCase):
@@ -77,6 +78,15 @@ class SuiteTest(unittest.TestCase):
     source = open('src/unittest/python/columns_and_figures_and_notes/test.md').read()
     talk = Presentation(source=source)
     self.assertEqual(open('src/unittest/python/columns_and_figures_and_notes/test'+__pyver__+'/index.html').read(),talk.to_html())
+    return
+
+  def test_slides(self):
+    """Testing markdown checklists."""
+    if __mdx_checklist__:
+      self.maxDiff = None
+      source = open('src/unittest/python/checklists/test.md').read()
+      talk = Presentation(source=source)
+      self.assertEqual(open('src/unittest/python/checklists/test'+__pyver__+'/index.html').read(),talk.to_html())
     return
 
 if __name__ == "__main__":

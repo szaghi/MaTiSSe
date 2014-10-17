@@ -10,6 +10,11 @@ import sys
 # modules not in the standard library
 import markdown
 from .mdx_mathjax import MathJaxExtension
+try:
+  from markdown_checklist.extension import ChecklistExtension
+  __mdx_checklist__ = True
+except ImportError:
+  __mdx_checklist__ = False
 #global variables
 __regex_codeblock__ = re.compile(r"(?P<cblock>[`]{3}.*?[`]{3})",re.DOTALL)
 __regex_codeblock_html__ = re.compile(r"(?P<cblock>\<code.*?\<\/code\>)",re.DOTALL)
@@ -39,9 +44,17 @@ class SourceEditor(object):
     self.regex_codeblock  =  __regex_codeblock__
     self.regex_codeinline =  __regex_codeinline__
     self.regex_overtheme  =  __regex_overtheme__
-    self.mkd = markdown.Markdown(output_format='html5',extensions=['smarty',
-                                                                   'extra',
-                                                                   MathJaxExtension()])
+    if __mdx_checklist__:
+      self.mkd = markdown.Markdown(output_format='html5',
+                                   extensions=['smarty',
+                                               'extra',
+                                               ChecklistExtension(),
+                                               MathJaxExtension()])
+    else:
+      self.mkd = markdown.Markdown(output_format='html5',
+                                   extensions=['smarty',
+                                               'extra',
+                                               MathJaxExtension()])
     return
 
   def md_convert(self,source,no_p=False):

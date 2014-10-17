@@ -44,11 +44,14 @@ input[type=button] {
   padding: 0;
   margin: 0;
 }
+.timercontrols {
+  display:table-row;
+}
 .timer {
   display:table-row;
 }
-.timercontrols {
-  display:table-row;
+.impress-enabled .step.active {
+  opacity: 1;
 }
 .impress-enabled .step {
   margin: 0; 
@@ -58,9 +61,6 @@ input[type=button] {
   -ms-transition: opacity 1s; 
   -o-transition: opacity 1s; 
   transition: opacity 1s;
-}
-.impress-enabled .step.active {
-  opacity: 1;
 }
 .step {
   position: relative;

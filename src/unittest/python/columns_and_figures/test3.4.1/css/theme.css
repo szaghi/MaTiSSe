@@ -53,6 +53,9 @@ input[type=button] {
 .step {
   position: relative;
 }
+.impress-enabled .step.active {
+  opacity: 1;
+}
 .impress-enabled .step {
   margin: 0; 
   opacity: 0.3; 
@@ -61,9 +64,6 @@ input[type=button] {
   -ms-transition: opacity 1s; 
   -o-transition: opacity 1s; 
   transition: opacity 1s;
-}
-.impress-enabled .step.active {
-  opacity: 1;
 }
 body {
   background: radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));

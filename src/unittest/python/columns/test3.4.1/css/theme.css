@@ -44,17 +44,14 @@ input[type=button] {
   padding: 0;
   margin: 0;
 }
-.timer {
+.timercontrols {
   display:table-row;
 }
-.timercontrols {
+.timer {
   display:table-row;
 }
 .impress-enabled .step.active {
   opacity: 1;
-}
-.step {
-  position: relative;
 }
 .impress-enabled .step {
   margin: 0; 
@@ -64,6 +61,9 @@ input[type=button] {
   -ms-transition: opacity 1s; 
   -o-transition: opacity 1s; 
   transition: opacity 1s;
+}
+.step {
+  position: relative;
 }
 body {
   background: radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
