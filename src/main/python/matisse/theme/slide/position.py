@@ -46,6 +46,13 @@ class Position(object):
     -------
     int
       scaling factor
+
+    >>> from .slide import Slide
+    >>> source = '---theme_slide_global data-scale = 3 ---endtheme_slide_global'
+    >>> theme = Slide(source=source)
+    >>> pos = Position()
+    >>> pos.get_scale(theme=theme)
+    3
     """
     return int(theme.data.data['data-scale'][0])
 
@@ -62,6 +69,13 @@ class Position(object):
     -------
     int
       offset factor
+
+    >>> from .slide import Slide
+    >>> source = '---theme_slide_global data-offset = 200 ---endtheme_slide_global'
+    >>> theme = Slide(source=source)
+    >>> pos = Position()
+    >>> pos.get_offset(theme=theme)
+    200
     """
     return int(theme.data.data['data-offset'][0])
 

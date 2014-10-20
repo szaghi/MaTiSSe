@@ -30,6 +30,8 @@ def initialize(project):
   project.set_property('verbose', True)
 
   project.set_property('coverage_break_build',False)
+  project.set_property('coverage_threshold_warn',90)
+
   project.set_property('dir_target','release')
   project.set_property('dir_dist','release/'+project.name+'-'+project.version)
   project.set_property('dir_reports','release/reports-'+project.name+'-'+project.version)

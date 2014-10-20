@@ -40,7 +40,13 @@ class Header(ThemeElement):
     return
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    >>> source = '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> myheader = Header(number=1,source=source)
+    >>> myheader.get_options()
+    '\\n\\nSlide Header\\nmetadata = []\\nactive = True\\ndisplay = block\\nwidth = 100%\\nheight = 10%\\nfont-size = 100%\\nfont-family = Open Sans, Arial, sans-serif\\noverflow = hidden'
+    """
     string = ['\n\nSlide Header']
     string.append(self.data.get_options())
     return ''.join(string)
@@ -62,6 +68,11 @@ class Header(ThemeElement):
       a string containing the css code of the element if as_list = False
     list
       a list of one string containing the css code of the element if as_list = True
+
+    >>> source = '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> myheader = Header(number=1,source=source)
+    >>> myheader.get_css(only_custom=True)
+    '\\n .slide-header_1 {\\n  height: 10%;\\n}\\n'
     """
     css = "\n .slide-header_"+str(self.number)+" {"
     css += self.data.get_css(only_custom=only_custom)

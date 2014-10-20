@@ -48,6 +48,12 @@ class Sidebar(ThemeElement):
 
     This theme element has the following special entries:
     1. position
+
+    >>> source = '---theme_slide_sidebar_1 width = 15% ---endtheme_slide_sidebar_1'
+    >>> sidb1 = Sidebar(number=1,source=source)
+    >>> sidb1.check_specials()
+    >>> sidb1.data.data['position'][0]
+    'R'
     """
     super(Sidebar,self).check_specials()
     for key,val in self.data.data.items():
@@ -67,6 +73,16 @@ class Sidebar(ThemeElement):
     Parameters
     ----------
     other : Sidebar object
+
+    >>> source = '---theme_slide_sidebar_1 background = red ---endtheme_slide_sidebar_1'
+    >>> sidb1 = Sidebar(number=1,source=source)
+    >>> source = '---theme_slide_sidebar_2 width = 15% \\n position = L ---endtheme_slide_sidebar_2'
+    >>> sidb2 = Sidebar(number=2,source=source)
+    >>> sidb1.set_from(sidb2)
+    >>> sidb1.data.data['width'][0]
+    '15%'
+    >>> sidb1.data.data['position'][0]
+    'L'
     """
     overposition = None
     if self.data.data['position'][1]:
@@ -79,6 +95,22 @@ class Sidebar(ThemeElement):
 
   def adjust_dims(self,headers,footers):
     """Method for adjusting sidebar dimensions accordingly to the settings of other elements of the slide theme.
+
+    Parameters
+    ----------
+    headers : dict
+      dictionary with values of Header objects, being the list of headers defined into the slide
+    footers : dict
+      dictionary with values of Footer objects, being the list of footers defined into the slide
+
+    >>> from .header import Header
+    >>> source = '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> myheader = Header(number=1,source=source)
+    >>> source = '---theme_slide_sidebar_1 width = 10% ---endtheme_slide_sidebar_1'
+    >>> mysidebar = Sidebar(number=1,source=source)
+    >>> mysidebar.adjust_dims(headers={'1':myheader},footers={})
+    >>> mysidebar.data.data['height'][0]
+    '90%'
     """
     s_h = 100 # slide sidebar height (in percent %); should be always 100% initially
     if len(headers)>0:
@@ -93,7 +125,13 @@ class Sidebar(ThemeElement):
     return
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    >>> source = '---theme_slide_sidebar_1 width = 10% ---endtheme_slide_sidebar_1'
+    >>> mysidebar = Sidebar(number=1,source=source)
+    >>> mysidebar.get_options()
+    '\\n\\nSlide Sidebar\\nmetadata = []\\nactive = True\\ndisplay = block\\nwidth = 10%\\nheight = 100%\\nfont-size = 100%\\nfont-family = Open Sans, Arial, sans-serif\\nposition = R\\noverflow = hidden'
+    """
     string = ['\n\nSlide Sidebar']
     string.append(self.data.get_options())
     return ''.join(string)
@@ -114,6 +152,11 @@ class Sidebar(ThemeElement):
       a string containing the css code of the element if as_list = False
     list
       a list of one string containing the css code of the element if as_list = True
+
+    >>> source = '---theme_slide_sidebar_1 width = 10% ---endtheme_slide_sidebar_1'
+    >>> mysidebar = Sidebar(number=1,source=source)
+    >>> mysidebar.get_css(only_custom=True)
+    '\\n .slide-sidebar_1 {\\n  float: left;\\n  width: 10%;\\n}\\n'
     """
     css = "\n .slide-sidebar_"+str(self.number)+" {\n  float: left;"
     css += self.data.get_css(only_custom=only_custom)

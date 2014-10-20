@@ -40,18 +40,52 @@ R: 16, 0: Too many public methods (21/20) (too-many-public-methods)
 
 Report
 ======
-7629 statements analysed.
+7632 statements analysed.
 
-Duplication
------------
+External dependencies
+---------------------
+::
 
-+-------------------------+-------+---------+-----------+
-|                         |now    |previous |difference |
-+=========================+=======+=========+===========+
-|nb duplicated lines      |12594  |12594    |=          |
-+-------------------------+-------+---------+-----------+
-|percent duplicated lines |74.600 |74.600   |=          |
-+-------------------------+-------+---------+-----------+
+    markdown (matisse.utils.mdx_mathjax,matisse.utils.source_editor)
+      \-inlinepatterns (matisse.utils.mdx_mathjax)
+      \-util (matisse.utils.mdx_mathjax)
+    matisse 
+      \-config (matisse.presentation.presentation,matisse.presentation.section,matisse.utils.utils,matisse.presentation.subsection,matisse.presentation.slide,matisse.matisse)
+      \-data 
+      | \-data (matisse.presentation.metadata,matisse.theme.theme_element)
+      \-matisse (matisse.__main__,MaTiSSe)
+      \-presentation 
+      | \-metadata (matisse.presentation.presentation)
+      | \-presentation (matisse.matisse)
+      | \-regexs (matisse.presentation.presentation,matisse.presentation.section,matisse.presentation.subsection,matisse.presentation.titlepage)
+      | \-section (matisse.presentation.presentation)
+      | \-slide (matisse.presentation.presentation,matisse.presentation.subsection,matisse.presentation.titlepage)
+      | \-subsection (matisse.presentation.presentation,matisse.presentation.section)
+      | \-titlepage (matisse.presentation.presentation)
+      | \-toc (matisse.presentation.presentation)
+      \-theme 
+      | \-box (matisse.theme.theme,matisse.presentation.slide,matisse.theme.note,matisse.theme.table,matisse.theme.figure,matisse.theme.columns)
+      | \-canvas (matisse.theme.theme)
+      | \-columns (matisse.presentation.slide)
+      | \-figure (matisse.theme.theme,matisse.presentation.slide,matisse.theme.columns)
+      | \-heading (matisse.theme.theme)
+      | \-note (matisse.theme.theme,matisse.presentation.slide,matisse.theme.columns)
+      | \-selector (matisse.theme.theme)
+      | \-slide 
+      | | \-footer (matisse.theme.slide.slide)
+      | | \-header (matisse.theme.slide.slide)
+      | | \-position (matisse.presentation.presentation,matisse.presentation.slide)
+      | | \-sidebar (matisse.theme.slide.slide)
+      | | \-slide (matisse.theme.theme)
+      | \-table (matisse.theme.theme,matisse.presentation.slide,matisse.theme.columns)
+      | \-theme (matisse.presentation.presentation,matisse.presentation.slide,matisse.presentation.titlepage)
+      | \-theme_element (matisse.theme.slide.content,matisse.theme.slide.header,matisse.theme.toc,matisse.theme.note,matisse.theme.selector,matisse.theme.table,matisse.theme.heading,matisse.theme.figure,matisse.theme.slide.footer,matisse.theme.slide.sidebar,matisse.theme.slide.slide,matisse.theme.canvas)
+      | \-toc (matisse.theme.theme)
+      \-utils 
+        \-mdx_mathjax (matisse.utils.source_editor)
+        \-source_editor (matisse.presentation.presentation,matisse.theme.theme,matisse.presentation.section,matisse.presentation.subsection,matisse.data.data,matisse.presentation.metadata,matisse.presentation.titlepage,matisse.presentation.slide,matisse.matisse,matisse.theme.theme_element,matisse.theme.note,matisse.theme.table,matisse.theme.box,matisse.theme.figure,matisse.theme.columns,matisse.theme.slide.slide)
+        \-utils (matisse.matisse,matisse.presentation.regexs)
+    yattag (matisse.presentation.presentation,matisse.presentation.metadata,matisse.presentation.slide,matisse.theme.note,matisse.presentation.toc,matisse.theme.table,matisse.theme.box,matisse.theme.figure,matisse.theme.columns)
 
 
 
@@ -61,13 +95,13 @@ Raw metrics
 +----------+-------+------+---------+-----------+
 |type      |number |%     |previous |difference |
 +==========+=======+======+=========+===========+
-|code      |8009   |46.45 |8009     |=          |
+|code      |8015   |45.32 |NC       |NC         |
 +----------+-------+------+---------+-----------+
-|docstring |7517   |43.60 |7517     |=          |
+|docstring |7955   |44.98 |NC       |NC         |
 +----------+-------+------+---------+-----------+
-|comment   |399    |2.31  |399      |=          |
+|comment   |391    |2.21  |NC       |NC         |
 +----------+-------+------+---------+-----------+
-|empty     |1317   |7.64  |1317     |=          |
+|empty     |1325   |7.49  |NC       |NC         |
 +----------+-------+------+---------+-----------+
 
 
@@ -78,13 +112,13 @@ Statistics by type
 +---------+-------+-----------+-----------+------------+---------+
 |type     |number |old number |difference |%documented |%badname |
 +=========+=======+===========+===========+============+=========+
-|module   |112    |112        |=          |100.00      |0.00     |
+|module   |112    |1          |+111.00    |100.00      |0.00     |
 +---------+-------+-----------+-----------+------------+---------+
-|class    |113    |113        |=          |84.07       |0.00     |
+|class    |113    |1          |+112.00    |84.07       |0.00     |
 +---------+-------+-----------+-----------+------------+---------+
-|method   |663    |663        |=          |100.00      |0.00     |
+|method   |663    |4          |+659.00    |100.00      |0.00     |
 +---------+-------+-----------+-----------+------------+---------+
-|function |55     |55         |=          |94.55       |5.45     |
+|function |55     |0          |+55.00     |94.55       |5.45     |
 +---------+-------+-----------+-----------+------------+---------+
 
 
@@ -95,11 +129,11 @@ Messages by category
 +-----------+-------+---------+-----------+
 |type       |number |previous |difference |
 +===========+=======+=========+===========+
-|convention |24     |24       |=          |
+|convention |24     |0        |+24.00     |
 +-----------+-------+---------+-----------+
-|refactor   |4      |4        |=          |
+|refactor   |4      |0        |+4.00      |
 +-----------+-------+---------+-----------+
-|warning    |3      |3        |=          |
+|warning    |3      |0        |+3.00      |
 +-----------+-------+---------+-----------+
 |error      |0      |0        |=          |
 +-----------+-------+---------+-----------+
@@ -138,52 +172,18 @@ Messages
 
 Global evaluation
 -----------------
-Your code has been rated at 9.96/10 (previous run: 9.96/10, +0.00)
+Your code has been rated at 9.96/10
 
-External dependencies
----------------------
-::
+Duplication
+-----------
 
-    markdown (matisse.utils.source_editor,matisse.utils.mdx_mathjax)
-      \-inlinepatterns (matisse.utils.mdx_mathjax)
-      \-util (matisse.utils.mdx_mathjax)
-    matisse 
-      \-config (matisse.matisse,matisse.presentation.subsection,matisse.presentation.section,matisse.utils.utils,matisse.presentation.presentation,matisse.presentation.slide)
-      \-data 
-      | \-data (matisse.presentation.metadata,matisse.theme.theme_element)
-      \-matisse (MaTiSSe,matisse.__main__)
-      \-presentation 
-      | \-metadata (matisse.presentation.presentation)
-      | \-presentation (matisse.matisse)
-      | \-regexs (matisse.presentation.presentation,matisse.presentation.titlepage,matisse.presentation.subsection,matisse.presentation.section)
-      | \-section (matisse.presentation.presentation)
-      | \-slide (matisse.presentation.presentation,matisse.presentation.titlepage,matisse.presentation.subsection)
-      | \-subsection (matisse.presentation.presentation,matisse.presentation.section)
-      | \-titlepage (matisse.presentation.presentation)
-      | \-toc (matisse.presentation.presentation)
-      \-theme 
-      | \-box (matisse.theme.theme,matisse.theme.columns,matisse.theme.note,matisse.theme.figure,matisse.theme.table,matisse.presentation.slide)
-      | \-canvas (matisse.theme.theme)
-      | \-columns (matisse.presentation.slide)
-      | \-figure (matisse.theme.theme,matisse.presentation.slide,matisse.theme.columns)
-      | \-heading (matisse.theme.theme)
-      | \-note (matisse.theme.theme,matisse.presentation.slide,matisse.theme.columns)
-      | \-selector (matisse.theme.theme)
-      | \-slide 
-      | | \-footer (matisse.theme.slide.slide)
-      | | \-header (matisse.theme.slide.slide)
-      | | \-position (matisse.presentation.presentation,matisse.presentation.slide)
-      | | \-sidebar (matisse.theme.slide.slide)
-      | | \-slide (matisse.theme.theme)
-      | \-table (matisse.theme.theme,matisse.presentation.slide,matisse.theme.columns)
-      | \-theme (matisse.presentation.presentation,matisse.presentation.slide,matisse.presentation.titlepage)
-      | \-theme_element (matisse.theme.slide.header,matisse.theme.selector,matisse.theme.note,matisse.theme.figure,matisse.theme.toc,matisse.theme.canvas,matisse.theme.slide.sidebar,matisse.theme.heading,matisse.theme.slide.content,matisse.theme.slide.slide,matisse.theme.table,matisse.theme.slide.footer)
-      | \-toc (matisse.theme.theme)
-      \-utils 
-        \-mdx_mathjax (matisse.utils.source_editor)
-        \-source_editor (matisse.matisse,matisse.theme.theme,matisse.data.data,matisse.theme.columns,matisse.theme.note,matisse.theme.figure,matisse.theme.theme_element,matisse.presentation.titlepage,matisse.presentation.subsection,matisse.presentation.section,matisse.theme.slide.slide,matisse.theme.table,matisse.presentation.presentation,matisse.presentation.metadata,matisse.presentation.slide,matisse.theme.box)
-        \-utils (matisse.matisse,matisse.presentation.regexs)
-    yattag (matisse.theme.columns,matisse.presentation.toc,matisse.theme.note,matisse.theme.figure,matisse.theme.table,matisse.presentation.presentation,matisse.presentation.metadata,matisse.presentation.slide,matisse.theme.box)
++-------------------------+-------+---------+-----------+
+|                         |now    |previous |difference |
++=========================+=======+=========+===========+
+|nb duplicated lines      |13016  |NC       |NC         |
++-------------------------+-------+---------+-----------+
+|percent duplicated lines |75.194 |NC       |NC         |
++-------------------------+-------+---------+-----------+
 
 
 

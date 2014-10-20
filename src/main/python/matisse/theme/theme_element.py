@@ -155,6 +155,12 @@ class ThemeElement(object):
       a string containing the css code of the element if as_list = False
     list
       a list of one string containing the css code of the element if as_list = True
+
+    >>> elem = ThemeElement('header',class_name='header')
+    >>> source = '---header height = 10% ---endheader'
+    >>> elem.get(source)
+    >>> elem.get_css(only_custom=True)
+    '\\n.header {\\n  height: 10%;\\n}\\n'
     """
     if self.class_name:
       css = '\n.'+self.class_name+' {'+self.data.get_css(only_custom=only_custom)+'\n}\n'
@@ -176,6 +182,14 @@ class ThemeElement(object):
     -------
     str
       source without the theme element data
+
+    >>> elem = ThemeElement('header')
+    >>> source = 'other contents before---header height = 10% ---endheader,other contents after'
+    >>> elem.get(source)
+    >>> elem.data.data['height'][0]
+    '10%'
+    >>> elem.strip(source)
+    'other contents before,other contents after'
     """
     return self.data.strip(source)
 

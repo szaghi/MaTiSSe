@@ -40,7 +40,13 @@ class Footer(ThemeElement):
     return
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    >>> source = '---theme_slide_footer_1 height = 10% ---endtheme_slide_footer_1'
+    >>> myfooter = Footer(number=1,source=source)
+    >>> myfooter.get_options()
+    '\\n\\nSlide Footer\\nmetadata = []\\nactive = True\\ndisplay = block\\nwidth = 100%\\nheight = 10%\\nfont-size = 100%\\nfont-family = Open Sans, Arial, sans-serif\\noverflow = hidden'
+    """
     string = ['\n\nSlide Footer']
     string.append(self.data.get_options())
     return ''.join(string)
@@ -61,6 +67,11 @@ class Footer(ThemeElement):
       a string containing the css code of the theme if as_list = False
     list
       a list of one string containing the css code of the theme if as_list = True
+
+    >>> source = '---theme_slide_footer_1 height = 10% ---endtheme_slide_footer_1'
+    >>> myfooter = Footer(number=1,source=source)
+    >>> myfooter.get_css(only_custom=True)
+    '\\n .slide-footer_1 {\\n  clear: both;\\n  height: 10%;\\n}\\n'
     """
     css = "\n .slide-footer_"+str(self.number)+" {\n  clear: both;"
     css += self.data.get_css(only_custom=only_custom)

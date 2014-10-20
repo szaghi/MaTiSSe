@@ -67,10 +67,12 @@ class Titlepage(Slide):
       if match.group('plain') and str(match.group('plain')).lower() == 'plain':
         self.plain = True
         self.overtheme = Theme(set_all_custom=True)
-      end = -1
       endmatch = re.search(re_endtitlepage,source[match.end():])
       if endmatch:
         end = endmatch.start()+match.end()
-      self.raw_body = source[match.end():end]
-      source = source[0:match.start()]+source[end:]
+        self.raw_body = source[match.end():end]
+        source = source[0:match.start()]+source[end:]
+      else:
+        self.raw_body = source[match.end():]
+        source = source[0:match.start()]
     return source

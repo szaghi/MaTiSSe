@@ -268,9 +268,9 @@ class Data(object):
       source without the raw data
 
     >>> mydata = Data('---mydata','---endmydata')
-    >>> source = 'other contents---mydata option1 = val1 ---endmydata'
+    >>> source = 'other contents before---mydata option1 = val1 ---endmydata,other contents after'
     >>> mydata.strip(source)
-    'other contents'
+    'other contents before,other contents after'
     """
     if self.skip:
       strip_source = source
@@ -288,9 +288,9 @@ class Data(object):
           else:
             start = matches[mtc-1][1]+1
           if match[0]!=start:
-            strip += strip_source[start:match[0]-1]
-        if matches[-1][1]<len(strip_source):
-          strip += strip_source[matches[-1][1]+1:]
+            strip += strip_source[start:match[0]]
+        if matches[-1][1]<len(strip_source)+1:
+          strip += strip_source[matches[-1][1]:]
         strip_source = strip
     else:
       strip_source = re.sub(self.regex,'',source)

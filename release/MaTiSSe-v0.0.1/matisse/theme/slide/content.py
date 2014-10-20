@@ -43,17 +43,22 @@ class Content(ThemeElement):
       dictionary with values of Footer objects, being the list of footers defined into the slide
     sidebars : dict
       dictionary with values of Sidebar objects, being the list of sidebars defined into the slide
+
+    >>> from .header import Header
+    >>> source = '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> myheader = Header(number=1,source=source)
+    >>> source = '---theme_slide_content background = red ---endtheme_slide_content'
+    >>> mycontent = Content(source=source)
+    >>> mycontent.adjust_dims(headers={'1':myheader},footers={},sidebars={})
+    >>> mycontent.data.data['height'][0]
+    '90%'
     """
     s_w = 100 # slide content width (in percent %); should be always 100% initially
     s_h = 100 # slide content height (in percent %); should be always 100% initially
-    #if 'padding' in self.data.data:
-      #s_h -= 2*int(self.data.data['padding'][0].strip('%'))
     if len(headers)>0:
       for header in headers.values():
         if header.active:
           s_h -= int(header.data.data['height'][0].strip('%'))
-          #if 'padding' in header.data.data:
-            #s_h -= 2*int(header.data.data['padding'][0].strip('%'))
     if len(footers)>0:
       for footer in footers.values():
         if footer.active:
@@ -67,7 +72,13 @@ class Content(ThemeElement):
     return
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    >>> source = '---theme_slide_content background = red ---endtheme_slide_content'
+    >>> mycontent = Content(source=source)
+    >>> mycontent.get_options()
+    '\\n\\nSlide Content\\nmetadata = []\\nactive = True\\ndisplay = block\\nwidth = 100%\\nheight = 100%\\npadding = 0\\nfont-size = 100%\\nfont-family = Open Sans, Arial, sans-serif\\noverflow = hidden\\nbackground = red'
+    """
     string = ['\n\nSlide Content']
     string.append(self.data.get_options())
     return ''.join(string)
@@ -88,6 +99,11 @@ class Content(ThemeElement):
       a string containing the css code of the theme if as_list = False
     list
       a list of one string containing the css code of the theme if as_list = True
+
+    >>> source = '---theme_slide_content background = red ---endtheme_slide_content'
+    >>> mycontent = Content(source=source)
+    >>> mycontent.get_css(only_custom=True)
+    '\\n .slide-content {\\n  float: left;\\n  background: red;\\n}\\n'
     """
     css = "\n .slide-content {\n  float: left;"
     css += self.data.get_css(only_custom=only_custom)
