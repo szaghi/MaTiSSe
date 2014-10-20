@@ -126,7 +126,7 @@
       "sum_lines_not_covered": 0
     }, 
     {
-      "coverage": 91, 
+      "coverage": 90, 
       "lines": [
         2, 
         8, 
@@ -252,11 +252,12 @@
         223, 
         225, 
         228, 
-        289
+        289, 
+        291
       ], 
       "module": "matisse.data.data", 
       "sum_lines": 113, 
-      "sum_lines_not_covered": 10
+      "sum_lines_not_covered": 11
     }, 
     {
       "coverage": 100, 
@@ -267,7 +268,7 @@
       "sum_lines_not_covered": 0
     }, 
     {
-      "coverage": 82, 
+      "coverage": 80, 
       "lines": [
         2, 
         8, 
@@ -344,11 +345,12 @@
         87, 
         88, 
         105, 
-        108
+        108, 
+        111
       ], 
       "module": "matisse.presentation.subsection", 
       "sum_lines": 63, 
-      "sum_lines_not_covered": 11
+      "sum_lines_not_covered": 12
     }, 
     {
       "coverage": 100, 
@@ -371,7 +373,7 @@
       "sum_lines_not_covered": 0
     }, 
     {
-      "coverage": 78, 
+      "coverage": 63, 
       "lines": [
         2, 
         8, 
@@ -441,14 +443,22 @@
         90, 
         91, 
         92, 
-        108
+        100, 
+        105, 
+        106, 
+        107, 
+        108, 
+        109, 
+        110, 
+        112, 
+        113
       ], 
       "module": "matisse.presentation.section", 
       "sum_lines": 55, 
-      "sum_lines_not_covered": 12
+      "sum_lines_not_covered": 20
     }, 
     {
-      "coverage": 76, 
+      "coverage": 37, 
       "lines": [
         2, 
         8, 
@@ -541,12 +551,28 @@
       ], 
       "lines_not_covered": [
         43, 
+        64, 
+        65, 
+        66, 
+        67, 
+        68, 
+        69, 
         71, 
         72, 
+        73, 
         75, 
+        76, 
+        99, 
+        100, 
+        101, 
+        102, 
+        103, 
+        104, 
         106, 
         107, 
+        108, 
         110, 
+        111, 
         136, 
         137, 
         138, 
@@ -558,16 +584,34 @@
         145, 
         147, 
         148, 
+        163, 
+        164, 
         165, 
+        166, 
+        167, 
+        168, 
+        169, 
+        170, 
+        171, 
+        172, 
         173, 
-        174
+        174, 
+        175, 
+        206, 
+        207, 
+        208, 
+        209, 
+        210, 
+        211, 
+        212, 
+        213
       ], 
       "module": "matisse.presentation.toc", 
       "sum_lines": 88, 
-      "sum_lines_not_covered": 21
+      "sum_lines_not_covered": 55
     }, 
     {
-      "coverage": 87, 
+      "coverage": 73, 
       "lines": [
         2, 
         8, 
@@ -719,7 +763,26 @@
         106, 
         124, 
         127, 
+        164, 
+        165, 
+        166, 
+        167, 
+        168, 
+        169, 
+        187, 
+        188, 
+        189, 
+        190, 
+        212, 
+        213, 
         234, 
+        249, 
+        251, 
+        252, 
+        254, 
+        257, 
+        258, 
+        260, 
         262, 
         263, 
         264, 
@@ -729,7 +792,7 @@
       ], 
       "module": "matisse.presentation.slide", 
       "sum_lines": 138, 
-      "sum_lines_not_covered": 17
+      "sum_lines_not_covered": 36
     }, 
     {
       "coverage": 100, 
@@ -740,7 +803,7 @@
       "sum_lines_not_covered": 0
     }, 
     {
-      "coverage": 80, 
+      "coverage": 75, 
       "lines": [
         2, 
         8, 
@@ -923,7 +986,15 @@
         69, 
         70, 
         71, 
+        103, 
+        108, 
+        109, 
+        110, 
         111, 
+        112, 
+        113, 
+        115, 
+        116, 
         144, 
         145, 
         167, 
@@ -957,7 +1028,7 @@
       ], 
       "module": "matisse.presentation.presentation", 
       "sum_lines": 175, 
-      "sum_lines_not_covered": 35
+      "sum_lines_not_covered": 43
     }, 
     {
       "coverage": 54, 
@@ -1021,7 +1092,7 @@
       "sum_lines_not_covered": 16
     }, 
     {
-      "coverage": 62, 
+      "coverage": 60, 
       "lines": [
         2, 
         8, 
@@ -1112,6 +1183,8 @@
         60, 
         61, 
         62, 
+        82, 
+        88, 
         93, 
         94, 
         95, 
@@ -1142,10 +1215,10 @@
       ], 
       "module": "matisse.presentation.metadata", 
       "sum_lines": 83, 
-      "sum_lines_not_covered": 31
+      "sum_lines_not_covered": 33
     }, 
     {
-      "coverage": 68, 
+      "coverage": 52, 
       "lines": [
         2, 
         7, 
@@ -1296,12 +1369,21 @@
         16, 
         17, 
         54, 
+        77, 
+        78, 
+        79, 
+        80, 
         104, 
         105, 
         107, 
         123, 
         138, 
+        179, 
         180, 
+        182, 
+        183, 
+        185, 
+        186, 
         271, 
         286, 
         287, 
@@ -1324,6 +1406,8 @@
         344, 
         367, 
         368, 
+        370, 
+        371, 
         392, 
         393, 
         394, 
@@ -1336,12 +1420,25 @@
         401, 
         402, 
         403, 
+        424, 
+        425, 
+        426, 
+        427, 
+        452, 
+        454, 
+        455, 
+        456, 
+        457, 
         459, 
+        460, 
+        461, 
+        462, 
+        463, 
         464
       ], 
       "module": "matisse.utils.source_editor", 
       "sum_lines": 144, 
-      "sum_lines_not_covered": 45
+      "sum_lines_not_covered": 69
     }, 
     {
       "coverage": 76, 
@@ -1450,7 +1547,7 @@
       "sum_lines_not_covered": 2
     }, 
     {
-      "coverage": 91, 
+      "coverage": 51, 
       "lines": [
         2, 
         7, 
@@ -1522,16 +1619,43 @@
         185
       ], 
       "lines_not_covered": [
+        72, 
+        73, 
+        74, 
+        75, 
+        76, 
+        77, 
+        78, 
+        124, 
+        125, 
+        126, 
+        127, 
+        128, 
         129, 
+        130, 
+        131, 
+        135, 
+        136, 
+        137, 
+        138, 
+        139, 
+        140, 
         141, 
+        142, 
+        143, 
+        144, 
         145, 
         146, 
         148, 
-        166
+        149, 
+        150, 
+        166, 
+        183, 
+        184
       ], 
       "module": "matisse.theme.figure", 
       "sum_lines": 68, 
-      "sum_lines_not_covered": 6
+      "sum_lines_not_covered": 33
     }, 
     {
       "coverage": 75, 
@@ -1569,7 +1693,7 @@
       "sum_lines_not_covered": 5
     }, 
     {
-      "coverage": 90, 
+      "coverage": 48, 
       "lines": [
         2, 
         8, 
@@ -1709,17 +1833,71 @@
         62, 
         63, 
         64, 
+        135, 
         137, 
         138, 
         160, 
         164, 
+        195, 
+        196, 
         198, 
+        199, 
+        214, 
+        215, 
+        216, 
+        217, 
+        218, 
+        219, 
+        220, 
+        221, 
+        222, 
+        223, 
+        224, 
+        225, 
+        226, 
+        227, 
+        228, 
+        229, 
+        244, 
+        245, 
+        246, 
+        247, 
+        248, 
+        260, 
+        261, 
+        262, 
+        263, 
+        264, 
+        265, 
+        266, 
+        267, 
+        268, 
+        269, 
+        270, 
+        271, 
+        272, 
+        273, 
+        274, 
+        276, 
+        277, 
+        278, 
+        279, 
+        280, 
+        281, 
+        282, 
+        283, 
+        284, 
+        285, 
         286, 
-        315
+        288, 
+        289, 
+        290, 
+        315, 
+        319
       ], 
       "module": "matisse.theme.theme_element", 
       "sum_lines": 130, 
-      "sum_lines_not_covered": 13
+      "sum_lines_not_covered": 67
     }, 
     {
       "coverage": 77, 
@@ -1759,7 +1937,7 @@
       "sum_lines_not_covered": 5
     }, 
     {
-      "coverage": 90, 
+      "coverage": 27, 
       "lines": [
         2, 
         7, 
@@ -1874,23 +2052,94 @@
         254
       ], 
       "lines_not_covered": [
+        106, 
+        107, 
+        108, 
+        109, 
+        110, 
+        111, 
+        112, 
+        113, 
+        114, 
+        115, 
+        116, 
+        117, 
+        118, 
+        119, 
         122, 
         123, 
         124, 
         125, 
         126, 
+        130, 
+        131, 
+        132, 
+        133, 
+        134, 
+        135, 
+        139, 
+        140, 
+        141, 
+        142, 
+        143, 
         144, 
+        146, 
+        147, 
+        148, 
+        149, 
+        150, 
+        151, 
+        152, 
+        153, 
+        157, 
+        158, 
+        159, 
+        160, 
         161, 
+        162, 
+        163, 
+        164, 
+        165, 
+        166, 
+        167, 
+        168, 
+        172, 
+        173, 
+        174, 
+        175, 
+        185, 
+        186, 
+        187, 
+        188, 
         189, 
         190, 
-        235
+        191, 
+        201, 
+        202, 
+        203, 
+        204, 
+        205, 
+        206, 
+        210, 
+        211, 
+        212, 
+        213, 
+        214, 
+        215, 
+        216, 
+        217, 
+        218, 
+        219, 
+        235, 
+        252, 
+        253
       ], 
       "module": "matisse.theme.box", 
       "sum_lines": 111, 
-      "sum_lines_not_covered": 10
+      "sum_lines_not_covered": 81
     }, 
     {
-      "coverage": 91, 
+      "coverage": 52, 
       "lines": [
         2, 
         7, 
@@ -1962,16 +2211,42 @@
         184
       ], 
       "lines_not_covered": [
+        73, 
+        74, 
+        75, 
+        76, 
+        77, 
+        78, 
+        79, 
+        125, 
+        126, 
+        127, 
+        128, 
+        129, 
         130, 
+        131, 
+        132, 
+        136, 
+        137, 
+        138, 
+        139, 
         140, 
         141, 
+        142, 
+        143, 
+        144, 
+        145, 
         146, 
         147, 
-        165
+        148, 
+        149, 
+        165, 
+        182, 
+        183
       ], 
       "module": "matisse.theme.note", 
       "sum_lines": 68, 
-      "sum_lines_not_covered": 6
+      "sum_lines_not_covered": 32
     }, 
     {
       "coverage": 52, 
@@ -2084,7 +2359,7 @@
       "sum_lines_not_covered": 32
     }, 
     {
-      "coverage": 88, 
+      "coverage": 31, 
       "lines": [
         2, 
         7, 
@@ -2155,18 +2430,56 @@
         144
       ], 
       "lines_not_covered": [
+        53, 
+        54, 
+        55, 
+        56, 
+        57, 
         60, 
         61, 
         62, 
         63, 
         64, 
         65, 
+        75, 
+        76, 
+        77, 
+        78, 
+        79, 
+        80, 
+        81, 
+        82, 
+        84, 
+        85, 
+        86, 
+        87, 
+        91, 
+        92, 
+        93, 
+        94, 
+        95, 
+        96, 
+        97, 
+        98, 
+        99, 
         101, 
-        109
+        102, 
+        103, 
+        104, 
+        105, 
+        106, 
+        107, 
+        108, 
+        109, 
+        140, 
+        141, 
+        142, 
+        143, 
+        144
       ], 
       "module": "matisse.theme.columns", 
       "sum_lines": 67, 
-      "sum_lines_not_covered": 8
+      "sum_lines_not_covered": 46
     }, 
     {
       "coverage": 73, 
@@ -2352,7 +2665,7 @@
       "sum_lines_not_covered": 0
     }, 
     {
-      "coverage": 79, 
+      "coverage": 22, 
       "lines": [
         2, 
         10, 
@@ -2400,6 +2713,31 @@
         78
       ], 
       "lines_not_covered": [
+        37, 
+        38, 
+        39, 
+        40, 
+        41, 
+        42, 
+        43, 
+        44, 
+        45, 
+        46, 
+        47, 
+        48, 
+        49, 
+        50, 
+        51, 
+        52, 
+        53, 
+        54, 
+        55, 
+        56, 
+        57, 
+        58, 
+        59, 
+        60, 
+        61, 
         65, 
         66, 
         67, 
@@ -2412,10 +2750,10 @@
       ], 
       "module": "matisse.theme.selector", 
       "sum_lines": 44, 
-      "sum_lines_not_covered": 9
+      "sum_lines_not_covered": 34
     }, 
     {
-      "coverage": 66, 
+      "coverage": 60, 
       "lines": [
         2, 
         8, 
@@ -2612,6 +2950,14 @@
         110, 
         111, 
         112, 
+        125, 
+        126, 
+        127, 
+        128, 
+        129, 
+        130, 
+        152, 
+        153, 
         183, 
         184, 
         185, 
@@ -2648,14 +2994,16 @@
         237, 
         238, 
         263, 
-        266
+        266, 
+        289, 
+        290
       ], 
       "module": "matisse.theme.theme", 
       "sum_lines": 172, 
-      "sum_lines_not_covered": 58
+      "sum_lines_not_covered": 68
     }, 
     {
-      "coverage": 66, 
+      "coverage": 22, 
       "lines": [
         2, 
         9, 
@@ -2686,6 +3034,18 @@
         72
       ], 
       "lines_not_covered": [
+        29, 
+        30, 
+        31, 
+        32, 
+        33, 
+        34, 
+        35, 
+        36, 
+        37, 
+        38, 
+        39, 
+        40, 
         44, 
         45, 
         46, 
@@ -2698,10 +3058,10 @@
       ], 
       "module": "matisse.theme.slide.header", 
       "sum_lines": 27, 
-      "sum_lines_not_covered": 9
+      "sum_lines_not_covered": 21
     }, 
     {
-      "coverage": 63, 
+      "coverage": 14, 
       "lines": [
         2, 
         9, 
@@ -2766,8 +3126,30 @@
         124
       ], 
       "lines_not_covered": [
+        31, 
+        32, 
+        33, 
+        34, 
+        35, 
+        36, 
+        37, 
+        38, 
+        39, 
+        40, 
+        41, 
+        42, 
+        43, 
+        44, 
+        52, 
+        53, 
+        54, 
+        55, 
+        56, 
+        57, 
+        58, 
         60, 
         61, 
+        62, 
         71, 
         72, 
         73, 
@@ -2776,9 +3158,17 @@
         76, 
         77, 
         78, 
+        83, 
+        84, 
+        85, 
+        86, 
+        87, 
+        88, 
         89, 
         90, 
         91, 
+        92, 
+        93, 
         97, 
         98, 
         99, 
@@ -2791,7 +3181,7 @@
       ], 
       "module": "matisse.theme.slide.sidebar", 
       "sum_lines": 61, 
-      "sum_lines_not_covered": 22
+      "sum_lines_not_covered": 52
     }, 
     {
       "coverage": 61, 
@@ -2901,7 +3291,7 @@
       "sum_lines_not_covered": 27
     }, 
     {
-      "coverage": 66, 
+      "coverage": 22, 
       "lines": [
         2, 
         9, 
@@ -2932,6 +3322,18 @@
         71
       ], 
       "lines_not_covered": [
+        29, 
+        30, 
+        31, 
+        32, 
+        33, 
+        34, 
+        35, 
+        36, 
+        37, 
+        38, 
+        39, 
+        40, 
         44, 
         45, 
         46, 
@@ -2944,10 +3346,10 @@
       ], 
       "module": "matisse.theme.slide.footer", 
       "sum_lines": 27, 
-      "sum_lines_not_covered": 9
+      "sum_lines_not_covered": 21
     }, 
     {
-      "coverage": 59, 
+      "coverage": 51, 
       "lines": [
         2, 
         9, 
@@ -3197,6 +3599,18 @@
         85, 
         86, 
         87, 
+        165, 
+        166, 
+        178, 
+        179, 
+        191, 
+        192, 
+        207, 
+        208, 
+        211, 
+        212, 
+        215, 
+        216, 
         228, 
         230, 
         231, 
@@ -3240,6 +3654,11 @@
         287, 
         288, 
         314, 
+        318, 
+        321, 
+        324, 
+        333, 
+        334, 
         350, 
         351, 
         352, 
@@ -3271,11 +3690,14 @@
         402, 
         405, 
         408, 
-        411
+        411, 
+        432, 
+        435, 
+        438
       ], 
       "module": "matisse.theme.slide.slide", 
       "sum_lines": 229, 
-      "sum_lines_not_covered": 92
+      "sum_lines_not_covered": 112
     }, 
     {
       "coverage": 100, 
@@ -3286,7 +3708,7 @@
       "sum_lines_not_covered": 0
     }, 
     {
-      "coverage": 86, 
+      "coverage": 66, 
       "lines": [
         2, 
         9, 
@@ -3337,6 +3759,15 @@
       "lines_not_covered": [
         31, 
         32, 
+        52, 
+        53, 
+        54, 
+        58, 
+        59, 
+        60, 
+        62, 
+        63, 
+        64, 
         71, 
         72, 
         73, 
@@ -3344,8 +3775,8 @@
       ], 
       "module": "matisse.theme.slide.content", 
       "sum_lines": 45, 
-      "sum_lines_not_covered": 6
+      "sum_lines_not_covered": 15
     }
   ], 
-  "overall_coverage": 75
+  "overall_coverage": 57
 }

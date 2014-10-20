@@ -26,7 +26,7 @@ def create():
     directory = os.path.dirname(mdf)
     inputfile = os.path.basename(mdf)
     print('Creating '+directory)
-    cmd = 'cd '+directory+' ; ../../../main/python/MaTiSSe.py -i '+inputfile+' -o '+inputfile[:-3]+pyver+' ; cd -'
+    cmd = 'cd '+directory+' ; MaTiSSe.py -i '+inputfile+' -o '+inputfile[:-3]+pyver+' ; cd -'
     syswork(cmd)
   return
 

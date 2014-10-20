@@ -3,38 +3,38 @@ Name                                Stmts   Miss  Cover   Missing
 matisse                                 0      0   100%   
 matisse.config                         72     35    51%   52, 56-67, 83-89, 100-102, 112-115, 125-131, 135-137
 matisse.data                            0      0   100%   
-matisse.data.data                     113     10    91%   74-76, 142, 194-195, 223, 225, 228, 289
+matisse.data.data                     113     11    90%   74-76, 142, 194-195, 223, 225, 228, 289, 291
 matisse.presentation                    0      0   100%   
-matisse.presentation.metadata          83     31    63%   56, 60-62, 93-95, 110-117, 131-136, 153-161, 181-184
-matisse.presentation.presentation     175     35    80%   68-71, 111, 144-145, 167-177, 181-184, 193, 222-225, 240-242, 267, 283-286
+matisse.presentation.metadata          83     33    60%   56, 60-62, 82-88, 93-95, 110-117, 131-136, 153-161, 181-184
+matisse.presentation.presentation     175     43    75%   68-71, 103, 108-116, 144-145, 167-177, 181-184, 193, 222-225, 240-242, 267, 283-286
 matisse.presentation.regexs            11      0   100%   
-matisse.presentation.section           55     12    78%   82-92, 108
-matisse.presentation.slide            138     17    88%   99-106, 124, 127, 234, 262-267
-matisse.presentation.subsection        63     11    83%   80-88, 105, 108
+matisse.presentation.section           55     20    64%   82-92, 100, 105-113
+matisse.presentation.slide            138     36    74%   99-106, 124, 127, 164-169, 187-190, 212-213, 234, 249, 251-252, 254, 257-258, 260-267
+matisse.presentation.subsection        63     12    81%   80-88, 105, 108, 111
 matisse.presentation.titlepage         35     16    54%   40, 44-47, 65-75
-matisse.presentation.toc               88     21    76%   43, 71-72, 75, 106-107, 110, 136-148, 165, 173-174
+matisse.presentation.toc               88     55    38%   43, 64-76, 99-111, 136-148, 163-175, 206-213
 matisse.theme                           0      0   100%   
-matisse.theme.box                     111     10    91%   122-126, 144, 161, 189-190, 235
+matisse.theme.box                     111     81    27%   106-119, 122-126, 130-135, 139-153, 157-168, 172-175, 185-191, 201-206, 210-219, 235, 252-253
 matisse.theme.canvas                   20      5    75%   19, 24-26, 35
-matisse.theme.columns                  67      8    88%   60-65, 101, 109
-matisse.theme.figure                   68      6    91%   129, 141, 145-148, 166
+matisse.theme.columns                  67     46    31%   53-57, 60-65, 75-87, 91-109, 140-144
+matisse.theme.figure                   68     33    51%   72-78, 124-131, 135-150, 166, 183-184
 matisse.theme.heading                  22      5    77%   37, 42-44, 53
-matisse.theme.note                     68      6    91%   130, 140-141, 146-147, 165
-matisse.theme.selector                 44      9    80%   65-67, 72-78
+matisse.theme.note                     68     32    53%   73-79, 125-132, 136-149, 165, 182-183
+matisse.theme.selector                 44     34    23%   37-61, 65-67, 72-78
 matisse.theme.slide                     0      0   100%   
-matisse.theme.slide.content            45      6    87%   31-32, 71-73, 96
-matisse.theme.slide.footer             27      9    67%   44-46, 65-71
-matisse.theme.slide.header             27      9    67%   44-46, 66-72
+matisse.theme.slide.content            45     15    67%   31-32, 52-54, 58-60, 62-64, 71-73, 96
+matisse.theme.slide.footer             27     21    22%   29-40, 44-46, 65-71
+matisse.theme.slide.header             27     21    22%   29-40, 44-46, 66-72
 matisse.theme.slide.position           70     27    61%   31-34, 87, 114, 119-145
-matisse.theme.slide.sidebar            61     22    64%   60-61, 71-78, 89-91, 97-99, 118-124
-matisse.theme.slide.slide             229     92    60%   67, 69-71, 75-87, 228-255, 259-266, 276-288, 314, 350-364, 368-380, 402, 405, 408, 411
+matisse.theme.slide.sidebar            61     52    15%   31-44, 52-62, 71-78, 83-93, 97-99, 118-124
+matisse.theme.slide.slide             229    112    51%   67, 69-71, 75-87, 165-166, 178-179, 191-192, 207-208, 211-212, 215-216, 228-255, 259-266, 276-288, 314, 318, 321, 324, 333-334, 350-364, 368-380, 402, 405, 408, 411, 432, 435, 438
 matisse.theme.table                    68     32    53%   73-79, 125-132, 136-149, 165, 182-183
-matisse.theme.theme                   172     58    66%   87, 89, 91-96, 100-112, 183-189, 199-208, 218-226, 230-238, 263, 266
-matisse.theme.theme_element           130     13    90%   45-46, 61-64, 137-138, 160, 164, 198, 286, 315
+matisse.theme.theme                   172     68    60%   87, 89, 91-96, 100-112, 125-130, 152-153, 183-189, 199-208, 218-226, 230-238, 263, 266, 289-290
+matisse.theme.theme_element           130     67    48%   45-46, 61-64, 135, 137-138, 160, 164, 195-199, 214-229, 244-248, 260-290, 315, 319
 matisse.theme.toc                     130     35    73%   29, 34-36, 45, 67, 72-74, 83, 105, 110-112, 121, 142, 168-171, 181-182, 205-210, 214-219, 232
 matisse.utils                           0      0   100%   
 matisse.utils.mdx_mathjax              38      9    76%   17, 19, 24-29, 52
-matisse.utils.source_editor           144     45    69%   16-17, 54, 104-107, 123, 138, 180, 271, 286-288, 307-317, 339-344, 367-368, 392-403, 459, 464
+matisse.utils.source_editor           144     69    52%   16-17, 54, 77-80, 104-107, 123, 138, 179-186, 271, 286-288, 307-317, 339-344, 367-368, 370-371, 392-403, 424-427, 452, 454-464
 matisse.utils.utils                    29      2    93%   33, 39
 -----------------------------------------------------------------
-TOTAL                                2403    596    75%   
+TOTAL                                2403   1027    57%   
