@@ -24,6 +24,8 @@ class SuiteTest(unittest.TestCase):
     num_failures = 0
     failed = []
     for cdir in __compare_dirs__:
+      if cdir.endswith('checklists') and not __mdx_checklist__:
+        continue
       source = open(cdir+'/test.md').read()
       talk = Presentation(source=source)
       if open(cdir+'/test'+__pyver__+'/index.html').read() != talk.to_html():

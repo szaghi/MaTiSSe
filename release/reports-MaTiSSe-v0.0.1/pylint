@@ -37,50 +37,16 @@ Report
 ======
 7547 statements analysed.
 
-External dependencies
----------------------
-::
+Duplication
+-----------
 
-    markdown (matisse.utils.source_editor,matisse.utils.mdx_mathjax)
-      \-inlinepatterns (matisse.utils.mdx_mathjax)
-      \-util (matisse.utils.mdx_mathjax)
-    matisse 
-      \-config (matisse.matisse,matisse.presentation.subsection,matisse.presentation.section,matisse.presentation.presentation,matisse.utils.utils,matisse.presentation.slide)
-      \-data 
-      | \-data (matisse.theme.theme_element,matisse.presentation.metadata)
-      \-matisse (matisse.__main__,MaTiSSe)
-      \-presentation 
-      | \-metadata (matisse.presentation.presentation)
-      | \-presentation (matisse.matisse)
-      | \-regexs (matisse.presentation.titlepage,matisse.presentation.subsection,matisse.presentation.section,matisse.presentation.presentation)
-      | \-section (matisse.presentation.presentation)
-      | \-slide (matisse.presentation.titlepage,matisse.presentation.subsection,matisse.presentation.presentation)
-      | \-subsection (matisse.presentation.section,matisse.presentation.presentation)
-      | \-titlepage (matisse.presentation.presentation)
-      | \-toc (matisse.presentation.presentation)
-      \-theme 
-      | \-box (matisse.theme.note,matisse.theme.columns,matisse.theme.theme,matisse.presentation.slide,matisse.theme.figure,matisse.theme.table)
-      | \-canvas (matisse.theme.theme)
-      | \-columns (matisse.presentation.slide)
-      | \-figure (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
-      | \-heading (matisse.theme.theme)
-      | \-note (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
-      | \-selector (matisse.theme.theme)
-      | \-slide 
-      | | \-footer (matisse.theme.slide.slide)
-      | | \-header (matisse.theme.slide.slide)
-      | | \-position (matisse.presentation.slide,matisse.presentation.presentation)
-      | | \-sidebar (matisse.theme.slide.slide)
-      | | \-slide (matisse.theme.theme)
-      | \-table (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
-      | \-theme (matisse.presentation.titlepage,matisse.presentation.slide,matisse.presentation.presentation)
-      | \-theme_element (matisse.theme.toc,matisse.theme.heading,matisse.theme.selector,matisse.theme.slide.content,matisse.theme.note,matisse.theme.slide.header,matisse.theme.slide.slide,matisse.theme.canvas,matisse.theme.slide.footer,matisse.theme.slide.sidebar,matisse.theme.figure,matisse.theme.table)
-      | \-toc (matisse.theme.theme)
-      \-utils 
-        \-mdx_mathjax (matisse.utils.source_editor)
-        \-source_editor (matisse.theme.theme_element,matisse.matisse,matisse.data.data,matisse.theme.note,matisse.presentation.metadata,matisse.presentation.subsection,matisse.presentation.section,matisse.theme.columns,matisse.presentation.presentation,matisse.theme.theme,matisse.theme.slide.slide,matisse.presentation.titlepage,matisse.presentation.slide,matisse.theme.box,matisse.theme.figure,matisse.theme.table)
-        \-utils (matisse.matisse,matisse.presentation.regexs)
-    yattag (matisse.theme.note,matisse.presentation.metadata,matisse.theme.columns,matisse.presentation.presentation,matisse.presentation.slide,matisse.theme.box,matisse.presentation.toc,matisse.theme.figure,matisse.theme.table)
++-------------------------+-------+---------+-----------+
+|                         |now    |previous |difference |
++=========================+=======+=========+===========+
+|nb duplicated lines      |13767  |13767    |=          |
++-------------------------+-------+---------+-----------+
+|percent duplicated lines |74.947 |74.947   |=          |
++-------------------------+-------+---------+-----------+
 
 
 
@@ -115,19 +81,6 @@ Statistics by type
 +---------+-------+-----------+-----------+------------+---------+
 |function |55     |55         |=          |94.55       |5.45     |
 +---------+-------+-----------+-----------+------------+---------+
-
-
-
-Duplication
------------
-
-+-------------------------+-------+---------+-----------+
-|                         |now    |previous |difference |
-+=========================+=======+=========+===========+
-|nb duplicated lines      |13767  |13767    |=          |
-+-------------------------+-------+---------+-----------+
-|percent duplicated lines |74.947 |74.947   |=          |
-+-------------------------+-------+---------+-----------+
 
 
 
@@ -179,4 +132,51 @@ Messages
 Global evaluation
 -----------------
 Your code has been rated at 9.96/10 (previous run: 9.96/10, +0.00)
+
+External dependencies
+---------------------
+::
+
+    markdown (matisse.utils.source_editor,matisse.utils.mdx_mathjax)
+      \-inlinepatterns (matisse.utils.mdx_mathjax)
+      \-util (matisse.utils.mdx_mathjax)
+    matisse 
+      \-config (matisse.presentation.section,matisse.presentation.slide,matisse.presentation.subsection,matisse.utils.utils,matisse.matisse,matisse.presentation.presentation)
+      \-data 
+      | \-data (matisse.presentation.metadata,matisse.theme.theme_element)
+      \-matisse (matisse.__main__,MaTiSSe)
+      \-presentation 
+      | \-metadata (matisse.presentation.presentation)
+      | \-presentation (matisse.matisse)
+      | \-regexs (matisse.presentation.section,matisse.presentation.subsection,matisse.presentation.presentation,matisse.presentation.titlepage)
+      | \-section (matisse.presentation.presentation)
+      | \-slide (matisse.presentation.subsection,matisse.presentation.presentation,matisse.presentation.titlepage)
+      | \-subsection (matisse.presentation.section,matisse.presentation.presentation)
+      | \-titlepage (matisse.presentation.presentation)
+      | \-toc (matisse.presentation.presentation)
+      \-theme 
+      | \-box (matisse.theme.theme,matisse.presentation.slide,matisse.theme.columns,matisse.theme.table,matisse.theme.figure,matisse.theme.note)
+      | \-canvas (matisse.theme.theme)
+      | \-columns (matisse.presentation.slide)
+      | \-figure (matisse.theme.columns,matisse.theme.theme,matisse.presentation.slide)
+      | \-heading (matisse.theme.theme)
+      | \-note (matisse.theme.columns,matisse.theme.theme,matisse.presentation.slide)
+      | \-selector (matisse.theme.theme)
+      | \-slide 
+      | | \-footer (matisse.theme.slide.slide)
+      | | \-header (matisse.theme.slide.slide)
+      | | \-position (matisse.presentation.slide,matisse.presentation.presentation)
+      | | \-sidebar (matisse.theme.slide.slide)
+      | | \-slide (matisse.theme.theme)
+      | \-table (matisse.theme.columns,matisse.theme.theme,matisse.presentation.slide)
+      | \-theme (matisse.presentation.slide,matisse.presentation.presentation,matisse.presentation.titlepage)
+      | \-theme_element (matisse.theme.slide.content,matisse.theme.slide.header,matisse.theme.canvas,matisse.theme.slide.slide,matisse.theme.slide.sidebar,matisse.theme.toc,matisse.theme.table,matisse.theme.heading,matisse.theme.figure,matisse.theme.note,matisse.theme.selector,matisse.theme.slide.footer)
+      | \-toc (matisse.theme.theme)
+      \-utils 
+        \-mdx_mathjax (matisse.utils.source_editor)
+        \-source_editor (matisse.presentation.section,matisse.theme.theme,matisse.presentation.slide,matisse.presentation.subsection,matisse.presentation.titlepage,matisse.theme.slide.slide,matisse.theme.columns,matisse.matisse,matisse.presentation.presentation,matisse.theme.theme_element,matisse.theme.box,matisse.theme.table,matisse.theme.figure,matisse.theme.note,matisse.presentation.metadata,matisse.data.data)
+        \-utils (matisse.matisse,matisse.presentation.regexs)
+    yattag (matisse.presentation.slide,matisse.theme.columns,matisse.presentation.presentation,matisse.theme.box,matisse.theme.table,matisse.theme.figure,matisse.presentation.toc,matisse.presentation.metadata,matisse.theme.note)
+
+
 
