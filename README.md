@@ -239,8 +239,18 @@ It can be convenient to _clone_ the project:
 git clone https://github.com/szaghi/MaTiSSe
 ```
 ### <a name="pip-install"></a>Using, PyPI the Python Package Index
-Under developing.
+MaTiSSe.py can be installed by means of `pip`, the python installer that search into the PyPI (Python Package Index) for packages and automatically install them. Just type:
+```bash
+pip install MaTiSSe.py
+```
+Note that you need root permissions if you are not using your virtualenv or you are trying to install MaTiSSe.py into your system space.
 
+It is also worth noting that the `pip` installation will allow you to directly import MaTiSSe.py code-packages into your Python application by means of module import, e.g.
+```python
+from matisse.presentation.presentation import Presentation
+```
+will import the `Presentation` class into your python application.
+ 
 Go to [Top](#top) or [Toc](#toc)
 
 ## <a name="help"></a>Getting Help]
@@ -703,6 +713,19 @@ The left column is large 60% of the slide content width, while the right one is 
 $endcolumns
 ```
 This example defines a two columns contents separated by a vertical line with the left column being large 60% of the slide content width, while the right one is 40% wide.
+
+###### Checklists
+Like GitHub flavored markdown syntax, it is possible to use the checklist list enviroment (if the optional Python module `markdown-checklist` has been installed). To use such a list type:
+```md
+* [ ] foo;
+* [x] bar;
+* [ ] baz.
+```
+and it will rendered as:
+
+* [ ] foo;
+* [x] bar;
+* [ ] baz.
 
 ##### Titlepage
 A `titlepage` is indeed a special slide rather than a special environment. It is designed to be a special slide where is extremely easy to have a plain slide theme in order to build a special slide. Indeed all slide are easily customizable, as you seen in the following, but a `titlepage` can start from a plain theme rather than the default one. To define a `titlepage` the syntax is:
@@ -1610,6 +1633,9 @@ python MaTiSSe.py ...
 Go to [Top](#top) or [Toc](#toc)
 ## <a name="versions"></a>Version History
 In the following the changelog of most important releases is reported.
+### v0.0.2
+##### Download [ZIP](https://github.com/szaghi/MaTiSSe/archive/v0.0.2.zip) ball or [TAR](https://github.com/szaghi/MaTiSSe/archive/v0.0.2.tar.gz) one
+STABLE release. Fully backward compatible. Add PyPI installation support.
 ### v0.0.1
 ##### Download [ZIP](https://github.com/szaghi/MaTiSSe/archive/v0.0.1.zip) ball or [TAR](https://github.com/szaghi/MaTiSSe/archive/v0.0.1.tar.gz) one
 First, STABLE release.

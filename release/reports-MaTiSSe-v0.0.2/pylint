@@ -1,0 +1,182 @@
+************* Module matisse.presentation.titlepage
+W: 21, 2: __init__ method from base class 'Slide' is not called (super-init-not-called)
+************* Module matisse.utils.source_editor
+F: 14, 2: Unable to import 'markdown_checklist.extension' (import-error)
+************* Module matisse.utils.mdx_mathjax
+C: 11, 0: Missing class docstring (missing-docstring)
+C: 31, 0: Missing class docstring (missing-docstring)
+C: 34, 0: Missing class docstring (missing-docstring)
+C: 37, 0: Missing class docstring (missing-docstring)
+C: 40, 0: Missing class docstring (missing-docstring)
+C: 44, 0: Missing class docstring (missing-docstring)
+C: 51, 0: Invalid function name "makeExtension" (invalid-name)
+C: 51, 0: Missing function docstring (missing-docstring)
+W: 21, 2: __init__ method from base class 'Slide' is not called (super-init-not-called)
+W: 21, 2: __init__ method from base class 'Slide' is not called (super-init-not-called)
+F: 14, 2: Unable to import 'markdown_checklist.extension' (import-error)
+C: 11, 0: Missing class docstring (missing-docstring)
+C: 31, 0: Missing class docstring (missing-docstring)
+C: 34, 0: Missing class docstring (missing-docstring)
+C: 37, 0: Missing class docstring (missing-docstring)
+C: 40, 0: Missing class docstring (missing-docstring)
+C: 44, 0: Missing class docstring (missing-docstring)
+C: 51, 0: Invalid function name "makeExtension" (invalid-name)
+C: 51, 0: Missing function docstring (missing-docstring)
+F: 14, 2: Unable to import 'markdown_checklist.extension' (import-error)
+C: 11, 0: Missing class docstring (missing-docstring)
+C: 31, 0: Missing class docstring (missing-docstring)
+C: 34, 0: Missing class docstring (missing-docstring)
+C: 37, 0: Missing class docstring (missing-docstring)
+C: 40, 0: Missing class docstring (missing-docstring)
+C: 44, 0: Missing class docstring (missing-docstring)
+C: 51, 0: Invalid function name "makeExtension" (invalid-name)
+C: 51, 0: Missing function docstring (missing-docstring)
+
+
+Report
+======
+7549 statements analysed.
+
+Duplication
+-----------
+
++-------------------------+-------+---------+-----------+
+|                         |now    |previous |difference |
++=========================+=======+=========+===========+
+|nb duplicated lines      |13768  |13768    |=          |
++-------------------------+-------+---------+-----------+
+|percent duplicated lines |74.944 |74.944   |=          |
++-------------------------+-------+---------+-----------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |7939   |42.32 |7939     |=          |
++----------+-------+------+---------+-----------+
+|docstring |8961   |47.77 |8961     |=          |
++----------+-------+------+---------+-----------+
+|comment   |522    |2.78  |522      |=          |
++----------+-------+------+---------+-----------+
+|empty     |1336   |7.12  |1336     |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |112    |112        |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |113    |113        |=          |84.07       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |656    |656        |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |55     |55         |=          |94.55       |5.45     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |24     |24       |=          |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |=          |
++-----------+-------+---------+-----------+
+|warning    |3      |3        |=          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++-------------------------------+------+--------+---------+-----------+
+|module                         |error |warning |refactor |convention |
++===============================+======+========+=========+===========+
+|matisse.presentation.titlepage |0.00  |33.33   |0.00     |0.00       |
++-------------------------------+------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++----------------------+------------+
+|message id            |occurrences |
++======================+============+
+|missing-docstring     |21          |
++----------------------+------------+
+|super-init-not-called |3           |
++----------------------+------------+
+|invalid-name          |3           |
++----------------------+------------+
+|import-error          |3           |
++----------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 9.96/10 (previous run: 9.96/10, +0.00)
+
+External dependencies
+---------------------
+::
+
+    markdown (matisse.utils.source_editor,matisse.utils.mdx_mathjax)
+      \-inlinepatterns (matisse.utils.mdx_mathjax)
+      \-util (matisse.utils.mdx_mathjax)
+    matisse 
+      \-config (matisse.presentation.presentation,matisse.matisse,matisse.utils.utils,matisse.presentation.subsection,matisse.presentation.slide,matisse.presentation.section)
+      \-data 
+      | \-data (matisse.theme.theme_element,matisse.presentation.metadata)
+      \-matisse (MaTiSSe,matisse.__main__)
+      \-presentation 
+      | \-metadata (matisse.presentation.presentation)
+      | \-presentation (matisse.matisse)
+      | \-regexs (matisse.presentation.presentation,matisse.presentation.titlepage,matisse.presentation.section,matisse.presentation.subsection)
+      | \-section (matisse.presentation.presentation)
+      | \-slide (matisse.presentation.presentation,matisse.presentation.titlepage,matisse.presentation.subsection)
+      | \-subsection (matisse.presentation.presentation,matisse.presentation.section)
+      | \-titlepage (matisse.presentation.presentation)
+      | \-toc (matisse.presentation.presentation)
+      \-theme 
+      | \-box (matisse.theme.note,matisse.theme.columns,matisse.theme.table,matisse.theme.theme,matisse.theme.figure,matisse.presentation.slide)
+      | \-canvas (matisse.theme.theme)
+      | \-columns (matisse.presentation.slide)
+      | \-figure (matisse.theme.theme,matisse.theme.columns,matisse.presentation.slide)
+      | \-heading (matisse.theme.theme)
+      | \-note (matisse.theme.theme,matisse.theme.columns,matisse.presentation.slide)
+      | \-selector (matisse.theme.theme)
+      | \-slide 
+      | | \-footer (matisse.theme.slide.slide)
+      | | \-header (matisse.theme.slide.slide)
+      | | \-position (matisse.presentation.presentation,matisse.presentation.slide)
+      | | \-sidebar (matisse.theme.slide.slide)
+      | | \-slide (matisse.theme.theme)
+      | \-table (matisse.theme.theme,matisse.theme.columns,matisse.presentation.slide)
+      | \-theme (matisse.presentation.presentation,matisse.presentation.slide,matisse.presentation.titlepage)
+      | \-theme_element (matisse.theme.note,matisse.theme.slide.sidebar,matisse.theme.canvas,matisse.theme.table,matisse.theme.slide.header,matisse.theme.slide.footer,matisse.theme.toc,matisse.theme.heading,matisse.theme.selector,matisse.theme.slide.slide,matisse.theme.slide.content,matisse.theme.figure)
+      | \-toc (matisse.theme.theme)
+      \-utils 
+        \-mdx_mathjax (matisse.utils.source_editor)
+        \-source_editor (matisse.presentation.presentation,matisse.matisse,matisse.presentation.subsection,matisse.presentation.titlepage,matisse.theme.box,matisse.theme.note,matisse.data.data,matisse.theme.columns,matisse.theme.table,matisse.theme.theme_element,matisse.theme.slide.slide,matisse.presentation.metadata,matisse.theme.theme,matisse.theme.figure,matisse.presentation.slide,matisse.presentation.section)
+        \-utils (matisse.presentation.regexs,matisse.matisse)
+    yattag (matisse.presentation.presentation,matisse.theme.box,matisse.theme.note,matisse.presentation.toc,matisse.theme.columns,matisse.theme.table,matisse.presentation.metadata,matisse.theme.figure,matisse.presentation.slide)
+
+
+
