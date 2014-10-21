@@ -30,9 +30,12 @@ class SuiteTest(unittest.TestCase):
       talk = Presentation(source=source)
       if open(cdir+'/test'+__pyver__+'/index.html').read() != talk.to_html():
         num_failures += 1
-        failed.append(cdir)
+        failed.append([cdir,talk.to_html()])
     if len(failed)>0:
-      print(failed)
+      for fail in failed:
+        print(fail[0])
+        print(fail[1])
+        print()
     self.assertEquals(num_failures,0)
     return
 
