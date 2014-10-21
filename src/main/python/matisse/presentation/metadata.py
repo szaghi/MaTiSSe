@@ -30,6 +30,11 @@ class Metadata(object):
     ----------
     data : Data object
       presentation metadata
+
+    >>> source = '---metadata max_time = 60 ---endmetadata'
+    >>> meta = Metadata(source)
+    >>> meta.data.data['max_time'][0]
+    '60'
     """
     _skip = [seditor.regex_codeblock,seditor.regex_codeinline]
     self.data = Data(regex_start='[-]{3}metadata',regex_end='[-]{3}endmetadata',skip=_skip,special_keys=['__all__'])
@@ -89,7 +94,17 @@ class Metadata(object):
     return self.data.strip(source)
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    Returns
+    -------
+    str
+      string with option_names = values pairs (without True/False custom tag)
+
+    >>> meta = Metadata()
+    >>> meta.get_options().split('\\n')[16]
+    'max_time = 25'
+    """
     string = ['Presentation metadata']
     string.append(self.data.get_options())
     return ''.join(string)
@@ -106,6 +121,11 @@ class Metadata(object):
     -------
     str
       metadata value
+
+    >>> source = '---metadata authors = ["S. Zaghi","J. Doe"] ---endmetadata'
+    >>> meta = Metadata(source)
+    >>> meta.get_value(metadata='authors')
+    'S. Zaghi and J. Doe'
     """
     if metadata in self.data.data:
       if metadata == 'authors' or metadata == 'authors_short':
@@ -149,6 +169,11 @@ class Metadata(object):
     -------
     str
       html string containing the metadata
+
+    >>> source = '---metadata authors = ["S. Zaghi","J. Doe"] ---endmetadata'
+    >>> meta = Metadata(source)
+    >>> meta.to_html(metadata='authors')
+    '<span class="metadata">S. Zaghi and J. Doe</span>'
     """
     doc = Doc()
     if metadata == 'logo':
@@ -172,6 +197,11 @@ class Metadata(object):
     -------
     str
       source string parsed
+
+    >>> source = '---metadata authors = ["S. Zaghi","J. Doe"] ---endmetadata $authors'
+    >>> meta = Metadata(source)
+    >>> meta.parse(source)
+    '---metadata authors = ["S. Zaghi","J. Doe"] ---endmetadata <span class="metadata">S. Zaghi and J. Doe</span>'
     """
     protected, obfuscate_source = obfuscate(source = source)
     for meta in self.data.data:

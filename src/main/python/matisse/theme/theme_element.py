@@ -124,7 +124,7 @@ class ThemeElement(object):
     Other particular special entries must be handled into the subclass method.
 
     >>> elem = ThemeElement('header')
-    >>> source = '---header metadata = ["slidetitle"] ---endheader'
+    >>> source = '---header metadata = ["slidetitle"] \\n active = False---endheader'
     >>> elem.get(source)
     >>> eval(elem.data.data['metadata'][0])[0]
     'slidetitle'

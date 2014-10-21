@@ -74,6 +74,19 @@ class Theme(object):
       list of Selector objects for handling user defined custom selectors (e.g. <code> tags)
     toc : TOC object
       Table of Contents theme
+
+    >>> source =  '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> source += '---theme_slide_footer_1 height = 10% ---endtheme_slide_footer_1'
+    >>> source += '---theme_slide_sidebar_1 width = 10% ---endtheme_slide_sidebar_1'
+    >>> theme = Theme(source=source)
+    >>> theme.slide.headers['slide-header_1'].data.data['height'][0]
+    '10%'
+    >>> theme = Theme(defaults=True)
+    >>> theme.slide.has_header()
+    (True, 1)
+    >>> theme = Theme(defaults=True,set_all_custom=True)
+    >>> theme.slide.headers['slide-header_1'].data.data['height'][1]
+    True
     """
     self.__reset()
     self.canvas = Canvas()
@@ -179,6 +192,22 @@ class Theme(object):
     Parameters
     ----------
     other : Theme object
+
+    >>> source =  '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> source += '---theme_slide_footer_1 height = 10% ---endtheme_slide_footer_1'
+    >>> source += '---theme_slide_sidebar_1 width = 10% ---endtheme_slide_sidebar_1'
+    >>> thm1 = Theme(source=source)
+    >>> thm1.slide.headers['slide-header_1'].data.data['background'] = ['white',False]
+    >>> source =  '---theme_slide_header_1 background = red ---endtheme_slide_header_1'
+    >>> source += '---theme_slide_header_2 background = red ---endtheme_slide_header_2'
+    >>> source += '---theme_slide_footer_1 background = green ---endtheme_slide_footer_1'
+    >>> source += '---theme_slide_footer_2 background = green ---endtheme_slide_footer_2'
+    >>> source += '---theme_slide_sidebar_1 background = blue ---endtheme_slide_sidebar_1'
+    >>> source += '---theme_slide_sidebar_2 background = blue ---endtheme_slide_sidebar_2'
+    >>> thm2 = Theme(source=source)
+    >>> thm1.set_from(thm2)
+    >>> thm1.slide.headers['slide-header_1'].data.data['background'][0]
+    'red'
     """
     self.canvas.set_from(other=other.canvas)
     for hds,head in enumerate(self.headings):
@@ -188,24 +217,24 @@ class Theme(object):
     self.check_specials()
     return
 
-  def update(self,source):
-    """Method for updating data from source without creating new data.
+  #def update(self,source):
+  #  """Method for updating data from source without creating new data.
 
-    Parameters
-    ----------
-    source : str
-      string (as single stream) containing the source
-    """
-    self.canvas.get(source=source)
-    for hds in self.headings:
-      hds.get(source=source)
-    self.slide.update(source=source)
-    if len(self.selectors)>0:
-      for slr in self.selectors:
-        slr.get(source=source)
-    self.toc.get(source=source)
-    self.check_specials()
-    return
+  #  Parameters
+  #  ----------
+  #  source : str
+  #    string (as single stream) containing the source
+  #  """
+  #  self.canvas.get(source=source)
+  #  for hds in self.headings:
+  #    hds.get(source=source)
+  #  self.slide.update(source=source)
+  #  if len(self.selectors)>0:
+  #    for slr in self.selectors:
+  #      slr.get(source=source)
+  #  self.toc.get(source=source)
+  #  self.check_specials()
+  #  return
 
   def get_custom(self,chk_specials=False):
     """Method returning only the data that have been set by users (customized) overriding default values.
@@ -214,6 +243,16 @@ class Theme(object):
     ----------
     chk_specials : bool, optional
       if activated handle special entries differently from standard ones
+
+    Returns
+    -------
+    dict
+      dictionary of customized data
+
+    >>> thm1 = Theme(defaults=True)
+    >>> thm1.slide.headers['slide-header_1'].data.data['background'] = ['white',True]
+    >>> thm1.get_custom()['slide-header_1'].data['background'][0]
+    'white'
     """
     custom = self.slide.get_custom(chk_specials=chk_specials)
     custom['canvas'] = self.canvas.data.get_custom(chk_specials=chk_specials)
@@ -226,7 +265,17 @@ class Theme(object):
     return custom
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    Returns
+    -------
+    str
+      string with option_names = values pairs (without True/False custom tag)
+
+    >>> thm1 = Theme(defaults=True)
+    >>> thm1.get_options().split('\\n')[4]
+    'active = True'
+    """
     string = []
     string.append(self.canvas.get_options())
     for hds in self.headings:
@@ -253,6 +302,10 @@ class Theme(object):
       a string containing the css code of the theme if as_list = False
     list
       a list of one string containing the css code of the theme if as_list = True
+
+    >>> thm1 = Theme(defaults=True)
+    >>> thm1.get_css(as_list=True)[0].split('\\n')[4]
+    '  margin: 0;'
     """
     css = [__default_css__]
     css.append(self.canvas.get_css(only_custom=only_custom))

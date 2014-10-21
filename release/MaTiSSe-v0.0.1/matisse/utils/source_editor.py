@@ -98,10 +98,20 @@ class SourceEditor(object):
     str
       (first) matching block of source; if nothing matches None is returned; if group
       name is not passed the whole match is returned
+
+    >>> seditor = SourceEditor()
+    >>> source = '---test contents ---endtest other contents'
+    >>> regex = re.compile(r"(?P<test>[-]{3}test.*?[-]{3}endtest)",re.DOTALL)
+    >>> seditor.get(regex,source,'test')
+    '---test contents ---endtest'
+    >>> seditor.get(regex,source,'testNone')
+    '---test contents ---endtest'
+    >>> regex = re.compile(r"(?P<test>[-]{3}wrongtest.*?[-]{3}endwrongtest)",re.DOTALL)
+    >>> seditor.get(regex,source,'test')
     """
     match = re.match(regex,source)
     if match:
-      if group_name:
+      if group_name and group_name in match.groupdict():
         return match.group(group_name)
       else:
         return match.group()
@@ -119,6 +129,11 @@ class SourceEditor(object):
     -------
     str
       (first) matching code blocks of source; if nothing matches None is returned
+
+    >>> seditor = SourceEditor()
+    >>> source = '``` my code block ``` other contents'
+    >>> seditor.get_codeblocks(source)
+    '``` my code block ```'
     """
     return self.get(regex=__regex_codeblock__,group_name='cblock',source=source)
 
@@ -134,6 +149,11 @@ class SourceEditor(object):
     -------
     str
       (first) matching code blocks of source; if nothing matches None is returned
+
+    >>> seditor = SourceEditor()
+    >>> source = '` my code inline ` other contents'
+    >>> seditor.get_codeinlines(source)
+    '` my code inline `'
     """
     return self.get(regex=__regex_codeinline__,group_name='cline',source=source)
 
@@ -173,6 +193,12 @@ class SourceEditor(object):
     -------
     str
       purged string
+
+    >>> seditor = SourceEditor()
+    >>> source = '---test contents ---endtest other contents'
+    >>> regex = re.compile(r"(?P<test>[-]{3}test.*?[-]{3}endtest)",re.DOTALL)
+    >>> seditor.purge(regex,source,'test')
+    '                            other contents'
     """
     purged_source = source
     for match in re.finditer(regex,purged_source):
@@ -199,6 +225,11 @@ class SourceEditor(object):
     -------
     str
       purged string
+
+    >>> seditor = SourceEditor()
+    >>> source = '``` my code block ``` other contents'
+    >>> seditor.purge_codeblocks(source)
+    '                      other contents'
     """
     return self.purge(regex=__regex_codeblock__,group_name='cblock',source=source)
 
@@ -215,6 +246,11 @@ class SourceEditor(object):
     -------
     str
       purged string
+
+    >>> seditor = SourceEditor()
+    >>> source = '` my code inline ` other contents'
+    >>> seditor.purge_codeinlines(source)
+    '                   other contents'
     """
     return self.purge(regex=__regex_codeinline__,group_name='cline',source=source)
 
@@ -231,6 +267,11 @@ class SourceEditor(object):
     -------
     str
       purged string
+
+    >>> seditor = SourceEditor()
+    >>> source = '``` my code block ``` contents ` my code inline ` other contents'
+    >>> seditor.purge_codes(source)
+    '                      contents                    other contents'
     """
     source = self.purge_codeinlines(source=source)
     return self.purge_codeblocks(source=source)
@@ -248,6 +289,11 @@ class SourceEditor(object):
     -------
     str
       purged string
+
+    >>> seditor = SourceEditor()
+    >>> source = '---slide contents ---endslide other contents'
+    >>> seditor.purge_overtheme(source)
+    '                              other contents'
     """
     return self.purge(regex=__regex_overtheme__,group_name='ostheme',source=source)
 
@@ -267,6 +313,12 @@ class SourceEditor(object):
     -------
     str
       stripped string
+
+    >>> seditor = SourceEditor()
+    >>> source = '---test contents ---endtest other contents'
+    >>> regex = re.compile(r"(?P<test>[-]{3}test.*?[-]{3}endtest)",re.DOTALL)
+    >>> seditor.strip(regex,source,'test')
+    ' other contents'
     """
     return self.purge(regex=regex,source=source,group_name=group_name,strip=True)
 
@@ -282,6 +334,11 @@ class SourceEditor(object):
     -------
     str
       stripped string
+
+    >>> seditor = SourceEditor()
+    >>> source = '---slide contents ---endslide other contents'
+    >>> seditor.strip_overtheme(source)
+    ' other contents'
     """
     protected, obfuscate_source = obfuscate_codeblocks(source = source)
     obfuscate_source = self.strip(regex=__regex_overtheme__,source=obfuscate_source)
@@ -335,6 +392,13 @@ def obfuscate_protected(source,re_protected):
     list of str containing the contents of protected blocks
   str
     source with protected contents obfuscated and replaced by a safe placeholder
+
+  >>> source = '``` my code block ``` other contents'
+  >>> prot, ob_source = obfuscate_protected(source,__regex_codeblock__)
+  >>> prot[0][2]
+  '``` my code block ```'
+  >>> ob_source
+  '$PROTECTED-1 other contents'
   """
   obfuscate_source = source
   protected_contents = []
@@ -360,13 +424,20 @@ def obfuscate_codeblocks(source):
     list of str containing the contents of codeblocks
   str
     source with codeblocks contents obfuscated and replaced by a safe placeholder
+
+  >>> source = '``` my code block ``` other contents'
+  >>> prot, ob_source = obfuscate_codeblocks(source)
+  >>> prot[0][2]
+  '``` my code block ```'
+  >>> ob_source
+  '$PROTECTED-1 other contents'
   """
   obfuscate_source = source
   protected_contents = []
-  for match in re.finditer(__regex_codeblock__,source):
+  for match in re.finditer(__regex_codeblock__,obfuscate_source):
     protected_contents.append([match.start(),match.end(),match.group()])
     obfuscate_source = re.sub(__regex_codeblock__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
-  for match in re.finditer(__regex_codeblock_html__,source):
+  for match in re.finditer(__regex_codeblock_html__,obfuscate_source):
     protected_contents.append([match.start(),match.end(),match.group()])
     obfuscate_source = re.sub(__regex_codeblock_html__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
   return protected_contents,obfuscate_source
@@ -388,16 +459,25 @@ def obfuscate_codes(source):
     list of str containing the contents of codes
   str
     source with codes contents obfuscated and replaced by a safe placeholder
+
+  >>> source = '``` my code block ``` contents ` code inline ` other contents'
+  >>> prot, ob_source = obfuscate_codes(source)
+  >>> prot[0][2]
+  '``` my code block ```'
+  >>> prot[1][2]
+  '` code inline `'
+  >>> ob_source
+  '$PROTECTED-1 contents $PROTECTED-2 other contents'
   """
   obfuscate_source = source
   protected_contents = []
-  for match in re.finditer(__regex_codeblock__,source):
+  for match in re.finditer(__regex_codeblock__,obfuscate_source):
     protected_contents.append([match.start(),match.end(),match.group()])
     obfuscate_source = re.sub(__regex_codeblock__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
-  for match in re.finditer(__regex_codeblock_html__,source):
+  for match in re.finditer(__regex_codeblock_html__,obfuscate_source):
     protected_contents.append([match.start(),match.end(),match.group()])
     obfuscate_source = re.sub(__regex_codeblock_html__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
-  for match in re.finditer(__regex_codeinline__,source):
+  for match in re.finditer(__regex_codeinline__,obfuscate_source):
     protected_contents.append([match.start(),match.end(),match.group()])
     obfuscate_source = re.sub(__regex_codeinline__,'$PROTECTED-'+str(len(protected_contents)),obfuscate_source,1)
   return protected_contents,obfuscate_source
@@ -419,6 +499,11 @@ def illuminate_protected(source,protected_contents):
   -------
   str
     source with protected contents illuminated (reintroduced)
+
+  >>> source = '``` my code block ``` contents ` code inline ` other contents'
+  >>> prot, ob_source = obfuscate_codes(source)
+  >>> illuminate_protected(ob_source,prot)
+  '``` my code block ``` contents ` code inline ` other contents'
   """
   if len(protected_contents)>0:
     illuminate_source = source
@@ -445,6 +530,11 @@ def tokenize(source,re_part,name_part):
   list
     list of tokens whose elements are ['name',source_part]; name is name_part for parts matching re_part and
     'unknown' for anything else
+
+  >>> source = '---test contents ---endtest other contents'
+  >>> regex = re.compile(r"(?P<test>[-]{3}test.*?[-]{3}endtest)",re.DOTALL)
+  >>> tokenize(source,regex,'TEST')[0][1]
+  '---test contents ---endtest'
   """
   protected, obfuscate_source = obfuscate_codeblocks(source = source)
   matches = []

@@ -6,7 +6,9 @@ from shutil import rmtree
 import sys
 import unittest
 import matisse.data.data as data
+import matisse.presentation as presentation
 import matisse.theme as theme
+import matisse.utils as utils
 from matisse.presentation.presentation import Presentation
 from matisse.utils.source_editor import __mdx_checklist__
 from matisse.utils.utils import make_output_tree
@@ -43,7 +45,7 @@ class SuiteTest(unittest.TestCase):
     """Testing docstrings into modules."""
     num_failures = doctest.testmod(data)[0]
     self.assertEquals(num_failures,0)
-    num_failures = doctest.testmod(theme.theme_element)[0]
+    num_failures = doctest.testmod(presentation.metadata)[0]
     self.assertEquals(num_failures,0)
     num_failures = doctest.testmod(theme.slide.header)[0]
     self.assertEquals(num_failures,0)
@@ -54,6 +56,14 @@ class SuiteTest(unittest.TestCase):
     num_failures = doctest.testmod(theme.slide.content)[0]
     self.assertEquals(num_failures,0)
     num_failures = doctest.testmod(theme.slide.position)[0]
+    self.assertEquals(num_failures,0)
+    num_failures = doctest.testmod(theme.slide.slide)[0]
+    self.assertEquals(num_failures,0)
+    num_failures = doctest.testmod(theme.theme)[0]
+    self.assertEquals(num_failures,0)
+    num_failures = doctest.testmod(theme.theme_element)[0]
+    self.assertEquals(num_failures,0)
+    num_failures = doctest.testmod(utils.source_editor)[0]
     self.assertEquals(num_failures,0)
     return
 

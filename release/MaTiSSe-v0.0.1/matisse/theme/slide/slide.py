@@ -38,6 +38,13 @@ class Slide(ThemeElement):
       list of Footer objects for handling the slide footers
     sidebars : list
       list of Sidebar objects for handling the slide sidebars
+
+    >>> sld1 = Slide()
+    >>> sld1.data.data['width'][0]
+    '900px'
+    >>> sld2 = Slide(defaults=True)
+    >>> sld2.has_header()
+    (True, 1)
     """
     self.content  = Content()
     self.headers  = {}
@@ -72,6 +79,14 @@ class Slide(ThemeElement):
     return
 
   def __str__(self):
+    """
+    >>> source =  '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> source += '---theme_slide_footer_1 height = 10% ---endtheme_slide_footer_1'
+    >>> source += '---theme_slide_sidebar_1 width = 10% ---endtheme_slide_sidebar_1'
+    >>> sld1 = Slide(source=source)
+    >>> str(sld1).split('\\n')[4]
+    "  width : ['900px', False]"
+    """
     string = '\n  Global slide\n'
     string += super(Slide, self).__str__()
     if self.has_header():
@@ -99,6 +114,14 @@ class Slide(ThemeElement):
       True is Slide has at least one header, False otherwise
     int
       number of headers (0 if Slide has not header at all)
+
+    >>> source = '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1 ---theme_slide_header_2 height = 15% ---endtheme_slide_header_2'
+    >>> sld1 = Slide(source=source)
+    >>> sld1.has_header()
+    (True, 2)
+    >>> sld2 = Slide()
+    >>> sld2.has_header(source=source)
+    (True, 2)
     """
     if source:
       purged_source = seditor.purge_overtheme(source=source)
@@ -121,6 +144,14 @@ class Slide(ThemeElement):
       True is Slide has at least one footer, False otherwise
     int
       number of footers (0 if Slide has not footer at all)
+
+    >>> source = '---theme_slide_footer_1 height = 10% ---endtheme_slide_footer_1 ---theme_slide_footer_2 height = 15% ---endtheme_slide_footer_2'
+    >>> sld1 = Slide(source=source)
+    >>> sld1.has_footer()
+    (True, 2)
+    >>> sld2 = Slide()
+    >>> sld2.has_footer(source=source)
+    (True, 2)
     """
     if source:
       purged_source = seditor.purge_overtheme(source=source)
@@ -143,6 +174,14 @@ class Slide(ThemeElement):
       True is Slide has at least one sidebar, False otherwise
     int
       number of sidebars (0 if Slide has not sidebar at all)
+
+    >>> source = '---theme_slide_sidebar_1 height = 10% ---endtheme_slide_sidebar_1 ---theme_slide_sidebar_2 height = 15% ---endtheme_slide_sidebar_2'
+    >>> sld1 = Slide(source=source)
+    >>> sld1.has_sidebar()
+    (True, 2)
+    >>> sld2 = Slide()
+    >>> sld2.has_sidebar(source=source)
+    (True, 2)
     """
     if source:
       purged_source = seditor.purge_overtheme(source=source)
@@ -223,6 +262,22 @@ class Slide(ThemeElement):
     Parameters
     ----------
     other : ThemeSlide object
+
+    >>> source =  '---theme_slide_header_1 height = 10% ---endtheme_slide_header_1'
+    >>> source += '---theme_slide_footer_1 height = 10% ---endtheme_slide_footer_1'
+    >>> source += '---theme_slide_sidebar_1 width = 10% ---endtheme_slide_sidebar_1'
+    >>> sld1 = Slide(source=source)
+    >>> sld1.headers['slide-header_1'].data.data['background'] = ['white',False]
+    >>> source =  '---theme_slide_header_1 background = red ---endtheme_slide_header_1'
+    >>> source += '---theme_slide_header_2 background = red ---endtheme_slide_header_2'
+    >>> source += '---theme_slide_footer_1 background = green ---endtheme_slide_footer_1'
+    >>> source += '---theme_slide_footer_2 background = green ---endtheme_slide_footer_2'
+    >>> source += '---theme_slide_sidebar_1 background = blue ---endtheme_slide_sidebar_1'
+    >>> source += '---theme_slide_sidebar_2 background = blue ---endtheme_slide_sidebar_2'
+    >>> sld2 = Slide(source=source)
+    >>> sld1.set_from(sld2)
+    >>> sld1.headers['slide-header_1'].data.data['background'][0]
+    'red'
     """
 
     self.content.set_from(other=other.content)
@@ -255,7 +310,14 @@ class Slide(ThemeElement):
     return
 
   def set_all_custom(self):
-    """Method for setting all data as customized by user (useful for plain slides theme)."""
+    """Method for setting all data as customized by user (useful for plain slides theme).
+
+    >>> sld1 = Slide(defaults=True)
+    >>> sld1.set_all_custom()
+    >>> sld1.data.data['width'][1]
+    True
+    """
+    self.data.set_all_custom()
     self.content.set_all_custom()
     for hds in self.headers:
       self.headers[hds].set_all_custom()
@@ -265,27 +327,27 @@ class Slide(ThemeElement):
       self.sidebars[sbr].set_all_custom()
     return
 
-  def update(self,source):
-    """Method for updating data from source without creating new data.
+  #def update(self,source):
+  #  """Method for updating data from source without creating new data.
 
-    Parameters
-    ----------
-    source : str
-      string (as single stream) containing the source
-    """
-    super(Slide,self).get(source)
-    self.content.get(source)
-    if self.has_header():
-      for hdr in self.headers.values():
-        hdr.get(source)
-    if self.has_footer():
-      for ftr in self.footers.values():
-        ftr.get(source)
-    if self.has_sidebar():
-      for sbr in self.sidebars.values():
-        sbr.get(source)
-    self.adjust_dims()
-    return
+  #  Parameters
+  #  ----------
+  #  source : str
+  #    string (as single stream) containing the source
+  #  """
+  #  super(Slide,self).get(source)
+  #  self.content.get(source)
+  #  if self.has_header():
+  #    for hdr in self.headers.values():
+  #      hdr.get(source)
+  #  if self.has_footer():
+  #    for ftr in self.footers.values():
+  #      ftr.get(source)
+  #  if self.has_sidebar():
+  #    for sbr in self.sidebars.values():
+  #      sbr.get(source)
+  #  self.adjust_dims()
+  #  return
 
   def check_specials(self):
     """Method for checking specials data entries.
@@ -346,6 +408,11 @@ class Slide(ThemeElement):
     -------
     dict
       dictionary of customized data
+
+    >>> sld1 = Slide(defaults=True)
+    >>> sld1.headers['slide-header_1'].data.data['background'] = ['white',True]
+    >>> sld1.get_custom()['slide-header_1'].data['background'][0]
+    'white'
     """
     custom = {}
     custom['slide-content'] = self.content.data.get_custom(chk_specials=chk_specials)
@@ -364,7 +431,17 @@ class Slide(ThemeElement):
     return custom
 
   def get_options(self):
-    """Method for getting the available data options."""
+    """Method for getting the available data options.
+
+    Returns
+    -------
+    str
+      string with option_names = values pairs (without True/False custom tag)
+
+    >>> sld1 = Slide(defaults=True)
+    >>> sld1.get_options().split('\\n')[5]
+    'width = 900px'
+    """
     string = ['\n\nSlide Global']
     string.append(self.data.get_options())
     if self.has_header():
@@ -395,6 +472,10 @@ class Slide(ThemeElement):
       a string containing the css code of the theme if as_list = False
     list
       a list of one string containing the css code of the theme if as_list = True
+
+    >>> sld1 = Slide(defaults=True)
+    >>> sld1.get_css(as_list=True)[0].split('\\n')[5]
+    '  width: 900px;'
     """
     css = ["\n.slide {\n  display: block;\n  padding: 0;\n  margin: 0;"+super(Slide,self).get_css(only_custom=only_custom)+"\n}\n"]
     if self.has_header():
