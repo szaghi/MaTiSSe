@@ -4,6 +4,7 @@ MaTiSSe.py, Markdown To Impressive Scientific Slides
 """
 __appname__ = "MaTiSSe.py"
 __description__ = "MaTiSSe.py, Markdown To Impressive Scientific Slides"
+__long_description__ = "MaTiSSe.py, Markdown To Impressive Scientific Slides. It is a very simple and stupid-to-use (KISS) presentation maker based on simple markdown syntax producing high quality first-class html/css presentation with great support for scientific contents."
 __version__ = "v0.0.1"
 __author__ = "Stefano Zaghi"
 __author_email__ = "stefano.zaghi@gmail.com"
