@@ -22,12 +22,15 @@ class SuiteTest(unittest.TestCase):
     """Testing compare tests."""
     self.maxDiff = None
     num_failures = 0
+    failed = []
     for cdir in __compare_dirs__:
-      print('Testing '+cdir)
       source = open(cdir+'/test.md').read()
       talk = Presentation(source=source)
       if open(cdir+'/test'+__pyver__+'/index.html').read() != talk.to_html():
         num_failures += 1
+        failed.append(cdir)
+    if len(failed)>0:
+      print(failed)
     self.assertEquals(num_failures,0)
     return
 

@@ -41,30 +41,30 @@ External dependencies
 ---------------------
 ::
 
-    markdown (matisse.utils.mdx_mathjax,matisse.utils.source_editor)
+    markdown (matisse.utils.source_editor,matisse.utils.mdx_mathjax)
       \-inlinepatterns (matisse.utils.mdx_mathjax)
       \-util (matisse.utils.mdx_mathjax)
     matisse 
-      \-config (matisse.matisse,matisse.presentation.presentation,matisse.presentation.section,matisse.presentation.slide,matisse.utils.utils,matisse.presentation.subsection)
+      \-config (matisse.matisse,matisse.presentation.subsection,matisse.presentation.section,matisse.presentation.presentation,matisse.utils.utils,matisse.presentation.slide)
       \-data 
-      | \-data (matisse.presentation.metadata,matisse.theme.theme_element)
+      | \-data (matisse.theme.theme_element,matisse.presentation.metadata)
       \-matisse (matisse.__main__,MaTiSSe)
       \-presentation 
       | \-metadata (matisse.presentation.presentation)
       | \-presentation (matisse.matisse)
-      | \-regexs (matisse.presentation.section,matisse.presentation.titlepage,matisse.presentation.subsection,matisse.presentation.presentation)
+      | \-regexs (matisse.presentation.titlepage,matisse.presentation.subsection,matisse.presentation.section,matisse.presentation.presentation)
       | \-section (matisse.presentation.presentation)
       | \-slide (matisse.presentation.titlepage,matisse.presentation.subsection,matisse.presentation.presentation)
       | \-subsection (matisse.presentation.section,matisse.presentation.presentation)
       | \-titlepage (matisse.presentation.presentation)
       | \-toc (matisse.presentation.presentation)
       \-theme 
-      | \-box (matisse.theme.table,matisse.presentation.slide,matisse.theme.figure,matisse.theme.theme,matisse.theme.columns,matisse.theme.note)
+      | \-box (matisse.theme.note,matisse.theme.columns,matisse.theme.theme,matisse.presentation.slide,matisse.theme.figure,matisse.theme.table)
       | \-canvas (matisse.theme.theme)
       | \-columns (matisse.presentation.slide)
-      | \-figure (matisse.theme.columns,matisse.presentation.slide,matisse.theme.theme)
+      | \-figure (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
       | \-heading (matisse.theme.theme)
-      | \-note (matisse.theme.columns,matisse.presentation.slide,matisse.theme.theme)
+      | \-note (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
       | \-selector (matisse.theme.theme)
       | \-slide 
       | | \-footer (matisse.theme.slide.slide)
@@ -72,15 +72,15 @@ External dependencies
       | | \-position (matisse.presentation.slide,matisse.presentation.presentation)
       | | \-sidebar (matisse.theme.slide.slide)
       | | \-slide (matisse.theme.theme)
-      | \-table (matisse.theme.columns,matisse.presentation.slide,matisse.theme.theme)
+      | \-table (matisse.presentation.slide,matisse.theme.columns,matisse.theme.theme)
       | \-theme (matisse.presentation.titlepage,matisse.presentation.slide,matisse.presentation.presentation)
-      | \-theme_element (matisse.theme.slide.slide,matisse.theme.slide.content,matisse.theme.slide.footer,matisse.theme.table,matisse.theme.heading,matisse.theme.toc,matisse.theme.canvas,matisse.theme.selector,matisse.theme.figure,matisse.theme.slide.sidebar,matisse.theme.slide.header,matisse.theme.note)
+      | \-theme_element (matisse.theme.toc,matisse.theme.heading,matisse.theme.selector,matisse.theme.slide.content,matisse.theme.note,matisse.theme.slide.header,matisse.theme.slide.slide,matisse.theme.canvas,matisse.theme.slide.footer,matisse.theme.slide.sidebar,matisse.theme.figure,matisse.theme.table)
       | \-toc (matisse.theme.theme)
       \-utils 
         \-mdx_mathjax (matisse.utils.source_editor)
-        \-source_editor (matisse.theme.slide.slide,matisse.presentation.metadata,matisse.matisse,matisse.theme.table,matisse.theme.box,matisse.theme.theme_element,matisse.presentation.presentation,matisse.data.data,matisse.presentation.section,matisse.presentation.slide,matisse.theme.figure,matisse.theme.theme,matisse.presentation.titlepage,matisse.theme.columns,matisse.presentation.subsection,matisse.theme.note)
+        \-source_editor (matisse.theme.theme_element,matisse.matisse,matisse.data.data,matisse.theme.note,matisse.presentation.metadata,matisse.presentation.subsection,matisse.presentation.section,matisse.theme.columns,matisse.presentation.presentation,matisse.theme.theme,matisse.theme.slide.slide,matisse.presentation.titlepage,matisse.presentation.slide,matisse.theme.box,matisse.theme.figure,matisse.theme.table)
         \-utils (matisse.matisse,matisse.presentation.regexs)
-    yattag (matisse.presentation.metadata,matisse.theme.table,matisse.presentation.toc,matisse.theme.box,matisse.presentation.presentation,matisse.presentation.slide,matisse.theme.figure,matisse.theme.columns,matisse.theme.note)
+    yattag (matisse.theme.note,matisse.presentation.metadata,matisse.theme.columns,matisse.presentation.presentation,matisse.presentation.slide,matisse.theme.box,matisse.presentation.toc,matisse.theme.figure,matisse.theme.table)
 
 
 
