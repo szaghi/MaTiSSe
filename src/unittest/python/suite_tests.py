@@ -23,6 +23,7 @@ class SuiteTest(unittest.TestCase):
     self.maxDiff = None
     num_failures = 0
     for cdir in __compare_dirs__:
+      print('Testing '+cdir)
       source = open(cdir+'/test.md').read()
       talk = Presentation(source=source)
       if open(cdir+'/test'+__pyver__+'/index.html').read() != talk.to_html():
