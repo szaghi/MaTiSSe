@@ -1,9 +1,5 @@
 [![Build Status](https://travis-ci.org/szaghi/MaTiSSe.png)](https://travis-ci.org/szaghi/MaTiSSe)
 [![Coverage Status](https://img.shields.io/coveralls/szaghi/MaTiSSe.svg)](https://coveralls.io/r/szaghi/MaTiSSe)
-[![Latest Version](https://pypip.in/version/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
-[![Supported Python versions](https://pypip.in/py_versions/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
-[![License](https://pypip.in/license/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
-[![Development Status](https://pypip.in/status/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
 [![Ready in backlog](https://badge.waffle.io/szaghi/matisse.png?label=ready&title=Ready)](https://waffle.io/szaghi/matisse)
 [![Open bugs](https://badge.waffle.io/szaghi/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/matisse)
 

@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 """Build script for MaTiSSe.py"""
-from pybuilder.core import Author,init,use_plugin
+import os
+from pybuilder.core import Author,init,task,use_plugin
+from shutil import copyfile
 import re
 
+#use_plugin('copy_resources')
 use_plugin('python.core')
-use_plugin('python.unittest')
 use_plugin('python.coverage')
-use_plugin('python.pylint')
 use_plugin('python.install_dependencies')
+#use_plugin('python.pylint')
+use_plugin('python.unittest')
 
 __source__ = open('src/main/python/matisse/matisse.py').read()
 
@@ -35,5 +38,17 @@ def initialize(project):
   project.set_property('dir_target','release')
   project.set_property('dir_dist','release/'+project.name+'-'+project.version)
   project.set_property('dir_reports','release/reports-'+project.name+'-'+project.version)
+  #project.set_property('copy_resources_target','$dir_dist')
+  #project.get_property('copy_resources_glob').append('MANIFEST.in')
 
-  project.default_task = ['analyze','publish']
+  project.default_task = ['analyze','publish','copy_resources']
+  return
+
+@task
+def copy_resources(project):
+  """Copy non source resource files."""
+  copyfile('MANIFEST.in','release/'+project.name+'-'+project.version+'/MANIFEST.in')
+  for mdf in os.listdir('.'):
+    if mdf.endswith('.md'):
+      copyfile(mdf,'release/'+project.name+'-'+project.version+'/'+mdf)
+  return
