@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="matisse-universe.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3843">
+      <stop
+         style="stop-color:#dcdcdc;stop-opacity:0;"
+         offset="0"
+         id="stop3845" />
+      <stop
+         style="stop-color:#dcdcdc;stop-opacity:1;"
+         offset="1"
+         id="stop3847" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3843"
+       id="radialGradient3849"
+       cx="361.42856"
+       cy="423.79077"
+       fx="361.42856"
+       fy="423.79077"
+       r="620.95214"
+       gradientTransform="matrix(4.0330968,0,0,2.2084519,-1096.2479,-512.13072)"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:collect="always"
+       id="filter3903">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.67083407"
+         id="feGaussianBlur3905" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="179.2697"
+     inkscape:cy="605.57677"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="false"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1857"
+     inkscape:window-height="1178"
+     inkscape:window-x="61"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:url(#radialGradient3849);stroke:none;stroke-width:10;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+       id="rect2985"
+       width="1217.2168"
+       height="840.07397"
+       x="-247.17984"
+       y="3.7537689"
+       ry="0"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <path
+       transform="matrix(1.3982907,0,0,1.5297336,-61.934403,-137.62342)"
+       style="fill:none;stroke:#000000;stroke-width:2.05123122;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;stroke-dasharray:none"
+       d="m -14.433066,153.6434 c 211.050616,9.04282 422.101236,-7.93485 633.151856,0 12.75218,149.0252 -13.69089,296.20383 0,447.43756 -211.05062,-13.0342 -422.10124,17.42148 -633.151856,0 11.8128446,-154.10323 -21.442472,-310.13947 0,-447.43756 z"
+       id="rect3755"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="-231.42857"
+       y="46.6479"
+       id="text3831"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833"
+         x="-231.42857"
+         y="46.6479"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Infinite Canvas</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="662.05359"
+       y="85.545792"
+       id="text3831-6"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9"
+         x="662.05359"
+         y="85.545792"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Slide</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m -81.428571,135.79071 c 260.279741,16.95926 594.696751,-28.73266 882.857141,0"
+       id="path3907"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       d="m -81.428571,175.64789 c 271.584841,21.96129 583.198401,-43.09501 882.857141,0"
+       id="path3907-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m -81.428571,215.50507 c 257.359191,15.43981 588.607751,-38.66336 882.857131,0"
+       id="path3907-8-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="107.24049"
+       y="125.38452"
+       id="text3831-6-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5"
+         x="107.24049"
+         y="125.38452"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS">Header 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="107.24049"
+       y="163.75916"
+       id="text3831-6-5-1"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-1"
+         x="107.24049"
+         y="163.75916"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Header 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="107.24049"
+       y="202.13379"
+       id="text3831-6-5-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-8"
+         x="107.24049"
+         y="202.13379"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Header NH</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M -74.285714,678.36218 C 216.58005,649.16224 498.51452,703.65524 792.85713,681.21932"
+       id="path3907-8-5-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M -67.142857,712.07648 C 229.32853,686.59512 486.06234,735.31803 788.57142,710.64791"
+       id="path3907-8-5-41"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       d="M -68.571428,747.21934 C 220.98538,722.32893 472.93838,789.8792 787.14286,741.50506"
+       id="path3907-8-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="107.24049"
+       y="695.56238"
+       id="text3831-6-5-12"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-7"
+         x="107.24049"
+         y="695.56238"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Footer 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="107.24049"
+       y="734.56238"
+       id="text3831-6-5-12-4"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-7-5"
+         x="107.24049"
+         y="734.56238"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Footer 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="107.24049"
+       y="773.56238"
+       id="text3831-6-5-12-1"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-7-0"
+         x="107.24049"
+         y="773.56238"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Footer NF</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       d="m 771.14288,223.79077 c -12.81911,147.46083 15.66429,298.9659 0,453.44885"
+       id="path3907-8-5-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 700.85712,213.79077 c -43.87338,154.48295 23.5114,308.9659 0,463.44885"
+       id="path3907-8-5-7-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 735,213.79077 c -17.03964,148.54094 12.72239,308.9659 0,463.44885"
+       id="path3907-8-5-7-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="-466.99387"
+       y="720.58673"
+       id="text3831-6-5-51"
+       sodipodi:linespacing="125%"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-71"
+         x="-466.99387"
+         y="720.58673"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Sidebar NL+1</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M -45.142857,225.21934 C -56.722086,379.67085 -37.135177,504.08207 -48,665.81105"
+       id="path3907-8-5-7-3-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 22.285714,225.21934 C 15.481725,370.1297 59.046942,503.83385 25.142857,661.52533"
+       id="path3907-8-5-7-3-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       d="m -11.142857,223.79077 c -20.161258,157.87581 16.3221468,285.91021 0,453.44885"
+       id="path3907-8-5-7-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="-502.99387"
+       y="-60.799805"
+       id="text3831-6-5-51-4"
+       sodipodi:linespacing="125%"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-71-2"
+         x="-502.99387"
+         y="-60.799805"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Sidebar 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="-502.99387"
+       y="-19.656948"
+       id="text3831-6-5-51-2"
+       sodipodi:linespacing="125%"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-71-8"
+         x="-502.99387"
+         y="-19.656948"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Sidebar 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="-502.99387"
+       y="19.485909"
+       id="text3831-6-5-51-1"
+       sodipodi:linespacing="125%"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-71-9"
+         x="-502.99387"
+         y="19.485909"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Sidebar NL</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="-466.99387"
+       y="757.4649"
+       id="text3831-6-5-51-8"
+       sodipodi:linespacing="125%"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-71-3"
+         x="-466.99387"
+         y="757.4649"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Sidebar NL+2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="-466.99387"
+       y="794.34308"
+       id="text3831-6-5-51-6"
+       sodipodi:linespacing="125%"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-71-5"
+         x="-466.99387"
+         y="794.34308"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Sidebar NL+NR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Terminal"
+       x="195.04045"
+       y="456.13379"
+       id="text3831-6-5-2"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stefano/python/MaTiSSe/examples/getting_started/images/matisse-universe.png"
+       inkscape:export-xdpi="151.37953"
+       inkscape:export-ydpi="151.37953"><tspan
+         sodipodi:role="line"
+         id="tspan3833-9-5-0"
+         x="195.04045"
+         y="456.13379"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold">Slide Content</tspan></text>
+  </g>
+</svg>
