@@ -13,7 +13,7 @@
 A very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
 
 #### A Taste of MaTiSSe.py
-Just fews screenshots form the `getting started` presentation.
+See MaTiSSe.py in action with the [getting started presentation](http://szaghi.github.io/MaTiSSe/#/slide-1) or see the following screenshots.
 
 ##### The Titlepage
 ![shot01](screenshots/01.png)
@@ -59,7 +59,23 @@ Go to [Top](#top) or [Toc](#toc)
 
 ## <a name="why"></a>Why?
 
-There are tons of markdown to html presentation tools. 
+There are tons of markdown (or similar source) to html presentation tools. In a non-special order (limiting to some GitHub hosted projects): 
+
++ [Cleaver](https://github.com/jdan/cleaver);
++ [Impressor](https://github.com/scommab/impressor);
++ [imark](https://github.com/SweetyCoder/imark);
++ [Hekyll](https://github.com/NgaNguyenDuy/hekyll);
++ [mdpress](https://github.com/egonSchiele/mdpress);
++ [Jekyller](https://github.com/shower/jekyller);
++ [reveal-ck](https://github.com/jedcn/reveal-ck);
++ [jekyll-reveal](https://github.com/dploeger/jekyll-revealjs);
++ [jekyll-slides](https://github.com/bleonard/jekyll-slides);
++ [Markdown Presenter](https://github.com/jsakamoto/MarkdownPresenter);
++ [Markdown2impress](https://github.com/tsucchi/ruby-markdown2impress);
++ [Landslide](https://github.com/adamzap/landslide);
++ [remark](https://github.com/gnab/remark);
++ [Hovercraft](https://github.com/regebro/hovercraft);
++ [Flowtime.js](https://github.com/marcolago/flowtime.js).
 
 #### Why yet another presenter?
 
