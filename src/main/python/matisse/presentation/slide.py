@@ -84,6 +84,9 @@ class Slide(object):
     self.overtheme = None
     self.pos = Position()
     self.__get_overtheme(theme=theme)
+    # metadata autoparsing...
+    for meta in ['sectiontitle','subsectiontitle','slidetitle']:
+      self.data[meta] = self.parse_metadata(source = self.data[meta])
     return
 
   def __get_overtheme(self,theme=None):
@@ -168,7 +171,7 @@ class Slide(object):
       doc.asis(self.data[metadata])
     return doc.getvalue()
 
-  def parse_metadata(self):
+  def parse_metadata(self,source):
     """Method for parsing metadata of slide level that are not parsed from presentation metadata parsing.
 
     The slide level metadata are:
@@ -179,7 +182,7 @@ class Slide(object):
     + slidetitle: the title of each slide that is obtained parsing your source;
     + slidenumber: the number of each slide that is obtained parsing your source.
     """
-    protected, obfuscate_source = obfuscate(source = self.raw_body)
+    protected, obfuscate_source = obfuscate(source = source)
     for meta in ['sectiontitle', 'sectionnumber', 'subsectiontitle', 'subsectionnumber', 'slidetitle', 'slidenumber']:
       if meta !='toc':
         regex = re.compile(r"\$"+meta+r"(\[(?P<style>.*?)\])*",re.DOTALL)
@@ -188,8 +191,7 @@ class Slide(object):
           if match.group('style'):
             style = str(match.group('style'))
           obfuscate_source = re.sub(regex,self.metadata_to_html(metadata=meta,style=style),obfuscate_source,1)
-    self.raw_body = illuminate(source=obfuscate_source,protected_contents=protected)
-    return
+    return illuminate(source=obfuscate_source,protected_contents=protected)
 
   def raw_body_parse(self):
     """Method for parsing raw_body.
@@ -199,7 +201,6 @@ class Slide(object):
     str
       string containing the parsed raw_body
     """
-    self.parse_metadata()
     tokens = columns.tokenize(source=self.raw_body)
     parsed_body = ''
     for token in tokens:
@@ -211,7 +212,7 @@ class Slide(object):
         parsed_body += '\n'+seditor.md_convert(content)
       elif token[0]=='columns':
         parsed_body += '\n'+columns.parse(source=token[1])
-    return parsed_body
+    return self.parse_metadata(source = parsed_body)
 
   def to_html(self,position,theme):
     """Method for converting slide content into html format.
@@ -250,8 +251,6 @@ class Slide(object):
         for sidebar in actual_theme.loop_over_sidebars():
           if sidebar.position == 'L':
             sidebar.to_html(doc=doc,metadata=self.data)
-        if self.number == 2:
-          self.raw_body_parse()
         actual_theme.content.to_html(doc=doc,content='\n'+self.raw_body_parse())
         for sidebar in actual_theme.loop_over_sidebars():
           if sidebar.position == 'R':

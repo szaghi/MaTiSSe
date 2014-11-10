@@ -11,9 +11,8 @@
 
 # MaTiSSe.py
 ### MaTiSSe.py, Markdown To Impressive Scientifiic Slides
-A very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
+MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
 
-+ MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents;
 + MaTiSSe.py is **NOT** *WYSIWYG*: it converts your sources to high quality html presentation with the same approach of LaTeX typesetting;
 + MaTiSSe.py is tailored to scientific contents (equations, figures, tables, etc...);
 + MaTiSSe.py is a Command Line Tool;
