@@ -9,7 +9,7 @@ matisse.presentation.metadata          83     14    83%   65-67, 133-136, 151-15
 matisse.presentation.presentation     175     31    82%   68-71, 111, 144-145, 167-177, 181-184, 193, 240-242, 267, 283-286
 matisse.presentation.regexs            11      0   100%   
 matisse.presentation.section           55     12    78%   82-92, 108
-matisse.presentation.slide            138     16    88%   99-106, 124, 127, 262-267
+matisse.presentation.slide            137     16    88%   103-110, 128, 131, 262-267
 matisse.presentation.subsection        63     11    83%   80-88, 105, 108
 matisse.presentation.titlepage         36      8    78%   40, 44-47, 72-74
 matisse.presentation.toc               88     21    76%   43, 71-72, 75, 106-107, 110, 136-148, 165, 173-174
@@ -37,4 +37,4 @@ matisse.utils.mdx_mathjax              38      9    76%   17, 19, 24-29, 52
 matisse.utils.source_editor           144     16    89%   16-17, 54, 364-374, 478-479, 549
 matisse.utils.utils                    29      2    93%   33, 39
 -----------------------------------------------------------------
-TOTAL                                2380    270    89%   
+TOTAL                                2379    270    89%   

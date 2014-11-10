@@ -86,7 +86,8 @@ class Slide(object):
     self.__get_overtheme(theme=theme)
     # metadata autoparsing...
     for meta in ['sectiontitle','subsectiontitle','slidetitle']:
-      self.data[meta] = self.parse_metadata(source = self.data[meta])
+      if meta in self.data:
+        self.data[meta] = self.parse_metadata(source = self.data[meta])
     return
 
   def __get_overtheme(self,theme=None):
