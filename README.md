@@ -10,7 +10,7 @@
 [![Open bugs](https://badge.waffle.io/szaghi/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/matisse)
 
 # MaTiSSe.py
-### MaTiSSe.py, Markdown To Impressive Scientifiic Slides
+### MaTiSSe.py, Markdown To Impressive Scientific Slides
 MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
 
 + MaTiSSe.py is **NOT** *WYSIWYG*: it converts your sources to high quality html presentation with the same approach of LaTeX typesetting;
@@ -20,7 +20,7 @@ MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple
 
 #### Documentation
 
-MaTiSSe.py has a comprehensive [wiki](https://github.com/szaghi/MaTiSSe/wiki): read it to know how to install and use MaTiSSe.py. 
+MaTiSSe.py has a comprehensive [wiki](https://github.com/szaghi/MaTiSSe/wiki): read it to know how to install and use MaTiSSe.py.
 
 #### A Taste of MaTiSSe.py
 See MaTiSSe.py in action with the [getting started presentation](http://szaghi.github.io/MaTiSSe/#/slide-1) or see the following screenshots.

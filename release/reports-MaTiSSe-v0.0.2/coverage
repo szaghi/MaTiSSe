@@ -6,10 +6,10 @@ matisse.data                            0      0   100%
 matisse.data.data                     113      6    95%   74-76, 142, 225, 289
 matisse.presentation                    0      0   100%   
 matisse.presentation.metadata          83     14    83%   65-67, 133-136, 151-156, 180, 184, 213
-matisse.presentation.presentation     175     31    82%   68-71, 111, 144-145, 167-177, 181-184, 193, 240-242, 267, 283-286
+matisse.presentation.presentation     219     66    70%   74-77, 80-115, 155, 188, 190-191, 213-223, 227-230, 239, 269, 280, 282, 296-298, 323, 339-342
 matisse.presentation.regexs            11      0   100%   
 matisse.presentation.section           55     12    78%   82-92, 108
-matisse.presentation.slide            137     16    88%   103-110, 128, 131, 262-267
+matisse.presentation.slide            135     16    88%   99-106, 124, 127, 258-264
 matisse.presentation.subsection        63     11    83%   80-88, 105, 108
 matisse.presentation.titlepage         36      8    78%   40, 44-47, 72-74
 matisse.presentation.toc               88     21    76%   43, 71-72, 75, 106-107, 110, 136-148, 165, 173-174
@@ -25,7 +25,7 @@ matisse.theme.slide                     0      0   100%
 matisse.theme.slide.content            45      1    98%   112
 matisse.theme.slide.footer             27      1    96%   80
 matisse.theme.slide.header             27      1    96%   81
-matisse.theme.slide.position           70      4    94%   31-34
+matisse.theme.slide.position           73      8    89%   25, 34-37, 179-181
 matisse.theme.slide.sidebar            61      3    95%   89, 92, 165
 matisse.theme.slide.slide             216      0   100%   
 matisse.theme.table                    68      7    90%   129-130, 140-141, 146-147, 165
@@ -37,4 +37,4 @@ matisse.utils.mdx_mathjax              38      9    76%   17, 19, 24-29, 52
 matisse.utils.source_editor           144     16    89%   16-17, 54, 364-374, 478-479, 549
 matisse.utils.utils                    29      2    93%   33, 39
 -----------------------------------------------------------------
-TOTAL                                2379    270    89%   
+TOTAL                                2424    309    87%   

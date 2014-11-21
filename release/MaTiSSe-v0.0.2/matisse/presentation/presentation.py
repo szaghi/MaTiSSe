@@ -51,6 +51,10 @@ class Presentation(object):
       presentation Table of Contents
     pos : Position object
       position of the current slide
+    svgpath_pos : list
+      list of Position objects, one for each slide (computing from a svg file)
+    center : Position object
+      position of the center slide (overview slides)
     """
     self.__reset()
     self.metadata = Metadata()
@@ -60,6 +64,8 @@ class Presentation(object):
     self.titlepage = Titlepage()
     self.toc = TOC()
     self.pos = Position()
+    self.svgpath_pos = None
+    self.center = None
     if source:
       self.__get(source)
     return
@@ -69,6 +75,44 @@ class Presentation(object):
     string += str(self.metadata)
     string += str(self.theme)
     return string
+
+  def __get_slides_position_fromsvg(self,svgfile,slides_number=1,slide_width=900,slide_height=700,slide_offset=1):
+    from svg.path import parse_path
+    from lxml import etree
+    # computing minimum and maximum coordinates defined into the svg file
+    paths = []
+    tree = etree.parse(open(svgfile, 'r'))
+    for element in tree.iter():
+      if element.tag.split("}")[1] == 'path':
+        path = parse_path(element.get("d"))
+        for line in path:
+          paths.append(line)
+    minimum = [ float("inf"), float("inf")]
+    maximum = [-float("inf"),-float("inf")]
+    for line in paths:
+      minimum = [min(minimum[0],line.start.real,line.end.real),min(minimum[1],line.start.imag,line.end.imag)]
+      maximum = [max(maximum[0],line.start.real,line.end.real),max(maximum[1],line.start.imag,line.end.imag)]
+    # computing canvas scaling factors
+    canvas_scale = [1.,1.]
+    canvas_scale[0] = (slide_width*( 1.+slide_offset/100)*slides_number)/(maximum[0]-minimum[0])/4.
+    canvas_scale[1] = (slide_height*(1.+slide_offset/100)*slides_number)/(maximum[1]-minimum[1])/4.
+    # computing slides positions
+    self.svgpath_pos = []
+    slides_on_line = int(slides_number / len(paths))
+    for line in paths[:-1]:
+      for i in range(slides_on_line):
+        self.svgpath_pos.append(Position(pos=[line.point(0.+float(i)/float(slides_on_line+1)).real*canvas_scale[0],line.point(0.+float(i)/float(slides_on_line+1)).imag*canvas_scale[1],0]))
+    if slides_number % slides_on_line != 0:
+      for i in range(slides_on_line + (slides_number % slides_on_line)):
+        self.svgpath_pos.append(Position(pos=[path[-1].point(0.+float(i)/float(slides_on_line+1)).real*canvas_scale[0],path[-1].point(0.+float(i)/float(slides_on_line+1)).imag*canvas_scale[1],0]))
+    else:
+      for i in range(slides_on_line):
+        self.svgpath_pos.append(Position(pos=[path[-1].point(0.+float(i)/float(slides_on_line+1)).real*canvas_scale[0],path[-1].point(0.+float(i)/float(slides_on_line+1)).imag*canvas_scale[1],0]))
+    # computing center for overview slides
+    center = [0,0,0]
+    center[0] = (maximum[0]+minimum[0])*canvas_scale[0]/2.
+    center[1] = (maximum[1]+minimum[1])*canvas_scale[1]/2.
+    return center
 
   def __get_theme(self,source):
     """Method for getting the presentation theme.
@@ -140,6 +184,8 @@ class Presentation(object):
         for slide in subsection.slides:
           slide.data['total_slides_number'] = Slide.slides_number
     self.toc.get(sections=self.sections)
+    if self.theme.slide.data.data['slide-transition'][0].lower() == 'svgpath':
+      self.center = Position(pos=self.__get_slides_position_fromsvg(svgfile='test.svg',slides_number=int(self.metadata.data.data['total_slides_number'][0]),slide_offset=200))
     if __config__.verbose:
       print('\nTable of Contents')
       print(self.toc)
@@ -219,14 +265,24 @@ class Presentation(object):
       with tag('body',onload="resetCountdown("+self.metadata.data.data['max_time'][0]+");"):
         with tag('div',id='impress'):
           if self.titlepage.found:
-            html = self.titlepage.to_html(position = self.pos, theme = self.theme.slide)
+            if self.theme.slide.data.data['slide-transition'][0].lower() == 'svgpath':
+              pos = self.svgpath_pos[0]
+            else:
+              pos = self.pos
+            html = self.titlepage.to_html(position = pos, theme = self.theme.slide)
             html = self.metadata.parse(html)
             html = self.toc.parse(html)
             doc.asis(html)
           for section in self.sections:
             for subsection in section.subsections:
               for slide in subsection.slides:
-                html = slide.to_html(position = self.pos, theme = self.theme.slide)
+                if slide.title == '$overview':
+                  pos = self.center
+                elif self.theme.slide.data.data['slide-transition'][0].lower() == 'svgpath':
+                  pos = self.svgpath_pos[slide.number-1]
+                else:
+                  pos = self.pos
+                html = slide.to_html(position = pos, theme = self.theme.slide)
                 html = self.metadata.parse(html)
                 html = self.toc.parse(html,current=[int(slide.data['sectionnumber']),int(slide.data['subsectionnumber']),slide.number])
                 doc.asis(html)

@@ -16,7 +16,6 @@ from ..theme import columns
 from ..theme import figure
 from ..theme import note
 from ..theme import table
-from ..theme.slide.position import Position
 from ..theme.theme import Theme
 from ..utils.source_editor import __source_editor__ as seditor
 from ..utils.source_editor import obfuscate_codeblocks as obfuscate
@@ -67,8 +66,6 @@ class Slide(object):
       slide metadata
     overtheme : Theme object
       overriding theme of the current slide
-    pos : Position object
-      slide position
     """
     Slide.slides_number += 1
     self.raw_body     = raw_body
@@ -82,7 +79,6 @@ class Slide(object):
     self.data['slidetitle' ] = self.title
     self.data['slidenumber'] = str(self.number)
     self.overtheme = None
-    self.pos = Position()
     self.__get_overtheme(theme=theme)
     # metadata autoparsing...
     for meta in ['sectiontitle','subsectiontitle','slidetitle']:
@@ -236,7 +232,7 @@ class Slide(object):
         actual_theme = self.overtheme.slide
       else:
         actual_theme = theme
-      position.set_position(theme=theme,overtheme=actual_theme)
+      position.set_position(theme=actual_theme)
       if self.title != '$overview':
         doc.attr(('class','step slide'))
         doc.attr(('data-x',str(position.position[0])))
@@ -261,8 +257,9 @@ class Slide(object):
       else:
         doc.attr(('class','step overview'))
         doc.attr(('style',''))
-        doc.attr(('data-x','0'))
-        doc.attr(('data-y','0'))
-        doc.attr(('data-z','0'))
-        doc.attr(('data-scale',str(position.scale)))
+        doc.attr(('data-x',str(position.position[0])))
+        doc.attr(('data-y',str(position.position[1])))
+        doc.attr(('data-z',str(position.position[2])))
+        #doc.attr(('data-scale',str(position.scale)))
+        doc.attr(('data-scale','100'))
     return doc.getvalue()

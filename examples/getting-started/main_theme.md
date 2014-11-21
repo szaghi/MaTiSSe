@@ -2,7 +2,6 @@
 background = radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))
 ---endtheme_canvas
 
-
 ---theme_toc
 font-variant = small-caps
 ---endtheme_toc
@@ -29,8 +28,8 @@ border-radius    = 10px
 background       = green
 color            = rgb(102,102,102)
 font-size        = 100%
-slide-transition = horizontal
-data-offset      = 200
+slide-transition = svgpath
+data-offset      = 1
 ---endtheme_slide_global
 
 ---theme_slide_content

@@ -210,6 +210,10 @@ h6 {
   display: block;
   padding: 0;
   margin: 0;
+  width: 900px;
+  height: 700px;
+  font-size: 100%;
+  font-family: Open Sans, Arial, sans-serif;
 }
 
 #slide-1 .slide-content {

@@ -8,7 +8,7 @@ class Position(object):
   """
   Object for handling slide position into the canvas.
   """
-  def __init__(self):
+  def __init__(self,pos=None):
     """
     Attributes
     ----------
@@ -21,7 +21,10 @@ class Position(object):
     offset : int
       distance between consecutive slide in percent (%)
     """
-    self.position = [0,0,0] # x,y,z
+    if pos:
+      self.position = pos
+    else:
+      self.position = [0,0,0] # x,y,z
     self.rotation = [0,0,0] # around x,y,z
     self.scale = 1
     self.offset = 1
@@ -81,7 +84,7 @@ class Position(object):
 
   @staticmethod
   def get_rotation(theme):
-    """Method for computing the current slide scale factor.
+    """Method for computing the current slide rotation.
 
     Parameters
     ----------
@@ -172,49 +175,43 @@ class Position(object):
     slide_transition = theme.data.data['slide-transition'][0]
     if slide_transition.lower() == 'absolute':
       pass
+    elif slide_transition.lower() == 'svgpath':
+      pos_x = self.position[0]
+      pos_y = self.position[1]
+      pos_z = self.position[2]
     elif slide_transition.lower() == 'horizontal':
       pos_x = self.position[0] + slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1]
-      #pos_z = self.position[2]
     elif slide_transition.lower() == '-horizontal':
       pos_x = self.position[0] - slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1]
-      #pos_z = self.position[2]
     elif slide_transition.lower() == 'vertical':
       pos_x = self.position[0]
       pos_y = self.position[1] + slide_height*(max(self.scale,scale)+offset/100.0)
-      #pos_z = self.position[2]
     elif slide_transition.lower() == '-vertical':
       pos_x = self.position[0]
       pos_y = self.position[1] - slide_height*(max(self.scale,scale)+offset/100.0)
-      #pos_z = self.position[2]
     elif slide_transition.lower() == 'diagonal':
       pos_x = self.position[0] + slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1] + slide_height*(max(self.scale,scale)+offset/100.0)
-      #pos_z = self.position[2]
     elif slide_transition.lower() == '-diagonal':
       pos_x = self.position[0] - slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1] - slide_height*(max(self.scale,scale)+offset/100.0)
-      #pos_z = self.position[2]
     elif slide_transition.lower() == 'diagonal-x':
       pos_x = self.position[0] - slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1] + slide_height*(max(self.scale,scale)+offset/100.0)
-      #pos_z = self.position[2]
     elif slide_transition.lower() == 'diagonal-y':
       pos_x = self.position[0] + slide_width*(max(self.scale,scale)+offset/100.0)
       pos_y = self.position[1] - slide_height*(max(self.scale,scale)+offset/100.0)
-      #pos_z = self.position[2]
     return [pos_x,pos_y,pos_z]
 
-  def set_position(self,theme,overtheme=None):
+  def set_position(self,theme):
     """Method for setting positioning data inquiring the (base) theme and the eventually present overriding one.
 
     Parameters
     ----------
     theme : Theme object
-      current global theme
-    overtheme : Theme object
-      overrinding theme
+      current theme
 
     >>> from .slide import Slide
     >>> source = '---theme_slide_global slide-transition = absolute \\n data-x = 45 \\n data-y = 65 \\n data-z = 85 ---endtheme_slide_global'
@@ -224,16 +221,12 @@ class Position(object):
     >>> pos.position
     [45, 65, 85]
     """
-    actual_theme = theme
-    if overtheme:
-      actual_theme = overtheme
+    scale = self.get_scale(theme=theme)
+    offset = self.get_offset(theme=theme)
 
-    scale = self.get_scale(theme=actual_theme)
-    offset = self.get_offset(theme=actual_theme)
+    self.rotation = self.get_rotation(theme=theme)
 
-    self.rotation = self.get_rotation(theme=actual_theme)
-
-    self.position = self.get_position(theme=actual_theme,scale=scale,offset=offset)
+    self.position = self.get_position(theme=theme,scale=scale,offset=offset)
 
     self.scale = scale
     self.offset = offset
