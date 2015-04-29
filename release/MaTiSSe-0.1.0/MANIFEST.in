@@ -1,2 +1,2 @@
 include *.md
-recursive-include matisse *.css *.js
+recursive-include matisse *.css *.js *.png

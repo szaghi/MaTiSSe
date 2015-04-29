@@ -1,0 +1,1081 @@
+src/main/python/MaTiSSe.py:4:26: E203 whitespace before ':'
+src/main/python/matisse/__main__.py:4:26: E203 whitespace before ':'
+src/main/python/matisse/utils/__init__.py:4:1: W391 blank line at end of file
+src/main/python/matisse/presentation/regexs.py:14:18: E221 multiple spaces before operator
+src/main/python/matisse/presentation/regexs.py:14:50: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:15:53: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:16:43: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:18:48: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:18:64: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:18:83: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:18:102: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:18:120: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/regexs.py:18:134: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/canvas.py:11:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/canvas.py:15:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/canvas.py:16:17: E231 missing whitespace after ','
+src/main/python/matisse/theme/canvas.py:17:94: E231 missing whitespace after ','
+src/main/python/matisse/theme/canvas.py:28:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/canvas.py:28:37: E231 missing whitespace after ','
+src/main/python/matisse/utils/mdx_mathjax.py:11:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/utils/mdx_mathjax.py:15:15: E211 whitespace before '('
+src/main/python/matisse/utils/mdx_mathjax.py:31:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/utils/mdx_mathjax.py:34:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/utils/mdx_mathjax.py:37:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/utils/mdx_mathjax.py:40:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/utils/mdx_mathjax.py:44:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/utils/mdx_mathjax.py:51:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/presentation/titlepage.py:17:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/presentation/titlepage.py:21:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/titlepage.py:21:32: E231 missing whitespace after ','
+src/main/python/matisse/presentation/titlepage.py:49:15: E231 missing whitespace after ','
+src/main/python/matisse/presentation/titlepage.py:63:35: E231 missing whitespace after ','
+src/main/python/matisse/presentation/titlepage.py:66:22: E231 missing whitespace after ','
+src/main/python/matisse/presentation/titlepage.py:70:43: E231 missing whitespace after ','
+src/main/python/matisse/presentation/titlepage.py:72:31: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/titlepage.py:74:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/section.py:13:20: E271 multiple spaces after keyword
+src/main/python/matisse/presentation/section.py:16:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/presentation/section.py:33:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:33:32: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:33:41: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:60:18: E221 multiple spaces before operator
+src/main/python/matisse/presentation/section.py:61:16: E221 multiple spaces before operator
+src/main/python/matisse/presentation/section.py:62:15: E221 multiple spaces before operator
+src/main/python/matisse/presentation/section.py:63:14: E221 multiple spaces before operator
+src/main/python/matisse/presentation/section.py:65:14: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:67:29: E202 whitespace before ']'
+src/main/python/matisse/presentation/section.py:73:25: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:99:50: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:100:46: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:100:60: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:101:24: E225 missing whitespace around operator
+src/main/python/matisse/presentation/section.py:103:64: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:105:14: E231 missing whitespace after ','
+src/main/python/matisse/presentation/section.py:109:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/section.py:110:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/section.py:110:63: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/section.py:112:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/section.py:113:52: E221 multiple spaces before operator
+src/main/python/matisse/presentation/section.py:113:52: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:113:58: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:114:49: E221 multiple spaces before operator
+src/main/python/matisse/presentation/section.py:114:49: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:114:58: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:115:48: E221 multiple spaces before operator
+src/main/python/matisse/presentation/section.py:115:48: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:115:58: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:116:56: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:116:58: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/section.py:116:62: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/header.py:11:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/slide/header.py:15:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/header.py:15:27: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/header.py:30:17: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/header.py:30:64: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/header.py:30:81: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/header.py:30:108: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/header.py:31:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/header.py:31:46: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/header.py:32:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/header.py:32:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/header.py:33:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/header.py:33:43: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/header.py:34:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/header.py:34:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/header.py:35:68: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/header.py:36:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/header.py:36:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/header.py:54:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/header.py:54:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/header.py:77:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/header.py:77:47: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/subsection.py:13:20: E271 multiple spaces after keyword
+src/main/python/matisse/presentation/subsection.py:16:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/presentation/subsection.py:33:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:33:32: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:33:41: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:33:51: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:64:18: E221 multiple spaces before operator
+src/main/python/matisse/presentation/subsection.py:65:16: E221 multiple spaces before operator
+src/main/python/matisse/presentation/subsection.py:67:15: E221 multiple spaces before operator
+src/main/python/matisse/presentation/subsection.py:68:14: E221 multiple spaces before operator
+src/main/python/matisse/presentation/subsection.py:70:14: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:72:32: E202 whitespace before ']'
+src/main/python/matisse/presentation/subsection.py:74:16: E221 multiple spaces before operator
+src/main/python/matisse/presentation/subsection.py:90:22: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:102:45: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:103:41: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:103:55: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:105:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:106:12: E231 missing whitespace after ','
+src/main/python/matisse/presentation/subsection.py:107:20: E225 missing whitespace around operator
+src/main/python/matisse/presentation/subsection.py:108:27: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/subsection.py:108:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/subsection.py:110:29: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/subsection.py:111:44: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/subsection.py:111:57: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/subsection.py:113:44: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/subsection.py:124:40: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:42: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:58: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:60: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:75: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:77: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:89: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:91: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:111: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/subsection.py:124:113: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/selector.py:12:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/selector.py:25:16: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:36:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:36:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:38:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:38:61: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/selector.py:39:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:39:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:40:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:40:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:41:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:41:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:42:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:42:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:43:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:43:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:44:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:44:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:45:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:45:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:46:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:46:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:47:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:47:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:48:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:49:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:49:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:50:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:50:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:51:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:51:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:52:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:52:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:53:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:53:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:54:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:54:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:55:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:55:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:56:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:56:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:57:36: E202 whitespace before ']'
+src/main/python/matisse/theme/selector.py:57:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:58:39: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:65:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/selector.py:69:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:69:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/selector.py:72:15: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/selector.py:72:26: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/heading.py:11:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:11:27: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:11:34: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:11:41: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:11:48: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:13:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/heading.py:17:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:17:27: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:19:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:19:60: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/heading.py:20:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:21:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:22:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:23:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:24:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:25:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:26:36: E202 whitespace before ']'
+src/main/python/matisse/theme/heading.py:26:42: E201 whitespace after '['
+src/main/python/matisse/theme/heading.py:26:64: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/heading.py:26:67: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:27:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:28:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:29:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:30:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:31:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:32:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:33:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:34:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:35:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/heading.py:42:22: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/heading.py:46:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:46:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/heading.py:49:16: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/heading.py:49:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/footer.py:11:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/slide/footer.py:15:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/footer.py:15:27: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/footer.py:30:17: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/footer.py:30:64: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/footer.py:30:81: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/footer.py:30:108: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/footer.py:31:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/footer.py:31:46: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/footer.py:32:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/footer.py:32:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/footer.py:33:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/footer.py:33:43: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/footer.py:34:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/footer.py:34:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/footer.py:35:68: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/footer.py:36:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/footer.py:36:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/footer.py:54:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/footer.py:54:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/footer.py:76:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/footer.py:76:47: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/figure.py:18:73: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:20:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/figure.py:46:27: E202 whitespace before ']'
+src/main/python/matisse/theme/figure.py:46:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:47:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:48:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:55:33: E202 whitespace before ']'
+src/main/python/matisse/theme/figure.py:55:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:56:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:57:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:60:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:72:17: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:81:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:101:22: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:116:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:136:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:137:21: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:137:31: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/figure.py:144:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:144:38: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:144:52: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:144:75: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:144:89: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/figure.py:146:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:146:38: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:146:52: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:146:95: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:146:109: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/figure.py:148:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:148:38: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:148:52: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:148:72: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:148:86: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/figure.py:152:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/figure.py:166:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:166:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:168:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/figure.py:181:49: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/figure.py:181:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/figure.py:182:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:183:64: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:184:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:184:60: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:184:77: E231 missing whitespace after ','
+src/main/python/matisse/theme/figure.py:185:44: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:11:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/slide/sidebar.py:15:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:15:27: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:33:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:33:66: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/sidebar.py:33:83: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:33:109: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:33:137: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/sidebar.py:34:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/sidebar.py:34:46: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/sidebar.py:35:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/sidebar.py:35:43: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/sidebar.py:36:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/sidebar.py:36:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/sidebar.py:37:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/sidebar.py:37:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/sidebar.py:38:68: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:39:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/sidebar.py:39:52: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/sidebar.py:40:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/sidebar.py:40:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/sidebar.py:58:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:59:12: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:63:47: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:67:50: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:70:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:90:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:96:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:96:31: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:115:14: E261 at least two spaces before inline comment
+src/main/python/matisse/theme/slide/sidebar.py:116:20: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/sidebar.py:120:20: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/sidebar.py:124:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/sidebar.py:124:45: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:139:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:139:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/sidebar.py:161:31: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/sidebar.py:161:48: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/content.py:11:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/slide/content.py:15:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:22:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:22:65: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:23:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/content.py:23:46: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/content.py:24:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/content.py:24:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/content.py:25:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/content.py:25:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/content.py:26:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/content.py:26:42: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/content.py:27:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/content.py:27:45: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/content.py:28:68: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:29:32: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/content.py:29:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/content.py:35:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:35:31: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:35:39: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:56:14: E261 at least two spaces before inline comment
+src/main/python/matisse/theme/slide/content.py:57:14: E261 at least two spaces before inline comment
+src/main/python/matisse/theme/slide/content.py:58:20: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/content.py:62:20: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/content.py:66:21: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/content.py:70:28: E221 multiple spaces before operator
+src/main/python/matisse/theme/slide/content.py:70:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/content.py:70:45: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:71:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/content.py:71:45: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:86:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/content.py:86:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:13:54: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:15:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/presentation/toc.py:19:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:46:28: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:46:39: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:66:19: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:66:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:68:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:69:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:69:37: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:71:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:72:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:72:37: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:73:20: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:75:20: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:75:36: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:75:40: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:79:31: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:79:42: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:79:53: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:101:19: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:101:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:103:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:104:22: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:104:38: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:104:42: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:104:61: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:104:65: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:106:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:107:22: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:107:38: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:107:42: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:107:61: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:107:65: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:108:20: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:110:20: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:110:25: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:110:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:110:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:110:64: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:110:68: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:114:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:114:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:114:43: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:114:54: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:138:19: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:138:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:140:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:141:24: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:141:40: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:141:44: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:141:63: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:141:67: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:141:81: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:141:85: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:143:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:144:24: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:144:40: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:144:44: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:144:63: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:144:67: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:144:81: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:144:85: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:145:20: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:20: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:27: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:43: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:47: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:66: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:70: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:84: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:147:88: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/toc.py:150:16: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:150:27: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:19:65: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:150:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:21:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/presentation/toc.py:168:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:47:27: E202 whitespace before ']'
+src/main/python/matisse/presentation/toc.py:168:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:47:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:171:58: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:48:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:171:80: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:49:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:171:90: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:56:33: E202 whitespace before ']'
+src/main/python/matisse/presentation/toc.py:174:57: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:56:43: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:174:79: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:57:43: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:174:91: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:58:43: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:174:101: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:61:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:177:15: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:73:15: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:181:12: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:82:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:182:29: E201 whitespace after '['
+src/main/python/matisse/theme/note.py:102:22: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:182:49: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:117:23: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:182:63: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:126:25: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:182:66: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:137:23: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:182:68: E202 whitespace before ']'
+src/main/python/matisse/theme/note.py:143:25: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:183:14: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:151:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/presentation/toc.py:184:39: E201 whitespace after '['
+src/main/python/matisse/theme/note.py:165:40: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:184:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:165:59: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:184:79: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:167:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/presentation/toc.py:184:82: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:180:49: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/toc.py:184:111: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:180:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/toc.py:184:113: E202 whitespace before ']'
+src/main/python/matisse/theme/note.py:181:38: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:186:49: E201 whitespace after '['
+src/main/python/matisse/theme/note.py:182:60: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:186:67: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:183:41: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:186:79: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:183:56: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:186:103: E202 whitespace before ']'
+src/main/python/matisse/theme/note.py:183:73: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:193:17: E231 missing whitespace after ','
+src/main/python/matisse/theme/note.py:184:44: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:193:24: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:205:39: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:210:25: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:211:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:211:53: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:212:39: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:212:54: E231 missing whitespace after ','
+src/main/python/matisse/presentation/toc.py:212:68: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:14:1: E265 block comment should start with '# '
+src/main/python/matisse/theme/box.py:18:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:19:52: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:20:103: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:21:106: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:23:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/box.py:78:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:78:35: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:106:16: E221 multiple spaces before operator
+src/main/python/matisse/theme/box.py:107:18: E221 multiple spaces before operator
+src/main/python/matisse/theme/box.py:108:15: E221 multiple spaces before operator
+src/main/python/matisse/theme/box.py:111:18: E221 multiple spaces before operator
+src/main/python/matisse/theme/box.py:112:13: E221 multiple spaces before operator
+src/main/python/matisse/theme/box.py:113:13: E221 multiple spaces before operator
+src/main/python/matisse/theme/box.py:123:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:124:31: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:124:50: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:124:63: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:124:85: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:124:91: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:125:31: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:125:50: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:125:63: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:125:85: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:125:91: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:128:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:130:32: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:137:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:139:32: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:155:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:157:32: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:170:15: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:186:26: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:186:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:186:47: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:186:52: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/box.py:186:87: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:190:47: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:193:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:202:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:211:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:214:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:221:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/box.py:235:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:235:58: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:237:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/box.py:250:49: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/box.py:250:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/box.py:251:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:252:58: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:253:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:253:54: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:253:71: E231 missing whitespace after ','
+src/main/python/matisse/theme/box.py:254:44: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:7:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/slide/position.py:11:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:27:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:27:27: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:27:30: E261 at least two spaces before inline comment
+src/main/python/matisse/theme/slide/position.py:28:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:28:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:28:28: E261 at least two spaces before inline comment
+src/main/python/matisse/theme/slide/position.py:34:38: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:35:42: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:36:38: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:111:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:112:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:112:24: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:114:24: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:114:30: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:114:36: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:183:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:183:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:183:68: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:183:75: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:186:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:186:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:186:68: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:11:10: E272 multiple spaces before keyword
+src/main/python/matisse/theme/slide/position.py:186:75: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:190:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:13:11: E272 multiple spaces before keyword
+src/main/python/matisse/theme/slide/position.py:190:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:190:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:14:12: E272 multiple spaces before keyword
+src/main/python/matisse/theme/slide/position.py:190:76: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:193:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:21:77: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:193:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:193:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:22:70: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:193:76: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:195:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:24:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/slide/position.py:195:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:195:68: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:39:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:195:75: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:196:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:53:16: E221 multiple spaces before operator
+src/main/python/matisse/theme/slide/position.py:196:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:196:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:54:17: E221 multiple spaces before operator
+src/main/python/matisse/theme/slide/position.py:196:76: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:198:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:62:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:198:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:198:68: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:63:14: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:198:75: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:199:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:64:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:199:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:199:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:64:43: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:199:76: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:201:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:64:56: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:201:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:201:68: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:64:71: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:201:75: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:202:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:67:15: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:202:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:202:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:75:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/slide/position.py:202:76: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:204:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:75:53: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/slide/position.py:204:61: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:204:68: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:77:39: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:204:75: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:205:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:78:45: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:205:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:205:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:78:59: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:205:76: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/position.py:206:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:79:20: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/position.py:206:24: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:208:24: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:80:14: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:229:50: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/position.py:229:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:81:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:82:48: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:82:62: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:84:48: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:85:56: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:85:86: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:93:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:94:16: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:95:29: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:96:38: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:96:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:101:32: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:101:46: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:101:60: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/columns.py:111:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/columns.py:125:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:125:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:127:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/columns.py:140:49: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/columns.py:140:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/columns.py:141:41: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:142:66: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:143:44: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:143:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:143:79: E231 missing whitespace after ','
+src/main/python/matisse/theme/columns.py:144:44: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:14:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/data/data.py:31:33: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:31:35: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:31:49: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:31:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:31:60: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:31:62: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:31:81: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:31:83: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/data/data.py:60:21: E221 multiple spaces before operator
+src/main/python/matisse/data/data.py:61:19: E221 multiple spaces before operator
+src/main/python/matisse/data/data.py:62:14: E221 multiple spaces before operator
+src/main/python/matisse/data/data.py:64:15: E221 multiple spaces before operator
+src/main/python/matisse/data/data.py:64:49: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:64:61: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:64:78: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:64:88: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:64:92: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:65:14: E221 multiple spaces before operator
+src/main/python/matisse/data/data.py:70:21: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:70:28: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:70:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:70:41: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:70:52: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:78:24: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:85:17: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:105:52: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:106:39: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:115:15: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:131:52: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:134:7: E265 block comment should start with '# '
+src/main/python/matisse/data/data.py:136:31: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:136:34: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:138:12: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:139:38: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:139:73: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:141:31: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:143:12: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:146:30: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:164:12: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:165:25: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:165:29: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:165:35: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:168:19: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:188:12: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:195:26: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:195:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:195:35: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:195:42: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:197:24: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:197:28: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:197:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:197:40: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:200:22: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:220:12: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:228:30: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:231:17: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:251:12: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:257:17: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:277:27: E201 whitespace after '['
+src/main/python/matisse/data/data.py:277:62: E202 whitespace before ']'
+src/main/python/matisse/data/data.py:278:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:278:48: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:278:67: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:278:72: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:280:37: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:282:40: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:283:22: E225 missing whitespace around operator
+src/main/python/matisse/data/data.py:285:16: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:289:32: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:289:38: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:290:22: E225 missing whitespace around operator
+src/main/python/matisse/data/data.py:292:26: E225 missing whitespace around operator
+src/main/python/matisse/data/data.py:292:44: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/data/data.py:296:39: E231 missing whitespace after ','
+src/main/python/matisse/data/data.py:296:42: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:19:58: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:21:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/table.py:47:27: E202 whitespace before ']'
+src/main/python/matisse/theme/table.py:47:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:48:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:49:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:56:33: E202 whitespace before ']'
+src/main/python/matisse/theme/table.py:56:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:57:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:58:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:61:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:73:16: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:82:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:102:22: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:117:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:126:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:137:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:143:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:151:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/table.py:165:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:165:60: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:167:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/table.py:180:49: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/table.py:180:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/table.py:181:39: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:182:62: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:183:42: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:183:58: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:183:75: E231 missing whitespace after ','
+src/main/python/matisse/theme/table.py:184:44: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:11:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/toc.py:15:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:15:32: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:22:22: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:23:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:23:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:24:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:24:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:25:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:25:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:26:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:26:59: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:27:46: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:38:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:38:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:49:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/toc.py:53:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:60:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:61:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:61:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:62:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:62:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:63:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:63:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:64:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:64:59: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:65:46: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:76:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:76:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:87:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/toc.py:91:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:98:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:99:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:99:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:100:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:100:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:101:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:101:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:102:34: E202 whitespace before ']'
+src/main/python/matisse/theme/toc.py:102:59: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:103:46: E241 multiple spaces after ','
+src/main/python/matisse/theme/toc.py:114:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:114:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:125:1: E302 expected 2 blank lines, found 1
+src/main/python/matisse/theme/toc.py:129:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:136:14: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:137:41: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:145:15: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:160:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:167:5: E265 block comment should start with '# '
+src/main/python/matisse/theme/toc.py:173:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:192:22: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:221:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:221:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/toc.py:236:17: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:18:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/presentation/metadata.py:22:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:39:37: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:40:50: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:40:80: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:40:91: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:41:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:41:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:42:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:42:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:43:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:43:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:44:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:44:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:45:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:45:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:46:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:46:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:47:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:47:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:48:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:48:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:49:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:49:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:50:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:50:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:51:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:51:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:52:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:52:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:53:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:53:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:54:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:54:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:55:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:55:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:56:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:56:50: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:57:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:58:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:58:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:59:40: E202 whitespace before ']'
+src/main/python/matisse/presentation/metadata.py:59:49: E241 multiple spaces after ','
+src/main/python/matisse/presentation/metadata.py:69:15: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:85:12: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:92:5: E129 visually indented line with same indent as next logical line
+src/main/python/matisse/presentation/metadata.py:93:63: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:112:21: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:139:20: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:139:24: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:153:23: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:153:50: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:153:77: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:155:23: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:155:50: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:158:19: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:158:28: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:180:28: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:182:26: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:188:17: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:206:51: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/metadata.py:206:53: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/presentation/metadata.py:208:17: E225 missing whitespace around operator
+src/main/python/matisse/presentation/metadata.py:209:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/metadata.py:209:38: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/presentation/metadata.py:209:63: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:210:39: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:214:42: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:214:69: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:214:82: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:214:99: E231 missing whitespace after ','
+src/main/python/matisse/presentation/metadata.py:215:46: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:14:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/theme_element.py:18:36: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/theme_element.py:18:38: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/theme_element.py:18:57: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/theme_element.py:18:59: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/theme_element.py:18:76: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/theme_element.py:18:78: E251 unexpected spaces around keyword / parameter equals
+src/main/python/matisse/theme/theme_element.py:43:47: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:43:81: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:47:32: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:51:18: E221 multiple spaces before operator
+src/main/python/matisse/theme/theme_element.py:52:14: E221 multiple spaces before operator
+src/main/python/matisse/theme/theme_element.py:52:51: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:52:60: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:52:83: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:53:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:54:20: E221 multiple spaces before operator
+src/main/python/matisse/theme/theme_element.py:55:16: E221 multiple spaces before operator
+src/main/python/matisse/theme/theme_element.py:56:38: E241 multiple spaces after ','
+src/main/python/matisse/theme/theme_element.py:57:29: E202 whitespace before ']'
+src/main/python/matisse/theme/theme_element.py:57:39: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:66:15: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:82:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:99:14: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:132:12: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:135:63: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:138:45: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:141:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:141:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:166:18: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:166:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:166:39: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:166:82: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:174:17: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:197:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:197:28: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:210:21: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:210:42: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:210:63: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:212:21: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:212:42: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:216:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:216:29: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:228:24: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:231:25: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:236:31: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:237:35: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:238:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:238:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:238:90: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:238:95: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:238:114: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:239:35: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:240:42: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:240:69: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:240:87: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:241:35: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:242:43: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:242:71: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:242:89: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:246:18: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:246:24: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:260:26: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:261:23: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:261:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/theme_element.py:264:24: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:264:28: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:278:28: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:281:24: E225 missing whitespace around operator
+src/main/python/matisse/theme/theme_element.py:284:30: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:284:48: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:286:31: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:286:49: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:288:29: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:288:41: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:290:41: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:295:28: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:297:42: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:297:45: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:299:41: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:306:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:306:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:306:34: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:306:47: E231 missing whitespace after ','
+src/main/python/matisse/theme/theme_element.py:333:38: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:16:1: E302 expected 2 blank lines, found 0
+src/main/python/matisse/theme/slide/slide.py:20:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:20:32: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:49:17: E221 multiple spaces before operator
+src/main/python/matisse/theme/slide/slide.py:50:17: E221 multiple spaces before operator
+src/main/python/matisse/theme/slide/slide.py:51:17: E221 multiple spaces before operator
+src/main/python/matisse/theme/slide/slide.py:53:16: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:56:59: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:56:75: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:56:91: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:57:54: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:57:63: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:59:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:59:51: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:60:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:60:51: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:61:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:61:50: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:62:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:62:73: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:63:56: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:64:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:64:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:65:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:65:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:66:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:66:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:67:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:67:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:68:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:68:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:69:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:69:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:70:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:70:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:71:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:71:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:72:37: E202 whitespace before ']'
+src/main/python/matisse/theme/slide/slide.py:72:47: E241 multiple spaces after ','
+src/main/python/matisse/theme/slide/slide.py:94:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:94:53: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:94:58: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:97:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:97:53: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:97:58: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:100:35: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:100:55: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:100:60: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:101:30: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:104:22: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:129:61: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:132:18: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/slide.py:132:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:134:22: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:159:61: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:162:18: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/slide.py:162:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:164:23: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:189:62: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:192:18: E225 missing whitespace around operator
+src/main/python/matisse/theme/slide/slide.py:192:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:205:43: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:205:51: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:218:43: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:218:51: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:231:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:231:53: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:233:15: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:244:8: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:247:37: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:247:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:247:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:247:71: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:248:8: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:251:37: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:251:45: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:251:69: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:251:71: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:252:8: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:255:39: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:255:47: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:255:72: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:255:74: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:259:20: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:330:3: E265 block comment should start with '# '
+src/main/python/matisse/theme/slide/slide.py:369:12: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:375:5: E129 visually indented line with same indent as next logical line
+src/main/python/matisse/theme/slide/slide.py:376:40: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:392:50: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:392:71: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:396:51: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:399:22: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:422:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:426:33: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:430:34: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:459:19: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:459:37: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:480:72: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:480:84: E231 missing whitespace after ','
+src/main/python/matisse/theme/slide/slide.py:480:123: E226 missing whitespace around arithmetic operator
+src/main/python/matisse/theme/slide/slide.py:496:17: E231 missing whitespace after ','
