@@ -4,6 +4,9 @@ python:
   - "2.7.9"
   #- "3.4.1"
 
+before_install:
+  - pip install MaTiSSe.py
+
 install:
   - pip install pybuilder
   - pyb install_dependencies --verbose

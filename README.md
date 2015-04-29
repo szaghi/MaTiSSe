@@ -1,15 +1,8 @@
  <a name="top"></a>
-[![Build Status](https://travis-ci.org/szaghi/MaTiSSe.png)](https://travis-ci.org/szaghi/MaTiSSe)
-[![Coverage Status](https://img.shields.io/coveralls/szaghi/MaTiSSe.svg)](https://coveralls.io/r/szaghi/MaTiSSe)
-[![Latest Version](https://pypip.in/version/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
-[![Supported Python versions](https://pypip.in/py_versions/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
-[![License](https://pypip.in/license/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
-[![Development Status](https://pypip.in/status/MaTiSSe.py/badge.svg)](https://pypi.python.org/pypi/MaTiSSe.py/)
-[![Ready in backlog](https://badge.waffle.io/szaghi/matisse.png?label=ready&title=Ready)](https://waffle.io/szaghi/matisse)
-[![In Progress](https://badge.waffle.io/szaghi/matisse.png?label=in%20progress&title=In%20Progress)](https://waffle.io/szaghi/matisse)
-[![Open bugs](https://badge.waffle.io/szaghi/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/matisse)
+# MaTiSSe.py [![Latest Version](https://pypip.in/version/MaTiSSe.py/badge.svg?style=flat)](https://pypi.python.org/pypi/MaTiSSe.py/) [![GitHub tag](https://img.shields.io/github/tag/szaghi/MaTiSSe.svg)]()
 
-# MaTiSSe.py
+[![License](https://pypip.in/license/MaTiSSe.py/badge.svg?style=flat)](https://pypi.python.org/pypi/MaTiSSe.py/)
+
 ### MaTiSSe.py, Markdown To Impressive Scientific Slides
 MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
 
@@ -17,6 +10,20 @@ MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple
 + MaTiSSe.py is tailored to scientific contents (equations, figures, tables, etc...);
 + MaTiSSe.py is a Command Line Tool;
 + MaTiSSe.py is a Free, Open Source Project.
+
+### Status
+[![Development Status](https://pypip.in/status/MaTiSSe.py/badge.svg?style=flat)](https://pypi.python.org/pypi/MaTiSSe.py/)
+[![Build Status](https://travis-ci.org/szaghi/MaTiSSe.svg?branch=master)](https://travis-ci.org/szaghi/MaTiSSe)
+[![Coverage Status](https://img.shields.io/coveralls/szaghi/MaTiSSe.svg)](https://coveralls.io/r/szaghi/MaTiSSe)
+[![Code Health](https://landscape.io/github/szaghi/MaTiSSe/master/landscape.svg?style=flat)](https://landscape.io/github/szaghi/MaTiSSe/master)
+
+#### Issues
+[![GitHub issues](https://img.shields.io/github/issues/szaghi/MaTiSSe.svg)]()
+[![Ready in backlog](https://badge.waffle.io/szaghi/matisse.png?label=ready&title=Ready)](https://waffle.io/szaghi/matisse)
+[![In Progress](https://badge.waffle.io/szaghi/matisse.png?label=in%20progress&title=In%20Progress)](https://waffle.io/szaghi/matisse)
+[![Open bugs](https://badge.waffle.io/szaghi/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/matisse)
+
+#### Python support [![Supported Python versions](https://pypip.in/py_versions/MaTiSSe.py/badge.svg?style=flat)](https://pypi.python.org/pypi/MaTiSSe.py/) [![Download format](https://pypip.in/format/MaTiSSe.py/badge.svg?style=flat)](https://pypi.python.org/pypi/MaTiSSe.py/)
 
 #### Documentation
 
