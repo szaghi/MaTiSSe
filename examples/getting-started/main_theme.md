@@ -28,8 +28,7 @@ border-radius    = 10px
 background       = green
 color            = rgb(102,102,102)
 font-size        = 100%
-slide-transition = svgpath
-data-offset      = 1
+data-offset      = 20
 ---endtheme_slide_global
 
 ---theme_slide_content

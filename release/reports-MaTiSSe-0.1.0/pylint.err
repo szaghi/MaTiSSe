@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/usr/bin/pylint", line 11, in <module>
+    sys.exit(run_pylint())
+  File "/usr/lib/python2.7/site-packages/pylint/__init__.py", line 22, in run_pylint
+    from pylint.lint import Run
+  File "/usr/lib/python2.7/site-packages/pylint/lint.py", line 43, in <module>
+    import astroid
+ImportError: No module named astroid
