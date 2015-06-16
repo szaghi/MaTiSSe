@@ -1,5 +1,4 @@
  <a name="top"></a>
-# MaTiSSe.py [![Latest Version](https://pypip.in/version/MaTiSSe.py/badge.svg?style=flat)](https://pypi.python.org/pypi/MaTiSSe.py/) [![GitHub tag](https://img.shields.io/github/tag/szaghi/MaTiSSe.svg)]()
 # MaTiSSe.py [![Latest Version](https://img.shields.io/pypi/v/MaTiSSe.py.svg)](https://img.shields.io/pypi/v/MaTiSSe.py.svg) [![GitHub tag](https://img.shields.io/github/tag/szaghi/MaTiSSe.svg)]()
 
 [![Join the chat at https://gitter.im/szaghi/MaTiSSe](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/szaghi/MaTiSSe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
