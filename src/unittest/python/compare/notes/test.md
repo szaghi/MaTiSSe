@@ -9,7 +9,23 @@ border = 2px solid black
 $note
 $style[font-size:110%;background:rgb(200,200,200);]
 $content[font-style:oblique;]{A first note}
-$caption(Note)[font-size:80%;]{Note one}
+$caption(Note)[font-size:80%;]{Note one
+
++ 1
++ 2
++ 3
+
+#### Test
+
+**test**
+
+```
+test
+```
+
+*test*
+
+}
 $endnote
 
 $note
