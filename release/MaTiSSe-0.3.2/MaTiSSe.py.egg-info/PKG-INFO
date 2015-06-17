@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: MaTiSSe.py
+Version: 0.3.2
+Summary: MaTiSSe.py, Markdown To Impressive Scientific Slides
+Home-page: https://github.com/szaghi/MaTiSSe
+Author: Stefano Zaghi
+Author-email: stefano.zaghi@gmail.com
+License: UNKNOWN
+Description: MaTiSSe.py, Markdown To Impressive Scientific Slides. It is a very simple and stupid-to-use (KISS) presentation maker based on simple markdown syntax producing high quality first-class html/css presentation with great support for scientific contents.
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Text Processing

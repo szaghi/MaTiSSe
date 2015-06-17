@@ -1319,7 +1319,7 @@ optional arguments:
           <div class="columns">
             <div style="display:block;float:left;width:45%;padding: 0 1%;" class="column" column-number="1">
               <ul>
-                <li><strong>presentation</strong> with its own options, having:<ul><li>one <strong>canvas</strong> with its own options over wich the slides are rendered:</li><li>N <strong>slide</strong>(s) with their own options; each slide has:<ul><li>$N_H$ <strong>headers</strong>, with $N_H \in [0,\infty]$;</li><li>$N_F$ <strong>footers</strong>, with $N_F \in [0,\infty]$;</li><li>$N_L$ left <strong>sidebars</strong>, with $N_L \in [0,\infty]$;</li><li>$N_R$ right <strong>sidebars</strong>, with $N_R \in [0,\infty]$;</li><li>1 main <strong>content</strong>.</li></ul></li></ul></li>
+                <li><strong>presentation</strong> with its own options, having:<ul><li>one <strong>canvas</strong> with its own options over wich the slides are rendered:</li><li>N <strong>slide</strong>(s) with their own options; each slide has:<ul><li><mathjax>$N_H$</mathjax><strong>headers</strong>, with <mathjax>$N_H \in [0,\infty]$</mathjax>;</li><li><mathjax>$N_F$</mathjax><strong>footers</strong>, with <mathjax>$N_F \in [0,\infty]$</mathjax>;</li><li><mathjax>$N_L$</mathjax> left <strong>sidebars</strong>, with <mathjax>$N_L \in [0,\infty]$</mathjax>;</li><li><mathjax>$N_R$</mathjax> right <strong>sidebars</strong>, with <mathjax>$N_R \in [0,\infty]$</mathjax>;</li><li>1 main <strong>content</strong>.</li></ul></li></ul></li>
               </ul>
             </div>
             <div style="display:block;float:left;width:55%;padding-left:1%;" class="column" column-number="2">
@@ -1933,9 +1933,9 @@ $$
 </code>
           </pre>
           <p>and you get:
-$$
+<mathjax>$$
 x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
-$$</p>
+$$</mathjax></p>
         </div>
         <div class="slide-sidebar_1">
           <div style="float:left;font-weight:bold;font-variant:small-caps;font-size:105%;display:inline-block">Getting Started to play with MaTiSSe.py</div>
@@ -2224,7 +2224,7 @@ $endbox
           </pre>
           <p>where:</p>
           <ul>
-            <li><code>$box</code> and <code>$endbox</code> are the tags defining the box environment;</li>
+            <li><code><mathjax>$box&lt;/code&gt; and &lt;code&gt;$</mathjax>endbox</code> are the tags defining the box environment;</li>
             <li><code>$style[style_options]</code> defines the style of the whole box; this is optional and can be omitted; the <code>style_options</code> are any valid css style definitions;</li>
             <li><code>$caption(caption_type)[caption_options]{caption}</code> defines the caption of the box that can be styled differently from the main box content and it is optional; the <code>(caption_type)</code> defines caption prefixing <em>class</em>, e.g. <em>Fig.</em> for figures, and it is itself optional: any sentences are valid; to disable the printing of the prefixing class use <code>$caption(none)...</code>; the <code>[caption_options]</code> defines the style options of the only caption: they are any valid css definitions; the <code>{caption}</code> defines the caption text and it must be present if <code>$caption</code> is defined;</li>
             <li><code>$content(content_type)[content_options]{content}</code> is not optional: it defines the box&rsquo;s content; the <code>(content_type)</code> defines defines the type of the content, &lsquo;figure&rsquo;, &lsquo;table&rsquo;, &lsquo;note&rsquo; and &lsquo;box&rsquo; for generic environments, and it is itself optional; the <code>[content_options]</code> defines the style options of the only content: they are any valid css definitions; the <code>{content}</code> defines the content data;</li>
@@ -2413,7 +2413,7 @@ $endnote
           </pre>
           <p>where the elements are the same of box environment, but:</p>
           <ul>
-            <li>the <code>content_type</code> and <code>caption_type</code> are automatically set to <code>note</code> and <code>Note</code> respectively; anyhow they can be still specified inside the <code>$note/$endnote</code> environment;</li>
+            <li>the <code>content_type</code> and <code>caption_type</code> are automatically set to <code>note</code> and <code>Note</code> respectively; anyhow they can be still specified inside the <code><mathjax>$note/$</mathjax>endnote</code> environment;</li>
             <li>no matter the order of <code>$caption</code>/<code>$content</code> statements, the caption is always placed above the content.</li>
           </ul>
           <p>You have seen this env on many preceding slides. Consider the following code:</p>
@@ -2513,7 +2513,7 @@ $endfigure
           </pre>
           <p>where the elements are the same of box environment, but:</p>
           <ul>
-            <li>the <code>content_type</code> and <code>caption_type</code> are automatically set to <code>figure</code> and <code>Figure</code> respectively; anyhow they can be still specified inside the <code>$figure/$endfigure</code> environment;</li>
+            <li>the <code>content_type</code> and <code>caption_type</code> are automatically set to <code>figure</code> and <code>Figure</code> respectively; anyhow they can be still specified inside the <code><mathjax>$figure/$</mathjax>endfigure</code> environment;</li>
             <li>the <code>content</code> must be the (relative to the root) path of an external figure file;</li>
             <li>no matter the order of <code>$caption</code>/<code>$content</code> statements, the caption is always placed below the content.</li>
           </ul>
@@ -3002,7 +3002,7 @@ $include(theme.dat)
         <div class="slide-content">
           <p>I known, you have just seen the universe of MaTiSSe.py, this is just a recall&hellip; The customizable theme elements are:</p>
           <ul>
-            <li><strong>presentation</strong> with its own options, having:<ul><li>one <strong>canvas</strong> with its own options over wich the slides are rendered:</li><li>N <strong>slide</strong>(s) with their own options; each slide has:<ul><li>$N_H$ <strong>headers</strong>, with $N_H \in [0,\infty]$;</li><li>$N_F$ <strong>footers</strong>, with $N_F \in [0,\infty]$;</li><li>$N_L$ left <strong>sidebars</strong>, with $N_L \in [0,\infty]$;</li><li>$N_R$ right <strong>sidebars</strong>, with $N_R \in [0,\infty]$;</li><li>1 main <strong>content</strong>.</li></ul></li></ul></li>
+            <li><strong>presentation</strong> with its own options, having:<ul><li>one <strong>canvas</strong> with its own options over wich the slides are rendered:</li><li>N <strong>slide</strong>(s) with their own options; each slide has:<ul><li><mathjax>$N_H$</mathjax><strong>headers</strong>, with <mathjax>$N_H \in [0,\infty]$</mathjax>;</li><li><mathjax>$N_F$</mathjax><strong>footers</strong>, with <mathjax>$N_F \in [0,\infty]$</mathjax>;</li><li><mathjax>$N_L$</mathjax> left <strong>sidebars</strong>, with <mathjax>$N_L \in [0,\infty]$</mathjax>;</li><li><mathjax>$N_R$</mathjax> right <strong>sidebars</strong>, with <mathjax>$N_R \in [0,\infty]$</mathjax>;</li><li>1 main <strong>content</strong>.</li></ul></li></ul></li>
           </ul>
           <div style="font-variant:small-caps;text-align:center;" class="figure" id="Figure-4">
             <figure>
