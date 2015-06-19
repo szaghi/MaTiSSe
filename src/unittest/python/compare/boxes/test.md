@@ -6,13 +6,18 @@ border = 2px solid black
 
 ##### Testing boxes
 
+Footnotes[^1] have a label[^@#$%] and the footnote's content.
+
+[^1]: This is a footnote content.
+[^@#$%]: A footnote on the label: "@#$%".
+
 $box
 $style[background:rgb(200,200,200)]
 $caption(GBox)[font-style:oblique;position:TOP;]{First box instance with caption in TOP}
 $content[font-size:110%;]{This the first instance of Box class used for testing purpose
 
-+ 1
-+ 2
++ 1, lorem ipsum **cazzo**;
++ 2  sdfwe _ciao_;
 + 3
 
 #### Test
