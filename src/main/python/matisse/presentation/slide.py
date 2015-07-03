@@ -25,7 +25,7 @@ from ..utils.source_editor import illuminate_protected as illuminate
 # class definition
 class Slide(object):
   """
-  Slide is an object that handles a single slide, its attributes and methods.
+  Handle single slide, its attributes and methods.
 
   Attributes
   ----------
@@ -45,7 +45,7 @@ class Slide(object):
     Parameters
     ----------
     raw_body : str, optional
-      string containing the body of the slide in raw format
+      body of the slide in raw format
     title : str, optional
       slide title
     data : OrderedDict object, optional
@@ -56,7 +56,7 @@ class Slide(object):
     Attributes
     ----------
     raw_body : str
-      string containing the body of the slide in raw format
+      body of the slide in raw format
     number : int
       slide number in global numeration
     local_number : int
