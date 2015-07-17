@@ -1,12 +1,16 @@
----metadata
-dirs_to_copy = ['images']
----endmetadata
+---
+theme:
+  - slide:
+    - border: '2px solid black'
+---
 
----theme_slide_global
-border = 2px solid black
----endtheme_slide_global
+---
+metadata:
+  - dirs_to_copy:
+    - images
+---
 
-### Test Figure Class
+#### Test Figure Class
 
 ##### Testing figures
 

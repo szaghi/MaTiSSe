@@ -1,0 +1,33 @@
+---
+metadata:
+  - title: Getting Started to play with MaTiSSe.py
+  - subtitle: a bad-showcase of MaTiSSe.py features
+  - authors:
+    - Stefano Zaghi
+    - John Doe
+  - authors_short:
+    - S. Zaghi
+    - J. Doe
+  - emails:
+    - stefano.zaghi@gmail.com
+    - john.doe@lost.com
+  - affiliations:
+    - NERD Laboratory, The World Most Uncool Research Center
+    - LOST Institute, Missed People Research Institute
+  - affiliations_short:
+    - NERD Laboratory
+    - LOST Institute
+  - logo: images/logo.png
+  - location: Via dellIsola del Giorno Prima 139, Utopia, Universo
+  - location_short: Utopia, Universo
+  - date: 29th February, 2015
+  - conference: Nhill Symposium 2015
+  - conference_short: NS2015
+  - session: Third High Performance Sleeping, HPS3
+  - session_short: HPS3
+  - max_time: 60
+  - toc_depth: 2
+  - dirs_to_copy:
+    - images
+    - video
+---

@@ -1,22 +1,29 @@
----theme_slide_global
-border = 2px solid black
----endtheme_slide_global
+---
+theme:
+  - slide:
+    - border: '2px solid black'
+    - header-1:
+      - height: '10%'
+      - background: 'rgb(180,180,180)'
+      - metadata:
+        - slidetitle:
+          - float: 'left'
+    - sidebar-1:
+      - width: '20%'
+      - position: 'R'
+      - background: 'rgb(200,200,200)'
+      - metadata:
+        - toc:
+          - depth: '4'
+---
 
----theme_slide_header_1
-height = 10%
-background = rgb(180,180,180)
-metadata   = ['slidetitle']
----endtheme_slide_header_1
+# First Chapter
 
----theme_slide_sidebar_1
-position = R
-width    = 20%
-metadata = [['toc','font-size:70%;',2]]
----endtheme_slide_sidebar_1
- 
-# First Section
-## First Subsection
-### Test TOC Inserting
+## First Section
+
+### First Subsection
+
+#### Test TOC Inserting
 
 ##### Testing TOC Inserting
 

@@ -1,8 +1,10 @@
----theme_slide_global
-border = 2px solid black
----endtheme_slide_global
+---
+theme:
+  - slide:
+    - border: '2px solid black'
+---
 
-### Test Box Class
+#### Test Box Class
 
 ##### Testing boxes
 
@@ -20,7 +22,7 @@ $content[font-size:110%;]{This the first instance of Box class used for testing 
 + 2  sdfwe _ciao_;
 + 3
 
-#### Test
+##### Test
 
 **test**
 

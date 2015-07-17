@@ -1,8 +1,10 @@
----theme_slide_global
-border = 2px solid black
----endtheme_slide_global
+---
+theme:
+  - slide:
+    - border: '2px solid black'
+---
 
-### Test LaTeX equations
+#### Test LaTeX equations
 
 ##### Testing equations
 

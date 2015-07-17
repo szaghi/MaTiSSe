@@ -1,8 +1,14 @@
----theme_slide_global
-border = 2px solid black
----endtheme_slide_global
+---
+theme:
+  - slide:
+    - border: '2px solid black'
+---
 
-#titlepage[plain]
+#### $titlepage
+---
+overtheme:
+  - slide:
+---
 
 ##### Testing Titlepage
 

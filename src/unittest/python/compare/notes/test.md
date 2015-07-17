@@ -1,8 +1,10 @@
----theme_slide_global
-border = 2px solid black
----endtheme_slide_global
+---
+theme:
+  - slide:
+    - border: '2px solid black'
+---
 
-### Test Note Class
+#### Test Note Class
 
 ##### Testing notes
 

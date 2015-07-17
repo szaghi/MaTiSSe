@@ -1,19 +1,23 @@
----metadata
-dirs_to_copy = ['images']
----endmetadata
+---
+theme:
+  - slide:
+    - border: '2px solid black'
+---
 
----theme_slide_global
-border = 2px solid black
----endtheme_slide_global
+---
+metadata:
+  - dirs_to_copy:
+    - images
+---
 
-### Test Columns and Figures
+#### Test Columns and Figures
 
 Just a two columns for testing purpose
 
 $columns
 
 $column[width:45%;background:rgb(200,200,200);]
-#### First column
+##### First column
 
 $figure
 $content[width:100%]{images/matisse-universe-no_bg.png}
@@ -21,7 +25,7 @@ $caption(Fig.){A first figure}
 $endfigure
 
 $column[width:55%;background:rgb(180,180,180);]
-#### Second column
+##### Second column
 
 $figure
 $content[width:100%]{images/matisse-universe-no_bg.png}
