@@ -939,6 +939,69 @@ $note
 $content{Such a theme data can placed anywhere inside your markdown source, however it has sense to place it at the beginning, inside the presentation _preamble_, that is just a convention rather than a physical part of the markdown document.}
 $endnote
 
+### Lists
+
+#### Lists Customization
+---
+overtheme:
+  - copy-from-theme: True
+  - ordered-list-items:
+    - content: 'counter(item, upper-roman)'
+    - color: 'pink'
+  - unordered-list-items:
+    - color: '#4788B3'
+    - content: "'>'"
+---
+
+Lists are ubiquitous in presentation. It is very desirable to have the possibility to customize ordered and unordered lists items. This can be done modifying the CSS theme of your talk. However, it is not very simple, as a consequence MaTiSSe provides a very friendly approach for customizing your list.
+
+For example see the following results:
+
+$columns
+
+$column[width:50%]
+
+##### Unordered list with customized color and symbol
+
++ Foo;
++ bar;
++ baz;
+
+##### Ordered list with customized color and symbol
+
+1. Foo;
+1. bar;
+1. baz;
+
+$column[width:50%]
+
+##### Lists themes definition
+
+```yaml
+theme:
+  - ordered-list-items:
+    - content: 'counter(item, upper-roman)'
+    - color: 'pink'
+  - unordered-list-items:
+    - color: '#4788B3'
+    - content: "'>'"
+  ...
+```
+$endcolumns
+
+$note
+$content{
+Many customizations are possible using CSS definitions. For example there are:
+
++ armenian;
++ georgian;
++ hebrew;
++ lower-alpha;
+
+For a more complete list see http://www.w3schools.com/cssref/pr_list-style-type.asp
+}
+$endnote
+
 ### TOC
 
 #### TOC Theme
