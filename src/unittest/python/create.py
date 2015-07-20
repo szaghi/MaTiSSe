@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 """Script for creating tests reference values"""
+from __future__ import print_function
 import os
 import subprocess
 import sys
 
 __md_files__ = [os.path.join(dp, f) for dp, dn, filenames in os.walk('.') for f in filenames if f.endswith('.md')]
+
 
 def syswork(cmd):
   """
@@ -18,15 +20,16 @@ def syswork(cmd):
       sys.exit(1)
   return
 
+
 def create():
   """Function for creating tests reference values."""
-  pyver = str(sys.version_info.major)+'.'+str(sys.version_info.minor)+'.'+str(sys.version_info.micro)
-  print('Python'+pyver)
+  pyver = str(sys.version_info.major) + '.' + str(sys.version_info.minor) + '.' + str(sys.version_info.micro)
+  print('Python' + pyver)
   for mdf in __md_files__:
     directory = os.path.dirname(mdf)
     inputfile = os.path.basename(mdf)
-    print('Creating '+directory)
-    cmd = 'cd '+directory+' ; MaTiSSe.py -i '+inputfile+' -o '+inputfile[:-3]+pyver+' ; cd -'
+    print('Creating ' + directory)
+    cmd = 'cd ' + directory + ' ; MaTiSSe.py -i ' + inputfile + ' -o ' + inputfile[:-3] + pyver + ' ; cd -'
     syswork(cmd)
   return
 

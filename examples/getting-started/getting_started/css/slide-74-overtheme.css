@@ -1,0 +1,14 @@
+
+#slide-74.slide {
+  transition: diagonal;
+  display: block;
+  width: 900px;
+  height: 700px;
+}
+#slide-74 .slide-content {
+  font-family: Comic Sans MS, cursive, sans-serif;
+  display: block;
+  float: left;
+  width: 100%;
+  height: 100%;
+}

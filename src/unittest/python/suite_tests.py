@@ -7,8 +7,7 @@ from shutil import rmtree
 import sys
 import subprocess
 import unittest
-# import matisse.presentation as presentation
-# import matisse.theme as theme
+from matisse.markdown_utils import __mdx_checklist__
 from matisse.matisse_config import MatisseConfig
 from matisse.presentation import Presentation
 
@@ -45,10 +44,10 @@ class SuiteTest(unittest.TestCase):
       dirslist.append(cdir)
     for cdir in dirslist:
       print('Preparing ' + cdir)
-      # if cdir.endswith('checklists') and not __mdx_checklist__:
-      #   continue
-      # if cdir.endswith('timer') and not __mdx_checklist__:
-      #   continue
+      if cdir.endswith('checklists') and not __mdx_checklist__:
+        continue
+      if cdir.endswith('timer') and not __mdx_checklist__:
+        continue
       old_pwd = os.getcwd()
       os.chdir(cdir)
       if os.path.exists('test' + __pyver__):
@@ -56,44 +55,66 @@ class SuiteTest(unittest.TestCase):
       syswork('MaTiSSe.py -i test.md -o test' + __pyver__)
       os.chdir(old_pwd)
     self.assertEqual(0, 0)
-    return
+
+  def compare(self, directory, passed, failed):
+    """Compare utility.
+
+    Parameters
+    ----------
+    directory: str
+      where the compare test is located
+    passed: list
+      passed tests list
+    failed: list
+      failed tests list
+    """
+    if os.path.exists(os.path.join(directory, 'test.md')):
+      source = open(os.path.join(directory, 'test.md')).read()
+      talk = Presentation()
+      talk.parse(config=self.config, source=source)
+      if os.path.exists(os.path.join(directory, 'test' + __pyver__)):
+        html_dir = os.path.join(directory, 'test' + __pyver__)
+        if open(os.path.join(html_dir, 'index.html')).read() != talk.to_html(config=self.config):
+          failed.append([directory, talk.to_html(config=self.config)])
+        else:
+          passed.append(directory)
+        rmtree(os.path.join(directory, 'test' + __pyver__))
+      else:
+        failed.append([directory, talk.to_html(config=self.config)])
 
   def test_compares(self):
     """Comparing tests."""
+    def print_results(passed, failed):
+      """Print results.
+
+      Parameters
+      ----------
+      passed: list
+        passed tests list
+      failed: list
+        failed tests list
+      """
+      if len(passed) > 0:
+        print('Tests Passed')
+        for done in passed:
+          print('  ' + done)
+      if len(failed) > 0:
+        print('Tests Failed')
+        for fail in failed:
+          print('  ' + fail[0])
+          print(fail[1])
+
     self.maxDiff = None
-    num_failures = 0
-    failed = []
     passed = []
+    failed = []
     for cdir in __compare_dirs__:
-  #     if cdir.endswith('checklists') and not __mdx_checklist__:
-  #       continue
-  #     if cdir.endswith('timer') and not __mdx_checklist__:
-  #       continue
-      if os.path.exists(cdir + os.sep + 'test.md'):
-        source = open(cdir + os.sep + 'test.md').read()
-        talk = Presentation()
-        talk.parse(config=self.config, source=source)
-        if os.path.exists(cdir + os.sep + 'test' + __pyver__):
-          if open(cdir + os.sep + 'test' + __pyver__ + os.sep + 'index.html').read() != talk.to_html(config=self.config):
-            num_failures += 1
-            failed.append([cdir, talk.to_html(config=self.config)])
-          else:
-            passed.append(cdir)
-          rmtree(cdir + os.sep + 'test' + __pyver__)
-        else:
-          num_failures += 1
-          failed.append([cdir, talk.to_html(config=self.config)])
-    if len(passed) > 0:
-      print('Tests Passed')
-      for done in passed:
-        print('  ' + done)
-    if len(failed) > 0:
-      print('Tests Failed')
-      for fail in failed:
-        print('  ' + fail[0])
-        print(fail[1])
-    self.assertEquals(num_failures, 0)
-    return
+      if cdir.endswith('checklists') and not __mdx_checklist__:
+        continue
+      if cdir.endswith('timer') and not __mdx_checklist__:
+        continue
+      self.compare(directory=cdir, passed=passed, failed=failed)
+    print_results(passed=passed, failed=failed)
+    self.assertEquals(len(failed), 0)
 
   # def test_utils(self):
   #   """Test utils module."""

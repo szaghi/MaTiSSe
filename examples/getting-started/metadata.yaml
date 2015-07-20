@@ -28,6 +28,10 @@ metadata:
   - max_time: 60
   - toc_depth: 2
   - dirs_to_copy:
+    - css
     - images
     - video
+  - css_overtheme:
+    - css/figure_zoom.css
+    - css/my_list.css
 ---
