@@ -7,22 +7,27 @@
 #slide-80 .slide-content {
   display: block;
   float: left;
-  width: 100%;
-  height: 84%;
+  width: 75%;
+  height: 90%;
 }
 #slide-80 .slide-header-1 {
+  width: 75%;
   height: 10%;
-  background: #3333B3;
+  background: white;
+  color: black;
+  float: right;
+  border-radius: 0;
   display: block;
   active: yes;
-  width: 100%;
 }
-#slide-80 .slide-footer-1 {
-  height: 6%;
-  background: #3333B3;
-  padding: 0;
+#slide-80 .slide-sidebar-2 {
+  position: L;
+  width: 25%;
+  height: 100%;
+  background: #272586;
+  color: white;
+  min-height: 100%;
   display: block;
-  clear: both;
+  float: left;
   active: yes;
-  width: 100%;
 }

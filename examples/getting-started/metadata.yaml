@@ -33,5 +33,5 @@ metadata:
     - video
   - css_overtheme:
     - css/figure_zoom.css
-    - css/my_list.css
+    - css/table.css
 ---

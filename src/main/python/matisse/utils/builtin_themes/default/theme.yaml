@@ -2,6 +2,12 @@
 theme:
   - canvas:
     - background: 'radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))'
+  - ordered-list-items:
+    - content: 'counter(item, lower-alpha)'
+    - color: '#4788B3'
+  - unordered-list-items:
+    - color: '#4788B3'
+    - content: "'\\262F'"
   - toc:
     - font-variant: 'small-caps'
     - chapter-emph:
@@ -93,7 +99,7 @@ theme:
           - white-space: 'pre-wrap'
           - display: 'inline-block'
         - toc:
-          - depth: '3'
+          - depth: '2'
           - font-size: '70%'
   - figure:
     - font-variant: 'small-caps'
@@ -112,9 +118,16 @@ theme:
       - font-size: '80%' 
       - color: '#4788B3'
     - content:
+      - controls: ''
+      - autoplay: ''
       - padding: '1% 5%'
       - box-shadow: '5px 5px 3px rgba(200,200,200,0.3)'
       - border-radius: '15px'
+  - table:
+    - caption: 
+      - padding: '2% 2%'
+      - color: '#4788B3'
+      - display: 'inline-block'
   - note:
     - display: 'inline-block'
     - font-variant: 'small-caps'

@@ -39,14 +39,9 @@ class SuiteTest(unittest.TestCase):
   def __init__(self, *args, **kwargs):
     super(SuiteTest, self).__init__(*args, **kwargs)
     self.config = MatisseConfig()
-    dirslist = ['src/unittest/python/utils/']
     for cdir in __compare_dirs__:
-      dirslist.append(cdir)
-    for cdir in dirslist:
       print('Preparing ' + cdir)
       if cdir.endswith('checklists') and not __mdx_checklist__:
-        continue
-      if cdir.endswith('timer') and not __mdx_checklist__:
         continue
       old_pwd = os.getcwd()
       os.chdir(cdir)
@@ -110,23 +105,9 @@ class SuiteTest(unittest.TestCase):
     for cdir in __compare_dirs__:
       if cdir.endswith('checklists') and not __mdx_checklist__:
         continue
-      if cdir.endswith('timer') and not __mdx_checklist__:
-        continue
       self.compare(directory=cdir, passed=passed, failed=failed)
     print_results(passed=passed, failed=failed)
     self.assertEquals(len(failed), 0)
-
-  # def test_utils(self):
-  #   """Test utils module."""
-  #   source = open('src/unittest/python/utils/test.md').read()
-  #   talk = Presentation(source=source)
-  #   make_output_tree(output='src/unittest/python/utils/utils/')
-  #   talk.save('src/unittest/python/utils/utils/')
-  #   self.assertEqual(open('src/unittest/python/utils/test' + __pyver__ + '/index.html').read(),
-  #                    open('src/unittest/python/utils/utils/index.html').read())
-  #   rmtree('src/unittest/python/utils/utils')
-  #   rmtree('src/unittest/python/utils/test' + __pyver__)
-  #   return
 
   # def test_docstrings(self):
   #   """Test docstrings into modules."""

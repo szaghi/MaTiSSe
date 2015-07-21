@@ -742,6 +742,60 @@ As all other box subclass, the themes of note environments can be defined once f
 }
 $endnote
 
+#### Table environment
+The *table* environment is a subclass of box one that is specialized for rendering tables. The syntax is the following:
+```md
+$table
+$style[style_options]
+$caption[caption_options]{caption}
+$content[content_options]{content}
+$endtable
+```
+where the elements are the same of box environment, but:
+
++ the `content_type` and `caption_type` are automatically set to `table` and `Table` respectively; anyhow they can be still specified inside the $`table`/$`endtable` environment;
++ no matter the order of `$caption`/`$content` statements, the caption is always placed above the content.
+
+Consider the following code:
+
+$columns
+
+$column[width:50%]
+
+```md
+$table
+$caption{My fancy Table}
+$content{
+
+|  /  | foo | bar | baz |
+|-----|-----|-----|-----|
+| a   | 1   |  2  |  3  |
+| b   | 2   |  3  |  4  |
+| c   | 3   |  4  |  5  |
+
+}
+$endtable
+```
+
+This becomes =>
+
+$column[width:50%]
+
+$table
+$caption{My fancy Table}
+$content{
+
+|  /  | foo | bar | baz |
+|-----|-----|-----|-----|
+| a   | 1   |  2  |  3  |
+| b   | 2   |  3  |  4  |
+| c   | 3   |  4  |  5  |
+
+}
+$endtable
+
+$endcolumns
+
 #### Figure environment
 The *figure* environment is a subclass of box one that is specialized for rendering figures. The syntax is the following:
 ```md

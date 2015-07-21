@@ -8,41 +8,21 @@
   display: block;
   float: left;
   width: 100%;
-  height: 82%;
+  height: 84%;
 }
 #slide-81 .slide-header-1 {
-  height: 4%;
-  background: black;
-  color: white;
-  padding: 1% 2%;
+  height: 10%;
+  background: #3333B3;
   display: block;
   active: yes;
   width: 100%;
 }
-#slide-81 .slide-header-2 {
-  height: 4%;
-  background: #191959;
-  color: white;
-  padding: 1% 4%;
-  display: block;
-  active: yes;
-  width: 100%;
-}
-#slide-81 .slide-header-3 {
-  height: 4%;
-  background: #262686;
-  color: white;
-  padding: 1% 6%;
-  display: block;
-  active: yes;
-  width: 100%;
-}
-#slide-81 .slide-header-4 {
+#slide-81 .slide-footer-1 {
   height: 6%;
-  background: #3333B2;
-  color: white;
-  padding: 1% 2%;
+  background: #3333B3;
+  padding: 0;
   display: block;
+  clear: both;
   active: yes;
   width: 100%;
 }

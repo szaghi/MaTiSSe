@@ -33,6 +33,8 @@ def initialize(project):
   project.build_depends_on('pylint')
   project.depends_on('markdown')
   project.depends_on('yattag')
+  project.depends_on('pyyaml')
+  project.depends_on('dirsync')
 
   project.set_property('flake8_max_line_length', 500)
   project.set_property('verbose', True)
