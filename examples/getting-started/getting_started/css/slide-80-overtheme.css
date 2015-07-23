@@ -1,4 +1,20 @@
 
+#slide-80 .toc-chapter-emph {
+  border: 0;
+  border-radius: 0;
+}
+#slide-80 .toc-section-emph {
+  border: 0;
+  border-radius: 0;
+}
+#slide-80 .toc-subsection-emph {
+  border: 0;
+  border-radius: 0;
+}
+#slide-80 .toc-slide-emph {
+  border: 0;
+  border-radius: 0;
+}
 #slide-80.slide {
   display: block;
   width: 900px;
@@ -11,23 +27,22 @@
   height: 90%;
 }
 #slide-80 .slide-header-1 {
-  width: 75%;
   height: 10%;
   background: white;
   color: black;
-  float: right;
   border-radius: 0;
+  padding: 0;
   display: block;
   active: yes;
+  width: 100%;
 }
-#slide-80 .slide-sidebar-2 {
+#slide-80 .slide-sidebar-1 {
   position: L;
   width: 25%;
-  height: 100%;
   background: #272586;
   color: white;
-  min-height: 100%;
   display: block;
   float: left;
   active: yes;
+  height: 90%;
 }

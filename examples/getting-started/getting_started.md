@@ -1784,30 +1784,54 @@ For each theme the **overtheme** definition is reported as code listings.
 #### Bergen
 ---
 overtheme:
+  - toc:
+    - chapter-emph:
+      - border: '0'
+      - border-radius: '0'
+    - section-emph:
+      - border: '0'
+      - border-radius: '0'
+    - subsection-emph:
+      - border: '0'
+      - border-radius: '0'
+    - slide-emph:
+      - border: '0'
+      - border-radius: '0'
   - slide:
     - header-1:
-      - width: '75%'
       - height: '10%'
       - background: white
       - color: black
-      - float: right
       - border-radius: '0'
+      - padding: '0'
       - metadata:
+        - custom-1:
+          - width: '25%'
+          - height: '100%'
+          - value: ' '
+          - margin: '0'
+          - padding: '0'
+          - display: 'block'
+          - float: 'left'
+          - color: '#272586'
+          - background: '#272586'
         - slidetitle:
+          - width: '75%'
+          - height: '100%'
+          - display: 'block'
+          - float: 'left'
           - font-size: '150%'
-    - sidebar-2:
+    - sidebar-1:
       - position: L
       - width: '25%'
-      - height: '100%'
       - background: '#272586'
       - color: white
-      - min-height: '100%'
       - metadata:
         - toc:
           - depth: '1'
           - font-size: '120%'
           - text-align: 'right'
-          - line-height: '500%'
+          - line-height: '200%'
           - padding: '30% 5%'
           - float: 'right'
 ---

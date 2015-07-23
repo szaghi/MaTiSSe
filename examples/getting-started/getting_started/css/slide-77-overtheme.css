@@ -25,7 +25,6 @@
   background: #822433;
   color: white;
   display: block;
-  clear: both;
   active: yes;
   width: 100%;
 }
@@ -35,6 +34,5 @@
   float: right;
   background: #822433;
   display: block;
-  clear: both;
   active: yes;
 }
