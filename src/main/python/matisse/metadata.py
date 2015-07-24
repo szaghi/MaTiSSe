@@ -87,7 +87,7 @@ class Metadata(object):
     return doc.getvalue()
 
   def timer_to_html(self, match, max_time):
-    """Convert custom metadata to html stream.
+    """Convert timer metadata to html stream.
 
     Parameters
     ----------
@@ -347,7 +347,9 @@ class Metadata(object):
         style = str(match.group('style'))
       if style:
         doc.attr(style=style)
-        doc.asis(re.search(r'value\:(?P<value>.*?)\;', style).group('value'))
+        value = re.search(r'value\:(?P<value>.*?)\;', style)
+        if value:
+          doc.asis(re.search(r'value\:(?P<value>.*?)\;', style).group('value'))
     return doc.getvalue()
 
   def to_html(self, match, toc_depth=None, max_time=None, current=None):
