@@ -1,0 +1,15 @@
+.slide {
+  background: white;
+}
+.toc-chapter {
+  display: inline;
+  clear: none;
+  padding-right: 2em;
+  color: #48487B;
+}
+.toc-chapter-emph {
+  display: inline;
+  clear: none;
+  padding-right: 2em;
+  color: white;
+}

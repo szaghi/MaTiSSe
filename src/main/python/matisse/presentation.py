@@ -288,6 +288,8 @@ class Presentation(object):
     source: str
     """
     complete_source = self.parser.includes(source=source)
+    if config.print_parsed_source:
+      print(complete_source)
     self.__get_metadata(source=complete_source)
     self.__get_theme(source=complete_source)
     new_theme = Theme()

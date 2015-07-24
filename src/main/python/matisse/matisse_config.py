@@ -61,6 +61,7 @@ class MatisseConfig(object):
     self.toc_at_sec_beginning = None
     self.toc_at_subsec_beginning = None
     self.pdf = False
+    self.print_parsed_source = False
     self.__get_highlight_styles()
     self.__check_highlight_style()
     self.__get_themes()
@@ -177,10 +178,13 @@ class MatisseConfig(object):
           if os.path.exists(theme_path):
             sync_logger = logging.getLogger('sync_logger')
             sync(os.path.join(themes, theme), 'theme-' + theme, 'sync', create=True, logger=sync_logger)
-            source_themed = r'\$include(' + os.path.join('theme-' + theme, 'theme.yaml') + ')\n' + source_themed
+            source_themed = r'$include(' + os.path.join('theme-' + theme, 'theme.yaml') + ')\n' + source_themed
             metadata_path = os.path.join(os.path.join(themes, theme), 'metadata.yaml')
             if os.path.exists(metadata_path):
-              source_themed = r'\$include(' + os.path.join('theme-' + theme, 'metadata.yaml') + ')\n' + source_themed
+              source_themed = r'$include(' + os.path.join('theme-' + theme, 'metadata.yaml') + ')\n' + source_themed
+            titlepage_path = os.path.join(os.path.join(themes, theme), 'titlepage.md')
+            if os.path.exists(titlepage_path):
+              source_themed = r'$include(' + os.path.join('theme-' + theme, 'titlepage.md') + ')\n' + source_themed
     return source_themed
 
   def str_highlight_styles(self):
@@ -225,6 +229,7 @@ class MatisseConfig(object):
     self.toc_at_sec_beginning = cliargs.toc_at_sec_beginning
     self.toc_at_subsec_beginning = cliargs.toc_at_subsec_beginning
     self.pdf = cliargs.pdf
+    self.print_parsed_source = cliargs.print_parsed_source
     return
 
   def printf(self):
