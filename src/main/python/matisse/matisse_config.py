@@ -196,7 +196,7 @@ class MatisseConfig(object):
       string containing the list of available styles
     """
     string = ['Available highlight.js styles']
-    for style in self.__highlight_styles:
+    for style in sorted(self.__highlight_styles):
       string.append(style)
     return '\n  '.join(string) + '\n'
 
@@ -209,7 +209,7 @@ class MatisseConfig(object):
       string containing the list of builtin themes
     """
     string = ['Builtin themes']
-    for theme in self.__themes:
+    for theme in sorted(self.__themes):
       string.append(theme)
     return '\n  '.join(string) + '\n'
 
