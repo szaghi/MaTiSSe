@@ -1,0 +1,7 @@
+---
+metadata:
+  - dirs_to_copy:
+    - theme-beamer-madrid
+  - css_overtheme:
+    - theme-beamer-madrid/css/slide.css
+---    

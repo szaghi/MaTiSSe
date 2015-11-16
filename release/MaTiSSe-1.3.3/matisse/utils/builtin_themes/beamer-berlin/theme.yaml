@@ -1,0 +1,80 @@
+---
+theme:
+  - ordered-list:
+    - margin-top: '0.5em'
+  - ordered-list-items:
+    - content: 'counter(item)'
+    - color: 'white'
+    - background: '#3333B2'
+    - padding-left: '1%'
+  - unordered-list-items:
+    - color: '#3333B2'
+    - content: "'\\25A0'"    
+  - slide:
+    - content:
+      - background: 'white'
+      - color: 'rgb(102,102,102)'
+      - padding: '1%'
+    - header-1:
+      - height: '4%'
+      - background: '#191959'
+      - color: 'white'
+      - padding: '0.5% 2%'
+      - metadata:
+        - toc:
+          - depth: '1'
+    - header-2:
+      - height: '4%'
+      - background: '#262686'
+      - color: 'white'
+      - padding: '0.5% 2%'
+      - metadata:
+        - subsectiontitle:
+          - font-size: '100%'
+          - padding: '0 1%'
+    - header-3:
+      - height: '6%'
+      - background: '#3333B2'
+      - color: 'white'
+      - padding: '0.5% 2%'
+      - metadata:
+        - slidetitle:
+          - font-size: '150%'
+          - padding: '0 1%'
+    - footer-1:
+      - height: '4%'
+      - background: '#262686'
+      - color: 'white'
+      - padding: '0.5% 5%'
+      - metadata:
+        - authors:
+          - float: 'left'
+          - font-size: '100%'
+          - padding: '0 1%'
+        - affiliations:
+          - float: 'right'
+          - font-size: '100%'
+    - footer-2:
+      - height: '4%'
+      - background: '#191959'
+      - color: 'white'
+      - padding: '0.5% 5%'
+      - metadata:
+        - title:
+          - font-size: '100%'
+          - padding: '0 1%'
+  - note:
+    - display: 'inline-block'
+    - margin: '1%'
+    - caption: 
+      - padding: '0 1em'
+      - width: '100%'
+      - color: 'white'
+      - background: '#262686'
+      - display: 'inline-block'
+      - font-size: '120%'  
+    - content: 
+      - padding: '0 1em'
+      - font-size: '120%'  
+      - background: '#E9E9F3'
+---

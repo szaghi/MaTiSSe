@@ -1,0 +1,6 @@
+---
+metadata:
+  - logo: theme-sapienza/logo/logo.png
+  - dirs_to_copy:
+    - theme-sapienza
+---    

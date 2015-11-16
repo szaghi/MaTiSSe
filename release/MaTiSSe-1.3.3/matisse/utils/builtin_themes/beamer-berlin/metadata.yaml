@@ -1,0 +1,7 @@
+---
+metadata:
+  - dirs_to_copy:
+    - theme-beamer-berlin
+  - css_overtheme:
+    - theme-beamer-berlin/css/slide.css
+---    
