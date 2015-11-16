@@ -1,0 +1,84 @@
+---
+theme:
+  - ordered-list:
+    - margin-top: '0.5em'
+  - ordered-list-items:
+    - content: 'counter(item)'
+    - color: 'white'
+    - background: '#41419E'
+    - padding-left: '1%'
+    - border-radius: '1em'
+  - unordered-list-items:
+    - color: '#41419E'
+    - content: "'\\2688'"    
+  - slide:
+    - content:
+      - background: 'white'
+      - color: 'rgb(102,102,102)'
+      - padding: '1%'
+    - header-1:
+      - height: '8%'
+      - padding: '1%'
+      - background: '#3333B3'
+      - color: 'white'
+      - metadata:
+        - slidetitle:
+          - font-size: '180%'
+    - footer-1:
+      - height: '6%'
+      - background: '#3333B3'
+      - padding: '0'
+      - color: 'white'
+      - metadata:
+        - authors_short:
+          - float: 'left'
+          - height: '100%'
+          - padding: '1% 1%'
+          - background: '#191959'
+        - affiliations_short:
+          - float: 'left'
+          - height: '100%'
+          - padding: '1% 1%'
+          - background: '#191959'
+        - title:
+          - float: 'left'
+          - font-size: '80%'
+          - height: '100%'
+          - padding: '1% 1%'
+          - background: '#262686'
+        - conference:
+          - float: 'left'
+          - font-size: '80%'
+          - height: '100%'
+          - width: '30%'
+          - padding: '1% 1%'
+          - background: '#3333B3'
+        - total_slides_number:
+          - float: 'right'
+          - padding: '1% 1%'
+        - custom-3:
+          - value: ' / '
+          - float: 'right'
+          - padding: '1% 0%'
+        - slidenumber:
+          - float: 'right'
+          - padding: '1% 1%'
+  - note:
+    - display: 'inline-block'
+    - margin: '1%'
+    - box-shadow: '7px 7px 5px rgba(200,200,200,0.8)'
+    - border-radius: '1em 1em 1em 1em'
+    - caption: 
+      - border-radius: '1em 1em 0 0'
+      - padding: '0 1em'
+      - width: '100%'
+      - color: 'white'
+      - background: '#262686'
+      - display: 'inline-block'
+      - font-size: '120%'  
+    - content: 
+      - padding: '0 1em'
+      - font-size: '120%'  
+      - background: '#E9E9F3'
+      - border-radius: '0 0 1em 1em'
+---
