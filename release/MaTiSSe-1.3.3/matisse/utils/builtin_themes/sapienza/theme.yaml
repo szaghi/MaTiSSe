@@ -1,0 +1,76 @@
+---
+theme:
+  - canvas:
+    - background: 'radial-gradient(rgb(240, 240, 240), rgb(110, 110, 110))' 
+  - slide:
+    - width: '1000px'
+    - height: '700px'
+    - border-radius: '10px'
+    - background: white
+    - content:
+      - padding: '1%'
+    - header-1:
+      - height: '6%'
+      - padding: '1% 2%'
+      - background: '#822433'
+      - color: white
+      - border-radius: '10px 10px 0 0'
+      - metadata:
+        - slidetitle:
+          - float: left
+          - font-variant: 'small-caps'
+          - font-size: '150%'
+        - logo:
+          - float: right
+          - height: '100%'
+    - footer-0:
+      - height: '3%'
+      - width: '90%'
+      - float: right
+      - background: '#822433'
+    - footer-1:
+      - height: '6%'
+      - padding: '1% 2%'
+      - background: '#822433'
+      - color: white
+      - metadata:
+        - title:
+          - padding: '0 1%'
+        - total_slides_number:
+          - float: right
+          - padding: '0 1%'
+        - custom-1:
+          - value: ' of '
+          - float: right
+        - slidenumber:
+          - float: right
+          - padding: '0 1%'
+        - custom-2:
+          - value: 'slide '
+          - float: right
+  - video:
+    - float: center
+    - font-variant: 'small-caps'
+    - text-align: 'center'
+    - caption: 
+      - font-size: '100%' 
+      - color: '#822433'
+    - content:
+      - controls: ''
+      - autoplay: ''
+      - padding: '1% 1%'
+  - figure:
+    - font-variant: 'small-caps'
+    - text-align: 'center'
+    - caption: 
+      - font-size: '100%' 
+      - color: '#822433'
+    - content:
+      - padding: '1% 1%'
+  - ordered-list-items:
+    - content: 'counter(item, decimal)'
+    - color: '#822433'
+  - unordered-list-items:
+    - color: '#822433'
+    - content: "'\\26AB'"
+---
