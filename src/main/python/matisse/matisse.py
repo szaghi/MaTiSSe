@@ -12,7 +12,7 @@ from presentation import Presentation
 __appname__ = "MaTiSSe.py"
 __description__ = "MaTiSSe.py, Markdown To Impressive Scientific Slides"
 __long_description__ = "MaTiSSe.py, Markdown To Impressive Scientific Slides. It is a very simple and stupid-to-use (KISS) presentation maker based on simple markdown syntax producing high quality first-class html/css presentation with great support for scientific contents."
-__version__ = "1.3.1"
+__version__ = "1.3.2"
 __author__ = "Stefano Zaghi"
 __author_email__ = "stefano.zaghi@gmail.com"
 __license__ = "GNU General Public License v3 (GPLv3)"
