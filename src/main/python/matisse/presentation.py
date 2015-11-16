@@ -251,7 +251,6 @@ class Presentation(object):
       theme = overtheme
     else:
       theme = self.theme
-    # decorators = getattr(self.theme, 'slide_' + decorator)
     decorators = getattr(theme, 'slide_' + decorator)
     for decor in sorted(decorators):
       insert = True

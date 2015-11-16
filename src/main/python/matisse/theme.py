@@ -210,6 +210,7 @@ class Theme(object):
         self.slide_sidebar_metadata[sidebar] = other.slide_sidebar_metadata[sidebar]
       else:
         append_css(my_element=self.slide_sidebar_metadata[sidebar], other_element=other.slide_sidebar_metadata[sidebar])
+    self.__check_slide()
     self.__get_css()
 
   @staticmethod
