@@ -1,0 +1,48 @@
+
+#slide-82.slide {
+  display: block;
+  width: 900px;
+  height: 700px;
+}
+#slide-82 .slide-content {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 82%;
+}
+#slide-82 .slide-header-1 {
+  height: 4%;
+  background: black;
+  color: white;
+  padding: 1% 2%;
+  display: block;
+  active: yes;
+  width: 100%;
+}
+#slide-82 .slide-header-2 {
+  height: 4%;
+  background: #191959;
+  color: white;
+  padding: 1% 4%;
+  display: block;
+  active: yes;
+  width: 100%;
+}
+#slide-82 .slide-header-3 {
+  height: 4%;
+  background: #262686;
+  color: white;
+  padding: 1% 6%;
+  display: block;
+  active: yes;
+  width: 100%;
+}
+#slide-82 .slide-header-4 {
+  height: 6%;
+  background: #3333B2;
+  color: white;
+  padding: 1% 2%;
+  display: block;
+  active: yes;
+  width: 100%;
+}

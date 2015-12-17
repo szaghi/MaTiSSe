@@ -1,0 +1,41 @@
+/* MaTiSSe.py default printing styles*/
+@media print {
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-box-sizing: border-box !important;
+       -moz-box-sizing: border-box !important;
+        -ms-box-sizing: border-box !important;
+         -o-box-sizing: border-box !important;
+            box-sizing: border-box !important;
+  }
+  header nav, footer {
+    display: none;
+  }
+  @page {
+    size: A4 !important;
+    margin: 0 !important;
+  }
+  body {
+    background: white !important;
+    width: 210mm !important;
+    height: 148.5mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .step, .slide {
+    position: relative !important;
+    width: 900px !important;
+    height: 700px !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    page-break-inside: avoid !important;
+    page-break-after: always !important;
+    -webkit-box-sizing: border-box !important;
+       -moz-box-sizing: border-box !important;
+        -ms-box-sizing: border-box !important;
+         -o-box-sizing: border-box !important;
+            box-sizing: border-box !important;
+  }
+}

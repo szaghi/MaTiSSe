@@ -1,0 +1,13 @@
+
+#slide-0.slide {
+  display: block;
+  width: 900px;
+  height: 700px;
+}
+#slide-0 .slide-content {
+  padding: 0%;
+  display: block;
+  float: left;
+  width: 100%;
+  height: 100%;
+}
