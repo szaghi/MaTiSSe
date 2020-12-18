@@ -2,9 +2,10 @@
 """
 video.py, module definition of Video class.
 """
+from __future__ import absolute_import
 import re
 from yattag import Doc
-from box import Box
+from .box import Box
 
 
 class Video(Box):

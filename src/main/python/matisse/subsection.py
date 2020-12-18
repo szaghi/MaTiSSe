@@ -2,8 +2,9 @@
 """
 subsection.py, module definition of Subsection class.
 """
+from __future__ import absolute_import
 from __future__ import print_function
-from slide import Slide
+from .slide import Slide
 
 
 class Subsection(object):

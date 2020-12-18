@@ -3,15 +3,16 @@
 """
 theme.py, module definition of Theme class.
 """
+from __future__ import absolute_import
 from __future__ import print_function
 from copy import deepcopy
 from collections import OrderedDict
-from yaml import load_all, YAMLError
-from box import Box
-from note import Note
-from figure import Figure
-from table import Table
-from video import Video
+from yaml import load_all, YAMLError, FullLoader
+from .box import Box
+from .note import Note
+from .figure import Figure
+from .table import Table
+from .video import Video
 
 
 class Theme(object):
@@ -762,7 +763,7 @@ class Theme(object):
     self.div_id = div_id
     if len(source) > 0:
       try:
-        for data in load_all(source):
+        for data in load_all(source, Loader=FullLoader):
           if name in data:
             for element in data[name]:
               self.__get_copy_from(data=element)

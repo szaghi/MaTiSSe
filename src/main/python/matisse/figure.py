@@ -2,9 +2,10 @@
 """
 figure.py, module definition of Figure class.
 """
+from __future__ import absolute_import
 import re
 from yattag import Doc
-from box import Box
+from .box import Box
 
 
 class Figure(Box):

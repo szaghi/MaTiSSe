@@ -23,6 +23,11 @@ class Position(object):
                      'rotx': 0, 'roty': 0, 'rotz': 0,
                      'scale': 1}
 
+  def __update_scale(self, transition):
+    """Update scale."""
+    if transition['scale'] != '':
+      self.position['scale'] = int(transition['scale'])
+
   def __update_position_absolute(self, transition):
     """Update position for absolute transition."""
     if transition['data-x'] != '':
@@ -37,8 +42,7 @@ class Position(object):
       self.position['roty'] = int(transition['data-rotate-y'])
     if transition['data-rotate-z'] != '':
       self.position['rotz'] = int(transition['data-rotate-z'])
-    if transition['scale'] != '':
-      self.position['scale'] = int(transition['scale'])
+    self.__update_scale(transition=transition)
 
   def __update_position_svgpath(self, transition):
     """Update position for svgpath transition."""
@@ -46,38 +50,46 @@ class Position(object):
   def __update_position_horizontal(self, transition):
     """Update position for horizontal transition."""
     self.position['x'] = self.position['x'] + transition['width'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def __update_position_neg_horizontal(self, transition):
     """Update position for -horizontal transition."""
     self.position['x'] = self.position['x'] - transition['width'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def __update_position_vertical(self, transition):
     """Update position for vertical transition."""
     self.position['y'] = self.position['y'] + transition['height'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def __update_position_neg_vertical(self, transition):
     """Update position for -vertical transition."""
     self.position['y'] = self.position['y'] - transition['height'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def __update_position_diagonal(self, transition):
     """Update position for diagonal transition."""
     self.position['x'] = self.position['x'] + transition['width'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
     self.position['y'] = self.position['y'] + transition['height'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def __update_position_neg_diagonal(self, transition):
     """Update position for -diagonal transition."""
     self.position['x'] = self.position['x'] - transition['width'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
     self.position['y'] = self.position['y'] - transition['height'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def __update_position_diagonal_neg_x(self, transition):
     """Update position for diagonal-x transition."""
     self.position['x'] = self.position['x'] - transition['width'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
     self.position['y'] = self.position['y'] + transition['height'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def __update_position_diagonal_neg_y(self, transition):
     """Update position for diagonal-y transition."""
     self.position['x'] = self.position['x'] + transition['width'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
     self.position['y'] = self.position['y'] - transition['height'] * (max(self.position['scale'], transition['scale']) + transition['offset'] / 100.0)
+    self.__update_scale(transition=transition)
 
   def update_position(self, presentation_theme, overtheme=None):
     """Update the position using theme/overtheme slides-transition data.

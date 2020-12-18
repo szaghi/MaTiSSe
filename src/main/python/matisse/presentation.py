@@ -3,20 +3,21 @@
 presentation.py, module definition of Presentation class.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 from collections import OrderedDict
 import logging
 import os
 from dirsync import sync
-from yaml import load_all, YAMLError
+from yaml import load_all, YAMLError, FullLoader
 from yattag import Doc, indent
-from chapter import Chapter
-from metadata import Metadata
-from parser import Parser
-from position import Position
-from section import Section
-from slide import Slide
-from subsection import Subsection
-from theme import Theme
+from .chapter import Chapter
+from .metadata import Metadata
+from .parser import Parser
+from .position import Position
+from .section import Section
+from .slide import Slide
+from .subsection import Subsection
+from .theme import Theme
 
 
 class Presentation(object):
@@ -107,7 +108,7 @@ class Presentation(object):
     yamlblocks = self.parser.tokenizer(source=source, re_search=self.parser.regexs['yamlblock'], exclude=codeblocks)
     try:
       for block in yamlblocks:
-        for data in load_all(block['match'].group().strip('---')):
+        for data in load_all(block['match'].group().strip('---'), Loader=FullLoader):
           if 'metadata' in data:
             for element in data['metadata']:
               for key in element:

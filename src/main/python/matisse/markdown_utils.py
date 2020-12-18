@@ -2,9 +2,10 @@
 """
 markdown_utils.py, module definition of markdown utils functions.
 """
+from __future__ import absolute_import
 import markdown
-from mdx_mathjax import MathJaxExtension
-from mdx_custom_span_class import CustomSpanClassExtension
+from .mdx_mathjax import MathJaxExtension
+from .mdx_custom_span_class import CustomSpanClassExtension
 try:
   from markdown_checklist.extension import ChecklistExtension
   __mdx_checklist__ = True

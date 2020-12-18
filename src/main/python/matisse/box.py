@@ -2,9 +2,10 @@
 """
 box.py, module definition of Box class.
 """
+from __future__ import absolute_import
 import re
 from yattag import Doc
-from markdown_utils import markdown2html
+from .markdown_utils import markdown2html
 
 
 class Box(object):

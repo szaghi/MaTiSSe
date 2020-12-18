@@ -2,15 +2,16 @@
 """
 slide.py, module definition of Slide class.
 """
+from __future__ import absolute_import
 from __future__ import print_function
-from box import Box
-from columns import Columns
-from figure import Figure
-from markdown_utils import markdown2html
-from note import Note
-from table import Table
-from theme import Theme
-from video import Video
+from .box import Box
+from .columns import Columns
+from .figure import Figure
+from .markdown_utils import markdown2html
+from .note import Note
+from .table import Table
+from .theme import Theme
+from .video import Video
 
 
 class Slide(object):

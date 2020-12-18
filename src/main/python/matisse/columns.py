@@ -2,10 +2,11 @@
 """
 columns.py, module definition of Columns class.
 """
+from __future__ import absolute_import
 from __future__ import print_function
 import re
 from yattag import Doc
-from markdown_utils import markdown2html
+from .markdown_utils import markdown2html
 
 
 __recolumns__ = re.compile(r"(?P<columns>\$columns(?P<env>.*?)\$endcolumns)", re.DOTALL)
