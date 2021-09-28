@@ -23,5 +23,5 @@ where
 For testing the example type:
 
 ```bash
-MaTiSSe.py -i getting_started.md --indented --toc-at-subsec-beginning 2
+MaTiSSe.py -i getting_started.md --toc-at-subsec-beginning 2
 ```

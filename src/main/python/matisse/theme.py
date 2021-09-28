@@ -148,7 +148,7 @@ class Theme(object):
           found = False
           for mycss in my_element:
             if isinstance(css, dict):
-              if css.keys()[0] in mycss:
+              if list(css.keys())[0] in mycss:
                 found = True
             elif css in mycss:
               found = True
