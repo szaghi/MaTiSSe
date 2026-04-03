@@ -2,10 +2,11 @@
 """Testing columns environment"""
 # import doctest
 import os
-from shutil import rmtree
-import sys
 import subprocess
+import sys
 import unittest
+from shutil import rmtree
+
 from matisse.markdown_utils import __mdx_checklist__
 from matisse.matisse_config import MatisseConfig
 from matisse.presentation import Presentation

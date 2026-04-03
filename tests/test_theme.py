@@ -5,10 +5,8 @@ Covers: __init__ defaults, set_from (deep-copy semantics), copy_from
 (non-overwrite merge), and the Phase-1 dict.keys() fix that is exercised
 inside copy_from via next(iter(css.keys())).
 """
-import pytest
 
 from matisse.theme import Theme
-
 
 # ---------------------------------------------------------------------------
 # __init__

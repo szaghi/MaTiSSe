@@ -3,7 +3,9 @@
 box.py, module definition of Box class.
 """
 import re
+
 from yattag import Doc
+
 from .markdown_utils import markdown2html
 
 

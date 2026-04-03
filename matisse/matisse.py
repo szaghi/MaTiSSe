@@ -5,6 +5,7 @@ MaTiSSe.py, Markdown To Impressive Scientific Slides
 import argparse
 import os
 import sys
+
 from .matisse_config import MatisseConfig
 from .presentation import Presentation
 

@@ -3,7 +3,9 @@
 note.py, module definition of Note class.
 """
 import re
+
 from yattag import Doc
+
 from .box import Box
 from .markdown_utils import markdown2html
 

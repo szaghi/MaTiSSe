@@ -2,6 +2,7 @@
 MathJax markdown extension.
 """
 import xml.etree.ElementTree as etree
+
 import markdown
 
 

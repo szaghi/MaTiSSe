@@ -3,9 +3,11 @@
 metadata.py, module definition of Metadata class.
 """
 from __future__ import annotations
+
 import re
 import sys
 from typing import Union
+
 from yattag import Doc
 
 

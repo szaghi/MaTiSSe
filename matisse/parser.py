@@ -4,6 +4,7 @@ parser.py, module definition of Parser class.
 This defines the MaTiSSe.py Parser.
 """
 from __future__ import annotations
+
 import os
 import re
 import sys

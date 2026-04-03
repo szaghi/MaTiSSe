@@ -26,10 +26,10 @@ copyright @2014 Konrad Wasowicz <exaroth@gmail.com>
 
 
 import xml.etree.ElementTree as etree
+
 import markdown
 from markdown import Extension
 from markdown.inlinepatterns import Pattern
-
 
 CUSTOM_CLS_RE = r'[!]{2}(?P<class>.+)[|](?P<text>.+)[!]{2}'
 

@@ -3,6 +3,7 @@
 section.py, module definition of Section class.
 """
 from collections import OrderedDict
+
 from .subsection import Subsection
 
 

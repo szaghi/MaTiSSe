@@ -3,11 +3,14 @@
 presentation.py, module definition of Presentation class.
 """
 from __future__ import annotations
-from collections import OrderedDict
+
 import os
+from collections import OrderedDict
 from shutil import copytree
-from yaml import load_all, YAMLError, FullLoader
+
+from yaml import FullLoader, YAMLError, load_all
 from yattag import Doc, indent
+
 from .chapter import Chapter
 from .metadata import Metadata
 from .parser import Parser

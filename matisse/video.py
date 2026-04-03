@@ -3,7 +3,9 @@
 video.py, module definition of Video class.
 """
 import re
+
 from yattag import Doc
+
 from .box import Box
 
 

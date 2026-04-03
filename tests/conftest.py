@@ -7,8 +7,8 @@ directly — no sys.path manipulation needed.
 import os
 
 import pytest
+
 from matisse.matisse_config import MatisseConfig
-from matisse.markdown_utils import __mdx_checklist__
 
 # ---------------------------------------------------------------------------
 # Locate all integration-test fixture directories (those containing test.md).

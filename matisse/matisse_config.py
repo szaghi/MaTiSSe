@@ -3,9 +3,10 @@
 matisse_config.py, module definition of MatisseConfig class.
 """
 from __future__ import annotations
+
 import os
-from shutil import copyfile, copytree, rmtree
 import sys
+from shutil import copyfile, copytree, rmtree
 
 
 class MatisseConfig(object):

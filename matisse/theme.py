@@ -3,12 +3,14 @@
 """
 theme.py, module definition of Theme class.
 """
-from copy import deepcopy
 from collections import OrderedDict
-from yaml import load_all, YAMLError, FullLoader
+from copy import deepcopy
+
+from yaml import FullLoader, YAMLError, load_all
+
 from .box import Box
-from .note import Note
 from .figure import Figure
+from .note import Note
 from .table import Table
 from .video import Video
 

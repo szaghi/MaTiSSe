@@ -141,9 +141,8 @@ class TestParseWithMatch:
 class TestYamlFrontMatter:
     def test_metadata_extracted_from_yaml_block(self):
         """Presentation.__get_metadata picks up values from YAML front matter."""
-        from collections import OrderedDict
-        from matisse.presentation import Presentation
         from matisse.matisse_config import MatisseConfig
+        from matisse.presentation import Presentation
 
         source = (
             '---\n'
@@ -166,8 +165,8 @@ class TestYamlFrontMatter:
         assert 'Alice' in p.metadata['authors'].value
 
     def test_missing_metadata_keeps_defaults(self):
-        from matisse.presentation import Presentation
         from matisse.matisse_config import MatisseConfig
+        from matisse.presentation import Presentation
 
         source = (
             '# Chapter\n'

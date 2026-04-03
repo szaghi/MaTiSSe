@@ -3,9 +3,10 @@
 columns.py, module definition of Columns class.
 """
 import re
-from yattag import Doc
-from .markdown_utils import markdown2html
 
+from yattag import Doc
+
+from .markdown_utils import markdown2html
 
 __recolumns__ = re.compile(r"(?P<columns>\$columns(?P<env>.*?)\$endcolumns)", re.DOTALL)
 __recol__ = re.compile(r"(?P<column>\$column(\[(?P<options>.*?)\])*)", re.DOTALL)

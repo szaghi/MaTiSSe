@@ -3,6 +3,7 @@
 chapter.py, module definition of Chapter class.
 """
 from collections import OrderedDict
+
 from .section import Section
 
 

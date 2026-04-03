@@ -5,7 +5,6 @@ Covers: tokenizer, tokens_end_update, slides_end_update, includes,
 and the full tokenize() pipeline.
 """
 import os
-import sys
 import tempfile
 
 import pytest
