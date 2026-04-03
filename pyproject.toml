@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "MaTiSSe.py"
+dynamic = ["version"]
+description = "MaTiSSe.py, Markdown To Impressive Scientific Slides"
+readme = "README.md"
+license = { text = "GNU General Public License v3 (GPLv3)" }
+authors = [{ name = "Stefano Zaghi", email = "stefano.zaghi@gmail.com" }]
+requires-python = ">=3.9"
+dependencies = ["markdown", "yattag", "pyyaml"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Text Processing",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff"]
+
+[project.scripts]
+"MaTiSSe.py" = "matisse.matisse:main"
+
+[project.urls]
+Homepage = "https://github.com/szaghi/MaTiSSe"
+
+# ---------------------------------------------------------------------------
+# setuptools — flat layout (package at repo root)
+# ---------------------------------------------------------------------------
+[tool.setuptools.dynamic]
+version = { attr = "matisse.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["matisse*"]
+
+[tool.setuptools.package-data]
+matisse = ["utils/**/*"]
+
+# ---------------------------------------------------------------------------
+# pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--tb=short"
+
+# ---------------------------------------------------------------------------
+# coverage
+# ---------------------------------------------------------------------------
+[tool.coverage.run]
+source = ["matisse"]
+branch = true
+omit = ["*/utils/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 60
+
+# ---------------------------------------------------------------------------
+# ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I"]
+ignore = [
+  "E501",  # line too long — already handled by line-length
+  "E741",  # ambiguous variable name (l, O, I) — present in existing code
+]
