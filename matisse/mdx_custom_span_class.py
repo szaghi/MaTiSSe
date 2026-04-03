@@ -24,43 +24,44 @@ copyright @2014 Konrad Wasowicz <exaroth@gmail.com>
 
 """
 
-
 import xml.etree.ElementTree as etree
 
 import markdown
 from markdown import Extension
 from markdown.inlinepatterns import Pattern
 
-CUSTOM_CLS_RE = r'[!]{2}(?P<class>.+)[|](?P<text>.+)[!]{2}'
+CUSTOM_CLS_RE = r"[!]{2}(?P<class>.+)[|](?P<text>.+)[!]{2}"
 
 
 class CustomSpanClassExtension(Extension):
-  """ Extension class for markdown """
-  def extendMarkdown(self, md):
-    md.inlinePatterns["custom_span_class"] = CustomSpanClassPattern(CUSTOM_CLS_RE, md)
+    """Extension class for markdown"""
+
+    def extendMarkdown(self, md):
+        md.inlinePatterns["custom_span_class"] = CustomSpanClassPattern(CUSTOM_CLS_RE, md)
 
 
 class CustomSpanClassPattern(Pattern):
-  def handleMatch(self, matched):
+    def handleMatch(self, matched):
+        """
+        If string matched
+        regexp expression create
+        new span elem with given class
+        """
 
-    """
-    If string matched
-    regexp expression create
-    new span elem with given class
-    """
+        cls = matched.group("class")
+        text = matched.group("text")
 
-    cls = matched.group("class")
-    text = matched.group("text")
-
-    elem = etree.Element("span")
-    elem.set("class", cls)
-    elem.text = markdown.util.AtomicString(text)
-    return elem
+        elem = etree.Element("span")
+        elem.set("class", cls)
+        elem.text = markdown.util.AtomicString(text)
+        return elem
 
 
 def makeExtension(*args, **kwargs):
-  return CustomSpanClassExtension(*args, **kwargs)
+    return CustomSpanClassExtension(*args, **kwargs)
+
 
 if __name__ == "__main__":
-  import doctest
-  doctest.testmod()
+    import doctest
+
+    doctest.testmod()

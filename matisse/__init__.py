@@ -1,4 +1,5 @@
 """Package defining the MaTiSSe.py program."""
+
 __version__ = "1.4.0"
 __author__ = "Stefano Zaghi"
 __author_email__ = "stefano.zaghi@gmail.com"

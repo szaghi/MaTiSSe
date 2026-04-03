@@ -2,6 +2,7 @@
 """
 MaTiSSe.py, Markdown To Impressive Scientific Slides
 """
+
 import argparse
 import os
 import sys
@@ -92,74 +93,165 @@ $endtable
 
 
 def make_presentation(config, source, output):
-  """Make the presentation.
+    """Make the presentation.
 
-  Parameters
-  ----------
-  config: MatisseConfig()
-  source: str
-    source markdown
-  output: str
-    output path
+    Parameters
+    ----------
+    config: MatisseConfig()
+    source: str
+      source markdown
+    output: str
+      output path
 
-  Returns
-  -------
-  source: str
-    the parsed source
-  """
-  config.make_output_tree(output=output)
-  if config.theme is not None:
-    source = config.put_theme(source=source, output=output)
-  presentation = Presentation()
-  presentation.parse(config=config, source=source)
-  presentation.save(config=config, output=output)
-  return source
+    Returns
+    -------
+    source: str
+      the parsed source
+    """
+    config.make_output_tree(output=output)
+    if config.theme is not None:
+        source = config.put_theme(source=source, output=output)
+    presentation = Presentation()
+    presentation.parse(config=config, source=source)
+    presentation.save(config=config, output=output)
+    return source
 
 
 def main():
-  """Main function."""
-  cliparser = argparse.ArgumentParser(prog=__appname__, description='MaTiSSe.py, Markdown To Impressive Scientific Slides')
-  cliparser.add_argument('-v', '--version', action='version', help='Show version', version='%(prog)s ' + __version__)
-  cliparser.add_argument('-i', '--input', required=False, action='store', default=None, help='Input file name of markdown source to be parsed')
-  cliparser.add_argument('-o', '--output', required=False, action='store', default=None, help='Output directory name containing the presentation files')
-  cliparser.add_argument('-t', '--theme', required=False, action='store', default=None, help='Select a builtin theme for initializing a new sample presentation')
-  cliparser.add_argument('-hs', '--highlight-style', required=False, action='store', default='github.css', help='Select the highlight.js style (default github.css); select "disable" to disable highligth.js', metavar='STYLE.CSS')
-  cliparser.add_argument('-s', '--sample', required=False, action='store', default=None, help='Generate a new sample presentation as skeleton of your one')
-  cliparser.add_argument('--toc-at-chap-beginning', required=False, action='store', default=None, help='Insert Table of Contents at each chapter beginning (default no): to activate indicate the TOC depth', metavar='TOC-DEPTH')
-  cliparser.add_argument('--toc-at-sec-beginning', required=False, action='store', default=None, help='Insert Table of Contents at each section beginning (default no): to activate indicate the TOC depth', metavar='TOC-DEPTH')
-  cliparser.add_argument('--toc-at-subsec-beginning', required=False, action='store', default=None, help='Insert Table of Contents at each subsection beginning (default no): to activate indicate the TOC depth', metavar='TOC-DEPTH')
-  cliparser.add_argument('--print-highlight-styles', required=False, action='store_true', default=None, help='Print the available highlight.js style (default github.css)')
-  cliparser.add_argument('--print-themes', required=False, action='store_true', default=None, help='Print the list of the builtin themes')
-  cliparser.add_argument('--verbose', required=False, action='store_true', default=False, help='More verbose printing messages (default no)')
-  cliparser.add_argument('--offline', required=False, action='store_true', default=False, help='Use local bundled copies of impress.js, MathJax and highlight.js instead of CDN (useful for air-gapped environments)')
-  cliparser.add_argument('--pdf', required=False, action='store_true', default=False, help='Disable impress effects for printing slides to pdf')
-  cliparser.add_argument('--print_parsed_source', required=False, action='store_true', default=False, help='Print the actually parsed source, namely source after including external files')
-  cliargs = cliparser.parse_args()
-  config = MatisseConfig(cliargs=cliargs)
-  if cliargs.print_themes:
-    print(config.str_themes())
-  elif cliargs.print_highlight_styles:
-    print(config.str_highlight_styles())
-  elif cliargs.sample:
-    output = os.path.splitext(os.path.basename(cliargs.sample))[0]
-    output = os.path.normpath(output)
-    source = make_presentation(config=config, source=__sample__, output=output)
-    with open(cliargs.sample, 'w') as sample_file:
-      sample_file.write(source)
-  elif cliargs.input:
-    if not os.path.exists(cliargs.input):
-      sys.stderr.write(f'Error: input file "{cliargs.input}" not found!')
-      sys.exit(1)
-    else:
-      with open(cliargs.input, 'r') as mdf:
-        source = mdf.read()
-      if cliargs.output:
-        output = cliargs.output
-      else:
-        output = os.path.splitext(os.path.basename(cliargs.input))[0]
-      output = os.path.normpath(output)
-      make_presentation(config=config, source=source, output=output)
+    """Main function."""
+    cliparser = argparse.ArgumentParser(
+        prog=__appname__, description="MaTiSSe.py, Markdown To Impressive Scientific Slides"
+    )
+    cliparser.add_argument("-v", "--version", action="version", help="Show version", version="%(prog)s " + __version__)
+    cliparser.add_argument(
+        "-i",
+        "--input",
+        required=False,
+        action="store",
+        default=None,
+        help="Input file name of markdown source to be parsed",
+    )
+    cliparser.add_argument(
+        "-o",
+        "--output",
+        required=False,
+        action="store",
+        default=None,
+        help="Output directory name containing the presentation files",
+    )
+    cliparser.add_argument(
+        "-t",
+        "--theme",
+        required=False,
+        action="store",
+        default=None,
+        help="Select a builtin theme for initializing a new sample presentation",
+    )
+    cliparser.add_argument(
+        "-hs",
+        "--highlight-style",
+        required=False,
+        action="store",
+        default="github.css",
+        help='Select the highlight.js style (default github.css); select "disable" to disable highligth.js',
+        metavar="STYLE.CSS",
+    )
+    cliparser.add_argument(
+        "-s",
+        "--sample",
+        required=False,
+        action="store",
+        default=None,
+        help="Generate a new sample presentation as skeleton of your one",
+    )
+    cliparser.add_argument(
+        "--toc-at-chap-beginning",
+        required=False,
+        action="store",
+        default=None,
+        help="Insert Table of Contents at each chapter beginning (default no): to activate indicate the TOC depth",
+        metavar="TOC-DEPTH",
+    )
+    cliparser.add_argument(
+        "--toc-at-sec-beginning",
+        required=False,
+        action="store",
+        default=None,
+        help="Insert Table of Contents at each section beginning (default no): to activate indicate the TOC depth",
+        metavar="TOC-DEPTH",
+    )
+    cliparser.add_argument(
+        "--toc-at-subsec-beginning",
+        required=False,
+        action="store",
+        default=None,
+        help="Insert Table of Contents at each subsection beginning (default no): to activate indicate the TOC depth",
+        metavar="TOC-DEPTH",
+    )
+    cliparser.add_argument(
+        "--print-highlight-styles",
+        required=False,
+        action="store_true",
+        default=None,
+        help="Print the available highlight.js style (default github.css)",
+    )
+    cliparser.add_argument(
+        "--print-themes", required=False, action="store_true", default=None, help="Print the list of the builtin themes"
+    )
+    cliparser.add_argument(
+        "--verbose",
+        required=False,
+        action="store_true",
+        default=False,
+        help="More verbose printing messages (default no)",
+    )
+    cliparser.add_argument(
+        "--offline",
+        required=False,
+        action="store_true",
+        default=False,
+        help="Use local bundled copies of impress.js, MathJax and highlight.js instead of CDN (useful for air-gapped environments)",
+    )
+    cliparser.add_argument(
+        "--pdf",
+        required=False,
+        action="store_true",
+        default=False,
+        help="Disable impress effects for printing slides to pdf",
+    )
+    cliparser.add_argument(
+        "--print_parsed_source",
+        required=False,
+        action="store_true",
+        default=False,
+        help="Print the actually parsed source, namely source after including external files",
+    )
+    cliargs = cliparser.parse_args()
+    config = MatisseConfig(cliargs=cliargs)
+    if cliargs.print_themes:
+        print(config.str_themes())
+    elif cliargs.print_highlight_styles:
+        print(config.str_highlight_styles())
+    elif cliargs.sample:
+        output = os.path.splitext(os.path.basename(cliargs.sample))[0]
+        output = os.path.normpath(output)
+        source = make_presentation(config=config, source=__sample__, output=output)
+        with open(cliargs.sample, "w") as sample_file:
+            sample_file.write(source)
+    elif cliargs.input:
+        if not os.path.exists(cliargs.input):
+            sys.stderr.write(f'Error: input file "{cliargs.input}" not found!')
+            sys.exit(1)
+        else:
+            with open(cliargs.input, "r") as mdf:
+                source = mdf.read()
+            if cliargs.output:
+                output = cliargs.output
+            else:
+                output = os.path.splitext(os.path.basename(cliargs.input))[0]
+            output = os.path.normpath(output)
+            make_presentation(config=config, source=source, output=output)
 
 
-if __name__ == '__main__':
-  main()
+if __name__ == "__main__":
+    main()

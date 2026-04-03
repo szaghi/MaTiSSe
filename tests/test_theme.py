@@ -12,6 +12,7 @@ from matisse.theme import Theme
 # __init__
 # ---------------------------------------------------------------------------
 
+
 class TestThemeInit:
     def test_default_canvas_is_empty_list(self):
         t = Theme()
@@ -47,51 +48,63 @@ class TestThemeInit:
 
     def test_toc_attributes_default_to_empty_list(self):
         t = Theme()
-        for attr in ('toc', 'toc_chapter_emph', 'toc_section_emph',
-                     'toc_subsection_emph', 'toc_slide_emph'):
-            assert getattr(t, attr) == [], f'{attr} should default to []'
+        for attr in ("toc", "toc_chapter_emph", "toc_section_emph", "toc_subsection_emph", "toc_slide_emph"):
+            assert getattr(t, attr) == [], f"{attr} should default to []"
 
     def test_env_list_attributes_default_to_empty_list(self):
         t = Theme()
-        for attr in ('box', 'box_caption', 'box_content',
-                     'note', 'note_caption', 'note_content',
-                     'table', 'table_caption', 'table_content',
-                     'figure', 'figure_caption', 'figure_content',
-                     'video', 'video_caption', 'video_content'):
-            assert getattr(t, attr) == [], f'{attr} should default to []'
+        for attr in (
+            "box",
+            "box_caption",
+            "box_content",
+            "note",
+            "note_caption",
+            "note_content",
+            "table",
+            "table_caption",
+            "table_content",
+            "figure",
+            "figure_caption",
+            "figure_content",
+            "video",
+            "video_caption",
+            "video_content",
+        ):
+            assert getattr(t, attr) == [], f"{attr} should default to []"
 
     def test_str_returns_empty_string_when_css_none(self):
         t = Theme()
-        assert str(t) == ''
+        assert str(t) == ""
 
 
 # ---------------------------------------------------------------------------
 # set_from
 # ---------------------------------------------------------------------------
 
+
 class TestSetFrom:
     def test_set_from_copies_canvas(self):
         src = Theme()
-        src.canvas = [{'background': 'red'}]
+        src.canvas = [{"background": "red"}]
         dst = Theme()
         dst.set_from(other=src)
-        assert dst.canvas == [{'background': 'red'}]
+        assert dst.canvas == [{"background": "red"}]
 
     def test_set_from_is_deep_copy(self):
         """Mutating src after set_from must not affect dst."""
         src = Theme()
-        src.canvas = [{'background': 'red'}]
+        src.canvas = [{"background": "red"}]
         dst = Theme()
         dst.set_from(other=src)
-        src.canvas[0]['background'] = 'blue'
-        assert dst.canvas[0]['background'] == 'red'
+        src.canvas[0]["background"] = "blue"
+        assert dst.canvas[0]["background"] == "red"
 
     def test_set_from_copies_slide(self):
         src = Theme()
-        src.slide = [{'width': '900px'}]
+        src.slide = [{"width": "900px"}]
         dst = Theme()
         dst.set_from(other=src)
-        assert dst.slide == [{'width': '900px'}]
+        assert dst.slide == [{"width": "900px"}]
 
     def test_set_from_copies_custom_flag(self):
         src = Theme()
@@ -102,66 +115,65 @@ class TestSetFrom:
 
     def test_set_from_copies_css(self):
         src = Theme()
-        src.css = 'body { color: red; }'
+        src.css = "body { color: red; }"
         dst = Theme()
         dst.set_from(other=src)
-        assert dst.css == 'body { color: red; }'
+        assert dst.css == "body { color: red; }"
 
     def test_set_from_copies_dict_attributes(self):
         src = Theme()
-        src.slide_header = {'h1': [{'font-size': '2em'}]}
+        src.slide_header = {"h1": [{"font-size": "2em"}]}
         dst = Theme()
         dst.set_from(other=src)
-        assert dst.slide_header == {'h1': [{'font-size': '2em'}]}
+        assert dst.slide_header == {"h1": [{"font-size": "2em"}]}
 
     def test_set_from_dict_is_deep_copy(self):
         src = Theme()
-        src.slide_header = {'h1': [{'font-size': '2em'}]}
+        src.slide_header = {"h1": [{"font-size": "2em"}]}
         dst = Theme()
         dst.set_from(other=src)
-        src.slide_header['h1'][0]['font-size'] = '1em'
-        assert dst.slide_header['h1'][0]['font-size'] == '2em'
+        src.slide_header["h1"][0]["font-size"] = "1em"
+        assert dst.slide_header["h1"][0]["font-size"] == "2em"
 
     def test_set_from_all_list_attrs_copied(self):
         """Every attribute in set_from's _attrs list should be transferred."""
         src = Theme()
-        src.toc = [{'color': 'blue'}]
-        src.box = [{'border': '1px solid black'}]
+        src.toc = [{"color": "blue"}]
+        src.box = [{"border": "1px solid black"}]
         dst = Theme()
         dst.set_from(other=src)
-        assert dst.toc == [{'color': 'blue'}]
-        assert dst.box == [{'border': '1px solid black'}]
+        assert dst.toc == [{"color": "blue"}]
+        assert dst.box == [{"border": "1px solid black"}]
 
 
 # ---------------------------------------------------------------------------
 # copy_from — non-overwrite merge
 # ---------------------------------------------------------------------------
 
+
 class TestCopyFrom:
     def test_copy_from_adds_missing_canvas_entry(self):
         """copy_from should add entries from other that are absent in self."""
         base = Theme()
-        base.canvas = [{'background': 'white'}]
+        base.canvas = [{"background": "white"}]
 
         override = Theme()
         # override has no canvas; after copy_from it should inherit base's canvas
         override.copy_from(other=base)
-        assert any('background' in (list(e.keys())[0] if isinstance(e, dict) else e)
-                   for e in override.canvas)
+        assert any("background" in (list(e.keys())[0] if isinstance(e, dict) else e) for e in override.canvas)
 
     def test_copy_from_does_not_overwrite_existing_canvas_entry(self):
         """An entry already present in self must not be replaced by other's value."""
         base = Theme()
-        base.canvas = [{'background': 'white'}]
+        base.canvas = [{"background": "white"}]
 
         override = Theme()
-        override.canvas = [{'background': 'black'}]
+        override.canvas = [{"background": "black"}]
         override.copy_from(other=base)
         # The existing 'background' in override should be kept, not duplicated
-        backgrounds = [e for e in override.canvas
-                       if isinstance(e, dict) and 'background' in e]
+        backgrounds = [e for e in override.canvas if isinstance(e, dict) and "background" in e]
         assert len(backgrounds) == 1
-        assert backgrounds[0]['background'] == 'black'
+        assert backgrounds[0]["background"] == "black"
 
     def test_copy_from_dict_keys_fix(self):
         """
@@ -170,7 +182,7 @@ class TestCopyFrom:
         with dict-valued CSS entries (exercises next(iter(css.keys()))).
         """
         base = Theme()
-        base.canvas = [{'background': 'white'}, {'color': 'black'}]
+        base.canvas = [{"background": "white"}, {"color": "black"}]
 
         override = Theme()
         # Should not raise TypeError about subscripting dict_keys
