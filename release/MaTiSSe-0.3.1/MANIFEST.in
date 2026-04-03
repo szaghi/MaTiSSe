@@ -1,2 +1,0 @@
-include *.md
-recursive-include matisse *.css *.js *.png

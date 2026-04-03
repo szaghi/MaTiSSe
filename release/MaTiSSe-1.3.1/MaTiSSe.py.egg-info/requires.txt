@@ -1,4 +1,0 @@
-markdown
-yattag
-pyyaml
-dirsync

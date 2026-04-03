@@ -1,9 +1,10 @@
  <a name="top"></a>
-# MaTiSSe.py [![Latest Version](https://img.shields.io/pypi/v/MaTiSSe.py.svg)](https://img.shields.io/pypi/v/MaTiSSe.py.svg) [![GitHub tag](https://img.shields.io/github/tag/szaghi/MaTiSSe.svg)]()
+# MaTiSSe.py
 
-[![Join the chat at https://gitter.im/szaghi/MaTiSSe](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/szaghi/MaTiSSe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![License](https://img.shields.io/badge/license-GNU%20GeneraL%20Public%20License%20v3,%20GPLv3-blue.svg)]()
+[![CI](https://github.com/szaghi/MaTiSSe/actions/workflows/ci.yml/badge.svg)](https://github.com/szaghi/MaTiSSe/actions/workflows/ci.yml)
+[![Latest Version](https://img.shields.io/pypi/v/MaTiSSe.py.svg)](https://pypi.org/project/MaTiSSe.py/)
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org)
 
 ### MaTiSSe.py, Markdown To Impressive Scientific Slides
 MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple `markdown` syntax producing high quality first-class html/css presentation with great support for scientific contents.
@@ -15,24 +16,18 @@ MaTiSSe.py is a very simple and stupid (KISS) presentation maker based on simple
 
 ### Status
 
-[![Build Status](https://travis-ci.org/szaghi/MaTiSSe.svg?branch=master)](https://travis-ci.org/szaghi/MaTiSSe)
-[![Coverage Status](https://img.shields.io/coveralls/szaghi/MaTiSSe.svg)](https://coveralls.io/r/szaghi/MaTiSSe)
-[![Code Health](https://landscape.io/github/szaghi/MaTiSSe/master/landscape.svg?style=flat)](https://landscape.io/github/szaghi/MaTiSSe/master)
+[![GitHub issues](https://img.shields.io/github/issues/szaghi/MaTiSSe.svg)](https://github.com/szaghi/MaTiSSe/issues)
 
-#### Issues
-[![GitHub issues](https://img.shields.io/github/issues/szaghi/MaTiSSe.svg)]()
-[![Ready in backlog](https://badge.waffle.io/szaghi/matisse.png?label=ready&title=Ready)](https://waffle.io/szaghi/matisse)
-[![In Progress](https://badge.waffle.io/szaghi/matisse.png?label=in%20progress&title=In%20Progress)](https://waffle.io/szaghi/matisse)
-[![Open bugs](https://badge.waffle.io/szaghi/matisse.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/matisse)
+#### Python support
 
-#### Python support [![Supported Python versions](https://img.shields.io/badge/Py-%202.7,%203.4-blue.svg)]()
+Requires **Python 3.9+**.
 
 #### Documentation
 
-MaTiSSe.py has a comprehensive [wiki](https://github.com/szaghi/MaTiSSe/wiki): read it to know how to install and use MaTiSSe.py.
+Install via pip and run with `MaTiSSe.py -i source.md -o output/`. See the [examples/](examples/) directory for sample presentations.
 
 #### A Taste of MaTiSSe.py
-See MaTiSSe.py in action with the [getting started presentation](http://szaghi.github.io/MaTiSSe/#/slide-1) or see the following screenshots.
+See the following screenshots or generate the bundled sample with `MaTiSSe.py --sample mytalk.md`.
 
 ##### The Titlepage
 ![shot01](screenshots/01.png)
@@ -86,6 +81,6 @@ MaTiSSe.py has a too much long list of features. Here the main features are list
 * [ ] `reveal.js` support;
 
 ## Copyrights
-MaTiSSe.py is an open source project, it is distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) license. A copy of the license should be distributed within MaTiSSe.py. Anyone interested to use, develop or to contribute to MaTiSSe.py is welcome. Take a look at the [contributing guidelines](CONTRIBUTING.md) for starting to contribute to the project.
+MaTiSSe.py is an open source project, it is distributed under the [GPL v3](https://www.gnu.org/licenses/gpl-3.0.html) license. A copy of the license should be distributed within MaTiSSe.py. Anyone interested to use, develop or to contribute to MaTiSSe.py is welcome. Take a look at the [contributing guidelines](CONTRIBUTING.md) for starting to contribute to the project.
 
 Go to [Top](#top)

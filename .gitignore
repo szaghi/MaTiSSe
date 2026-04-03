@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Tools
+.ruff_cache/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Coverage
+.coverage
+coverage.xml
+
+# Generated test artefacts
+tests/compare/*/test*/
+
+# VitePress
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+docs/node_modules/
+
+# Docs / releases
+gh-pages/
+wiki/
+
+# Editor
+*.swp
+*.swo
+*~
+.DS_Store

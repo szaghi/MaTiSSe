@@ -1,9 +1,0 @@
----
-metadata:
-  - logo: theme-default/logo/logo.png
-  - dirs_to_copy:
-    - theme-default
-  - css_overtheme:
-    - theme-default/css/table.css
-    - theme-default/css/figure_zoom.css
----    
