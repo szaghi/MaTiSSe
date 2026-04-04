@@ -80,24 +80,6 @@ class Slide(object):
             for key in position:
                 self.position[key] = position[key]
 
-    def put_html_attributes(self, doc):
-        """Put html attributes of the slide.
-
-        Parameters
-        ----------
-        doc: Doc
-        """
-        doc.attr(("id", f"slide-{self.number}"))
-        # doc.attr(('title', str(self.title)))
-        doc.attr(("class", "step slide"))
-        doc.attr(("data-x", str(self.position["x"])))
-        doc.attr(("data-y", str(self.position["y"])))
-        doc.attr(("data-z", str(self.position["z"])))
-        doc.attr(("data-scale", str(self.position["scale"])))
-        doc.attr(("data-rotate-x", str(self.position["rotx"])))
-        doc.attr(("data-rotate-y", str(self.position["roty"])))
-        doc.attr(("data-rotate-z", str(self.position["rotz"])))
-
     def _parse_env(self, parser, theme, Env, re_search, source):
         """Parse an environment block from source, replacing it with its HTML.
 

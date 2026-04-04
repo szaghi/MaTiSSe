@@ -10,7 +10,6 @@ from collections import OrderedDict
 from shutil import copytree
 
 from yaml import FullLoader, YAMLError, load_all
-from yattag import Doc, indent
 
 from .chapter import Chapter
 from .metadata import Metadata
@@ -165,158 +164,6 @@ class Presentation(object):
                 print("is placed before the first defined chapter/section/subsection.")
                 print("All contents before the first defined chapter/section/subsection is omitted!")
                 print()
-
-    def __put_html_tag_head(self, doc, tag, text, config):
-        """Put head tag into html doc.
-
-        Parameters
-        ----------
-        doc: Doc()
-        tag: Tag()
-        config : MatisseConfig
-          MaTiSSe configuration
-        """
-        with tag("head"):
-            doc.stag("meta", charset="utf-8")
-            doc.stag("meta", author=" and ".join(self.metadata["authors"].value))
-            with tag("title"):
-                text(self.metadata["title"].value)
-            doc.stag("meta", subtitle=self.metadata["subtitle"].value)
-            doc.stag("link", rel="stylesheet", href="css/normalize.css")
-            doc.stag("link", rel="stylesheet", href="css/matisse_defaults.css")
-            doc.stag("link", rel="stylesheet", href="css/matisse_defaults_printing.css")
-            if config.highlight:
-                if config.offline:
-                    doc.stag("link", rel="stylesheet", href=f"js/highlight/styles/{config.highlight_style}")
-                else:
-                    doc.stag(
-                        "link",
-                        rel="stylesheet",
-                        href=f"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{config.highlight_style}",
-                    )
-            doc.stag("link", rel="stylesheet", href="css/theme.css")
-            for css in self.metadata["css_overtheme"].value:
-                doc.stag("link", rel="stylesheet", href=css)
-            for chapter in self.chapters:
-                for section in chapter.sections:
-                    for subsection in section.subsections:
-                        for slide in subsection.slides:
-                            if slide.overtheme.custom:
-                                doc.stag("link", rel="stylesheet", href=f"css/slide-{slide.number}-overtheme.css")
-
-    def __put_html_tags_scripts(self, doc, tag, config):
-        """Put final tags for scripts into html doc.
-
-        Parameters
-        ----------
-        doc: Doc()
-        tag: Tag()
-        config : MatisseConfig
-          MaTiSSe configuration
-        """
-        with tag("script"):
-            doc.attr(src="js/countDown.js")
-        if config.offline:
-            # --- offline mode: use local bundles ---
-            with tag("script"):
-                doc.attr(src="js/impress.js")
-            if not config.pdf:
-                with tag("script"):
-                    doc.asis("impress().init();")
-            with tag("script"):
-                doc.attr(("type", "text/x-mathjax-config"))
-                doc.text("""
-          MathJax.Hub.Config({
-            extensions: ["tex2jax.js"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-            tex2jax: {
-              inlineMath: [ ['$','$'] ],
-              displayMath: [ ['$$','$$'] ],
-              processEscapes: true
-            },
-            "HTML-CSS": { availableFonts: ["Neo-Euler"] }
-          });
-        """)
-            with tag("script"):
-                doc.attr(("type", "text/javascript"))
-                doc.attr(src="js/MathJax/MathJax.js")
-            if config.highlight:
-                with tag("script"):
-                    doc.attr(src="js/highlight/highlight.pack.js")
-                with tag("script"):
-                    doc.text("hljs.initHighlightingOnLoad();")
-        else:
-            # --- online mode (default): CDN — impress.js 2, MathJax 3, highlight.js 11 ---
-            with tag("script"):
-                doc.attr(src="https://cdn.jsdelivr.net/npm/impress.js@2/dist/impress.min.js")
-            if not config.pdf:
-                with tag("script"):
-                    doc.asis("impress().init();")
-            with tag("script"):
-                doc.text("""
-          MathJax = {
-            tex: {
-              inlineMath: [['$', '$']],
-              displayMath: [['$$', '$$']],
-              processEscapes: true
-            }
-          };
-        """)
-            with tag("script"):
-                doc.attr(src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js")
-            if config.highlight:
-                with tag("script"):
-                    doc.attr(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js")
-                with tag("script"):
-                    doc.text("hljs.highlightAll();")
-
-    def __put_html_slide_decorators(self, tag, doc, decorator, position=None, overtheme=None, current=None):
-        """Put html data of headers, footers and sidebars.
-
-        Parameters
-        ----------
-        doc: Doc
-        tag: tag
-        decorator: {header, footer, sidebar}
-        position: {'L','R'}
-          sidebars position, L => left, R => right
-        current: list
-        """
-        if overtheme is not None and overtheme.custom:
-            theme = overtheme
-        else:
-            theme = self.theme
-        decorators = getattr(theme, "slide_" + decorator)
-        for decor in sorted(decorators):
-            insert = True
-            # position check for sidebars
-            if decorator == "sidebar" and position is not None:
-                for css in decorators[decor]:
-                    for key in css:
-                        if "position" in key.lower():
-                            pos = css[key]
-                            break
-                insert = pos.lower() == position.lower()
-            # active check
-            for css in decorators[decor]:
-                for key in css:
-                    if "active" in key.lower():
-                        insert = insert and css[key].lower() == "yes"
-            if insert:
-                placeholders = theme.get_slide_decorators_metadata(decorator=decorator, name=decor)
-                for metadata in self.metadata:
-                    placeholders = self.metadata[metadata].parse(
-                        parser=self.parser,
-                        source=placeholders,
-                        toc_depth=self.metadata["toc_depth"].value,
-                        max_time=self.metadata["max_time"].value,
-                        current=current,
-                    )
-                if decorator != "sidebar":
-                    with doc.tag("div"):
-                        doc.attr(style="clear: both;")
-                with tag("div", klass="slide-" + decor):
-                    doc.asis(placeholders)
 
     def __make_toc_slide(self, slides_number, depth):
         """Create a Table of Contents slide at the current position.
@@ -480,88 +327,9 @@ class Presentation(object):
         config : MatisseConfig
           MaTiSSe configuration
         """
-        doc, tag, text = Doc().tagtext()
-        doc.asis("<!DOCTYPE html>")
-        with tag("html"):
-            # doc.attr(title=self.metadata['title'].value)
-            self.__put_html_tag_head(doc=doc, tag=tag, text=text, config=config)
-            with tag("body", onload=f"resetCountdown({self.metadata['max_time'].value});"):
-                doc.attr(klass="impress-not-supported")
-                with tag("div", id="impress"):
-                    # numbering: [local_chap, local_sec, local_subsec, local_slide]
-                    current = [0, 0, 0, 0]
-                    for chapter in self.chapters:
-                        current[0] += 1
-                        current[1] = 0
-                        current[2] = 0
-                        current[3] = 0
-                        self.metadata["chaptertitle"].update_value(value=chapter.title)
-                        self.metadata["chapternumber"].update_value(value=chapter.number)
-                        for section in chapter.sections:
-                            current[1] += 1
-                            current[2] = 0
-                            current[3] = 0
-                            self.metadata["sectiontitle"].update_value(value=section.title)
-                            self.metadata["sectionnumber"].update_value(value=section.number)
-                            for subsection in section.subsections:
-                                current[2] += 1
-                                current[3] = 0
-                                self.metadata["subsectiontitle"].update_value(value=subsection.title)
-                                self.metadata["subsectionnumber"].update_value(value=subsection.number)
-                                for slide in subsection.slides:
-                                    current[3] += 1
-                                    self.metadata["slidetitle"].update_value(value=slide.title)
-                                    self.metadata["slidenumber"].update_value(value=slide.number)
-                                    with doc.tag("div"):
-                                        chapter.put_html_attributes(doc=doc)
-                                        section.put_html_attributes(doc=doc)
-                                        subsection.put_html_attributes(doc=doc)
-                                        slide.put_html_attributes(doc=doc)
-                                        self.__put_html_slide_decorators(
-                                            tag=tag,
-                                            doc=doc,
-                                            decorator="header",
-                                            current=current,
-                                            overtheme=slide.overtheme,
-                                        )
-                                        # with doc.tag('div'):
-                                        # doc.attr(style='clear: both;')
-                                        self.__put_html_slide_decorators(
-                                            tag=tag,
-                                            doc=doc,
-                                            decorator="sidebar",
-                                            position="L",
-                                            current=current,
-                                            overtheme=slide.overtheme,
-                                        )
-                                        slide.to_html(
-                                            doc=doc,
-                                            parser=self.parser,
-                                            metadata=self.metadata,
-                                            theme=self.theme,
-                                            current=current,
-                                        )
-                                        self.__put_html_slide_decorators(
-                                            tag=tag,
-                                            doc=doc,
-                                            decorator="sidebar",
-                                            position="R",
-                                            current=current,
-                                            overtheme=slide.overtheme,
-                                        )
-                                        # with doc.tag('div'):
-                                        # doc.attr(style='clear: both;')
-                                        self.__put_html_slide_decorators(
-                                            tag=tag,
-                                            doc=doc,
-                                            decorator="footer",
-                                            current=current,
-                                            overtheme=slide.overtheme,
-                                        )
-                self.__put_html_tags_scripts(doc=doc, tag=tag, config=config)
-        # source = re.sub(r"<li>(?P<item>.*)</li>", r"<li><span>\g<item></span></li>", source)
-        html = indent(doc.getvalue())
-        return html
+        from .backends.impress.renderer import ImpressBackend
+
+        return ImpressBackend(config).render(self)
 
     def save(self, config, output):
         """Save the html form of presentation into external file.
@@ -573,24 +341,37 @@ class Presentation(object):
         output : str
           output path
         """
-
         if not os.path.exists(output):
             os.makedirs(output)
+
+        if config.backend == "reveal":
+            from .backends.reveal.renderer import RevealBackend
+
+            backend = RevealBackend(config)
+        else:
+            from .backends.impress.renderer import ImpressBackend
+
+            backend = ImpressBackend(config)
+
         with open(os.path.join(output, "index.html"), "w") as html:
-            html.write(self.to_html(config=config))
+            html.write(backend.render(self))
+
         # copy user defined directories if set
         if len(self.metadata["dirs_to_copy"].value) > 0:
             for data in self.metadata["dirs_to_copy"].value:
                 copytree(data, os.path.join(output, data), dirs_exist_ok=True)
-        # css files
-        with open(os.path.join(output, "css/theme.css"), "w") as css_theme:
-            css_theme.writelines(self.theme.css)
-        for chapter in self.chapters:
-            for section in chapter.sections:
-                for subsection in section.subsections:
-                    for slide in subsection.slides:
-                        if slide.overtheme.custom:
-                            with open(
-                                os.path.join(output, f"css/slide-{slide.number}-overtheme.css"), "w"
-                            ) as css_theme:
-                                css_theme.writelines(slide.overtheme.css)
+
+        # impress.js-specific CSS assets (theme.css + per-slide overtheme CSS)
+        if config.backend != "reveal":
+            with open(os.path.join(output, "css/theme.css"), "w") as css_theme:
+                css_theme.writelines(self.theme.css)
+            for chapter in self.chapters:
+                for section in chapter.sections:
+                    for subsection in section.subsections:
+                        for slide in subsection.slides:
+                            if slide.overtheme.custom:
+                                with open(
+                                    os.path.join(output, f"css/slide-{slide.number}-overtheme.css"),
+                                    "w",
+                                ) as css_theme:
+                                    css_theme.writelines(slide.overtheme.css)
