@@ -1,0 +1,196 @@
+---
+# Solarized Dark theme for MaTiSSe
+#
+# Palette (Ethan Schoonover's Solarized):
+#   base03  #002b36  darkest background
+#   base02  #073642  dark background highlights
+#   base01  #586e75  secondary content / comments
+#   base0   #839496  body text (normal)
+#   base1   #93a1a1  secondary content (light)
+#   base2   #eee8d5  background highlights (light mode)
+#   yellow  #b58900  / #af8700
+#   orange  #cb4b16  / #d75f00
+#   green   #859900
+#   blue    #268bd2
+#   cyan    #2aa198
+#
+# Structure: beamer-berkely skeleton (left sidebar + top header + bottom footer)
+# Colors and list/toc/environment styling: zen-of-fortran-talk/src/theme.yaml
+#
+theme:
+  - toc:
+    - display: 'inline-block'
+    - font-size: '90%'
+    - font-variant: 'small-caps'
+    - color: '#839496'
+    - section-emph:
+      - border: '1px solid #859900'
+      - border-radius: '5px'
+      - font-weight: 'bold'
+      - color: '#859900'
+    - subsection-emph:
+      - border: '1px solid #d75f00'
+      - border-radius: '5px'
+      - color: '#d75f00'
+  - canvas:
+    - background: 'radial-gradient(rgb(88, 110, 117), rgb(0, 43, 54))'
+  - ordered-list-items:
+    - content: 'counter(item)'
+    - color: '#d75f00'
+    - padding-left: '1%'
+  - unordered-list-items:
+    - color: '#859900'
+    - content: "'\\25A0'"
+  - slide:
+    # global slide
+    - transition: 'horizontal'
+    - width: '900px'
+    - height: '700px'
+    - font-size: '120%'
+    - data-offset: '20'
+    - border-style: 'solid'
+    - border-width: '1px'
+    - border-color: '#586e75'
+    - border-radius: '10px'
+    # elements
+    - content:
+      - background: '#073642'
+      - color: '#eee8d5'
+      - padding: '2%'
+    - header-1:
+      - height: '10%'
+      - background: '#002b36'
+      - color: '#839496'
+      - padding: '0'
+      - metadata:
+        - custom-1:
+          - value: '.'
+          - float: 'left'
+          - height: '100%'
+          - width: '20%'
+          - color: '#002b36'
+          - background: '#002b36'
+        - slidetitle:
+          - float: 'left'
+          - padding: '1% 2%'
+          - font-size: '190%'
+          - color: '#859900'
+          - font-variant: 'small-caps'
+    - footer-1:
+      - background: '#002b36'
+      - border-radius: '0 0 10px 0'
+      - height: '6%'
+      - padding: '0.5% 0%'
+      - color: '#af8700'
+      - metadata:
+        - sectiontitle:
+          - padding: '0% 1% 2% 1%'
+          - font-size: '110%'
+          - float: 'left'
+          - font-variant: 'small-caps'
+          - color: '#839496'
+        - custom-1:
+          - value: ' | '
+          - float: 'left'
+          - padding: '0.5%'
+          - color: '#586e75'
+        - subsectiontitle:
+          - padding: '0% 1% 2% 1%'
+          - font-size: '110%'
+          - float: 'left'
+          - font-variant: 'small-caps'
+          - color: '#859900'
+        - total_slides_number:
+          - float: 'right'
+          - padding: '0 1%'
+          - color: '#d75f00'
+        - custom-2:
+          - value: ' of '
+          - float: 'right'
+          - color: '#839496'
+        - slidenumber:
+          - float: 'right'
+          - padding: '0 1%'
+          - color: '#eee8d5'
+        - custom-3:
+          - value: 'slide '
+          - float: 'right'
+          - color: '#859900'
+    - sidebar-1:
+      - position: 'L'
+      - width: '20%'
+      - padding: '1% 2%'
+      - background: '#002b36'
+      - color: '#839496'
+      - border-radius: '10px 0 0 0'
+      - metadata:
+        - title:
+          - font-weight: 'bold'
+          - font-variant: 'small-caps'
+          - font-size: '105%'
+          - display: 'inline-block'
+          - color: '#268bd2'
+        - authors:
+          - font-variant: 'small-caps'
+          - font-size: '90%'
+          - display: 'inline-block'
+          - color: '#93a1a1'
+        - affiliations:
+          - margin-top: '4%'
+          - margin-bottom: '10%'
+          - font-variant: 'small-caps'
+          - font-size: '80%'
+          - white-space: 'pre-wrap'
+          - display: 'inline-block'
+          - color: '#657b83'
+        - toc:
+          - depth: '1'
+  - note:
+    - display: 'inline-block'
+    - padding: '0% 1%'
+    - margin: '0.2% 0%'
+    - caption:
+      - padding: '0 1em'
+      - width: '100%'
+      - color: '#eee8d5'
+      - background: '#073642'
+      - display: 'inline-block'
+      - font-size: '120%'
+      - border-bottom: '1px solid #d75f00'
+    - content:
+      - padding: '0 1em'
+      - font-size: '120%'
+      - background: '#002b36'
+      - color: '#eee8d5'
+  - table:
+    - display: 'inline-block'
+    - margin: '2% 0%'
+    - caption:
+      - padding: '2% 0%'
+      - color: '#d75f00'
+      - font-size: '120%'
+      - display: 'inline-block'
+    - content:
+      - padding: '2% 0%'
+  - figure:
+    - font-variant: 'small-caps'
+    - text-align: 'center'
+    - caption:
+      - font-size: '80%'
+      - color: '#859900'
+    - content:
+      - padding: '1% 5%'
+  - box:
+    - display: 'inline-block'
+    - font-variant: 'small-caps'
+    - border-radius: '10px'
+    - caption:
+      - padding: '0 2%'
+      - color: '#859900'
+      - border-bottom: '1px solid #859900'
+      - display: 'inline-block'
+    - content:
+      - padding: '0 2%'
+      - font-size: '120%'
+      - color: '#eee8d5'
+---

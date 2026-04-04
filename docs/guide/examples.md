@@ -2,15 +2,67 @@
 
 ## Full examples (repository)
 
-The repository ships three ready-to-build example presentations under the
-`examples/` directory.  Clone the repo, install MaTiSSe, then run the
-commands below from the **repository root**.
+The repository ships ready-to-build example presentations under the
+`examples/` directory, together with a helper script that drives all builds.
+Clone the repo, install MaTiSSe, then use the script from the **repository root**.
 
 ```bash
 git clone https://github.com/szaghi/MaTiSSe.git
 cd MaTiSSe
 pip install -e .
 ```
+
+### `examples/build.sh` — the build script
+
+`examples/build.sh` is a self-contained Bash script that knows how to build
+every example in the repository.
+
+```
+Usage (from the repository root):
+  examples/build.sh                  # build all examples
+  examples/build.sh <name>           # build one example by name
+  examples/build.sh --list           # list available example names
+  examples/build.sh --help           # show full help
+```
+
+**Build everything at once:**
+
+```bash
+examples/build.sh
+```
+
+**Build a single example by name:**
+
+```bash
+examples/build.sh getting-started
+examples/build.sh reveal-quickstart
+examples/build.sh themes/solarized-dark
+```
+
+**List available names:**
+
+```bash
+examples/build.sh --list
+```
+
+Output:
+```
+Available examples:
+  getting-started
+  reveal-quickstart
+  reveal-scientific
+  themes/beamer-antibes
+  themes/beamer-berkely
+  themes/beamer-berlin
+  themes/beamer-madrid
+  themes/matisse
+  themes/sapienza
+  themes/solarized-dark
+```
+
+Each built presentation lands in `examples/<name>/out/index.html`.
+
+---
 
 ### getting-started (impress.js)
 
@@ -20,6 +72,8 @@ theme system: canvas, headers, footers, sidebars, overtheme overrides, TOC
 slides, figures, boxes, tables, notes, columns, video, and code listings.
 
 ```bash
+examples/build.sh getting-started
+# or manually:
 matisse build \
   -i examples/getting-started/getting_started.md \
   -o examples/getting-started/out/ \
@@ -31,7 +85,7 @@ Navigate with arrow keys or spacebar; use the mouse to pan the 3D canvas.
 
 > **Note:** this example uses `$include()` internally (for `metadata.yaml`
 > and `theme.yaml`).  The paths are relative to the working directory, so
-> the command must be run from the **repo root** as shown above.
+> all commands must be run from the **repo root**.
 
 ### reveal-quickstart (reveal.js)
 
@@ -40,6 +94,8 @@ Covers slide structure, LaTeX math, syntax-highlighted code, the `$box`
 and `$columns` environments, and speaker notes via `$note`.
 
 ```bash
+examples/build.sh reveal-quickstart
+# or manually:
 matisse build \
   -i examples/reveal-quickstart/quickstart.md \
   -o examples/reveal-quickstart/out/ \
@@ -57,7 +113,7 @@ Open `examples/reveal-quickstart/out/index.html` in a browser.
 | `F` | Full screen |
 
 > Press **S** to open the presenter view and read the speaker notes — each
-> `$note` block is rendered as a `<aside class="notes">` element.
+> `$note` block is rendered as an `<aside class="notes">` element.
 
 ### reveal-scientific (reveal.js)
 
@@ -68,6 +124,8 @@ scaling tables, `$box` theorem blocks, `$columns` side-by-side layouts,
 and speaker notes on every slide.
 
 ```bash
+examples/build.sh reveal-scientific
+# or manually:
 matisse build \
   -i examples/reveal-scientific/talk.md \
   -o examples/reveal-scientific/out/ \
@@ -76,27 +134,34 @@ matisse build \
 
 Open `examples/reveal-scientific/out/index.html` in a browser.
 
-### Build all examples at once
+### themes/ — built-in theme showcase
+
+A single shared source (`examples/themes/talk.md`) is built once per
+built-in theme so you can compare them side by side.
 
 ```bash
-# impress.js — getting-started
-matisse build \
-  -i examples/getting-started/getting_started.md \
-  -o examples/getting-started/out/ \
-  --toc-at-subsec-beginning 2
+# Build all theme variants
+examples/build.sh themes/beamer-antibes
+examples/build.sh themes/beamer-berkely
+examples/build.sh themes/beamer-berlin
+examples/build.sh themes/beamer-madrid
+examples/build.sh themes/matisse
+examples/build.sh themes/sapienza
+examples/build.sh themes/solarized-dark
 
-# reveal.js — quickstart
-matisse build \
-  -i examples/reveal-quickstart/quickstart.md \
-  -o examples/reveal-quickstart/out/ \
-  --backend reveal
-
-# reveal.js — scientific talk
-matisse build \
-  -i examples/reveal-scientific/talk.md \
-  -o examples/reveal-scientific/out/ \
-  --backend reveal
+# or build all of them in one go
+examples/build.sh
 ```
+
+| Theme | Layout | Palette |
+|-------|--------|---------|
+| `beamer-antibes` | Triple header (title / section / subsection) | Navy / white |
+| `beamer-berkely` | Left sidebar + header | Blue / white |
+| `beamer-berlin`  | Triple header + double footer | Navy / white |
+| `beamer-madrid`  | Header + rich segmented footer | Blue / white |
+| `matisse`        | Right sidebar + header + footer | Sky blue / white |
+| `sapienza`       | Header + footer | Crimson / white |
+| `solarized-dark` | Left sidebar + header + footer | Solarized dark |
 
 ---
 

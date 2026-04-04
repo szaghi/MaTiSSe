@@ -4,6 +4,11 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.5.2] — 2026-04-04
+### Added
+- **docs**: Add examples/build.sh script and update example documentation
+
+
 ## [1.5.0] — 2026-04-04
 ### Added
 - **backends**: Implement abstract backend interface and impress.js backend ⚠ BREAKING CHANGE

@@ -1,9 +1,9 @@
 ---
 metadata:
-  - logo: theme-default/logo/logo.png
+  - logo: theme-matisse/logo/logo.png
   - dirs_to_copy:
-    - theme-default
+    - theme-matisse
   - css_overtheme:
-    - theme-default/css/table.css
-    - theme-default/css/figure_zoom.css
+    - theme-matisse/css/table.css
+    - theme-matisse/css/figure_zoom.css
 ---    
