@@ -30,6 +30,7 @@ dev = ["pytest", "pytest-cov", "ruff"]
 
 [project.scripts]
 "MaTiSSe.py" = "matisse.matisse:main"
+matisse      = "matisse.matisse:main"
 
 [project.urls]
 Homepage = "https://github.com/szaghi/MaTiSSe"
