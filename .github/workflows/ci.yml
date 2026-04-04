@@ -63,7 +63,7 @@ jobs:
       run: |
         python --version
         MaTiSSe.py --help
-        MaTiSSe.py --print-themes
+        MaTiSSe.py build --print-themes
 
     - name: Smoke-test CLI (Windows)
       if: startsWith(runner.os, 'Windows')
