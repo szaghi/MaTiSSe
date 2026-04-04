@@ -6,6 +6,8 @@ The CLI entry point is in matisse.cli; main() here is a thin shim so the
 registered console-script "MaTiSSe.py = matisse.matisse:main" keeps working.
 """
 
+import shutil
+
 from .presentation import Presentation
 
 __sample__ = r"""
@@ -104,6 +106,8 @@ def make_presentation(config, source, output):
     presentation = Presentation()
     presentation.parse(config=config, source=source)
     presentation.save(config=config, output=output)
+    if config.theme is not None:
+        shutil.rmtree("theme-" + config.theme, ignore_errors=True)
     return source
 
 
