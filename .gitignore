@@ -36,3 +36,6 @@ wiki/
 *.swo
 *~
 .DS_Store
+
+# Test data
+sample/

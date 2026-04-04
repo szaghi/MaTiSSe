@@ -23,13 +23,39 @@ Each `####` heading starts a new slide. Chapters, sections, and subsections are 
 ```
 :::
 
+### Ordering rule
+
+If the source defines at least one section (`#`), any subsections or slides that appear *before* the first section are silently omitted. The same applies to subsections relative to slides. Use `--verbose` to surface these warnings during the build.
+
+### Unstructured presentations
+
+Sections and subsections are optional. A flat sequence of slide headings is valid:
+
+```markdown
+#### First slide
+
+Content here.
+
+#### Second slide
+
+More content.
+```
+
 ## Special slides
+
+### Title page
 
 ```markdown
 $titlepage
 ```
 
-Inserts a title page slide whose content is rendered from the presentation metadata (title, authors, affiliations, date).
+Inserts a title page slide whose content is rendered from the presentation metadata (title, authors, affiliations, date). The optional `[plain]` modifier starts the title page from a bare theme instead of inheriting the global slide theme:
+
+```markdown
+$titlepage[plain]
+```
+
+The title page slide title is automatically set to an empty string; all other metadata keys are available and can be used inside `$box` environments placed after `$titlepage`. See [Metadata](/reference/metadata) for a full composition example.
 
 ## File inclusion
 
@@ -37,7 +63,22 @@ Inserts a title page slide whose content is rendered from the presentation metad
 $include(path/to/file.md)
 ```
 
-Recursively includes another Markdown file. Useful for splitting a large talk into per-section files.
+Includes another Markdown file at parse time. Useful for splitting a large talk into per-section files or keeping metadata/theme definitions in separate files:
+
+```markdown
+$include(metadata.dat)
+$include(theme.dat)
+
+# First section
+
+## Overview
+
+#### Introduction
+```
+
+::: warning No recursive inclusion
+`$include` statements are resolved once at the beginning of the build. Including a file that itself contains `$include` statements will not work.
+:::
 
 ## YAML blocks
 
@@ -97,6 +138,7 @@ Available environments:
 | `$note...$endnote` | Note/callout |
 | `$table...$endtable` | Table with caption |
 | `$video...$endvideo` | Embedded video |
+| `$columns...$endcolumns` | Multi-column layout |
 
 See the [Advanced](/advanced/) section for full details on each environment.
 
@@ -112,3 +154,11 @@ theme_slide_header_1:
   content: "$title — $authors"
 ---
 ```
+
+They can also appear directly in slide content with optional CSS styling:
+
+```markdown
+$authors[font-size:150%;color:#003366]
+```
+
+See [Metadata](/reference/metadata) for the full list of keys including auto-generated ones (`toc`, `slidenumber`, `sectiontitle`, etc.).

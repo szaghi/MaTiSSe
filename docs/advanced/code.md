@@ -54,3 +54,7 @@ Standard Markdown backtick inline code is rendered without syntax highlighting:
 ```markdown
 Use the `MaTiSSe.py` command to build your presentation.
 ```
+
+## Note on indented code blocks
+
+Original Markdown allows indenting by 4 spaces to create a code block. This form is **not fully supported** in MaTiSSe.py. Always use fenced code blocks (` ``` `) instead.

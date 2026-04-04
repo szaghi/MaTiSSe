@@ -86,6 +86,7 @@ export default defineConfig({
             { text: 'Tables',        link: '/advanced/tables' },
             { text: 'Columns',       link: '/advanced/columns' },
             { text: 'Video',         link: '/advanced/video' },
+            { text: 'Checklists',    link: '/advanced/checklists' },
           ],
         },
         {
