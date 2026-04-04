@@ -53,6 +53,7 @@ class MatisseConfig(object):
         toc_at_subsec_beginning : bool
           insert a slide with TOC at the beginning of each subsection (default false)
         """
+        self.backend = "impress"
         self.verbose = False
         self.offline = False
         self.highlight = True
@@ -102,6 +103,15 @@ class MatisseConfig(object):
         themes = os.path.join(os.path.dirname(__file__), "utils/builtin_themes")
         for theme in os.listdir(themes):
             MatisseConfig.__themes.append(theme)
+
+    _VALID_BACKENDS = frozenset({"impress", "reveal"})
+
+    def __check_backend(self):
+        """Validate the selected rendering backend."""
+        if self.backend not in self._VALID_BACKENDS:
+            sys.stderr.write(f"Error: unknown backend '{self.backend}'. Valid values: {sorted(self._VALID_BACKENDS)}\n")
+            sys.stderr.write("Falling back to 'impress'.\n")
+            self.backend = "impress"
 
     def __check_highlight_style(self):
         """Check if the selected highlight.js style is available."""
@@ -224,6 +234,8 @@ class MatisseConfig(object):
         cliargs : argparse parsed object
           command line arguments parsed
         """
+        self.backend = getattr(cliargs, "backend", "impress")
+        self.__check_backend()
         self.verbose = cliargs.verbose
         self.offline = getattr(cliargs, "offline", False)
         self.set_highlight_style(style=cliargs.highlight_style)

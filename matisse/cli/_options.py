@@ -56,6 +56,15 @@ ThemeOpt = Annotated[
 # Rendering group
 # ---------------------------------------------------------------------------
 
+BackendOpt = Annotated[
+    str,
+    typer.Option(
+        "--backend",
+        "-b",
+        help='Rendering backend: "impress" (impress.js) or "reveal" (reveal.js). Default: impress.',
+    ),
+]
+
 OfflineOpt = Annotated[
     bool,
     typer.Option(
