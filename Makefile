@@ -1,17 +1,30 @@
 .PHONY: dev test lint fmt clean
 
-dev:
-	pip install -e ".[dev]"
+VENV   := .venv
+PYTHON := $(VENV)/bin/python
+PIP    := $(VENV)/bin/pip
 
-test:
-	python -m pytest --cov=matisse --cov-report=term-missing
+$(VENV)/bin/activate:
+	python3 -m venv $(VENV)
 
-lint:
-	ruff check matisse/ tests/
+## Install package in editable mode with dev extras
+dev: $(VENV)/bin/activate
+	$(PIP) install -e ".[dev]"
 
-fmt:
-	ruff check --fix matisse/ tests/
-	ruff format matisse/ tests/
+## Run test suite
+test: dev
+	$(VENV)/bin/pytest
 
+## Check linting (no fixes)
+lint: dev
+	$(VENV)/bin/ruff check .
+	$(VENV)/bin/ruff format --check .
+
+## Auto-fix lint and format
+fmt: dev
+	$(VENV)/bin/ruff check --fix .
+	$(VENV)/bin/ruff format .
+
+## Remove build artifacts
 clean:
 	rm -rf dist/ build/ *.egg-info .pytest_cache .coverage coverage.xml

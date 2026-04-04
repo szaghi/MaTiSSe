@@ -1,0 +1,30 @@
+---
+metadata:
+  - title:    "High-Order Numerical Methods for the Incompressible Navier-Stokes Equations"
+  - subtitle: "Stability, Accuracy, and Scalability on Adaptive Meshes"
+  - authors:
+    - Alice Rossi
+    - Bruno Mancini
+    - Carol Zhang
+  - authors_short:
+    - A. Rossi
+    - B. Mancini
+    - C. Zhang
+  - emails:
+    - a.rossi@fluid.example.edu
+    - b.mancini@fluid.example.edu
+    - c.zhang@hpc.example.edu
+  - affiliations:
+    - Fluid Dynamics Laboratory, Example University
+    - Fluid Dynamics Laboratory, Example University
+    - High-Performance Computing Centre, Example Institute
+  - affiliations_short:
+    - FDL — Example University
+    - HPC — Example Institute
+  - date:             "ICFD 2026, April 4–6"
+  - conference:       "International Conference on Fluid Dynamics"
+  - conference_short: "ICFD 2026"
+  - session:          "Session 4B — High-Order Methods"
+  - max_time:         30
+  - toc_depth:        2
+---

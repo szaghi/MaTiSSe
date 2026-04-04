@@ -26,8 +26,9 @@ and `matisse [OPTIONS]` behave identically at the shell.
 
 | Option | Short | Default | Description |
 |---|---|---|---|
-| `--offline` | — | off | Bundle impress.js, MathJax, and highlight.js locally instead of loading from CDN |
-| `--pdf` | — | off | Disable impress.js animations — suitable for PDF printing |
+| `--backend NAME` | `-b` | `impress` | Rendering backend: `impress` (impress.js) or `reveal` (reveal.js) |
+| `--offline` | — | off | Bundle impress.js, MathJax, and highlight.js locally instead of loading from CDN (impress backend only) |
+| `--pdf` | — | off | Disable impress.js animations — suitable for PDF printing (impress backend only) |
 | `--highlight-style STYLE` | `-hs` | `github.css` | highlight.js CSS style. Use `"disable"` to turn off syntax highlighting. |
 
 ## TOC options
@@ -84,20 +85,26 @@ matisse --show-completion
 ## Examples
 
 ```bash
-# Minimal build
+# Minimal build (impress.js — default)
 matisse build -i talk.md -o talk/
 
-# Bundle all assets locally (offline / air-gapped)
+# Build with the reveal.js backend
+matisse build -i talk.md -o talk/ --backend reveal
+
+# Bundle all assets locally (offline / air-gapped — impress backend only)
 matisse build -i talk.md -o talk/ --offline
 
-# PDF-friendly output (no slide animations)
+# PDF-friendly output (no slide animations — impress backend only)
 matisse build -i talk.md -o talk/ --pdf
 
 # Generate a sample skeleton with a built-in theme
 matisse build --sample mytalk.md --theme beamer-madrid
 
-# List built-in themes
+# List built-in themes (impress backend)
 matisse build --print-themes
+
+# List reveal.js built-in themes
+matisse build --backend reveal --print-themes
 
 # List available highlight.js styles
 matisse build --print-highlight-styles

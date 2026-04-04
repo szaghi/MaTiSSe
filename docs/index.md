@@ -4,7 +4,7 @@ layout: home
 hero:
   name: MaTiSSe
   text: Markdown To Impressive Scientific Slides
-  tagline: Write scientific presentations in plain Markdown — LaTeX math, syntax highlighting, rich layouts, and impress.js animations.
+  tagline: Write scientific presentations in plain Markdown — LaTeX math, syntax highlighting, rich layouts, and your choice of impress.js or reveal.js.
   actions:
     - theme: brand
       text: Quick Start
@@ -37,11 +37,11 @@ features:
     details: Code blocks are highlighted by highlight.js 11 with support for dozens of languages. Choose from all built-in highlight.js styles.
     link: /advanced/code
     linkText: Code highlighting
-  - icon: 🌐
-    title: CDN-by-default, offline-ready
-    details: impress.js, MathJax, and highlight.js are loaded from CDN by default for minimal output size. Pass `--offline` to bundle everything locally for air-gapped environments.
-    link: /advanced/offline
-    linkText: Offline mode
+  - icon: 🖥️
+    title: Two rendering backends
+    details: "`--backend impress` (default) gives full impress.js 3D canvas effects and spatial transitions. `--backend reveal` switches to reveal.js: speaker notes, overview mode, and built-in PDF export — same Markdown source, one flag."
+    link: /advanced/reveal
+    linkText: reveal.js guide
   - icon: 🆓
     title: Free and open source
     details: Released under the GNU GPL v3 license. Free to use, study, modify, and distribute. Contributions welcome.
@@ -51,7 +51,7 @@ features:
 
 Scientific presentations demand more than a typical slide tool offers — inline equations, code listings, figures with captions, precise layouts, and reproducible output that lives in version control alongside the paper.
 
-**MaTiSSe bridges that gap.** Write your talk in Markdown, embed LaTeX equations and code blocks as you would in a paper, and let MaTiSSe generate a fully self-contained HTML presentation powered by impress.js.
+**MaTiSSe bridges that gap.** Write your talk in Markdown, embed LaTeX equations and code blocks as you would in a paper, and let MaTiSSe generate a fully self-contained HTML presentation — powered by **impress.js** (3D canvas, spatial transitions) or **reveal.js** (speaker notes, overview mode, PDF export), selectable with a single flag.
 
 ```bash
 # Install

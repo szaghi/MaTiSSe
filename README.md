@@ -11,7 +11,8 @@
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 > Markdown To Impressive Scientific Slides — a KISS CLI that compiles plain Markdown into
-> high-quality, self-contained HTML presentations with full scientific-content support.
+> high-quality, self-contained HTML presentations with full scientific-content support,
+> powered by **impress.js** or **reveal.js** — your choice, one flag.
 
 <div>
 <table>
@@ -29,7 +30,7 @@
 </tr>
 <tr>
 <td><b>🆓 Free and open source</b><br><sub>Released under the GNU GPL v3 license. Free to use, study, modify, and distribute. Contributions welcome — see the <a href="CONTRIBUTING.md">contributing guidelines</a>.</sub></td>
-<td><b>🖥️ Powered by impress.js</b><br><sub>Each slide gets full impress.js positioning and transition support — rotate, scale, translate in 3D. Or disable animations entirely with <code>--pdf</code>. <a href="https://szaghi.github.io/MaTiSSe/guide/quickstart">Quick start</a></sub></td>
+<td><b>🖥️ Two rendering backends</b><br><sub><code>--backend impress</code> (default) gives full impress.js 3D canvas effects. <code>--backend reveal</code> switches to reveal.js: speaker notes, overview mode, built-in PDF export, and a large plugin ecosystem — same source file, one flag. <a href="https://szaghi.github.io/MaTiSSe/advanced/reveal">reveal.js guide</a></sub></td>
 </tr>
 </table>
 </div>
@@ -78,10 +79,12 @@ Open `mytalk/index.html` in a browser and navigate with arrow keys or spacebar.
     * [x] `$columns…$endcolumns` multi-column layout;
 * [x] syntax-highlighted code listings via highlight.js 11 (100+ styles);
 * [x] `$include(file)` for composing presentations from multiple source files;
-* [x] `--offline` mode: all JS/CSS assets bundled locally (air-gapped environments);
-* [x] `--pdf` mode: animations disabled for clean PDF printing;
+* [x] `--offline` mode: all JS/CSS assets bundled locally (air-gapped environments, impress backend);
+* [x] `--pdf` mode: animations disabled for clean PDF printing (impress backend);
 * [x] shell tab-completion for `--theme` and `--highlight-style`;
-* [x] powered by [impress.js](https://impress.js.org/) for 3D-capable slide transitions.
+* [x] **dual rendering backends** selectable with `--backend`:
+    * [x] [impress.js](https://impress.js.org/) — 3D canvas, spatial slide transitions (default);
+    * [x] [reveal.js](https://revealjs.com/) — speaker notes, overview mode, built-in PDF export.
 
 ## Author
 

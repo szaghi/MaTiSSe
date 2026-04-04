@@ -1,11 +1,113 @@
 # Examples
 
-Quick copy-paste examples to get started with MaTiSSe.
+## Full examples (repository)
 
-Build any example with:
+The repository ships three ready-to-build example presentations under the
+`examples/` directory.  Clone the repo, install MaTiSSe, then run the
+commands below from the **repository root**.
 
 ```bash
-matisse -i source.md -o output/
+git clone https://github.com/szaghi/MaTiSSe.git
+cd MaTiSSe
+pip install -e .
+```
+
+### getting-started (impress.js)
+
+A comprehensive feature tour of MaTiSSe — the same presentation that was
+used to write the original documentation.  Demonstrates the full impress.js
+theme system: canvas, headers, footers, sidebars, overtheme overrides, TOC
+slides, figures, boxes, tables, notes, columns, video, and code listings.
+
+```bash
+matisse build \
+  -i examples/getting-started/getting_started.md \
+  -o examples/getting-started/out/ \
+  --toc-at-subsec-beginning 2
+```
+
+Open `examples/getting-started/out/index.html` in a browser.
+Navigate with arrow keys or spacebar; use the mouse to pan the 3D canvas.
+
+> **Note:** this example uses `$include()` internally (for `metadata.yaml`
+> and `theme.yaml`).  The paths are relative to the working directory, so
+> the command must be run from the **repo root** as shown above.
+
+### reveal-quickstart (reveal.js)
+
+A minimal, heavily annotated introduction to the reveal.js backend.
+Covers slide structure, LaTeX math, syntax-highlighted code, the `$box`
+and `$columns` environments, and speaker notes via `$note`.
+
+```bash
+matisse build \
+  -i examples/reveal-quickstart/quickstart.md \
+  -o examples/reveal-quickstart/out/ \
+  --backend reveal
+```
+
+Open `examples/reveal-quickstart/out/index.html` in a browser.
+
+| Key | Action |
+|-----|--------|
+| `Space` / `→` | Next slide |
+| `←` | Previous slide |
+| `O` | Overview mode |
+| `S` | Presenter view (speaker notes) |
+| `F` | Full screen |
+
+> Press **S** to open the presenter view and read the speaker notes — each
+> `$note` block is rendered as a `<aside class="notes">` element.
+
+### reveal-scientific (reveal.js)
+
+A realistic 14-slide computational fluid dynamics conference talk.
+Demonstrates: full metadata, multi-chapter structure, heavy LaTeX (PDEs,
+algorithms), Python and Fortran code listings, `$table` convergence and
+scaling tables, `$box` theorem blocks, `$columns` side-by-side layouts,
+and speaker notes on every slide.
+
+```bash
+matisse build \
+  -i examples/reveal-scientific/talk.md \
+  -o examples/reveal-scientific/out/ \
+  --backend reveal
+```
+
+Open `examples/reveal-scientific/out/index.html` in a browser.
+
+### Build all examples at once
+
+```bash
+# impress.js — getting-started
+matisse build \
+  -i examples/getting-started/getting_started.md \
+  -o examples/getting-started/out/ \
+  --toc-at-subsec-beginning 2
+
+# reveal.js — quickstart
+matisse build \
+  -i examples/reveal-quickstart/quickstart.md \
+  -o examples/reveal-quickstart/out/ \
+  --backend reveal
+
+# reveal.js — scientific talk
+matisse build \
+  -i examples/reveal-scientific/talk.md \
+  -o examples/reveal-scientific/out/ \
+  --backend reveal
+```
+
+---
+
+## Inline snippets
+
+Quick copy-paste examples to get started with MaTiSSe.
+
+Build any snippet by saving it to a `.md` file and running:
+
+```bash
+matisse build -i source.md -o output/
 ```
 
 Then open `output/index.html` in a browser.

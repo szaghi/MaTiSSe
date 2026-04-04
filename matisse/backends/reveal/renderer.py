@@ -160,6 +160,7 @@ class RevealBackend(AbstractBackend):
                                     metadata=presentation.metadata,
                                     theme=presentation.theme,
                                     current=current,
+                                    backend="reveal",
                                 )
                 self._put_scripts(doc, tag, theme, config)
         return indent(doc.getvalue())
