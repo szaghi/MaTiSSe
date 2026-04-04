@@ -9,6 +9,7 @@ This section covers MaTiSSe.py's rich content environments and scientific author
 - [Tables](/advanced/tables) — captioned tables
 - [Columns](/advanced/columns) — multi-column layouts
 - [Video](/advanced/video) — embedded video
+- [Checklists](/advanced/checklists) — interactive checklist lists
 
 ## Scientific content
 
@@ -18,3 +19,9 @@ This section covers MaTiSSe.py's rich content environments and scientific author
 ## Deployment
 
 - [Offline Mode](/advanced/offline) — self-contained output with bundled assets
+
+## Environment composition rules
+
+`$columns` can contain any other environment — figures, boxes, notes, tables, and math all work inside a column.
+
+Box-like environments (`$box`, `$note`, `$figure`, `$table`) **cannot** contain a `$columns` environment. Nest only one level deep.
