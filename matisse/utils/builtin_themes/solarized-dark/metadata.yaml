@@ -1,0 +1,7 @@
+---
+metadata:
+  - dirs_to_copy:
+    - theme-solarized-dark
+  - css_overtheme:
+    - theme-solarized-dark/css/slide.css
+---
