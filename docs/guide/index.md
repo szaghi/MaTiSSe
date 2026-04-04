@@ -48,3 +48,35 @@ Chapter (# heading)
 ```
 
 Each level contributes to the automatically generated table of contents and to theme inheritance.
+
+Each slide is composed of an infinite canvas on which one or more **header**, **footer**, **sidebar**, and **content** areas are laid out:
+
+![MaTiSSe.py slide anatomy — canvas, headers, footers, sidebars, and content area](/images/matisse-universe-no_bg.png)
+
+By default only the content area is enabled; headers, footers, and sidebars are activated and styled through the [theme YAML](/reference/themes).
+
+## Additional features
+
+Beyond equations and code, MaTiSSe.py supports:
+
+- **Table of Contents** — auto-generated from the chapter/section/subsection hierarchy
+- **Countdown timer** — configurable presentation clock
+- **Navigation controls** — keyboard and on-screen slide navigation
+- **Multimedia** — figures with captions, embedded video and audio, multi-column layouts
+- **Theming** — unlimited header/footer layers, left/right sidebars, per-slide overrides
+
+## Team
+
+**Main developer**: Stefano Zaghi ([@szaghi](https://github.com/szaghi))
+
+**Contributors**: Ronojoy Adhikari ([@ronojoy](https://github.com/ronojoy)) — and you? See [Contributing](/guide/contributing).
+
+## Design philosophy
+
+MaTiSSe.py targets scientific researchers who work with LaTeX-beamer and want modern, browser-based presentations without sacrificing equation quality or structured layout.
+
+It is **not** designed for:
+
+- "Drag and drop" or WYSIWYG editing
+- Casual, unstructured presentations
+- Users unwilling to write plain-text markup

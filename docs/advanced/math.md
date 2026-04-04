@@ -22,6 +22,10 @@ $$
 $$
 ```
 
+The equation is rendered directly in the slide by MathJax:
+
+![LaTeX equation rendered in a MaTiSSe.py slide](/images/latexeq.png)
+
 ## Escaping dollar signs
 
 To include a literal `$` that should not trigger math, escape it:
