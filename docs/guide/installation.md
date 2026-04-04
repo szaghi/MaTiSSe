@@ -8,13 +8,13 @@
 ## Install from PyPI
 
 ```bash
-pip install matisse
+pip install MaTiSSe.py
 ```
 
 With [pipx](https://pypa.github.io/pipx/) (recommended for isolated installs):
 
 ```bash
-pipx install matisse
+pipx install MaTiSSe.py
 ```
 
 Verify the installation:
@@ -48,7 +48,7 @@ Frontend assets (impress.js, MathJax, highlight.js) are loaded from CDN at runti
 ## Upgrading
 
 ```bash
-pip install --upgrade matisse
+pip install --upgrade MaTiSSe.py
 ```
 
 ## Platform notes

@@ -61,7 +61,7 @@ Check your Python version (`python --version` — requires 3.9+) and ensure the 
 
 **MaTiSSe command not found?**
 
-If you installed with `pip install --user`, make sure `~/.local/bin` is in your `PATH`. With `pipx install matisse` the binary is wired up automatically.
+If you installed with `pip install --user`, make sure `~/.local/bin` is in your `PATH`. With `pipx install MaTiSSe.py` the binary is wired up automatically.
 
 **How do I contribute?**
 

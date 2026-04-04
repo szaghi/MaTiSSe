@@ -55,7 +55,7 @@ Scientific presentations demand more than a typical slide tool offers — inline
 
 ```bash
 # Install
-pip install matisse
+pip install MaTiSSe.py
 
 # Generate a sample presentation to start from
 matisse --sample mytalk.md
