@@ -12,8 +12,8 @@ metadata:
     - jane.smith@example.edu
     - john.doe@example.edu
   - affiliations:
-    - Department of Computer Science, Example University
-    - Institute for Scientific Computing, Example Institute
+    - Department of Computer Science
+    - Institute for Scientific Computing
   - affiliations_short:
     - CS Dept., Example University
     - ISC, Example Institute
@@ -57,7 +57,7 @@ Key properties:
 + **Syntax-highlighted** code via highlight.js 11
 + Rich **scientific environments**: `$figure`, `$box`, `$note`, `$table`, `$columns`
 + **Two backends**: impress.js (3D canvas) and reveal.js (speaker notes, PDF export)
-+ **Seven built-in themes** — this presentation demonstrates all of them
++ **Eight built-in themes** — this presentation demonstrates all of them
 
 ```bash
 # Build this presentation with any built-in theme
@@ -82,6 +82,7 @@ $content{
 | matisse          | Right sidebar + header + footer | Sky-blue / white   |
 | sapienza         | Header + footer            | Crimson / white          |
 | solarized-dark   | Left sidebar + header + footer | Solarized dark       |
+| dracula          | Left sidebar + header + footer | Dracula dark         |
 }
 $endtable
 

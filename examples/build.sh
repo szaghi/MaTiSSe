@@ -19,6 +19,7 @@
 #   themes/matisse           built-in theme: right sidebar + header + footer
 #   themes/sapienza          built-in theme: header + footer, crimson/white
 #   themes/solarized-dark    built-in theme: left sidebar + header + footer, solarized dark
+#   themes/dracula           built-in theme: left sidebar + header + footer, dracula dark
 # =============================================================================
 set -euo pipefail
 
@@ -39,6 +40,7 @@ declare -a EXAMPLES=(
   "themes/matisse|-i examples/themes/talk.md -o examples/themes/matisse/out/ --theme matisse"
   "themes/sapienza|-i examples/themes/talk.md -o examples/themes/sapienza/out/ --theme sapienza"
   "themes/solarized-dark|-i examples/themes/talk.md -o examples/themes/solarized-dark/out/ --theme solarized-dark"
+  "themes/dracula|-i examples/themes/talk.md -o examples/themes/dracula/out/ --theme dracula"
 )
 
 # ---------------------------------------------------------------------------
@@ -76,7 +78,7 @@ _build_one() {
   echo "  matisse build $cmd"
   echo "──────────────────────────────────────────"
   # shellcheck disable=SC2086
-  matisse build $cmd
+  matisse build --offline $cmd
   echo "✓ $name → done"
 }
 

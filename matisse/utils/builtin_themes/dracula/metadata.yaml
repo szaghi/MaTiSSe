@@ -1,0 +1,7 @@
+---
+metadata:
+  - dirs_to_copy:
+    - theme-dracula
+  - css_overtheme:
+    - theme-dracula/css/slide.css
+---

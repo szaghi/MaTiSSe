@@ -1,7 +1,7 @@
 # Built-in themes showcase
 
 This directory contains a single shared presentation source (`talk.md`) that
-can be built with any of MaTiSSe's seven built-in themes.  All build commands
+can be built with any of MaTiSSe's eight built-in themes.  All build commands
 are run from the **repository root**.
 
 ## Themes at a glance
@@ -15,11 +15,12 @@ are run from the **repository root**.
 | [matisse](#matisse)               | Right sidebar + header + footer | Sky blue / white |
 | [sapienza](#sapienza)             | Header + footer | Crimson / white |
 | [solarized-dark](#solarized-dark) | Left sidebar + header + footer | Solarized dark |
+| [dracula](#dracula)               | Left sidebar + header + footer | Dracula dark |
 
 ## Build all themes at once
 
 ```bash
-for theme in beamer-antibes beamer-berkely beamer-berlin beamer-madrid matisse sapienza solarized-dark; do
+for theme in beamer-antibes beamer-berkely beamer-berlin beamer-madrid matisse sapienza solarized-dark dracula; do
   matisse build \
     -i examples/themes/talk.md \
     -o examples/themes/${theme}/out/ \
@@ -37,6 +38,7 @@ examples/themes/beamer-madrid/out/index.html
 examples/themes/matisse/out/index.html
 examples/themes/sapienza/out/index.html
 examples/themes/solarized-dark/out/index.html
+examples/themes/dracula/out/index.html
 ```
 
 ---
@@ -141,4 +143,21 @@ matisse build \
   -i examples/themes/talk.md \
   -o examples/themes/solarized-dark/out/ \
   --theme solarized-dark
+```
+
+---
+
+## dracula
+
+Left sidebar (title, authors, affiliations, depth-1 TOC) + header (slide
+title) + footer (section | subsection breadcrumb + slide count).  Dark canvas
+using the official [Dracula palette](https://github.com/dracula/dracula-theme):
+purple accents, green headings, orange counters, pink note borders on a
+`#282a36` content area.
+
+```bash
+matisse build \
+  -i examples/themes/talk.md \
+  -o examples/themes/dracula/out/ \
+  --theme dracula
 ```

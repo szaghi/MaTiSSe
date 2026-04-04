@@ -148,6 +148,7 @@ examples/build.sh themes/beamer-madrid
 examples/build.sh themes/matisse
 examples/build.sh themes/sapienza
 examples/build.sh themes/solarized-dark
+examples/build.sh themes/dracula
 
 # or build all of them in one go
 examples/build.sh
@@ -162,6 +163,7 @@ examples/build.sh
 | `matisse`        | Right sidebar + header + footer | Sky blue / white |
 | `sapienza`       | Header + footer | Crimson / white |
 | `solarized-dark` | Left sidebar + header + footer | Solarized dark |
+| `dracula`        | Left sidebar + header + footer | Dracula dark |
 
 ---
 
