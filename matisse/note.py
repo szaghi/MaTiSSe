@@ -61,8 +61,21 @@ class Note(Box):
         if source:
             self.get(source=source)
 
-    def to_html(self):
-        """Convert self data to its html stream."""
+    def to_html(self, backend="impress"):
+        """Convert self data to its html stream.
+
+        Parameters
+        ----------
+        backend : str
+          Rendering backend.  When ``"reveal"``, the note is emitted as an
+          ``<aside class="notes">`` element (reveal.js speaker notes) instead
+          of the usual visible note box.
+        """
+        if backend == "reveal":
+            doc = Doc()
+            with doc.tag("aside", klass="notes"):
+                doc.asis(markdown2html(self.ctn, no_p=True))
+            return doc.getvalue()
         doc = Doc()
         with doc.tag("div", id=f"note-{self.number}"):
             if self.style:

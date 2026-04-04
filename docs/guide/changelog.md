@@ -4,6 +4,23 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.5.0] — 2026-04-04
+### Added
+- **backends**: Implement abstract backend interface and impress.js backend ⚠ BREAKING CHANGE
+
+- **backends**: Implement reveal.js backend
+
+- **backends**: Add documentation, examples, and tests for reveal.js
+
+
+### Documentation
+- Update installation instructions to use MaTiSSe.py package name
+
+
+### revert
+- **docs**: Remove changelog.md file and replace with symlink ⚠ BREAKING CHANGE
+
+
 ## [1.4.5] — 2026-04-04
 ### Added
 - **cli**: Add matisse script entry point

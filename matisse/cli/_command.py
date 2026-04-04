@@ -13,6 +13,7 @@ from ..matisse import __sample__, make_presentation
 from ..matisse_config import MatisseConfig
 from ._app import _ns, app
 from ._options import (
+    BackendOpt,
     HighlightStyleOpt,
     InputOpt,
     OfflineOpt,
@@ -39,6 +40,7 @@ def build(
     sample: SampleOpt = None,
     theme: ThemeOpt = None,
     # Rendering group
+    backend: BackendOpt = "impress",
     offline: OfflineOpt = False,
     pdf: PdfOpt = False,
     highlight_style: HighlightStyleOpt = "github.css",
@@ -57,6 +59,7 @@ def build(
 
     # Build a Namespace the existing MatisseConfig.update() understands unchanged.
     cliargs = _ns(
+        backend=backend,
         verbose=verbose,
         offline=offline,
         highlight_style=highlight_style,

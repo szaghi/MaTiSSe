@@ -1,5 +1,22 @@
 # Theme YAML Reference
 
+MaTiSSe supports two rendering backends — **impress** (default) and **reveal** — each
+with its own theme system.  The YAML keys described in this page apply to the **impress
+backend**.  For the reveal backend, see [Reveal.js backend](/advanced/reveal).
+
+## Backend-specific keys at a glance
+
+| Theme area | impress backend | reveal backend |
+|---|---|---|
+| Canvas / global | `theme_canvas`, `theme_slide_global` | `reveal.theme` |
+| Slide transition | `transition` key in `theme_slide_global` | `reveal.transition` |
+| Headers / footers | `theme_slide_header_*`, `theme_slide_footer_*` | not supported |
+| Sidebars | `theme_slide_sidebar_*` | not supported |
+| Content area | `theme_slide_content` | not supported |
+| Positioning | `data-x`, `data-y`, `data-z` … | not applicable |
+| Speaker notes | `$note` renders as a visible box | `$note` → `<aside class="notes">` |
+| Custom CSS | inline in theme CSS | `reveal.custom_css` |
+
 Themes are defined in YAML blocks embedded in the source file between `---` delimiters.
 
 ## Global slide properties

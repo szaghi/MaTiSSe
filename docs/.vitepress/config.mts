@@ -99,9 +99,10 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Deployment',
+          text: 'Backends',
           items: [
-            { text: 'Offline Mode', link: '/advanced/offline' },
+            { text: 'reveal.js backend', link: '/advanced/reveal' },
+            { text: 'Offline Mode',      link: '/advanced/offline' },
           ],
         },
       ],

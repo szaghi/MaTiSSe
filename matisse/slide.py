@@ -80,25 +80,7 @@ class Slide(object):
             for key in position:
                 self.position[key] = position[key]
 
-    def put_html_attributes(self, doc):
-        """Put html attributes of the slide.
-
-        Parameters
-        ----------
-        doc: Doc
-        """
-        doc.attr(("id", f"slide-{self.number}"))
-        # doc.attr(('title', str(self.title)))
-        doc.attr(("class", "step slide"))
-        doc.attr(("data-x", str(self.position["x"])))
-        doc.attr(("data-y", str(self.position["y"])))
-        doc.attr(("data-z", str(self.position["z"])))
-        doc.attr(("data-scale", str(self.position["scale"])))
-        doc.attr(("data-rotate-x", str(self.position["rotx"])))
-        doc.attr(("data-rotate-y", str(self.position["roty"])))
-        doc.attr(("data-rotate-z", str(self.position["rotz"])))
-
-    def _parse_env(self, parser, theme, Env, re_search, source):
+    def _parse_env(self, parser, theme, Env, re_search, source, backend="impress"):
         """Parse an environment block from source, replacing it with its HTML.
 
         Parameters
@@ -110,6 +92,9 @@ class Slide(object):
           environment class (Box, Note, Figure, Table, Video, Columns)
         re_search: compiled regex
         source: str
+        backend: str
+          rendering backend; passed to Note.to_html() to select speaker-note
+          rendering when ``"reveal"``
 
         Returns
         -------
@@ -124,7 +109,10 @@ class Slide(object):
             parsed_source = source[: envs[0]["start"]]
             for e, env in enumerate(envs[:-1]):
                 obj = Env(source=env["match"].group())
-                parsed_source += obj.to_html() + source[env["end"] : envs[e + 1]["start"]]
+                if Env is Note:
+                    parsed_source += obj.to_html(backend=backend) + source[env["end"] : envs[e + 1]["start"]]
+                else:
+                    parsed_source += obj.to_html() + source[env["end"] : envs[e + 1]["start"]]
             if Env is Video:
                 if self.overtheme.custom:
                     obj = Env(source=envs[-1]["match"].group(), theme=self.overtheme)
@@ -132,11 +120,14 @@ class Slide(object):
                     obj = Env(source=envs[-1]["match"].group(), theme=theme)
             else:
                 obj = Env(source=envs[-1]["match"].group())
-            parsed_source += obj.to_html() + source[envs[-1]["end"] :]
+            if Env is Note:
+                parsed_source += obj.to_html(backend=backend) + source[envs[-1]["end"] :]
+            else:
+                parsed_source += obj.to_html() + source[envs[-1]["end"] :]
             return parsed_source
         return source
 
-    def to_html(self, doc, parser, metadata, theme, current):
+    def to_html(self, doc, parser, metadata, theme, current, backend="impress"):
         """Generate html from self.
 
         Parameters
@@ -148,6 +139,10 @@ class Slide(object):
         theme: Theme()
           presentation theme
         current: list
+        backend: str
+          rendering backend.  When ``"reveal"``, ``$note`` environments are
+          emitted as ``<aside class="notes">`` (speaker notes) instead of the
+          default visible note boxes.
         """
         html = self.contents
         for meta in metadata:
@@ -159,7 +154,9 @@ class Slide(object):
                 current=current,
             )
         html = self._parse_env(parser=parser, theme=theme, Env=Box, re_search=Box.regexs["box"], source=html)
-        html = self._parse_env(parser=parser, theme=theme, Env=Note, re_search=Note.regexs["note"], source=html)
+        html = self._parse_env(
+            parser=parser, theme=theme, Env=Note, re_search=Note.regexs["note"], source=html, backend=backend
+        )
         html = self._parse_env(parser=parser, theme=theme, Env=Figure, re_search=Figure.regexs["figure"], source=html)
         html = self._parse_env(parser=parser, theme=theme, Env=Table, re_search=Table.regexs["table"], source=html)
         html = self._parse_env(parser=parser, theme=theme, Env=Video, re_search=Video.regexs["video"], source=html)

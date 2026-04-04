@@ -53,6 +53,7 @@ class MatisseConfig(object):
         toc_at_subsec_beginning : bool
           insert a slide with TOC at the beginning of each subsection (default false)
         """
+        self.backend = "impress"
         self.verbose = False
         self.offline = False
         self.highlight = True
@@ -102,6 +103,15 @@ class MatisseConfig(object):
         themes = os.path.join(os.path.dirname(__file__), "utils/builtin_themes")
         for theme in os.listdir(themes):
             MatisseConfig.__themes.append(theme)
+
+    _VALID_BACKENDS = frozenset({"impress", "reveal"})
+
+    def __check_backend(self):
+        """Validate the selected rendering backend."""
+        if self.backend not in self._VALID_BACKENDS:
+            sys.stderr.write(f"Error: unknown backend '{self.backend}'. Valid values: {sorted(self._VALID_BACKENDS)}\n")
+            sys.stderr.write("Falling back to 'impress'.\n")
+            self.backend = "impress"
 
     def __check_highlight_style(self):
         """Check if the selected highlight.js style is available."""
@@ -203,15 +213,40 @@ class MatisseConfig(object):
             string.append(style)
         return "\n  ".join(string) + "\n"
 
+    # reveal.js built-in theme names (CDN — reveal.js 5)
+    _REVEAL_THEMES = (
+        "beige",
+        "black",
+        "blood",
+        "dracula",
+        "league",
+        "moon",
+        "night",
+        "serif",
+        "simple",
+        "sky",
+        "solarized",
+        "white",
+    )
+
     def str_themes(self):
-        """Stringify the builtin themes.
+        """Stringify the available themes for the current backend.
+
+        For the impress backend, lists built-in theme directories from
+        ``utils/builtin_themes/``.  For the reveal backend, lists the
+        reveal.js built-in theme names (CDN-delivered).
 
         Returns
         -------
         str
-          string containing the list of builtin themes
+          string containing the list of themes
         """
-        string = ["Builtin themes"]
+        if self.backend == "reveal":
+            string = ["reveal.js built-in themes"]
+            for theme in self._REVEAL_THEMES:
+                string.append(theme)
+            return "\n  ".join(string) + "\n"
+        string = ["Builtin themes (impress backend)"]
         for theme in sorted(self.__themes):
             string.append(theme)
         return "\n  ".join(string) + "\n"
@@ -224,6 +259,8 @@ class MatisseConfig(object):
         cliargs : argparse parsed object
           command line arguments parsed
         """
+        self.backend = getattr(cliargs, "backend", "impress")
+        self.__check_backend()
         self.verbose = cliargs.verbose
         self.offline = getattr(cliargs, "offline", False)
         self.set_highlight_style(style=cliargs.highlight_style)
@@ -241,33 +278,51 @@ class MatisseConfig(object):
 
     def make_output_tree(self, output: str) -> None:
         """
-        Create output tree and copy MaTiSSe.py assets.
+        Create output tree and copy MaTiSSe assets.
 
-        In online mode (default) only countDown.js is copied; impress.js, MathJax
-        and highlight.js are loaded from CDN.  In offline mode all local bundles
-        are copied so the presentation works without a network connection.
+        **impress backend (default)**
+
+        In online mode only ``countDown.js`` is copied; impress.js, MathJax and
+        highlight.js are loaded from CDN.  In offline mode all local bundles are
+        copied so the presentation works without a network connection.
+
+        **reveal backend**
+
+        The reveal.js presentation is entirely CDN-based (reveal.js 5, MathJax 3,
+        highlight.js 11).  Only the output directory skeleton (``css/``, ``js/``)
+        is created; no local asset bundles are copied.  ``--offline`` is not yet
+        supported for the reveal backend and will emit a warning.
 
         Parameters
         ----------
         output: str
           output path
         """
-        # checking output directory
+        # ensure output directory exists
         if not os.path.exists(output):
             os.makedirs(output)
-        # creating css directory
+        # always create css/ and js/ subdirectories
         if not os.path.exists(os.path.join(output, "css")):
             os.makedirs(os.path.join(output, "css"))
-        # normalize.css
+        if not os.path.exists(os.path.join(output, "js")):
+            os.makedirs(os.path.join(output, "js"))
+
+        if self.backend == "reveal":
+            if self.offline:
+                sys.stderr.write(
+                    "Warning: --offline is not yet supported for --backend reveal. "
+                    "Assets will be loaded from CDN.\n"
+                )
+            # No local bundles for reveal — all CSS/JS comes from CDN
+            return
+
+        # --- impress backend assets ---
         css = os.path.join(os.path.dirname(__file__), "utils/css/normalize.css")
         copyfile(css, os.path.join(output, "css/normalize.css"))
         css = os.path.join(os.path.dirname(__file__), "utils/css/matisse_defaults.css")
         copyfile(css, os.path.join(output, "css/matisse_defaults.css"))
         css = os.path.join(os.path.dirname(__file__), "utils/css/matisse_defaults_printing.css")
         copyfile(css, os.path.join(output, "css/matisse_defaults_printing.css"))
-        # creating jscript directory
-        if not os.path.exists(os.path.join(output, "js")):
-            os.makedirs(os.path.join(output, "js"))
         if self.offline:
             # MathJax engine (local bundle — MathJax 2.x)
             if os.path.exists(os.path.join(output, "js/MathJax")):
@@ -283,6 +338,6 @@ class MatisseConfig(object):
             # impress.js (local bundle)
             jscript = os.path.join(os.path.dirname(__file__), "utils/js/impress/impress.js")
             copyfile(jscript, os.path.join(output, "js/impress.js"))
-        # countDown.js is always local
+        # countDown.js is always local (impress backend only)
         jscript = os.path.join(os.path.dirname(__file__), "utils/js/countDown.js")
         copyfile(jscript, os.path.join(output, "js/countDown.js"))
