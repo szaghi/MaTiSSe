@@ -23,8 +23,7 @@ _completion_flags = frozenset({"--install-completion", "--show-completion"})
 
 _prog_upper = os.path.basename(sys.argv[0]).upper().replace("-", "_")
 _COMPLETION_MODE: bool = bool(
-    os.environ.get(f"_{_prog_upper}_COMPLETE")
-    or _completion_flags.intersection(sys.argv[1:])
+    os.environ.get(f"_{_prog_upper}_COMPLETE") or _completion_flags.intersection(sys.argv[1:])
 )
 
 
