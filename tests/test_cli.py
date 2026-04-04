@@ -5,7 +5,6 @@ test_cli.py — Smoke tests for the Typer-based MaTiSSe.py CLI.
 import os
 import tempfile
 
-import pytest
 from typer.testing import CliRunner
 
 from matisse.cli import app
