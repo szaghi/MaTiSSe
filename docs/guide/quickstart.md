@@ -11,7 +11,7 @@ MaTiSSe.py --sample mytalk.md
 To start from a built-in theme, pass `--theme` as well:
 
 ```bash
-MaTiSSe.py --sample mytalk.md --theme cnr-insean
+MaTiSSe.py --sample mytalk.md --theme beamer-madrid
 ```
 
 List all available built-in themes:
