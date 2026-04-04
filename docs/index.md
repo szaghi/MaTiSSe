@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: MaTiSSe.py
+  name: MaTiSSe
   text: Markdown To Impressive Scientific Slides
   tagline: Write scientific presentations in plain Markdown — LaTeX math, syntax highlighting, rich layouts, and impress.js animations.
   actions:
@@ -47,21 +47,21 @@ features:
     details: Released under the GNU GPL v3 license. Free to use, study, modify, and distribute. Contributions welcome.
 ---
 
-## Why MaTiSSe.py?
+## Why MaTiSSe?
 
 Scientific presentations demand more than a typical slide tool offers — inline equations, code listings, figures with captions, precise layouts, and reproducible output that lives in version control alongside the paper.
 
-**MaTiSSe.py bridges that gap.** Write your talk in Markdown, embed LaTeX equations and code blocks as you would in a paper, and let MaTiSSe generate a fully self-contained HTML presentation powered by impress.js.
+**MaTiSSe bridges that gap.** Write your talk in Markdown, embed LaTeX equations and code blocks as you would in a paper, and let MaTiSSe generate a fully self-contained HTML presentation powered by impress.js.
 
 ```bash
 # Install
-pip install MaTiSSe.py
+pip install matisse
 
 # Generate a sample presentation to start from
-MaTiSSe.py --sample mytalk.md
+matisse --sample mytalk.md
 
 # Build
-MaTiSSe.py -i mytalk.md -o mytalk/
+matisse -i mytalk.md -o mytalk/
 ```
 
 A minimal slide source looks like this:
@@ -96,4 +96,4 @@ print("Hello, MaTiSSe!")
 
 ## Copyrights
 
-MaTiSSe.py is an open source project distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) license.
+MaTiSSe is an open source project distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) license.

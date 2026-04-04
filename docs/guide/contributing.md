@@ -6,7 +6,7 @@ Contributions are welcome — bug reports, feature requests, documentation impro
 
 Open an issue on [GitHub](https://github.com/szaghi/MaTiSSe/issues). Include:
 
-- MaTiSSe.py version (`MaTiSSe.py --version`)
+- MaTiSSe version (`matisse --version`)
 - Python version (`python --version`)
 - A minimal reproducer (source `.md` file or snippet)
 - The error message or unexpected output

@@ -2,9 +2,9 @@
 
 ## General
 
-**What is MaTiSSe.py?**
+**What is MaTiSSe?**
 
-MaTiSSe.py is a command-line tool that converts Markdown (extended) sources into HTML presentations. It is NOT WYSIWYG — it uses the same approach as LaTeX typesetting.
+MaTiSSe is a command-line tool that converts Markdown (extended) sources into HTML presentations. It is NOT WYSIWYG — it uses the same approach as LaTeX typesetting.
 
 **Is it WYSIWYG?**
 
@@ -22,7 +22,7 @@ Basic knowledge is helpful but not required. The YAML theme system lets you cont
 
 Any modern browser supporting HTML5/CSS3. Tested with Chrome/Chromium.
 
-**Is MaTiSSe.py free?**
+**Is MaTiSSe free?**
 
 Yes — released under the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html).
 
@@ -51,7 +51,7 @@ Yes — standard Markdown image syntax `![alt](image.png)` works, or use the `$f
 
 **Can I customize the theme?**
 
-Yes. MaTiSSe.py has an extensive YAML theme system: canvas, headers, footers, sidebars, fonts, colours, per-slide overrides. See the [Theme reference](/reference/themes).
+Yes. MaTiSSe has an extensive YAML theme system: canvas, headers, footers, sidebars, fonts, colours, per-slide overrides. See the [Theme reference](/reference/themes).
 
 ## Installation
 
@@ -59,9 +59,9 @@ Yes. MaTiSSe.py has an extensive YAML theme system: canvas, headers, footers, si
 
 Check your Python version (`python --version` — requires 3.9+) and ensure the virtual environment (if any) is activated.
 
-**MaTiSSe.py command not found?**
+**MaTiSSe command not found?**
 
-If you installed with `pip install --user`, make sure `~/.local/bin` is in your `PATH`. With `pipx install MaTiSSe.py` the binary is wired up automatically.
+If you installed with `pip install --user`, make sure `~/.local/bin` is in your `PATH`. With `pipx install matisse` the binary is wired up automatically.
 
 **How do I contribute?**
 

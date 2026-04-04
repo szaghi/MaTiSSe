@@ -1,6 +1,6 @@
 # Advanced Topics
 
-This section covers MaTiSSe.py's rich content environments and scientific authoring features.
+This section covers MaTiSSe's rich content environments and scientific authoring features.
 
 ## Environments
 

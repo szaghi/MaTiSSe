@@ -5,25 +5,25 @@
 The fastest way to get started is to let MaTiSSe generate a working example:
 
 ```bash
-MaTiSSe.py --sample mytalk.md
+matisse --sample mytalk.md
 ```
 
 To start from a built-in theme, pass `--theme` as well:
 
 ```bash
-MaTiSSe.py --sample mytalk.md --theme beamer-madrid
+matisse --sample mytalk.md --theme beamer-madrid
 ```
 
 List all available built-in themes:
 
 ```bash
-MaTiSSe.py --print-themes
+matisse --print-themes
 ```
 
 This writes `mytalk.md` — a fully annotated source file showing all major features. Build it immediately:
 
 ```bash
-MaTiSSe.py -i mytalk.md -o mytalk/
+matisse -i mytalk.md -o mytalk/
 ```
 
 Open `mytalk/index.html` in a browser. Use arrow keys or spacebar to navigate slides.
@@ -74,7 +74,7 @@ def greet(name: str) -> str:
 Build:
 
 ```bash
-MaTiSSe.py -i source.md -o output/
+matisse -i source.md -o output/
 ```
 
 ## Common options
@@ -92,7 +92,7 @@ MaTiSSe.py -i source.md -o output/
 ## List available themes
 
 ```bash
-MaTiSSe.py --print-themes
+matisse --print-themes
 ```
 
 Apply a built-in theme by adding a `theme` key to your metadata block:

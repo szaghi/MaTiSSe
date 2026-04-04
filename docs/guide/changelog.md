@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to MaTiSSe.py are documented here.
+All notable changes to MaTiSSe are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 

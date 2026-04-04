@@ -1,9 +1,9 @@
 <div align="center">
 
-# MaTiSSe.py
+# MaTiSSe
 
 [![CI](https://github.com/szaghi/MaTiSSe/actions/workflows/ci.yml/badge.svg)](https://github.com/szaghi/MaTiSSe/actions/workflows/ci.yml)
-[![Latest Version](https://img.shields.io/pypi/v/MaTiSSe.py.svg)](https://pypi.org/project/MaTiSSe.py/)
+[![Latest Version](https://img.shields.io/pypi/v/MaTiSSe.svg)](https://pypi.org/project/MaTiSSe/)
 [![GitHub tag](https://img.shields.io/github/tag/szaghi/MaTiSSe.svg)]()
 [![GitHub issues](https://img.shields.io/github/issues/szaghi/MaTiSSe.svg)](https://github.com/szaghi/MaTiSSe/issues)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org)
@@ -38,16 +38,16 @@
 
 </div>
 
-## Why MaTiSSe.py?
+## Why MaTiSSe?
 
 LaTeX Beamer produces beautiful slides, but its compile cycle is slow and its syntax is noisy. PowerPoint and Keynote are WYSIWYG and therefore hard to version-control or script. Modern presentation frameworks like impress.js are impressive but require hand-written HTML.
 
-MaTiSSe.py takes a different path: you write clean, readable Markdown — with optional YAML theme blocks and a handful of scientific-content environments — and MaTiSSe.py compiles it into a self-contained HTML/CSS/JS presentation.
+MaTiSSe takes a different path: you write clean, readable Markdown — with optional YAML theme blocks and a handful of scientific-content environments — and MaTiSSe compiles it into a self-contained HTML/CSS/JS presentation.
 
 ```bash
 # Generate a sample and build it immediately
-MaTiSSe.py build --sample mytalk.md --theme beamer-madrid
-MaTiSSe.py build -i mytalk.md -o mytalk/
+matisse build --sample mytalk.md --theme beamer-madrid
+matisse build -i mytalk.md -o mytalk/
 ```
 
 Open `mytalk/index.html` in a browser and navigate with arrow keys or spacebar.
@@ -89,4 +89,4 @@ Open `mytalk/index.html` in a browser and navigate with arrow keys or spacebar.
 
 ## Copyrights
 
-MaTiSSe.py is an open source project distributed under the [GPL v3](https://www.gnu.org/licenses/gpl-3.0.html) license. Anyone interested in using, developing, or contributing to MaTiSSe.py is welcome — see the [contributing guidelines](CONTRIBUTING.md).
+MaTiSSe is an open source project distributed under the [GPL v3](https://www.gnu.org/licenses/gpl-3.0.html) license. Anyone interested in using, developing, or contributing to MaTiSSe is welcome — see the [contributing guidelines](CONTRIBUTING.md).
