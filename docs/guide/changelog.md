@@ -1,8 +1,19 @@
 # Changelog
 
-All notable changes to MaTiSSe are documented here.
+All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
+
+## [1.4.5] — 2026-04-04
+### Added
+- **cli**: Add matisse script entry point
+
+
+### Documentation
+- Overhaul README with modern structure and enhanced content
+
+- Update documentation to reflect matisse command name change
+
 
 ## [1.4.4] — 2026-04-04
 ### Fixed
