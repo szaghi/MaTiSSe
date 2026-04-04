@@ -4,6 +4,11 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.4.3] — 2026-04-04
+### Fixed
+- **cli**: Update CLI theme printing to use build subcommand
+
+
 ## [1.4.2] — 2026-04-04
 ### Added
 - **cli**: Restructure command-line interface with Typer
