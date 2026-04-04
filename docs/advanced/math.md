@@ -1,6 +1,6 @@
 # Math & LaTeX
 
-MaTiSSe.py renders equations with [MathJax 3](https://www.mathjax.org/), loaded from CDN by default.
+MaTiSSe renders equations with [MathJax 3](https://www.mathjax.org/), loaded from CDN by default.
 
 ## Inline math
 
@@ -24,7 +24,7 @@ $$
 
 The equation is rendered directly in the slide by MathJax:
 
-![LaTeX equation rendered in a MaTiSSe.py slide](/images/latexeq.png)
+![LaTeX equation rendered in a MaTiSSe slide](/images/latexeq.png)
 
 ## Escaping dollar signs
 

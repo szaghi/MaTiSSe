@@ -1,6 +1,6 @@
 # Markdown Syntax
 
-MaTiSSe.py processes standard Markdown with several extensions for presentation structure and scientific content.
+MaTiSSe processes standard Markdown with several extensions for presentation structure and scientific content.
 
 ## Document structure
 

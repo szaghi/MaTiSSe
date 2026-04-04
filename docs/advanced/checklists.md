@@ -1,6 +1,6 @@
 # Checklists
 
-MaTiSSe.py supports GitHub-flavored checklist lists, mirroring the syntax used on GitHub issues and pull requests.
+MaTiSSe supports GitHub-flavored checklist lists, mirroring the syntax used on GitHub issues and pull requests.
 
 ## Requirement
 
@@ -33,7 +33,7 @@ Rendered output:
 ```markdown
 #### Pre-flight checklist
 
-* [x] Install MaTiSSe.py
+* [x] Install matisse
 * [x] Write source file
 * [ ] Build presentation
 * [ ] Review slides

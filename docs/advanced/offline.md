@@ -1,6 +1,6 @@
 # Offline Mode
 
-By default MaTiSSe.py generates presentations that load their JavaScript and CSS from CDN:
+By default MaTiSSe generates presentations that load their JavaScript and CSS from CDN:
 
 | Asset | CDN source |
 |---|---|
@@ -15,7 +15,7 @@ This keeps the output directory small and always uses the pinned versions.
 Pass `--offline` to copy all three bundles into the output directory:
 
 ```bash
-MaTiSSe.py -i talk.md -o talk/ --offline
+matisse -i talk.md -o talk/ --offline
 ```
 
 The output `js/` subdirectory will contain local copies of impress.js, MathJax, and highlight.js. The generated `index.html` references these local paths instead of CDN URLs.

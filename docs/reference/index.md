@@ -1,6 +1,6 @@
 # Reference Overview
 
-This section documents every user-facing interface of MaTiSSe.py.
+This section documents every user-facing interface of MaTiSSe.
 
 ## Sections
 

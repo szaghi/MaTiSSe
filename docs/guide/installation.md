@@ -8,19 +8,19 @@
 ## Install from PyPI
 
 ```bash
-pip install MaTiSSe.py
+pip install matisse
 ```
 
 With [pipx](https://pypa.github.io/pipx/) (recommended for isolated installs):
 
 ```bash
-pipx install MaTiSSe.py
+pipx install matisse
 ```
 
 Verify the installation:
 
 ```bash
-MaTiSSe.py --version
+matisse --version
 ```
 
 ## Install from source
@@ -35,7 +35,7 @@ The `.[dev]` extras install `pytest`, `pytest-cov`, and `ruff` for local develop
 
 ## Runtime dependencies
 
-MaTiSSe.py depends on three Python packages, all installed automatically:
+MaTiSSe depends on three Python packages, all installed automatically:
 
 | Package | Purpose |
 |---|---|
@@ -48,7 +48,7 @@ Frontend assets (impress.js, MathJax, highlight.js) are loaded from CDN at runti
 ## Upgrading
 
 ```bash
-pip install --upgrade MaTiSSe.py
+pip install --upgrade matisse
 ```
 
 ## Platform notes
@@ -61,7 +61,7 @@ pip install --upgrade MaTiSSe.py
 
 ## Troubleshooting
 
-**`MaTiSSe.py: command not found`**
+**`matisse: command not found`**
 
 If you installed with `pip install --user`, ensure `~/.local/bin` is on your `PATH`. `pipx` wires up the binary automatically.
 

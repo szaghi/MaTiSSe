@@ -109,7 +109,7 @@ Slide content here.
 List available built-in themes:
 
 ```bash
-MaTiSSe.py --print-themes
+matisse --print-themes
 ```
 
 Apply a built-in theme in the metadata block:

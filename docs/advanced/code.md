@@ -1,6 +1,6 @@
 # Code Highlighting
 
-MaTiSSe.py uses [highlight.js 11](https://highlightjs.org/) for syntax highlighting.
+MaTiSSe uses [highlight.js 11](https://highlightjs.org/) for syntax highlighting.
 
 ## Fenced code blocks
 
@@ -35,7 +35,7 @@ highlight.js 11 supports over 190 languages automatically. Some common ones:
 List all available highlight.js styles:
 
 ```bash
-MaTiSSe.py --print-highlight-styles
+matisse --print-highlight-styles
 ```
 
 Specify a style in your metadata block:
@@ -52,9 +52,9 @@ highlight_style: github-dark
 Standard Markdown backtick inline code is rendered without syntax highlighting:
 
 ```markdown
-Use the `MaTiSSe.py` command to build your presentation.
+Use the `matisse` command to build your presentation.
 ```
 
 ## Note on indented code blocks
 
-Original Markdown allows indenting by 4 spaces to create a code block. This form is **not fully supported** in MaTiSSe.py. Always use fenced code blocks (` ``` `) instead.
+Original Markdown allows indenting by 4 spaces to create a code block. This form is **not fully supported** in MaTiSSe. Always use fenced code blocks (` ``` `) instead.

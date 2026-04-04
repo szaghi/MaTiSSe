@@ -1,12 +1,12 @@
 # Command-Line Options
 
 ```
-MaTiSSe.py [OPTIONS] COMMAND [ARGS]...
-MaTiSSe.py build [OPTIONS]
+matisse [OPTIONS] COMMAND [ARGS]...
+matisse build [OPTIONS]
 ```
 
-The single command is `build`. It is the default, so `MaTiSSe.py build [OPTIONS]`
-and `MaTiSSe.py [OPTIONS]` behave identically at the shell.
+The single command is `build`. It is the default, so `matisse build [OPTIONS]`
+and `matisse [OPTIONS]` behave identically at the shell.
 
 ## I/O options
 
@@ -58,18 +58,18 @@ These options print information and exit immediately — no source file is requi
 
 ## Shell completions
 
-MaTiSSe.py includes shell tab-completion for `--theme` and `--highlight-style`.
+MaTiSSe includes shell tab-completion for `--theme` and `--highlight-style`.
 Enable it once for your shell:
 
 ```bash
 # bash
-MaTiSSe.py --install-completion bash
+matisse --install-completion bash
 
 # zsh
-MaTiSSe.py --install-completion zsh
+matisse --install-completion zsh
 
 # fish
-MaTiSSe.py --install-completion fish
+matisse --install-completion fish
 ```
 
 After restarting your shell (or sourcing the completion script), pressing `Tab`
@@ -78,27 +78,27 @@ after `--theme` or `--highlight-style` will list matching names.
 To inspect the generated completion script without installing it:
 
 ```bash
-MaTiSSe.py --show-completion
+matisse --show-completion
 ```
 
 ## Examples
 
 ```bash
 # Minimal build
-MaTiSSe.py build -i talk.md -o talk/
+matisse build -i talk.md -o talk/
 
 # Bundle all assets locally (offline / air-gapped)
-MaTiSSe.py build -i talk.md -o talk/ --offline
+matisse build -i talk.md -o talk/ --offline
 
 # PDF-friendly output (no slide animations)
-MaTiSSe.py build -i talk.md -o talk/ --pdf
+matisse build -i talk.md -o talk/ --pdf
 
 # Generate a sample skeleton with a built-in theme
-MaTiSSe.py build --sample mytalk.md --theme beamer-madrid
+matisse build --sample mytalk.md --theme beamer-madrid
 
 # List built-in themes
-MaTiSSe.py build --print-themes
+matisse build --print-themes
 
 # List available highlight.js styles
-MaTiSSe.py build --print-highlight-styles
+matisse build --print-highlight-styles
 ```

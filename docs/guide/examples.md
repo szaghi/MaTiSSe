@@ -1,11 +1,11 @@
 # Examples
 
-Quick copy-paste examples to get started with MaTiSSe.py.
+Quick copy-paste examples to get started with MaTiSSe.
 
 Build any example with:
 
 ```bash
-MaTiSSe.py -i source.md -o output/
+matisse -i source.md -o output/
 ```
 
 Then open `output/index.html` in a browser.
@@ -31,7 +31,7 @@ $titlepage
 
 #### First Slide
 
-This is a simple presentation using MaTiSSe.py.
+This is a simple presentation using matisse.
 
 Inline math: $E = mc^2$
 
@@ -44,7 +44,7 @@ $$
 
 Output preview:
 
-![Screenshot of a minimal MaTiSSe.py presentation](/images/first_talk.png)
+![Screenshot of a minimal MaTiSSe presentation](/images/first_talk.png)
 
 ## Scientific talk
 
@@ -85,7 +85,7 @@ Summary of findings.
 
 Output preview:
 
-![Screenshot of a structured MaTiSSe.py presentation with sections](/images/second_talk.png)
+![Screenshot of a structured MaTiSSe presentation with sections](/images/second_talk.png)
 
 ## Two-column layout
 

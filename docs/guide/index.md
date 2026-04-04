@@ -1,6 +1,6 @@
-# About MaTiSSe.py
+# About MaTiSSe
 
-**MaTiSSe.py** (*Markdown To Impressive Scientific Slides*) is a command-line tool that converts Markdown source files into high-quality HTML/CSS presentations.
+**MaTiSSe** (*Markdown To Impressive Scientific Slides*) is a command-line tool that converts Markdown source files into high-quality HTML/CSS presentations.
 
 ## Goals
 
@@ -12,7 +12,7 @@ Scientific speakers need:
 - **Reproducibility** — source in version control, output fully deterministic
 - **Portability** — a single output directory that runs in any browser
 
-MaTiSSe.py addresses all of these from a single Markdown file.
+MaTiSSe addresses all of these from a single Markdown file.
 
 ## How it works
 
@@ -51,13 +51,13 @@ Each level contributes to the automatically generated table of contents and to t
 
 Each slide is composed of an infinite canvas on which one or more **header**, **footer**, **sidebar**, and **content** areas are laid out:
 
-![MaTiSSe.py slide anatomy — canvas, headers, footers, sidebars, and content area](/images/matisse-universe-no_bg.png)
+![MaTiSSe slide anatomy — canvas, headers, footers, sidebars, and content area](/images/matisse-universe-no_bg.png)
 
 By default only the content area is enabled; headers, footers, and sidebars are activated and styled through the [theme YAML](/reference/themes).
 
 ## Additional features
 
-Beyond equations and code, MaTiSSe.py supports:
+Beyond equations and code, MaTiSSe supports:
 
 - **Table of Contents** — auto-generated from the chapter/section/subsection hierarchy
 - **Countdown timer** — configurable presentation clock
@@ -73,7 +73,7 @@ Beyond equations and code, MaTiSSe.py supports:
 
 ## Design philosophy
 
-MaTiSSe.py targets scientific researchers who work with LaTeX-beamer and want modern, browser-based presentations without sacrificing equation quality or structured layout.
+MaTiSSe targets scientific researchers who work with LaTeX-beamer and want modern, browser-based presentations without sacrificing equation quality or structured layout.
 
 It is **not** designed for:
 

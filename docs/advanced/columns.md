@@ -1,6 +1,6 @@
 # Columns
 
-MaTiSSe.py supports multi-column layouts within a slide using the columns environment.
+MaTiSSe supports multi-column layouts within a slide using the columns environment.
 
 ## Syntax
 
