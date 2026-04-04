@@ -310,8 +310,7 @@ class MatisseConfig(object):
         if self.backend == "reveal":
             if self.offline:
                 sys.stderr.write(
-                    "Warning: --offline is not yet supported for --backend reveal. "
-                    "Assets will be loaded from CDN.\n"
+                    "Warning: --offline is not yet supported for --backend reveal. Assets will be loaded from CDN.\n"
                 )
             # No local bundles for reveal — all CSS/JS comes from CDN
             return
