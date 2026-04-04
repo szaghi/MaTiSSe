@@ -11,10 +11,16 @@
 pip install MaTiSSe.py
 ```
 
+With [pipx](https://pypa.github.io/pipx/) (recommended for isolated installs):
+
+```bash
+pipx install MaTiSSe.py
+```
+
 Verify the installation:
 
 ```bash
-MaTiSSe.py --help
+MaTiSSe.py --version
 ```
 
 ## Install from source
@@ -43,4 +49,30 @@ Frontend assets (impress.js, MathJax, highlight.js) are loaded from CDN at runti
 
 ```bash
 pip install --upgrade MaTiSSe.py
+```
+
+## Platform notes
+
+| Platform | Notes |
+|---|---|
+| Linux | Works on any modern distribution |
+| macOS | Works with the standard Python installation |
+| Windows | Use WSL (Windows Subsystem for Linux) or PowerShell with Python 3.9+ |
+
+## Troubleshooting
+
+**`MaTiSSe.py: command not found`**
+
+If you installed with `pip install --user`, ensure `~/.local/bin` is on your `PATH`. `pipx` wires up the binary automatically.
+
+**Module import errors**
+
+Check Python version (`python --version` — must be 3.9+). If using a virtual environment, make sure it is activated before running `pip install`.
+
+**Reinstall from source**
+
+```bash
+git clone https://github.com/szaghi/MaTiSSe.git
+cd MaTiSSe
+pip install -e ".[dev]"
 ```

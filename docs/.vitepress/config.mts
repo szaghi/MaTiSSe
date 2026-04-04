@@ -26,6 +26,8 @@ export default defineConfig({
           { text: 'About',        link: '/guide/' },
           { text: 'Installation', link: '/guide/installation' },
           { text: 'Quick Start',  link: '/guide/quickstart' },
+          { text: 'Examples',     link: '/guide/examples' },
+          { text: 'FAQ',          link: '/guide/faq' },
           { text: 'Changelog',    link: '/guide/changelog' },
           { text: 'Contributing', link: '/guide/contributing' },
         ],
@@ -43,6 +45,8 @@ export default defineConfig({
             { text: 'About MaTiSSe.py', link: '/guide/' },
             { text: 'Installation',     link: '/guide/installation' },
             { text: 'Quick Start',      link: '/guide/quickstart' },
+            { text: 'Examples',         link: '/guide/examples' },
+            { text: 'FAQ',              link: '/guide/faq' },
           ],
         },
         {

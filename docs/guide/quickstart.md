@@ -8,6 +8,18 @@ The fastest way to get started is to let MaTiSSe generate a working example:
 MaTiSSe.py --sample mytalk.md
 ```
 
+To start from a built-in theme, pass `--theme` as well:
+
+```bash
+MaTiSSe.py --sample mytalk.md --theme cnr-insean
+```
+
+List all available built-in themes:
+
+```bash
+MaTiSSe.py --print-themes
+```
+
 This writes `mytalk.md` — a fully annotated source file showing all major features. Build it immediately:
 
 ```bash

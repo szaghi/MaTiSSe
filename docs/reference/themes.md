@@ -120,3 +120,29 @@ title: My Talk
 theme: dark
 ---
 ```
+
+### Theme gallery
+
+**Antibes** — multi-level header bands with section and subsection titles
+
+![Antibes theme screenshot](/images/antibes.png)
+
+**Bergen** — left sidebar with TOC, wide header for slide title
+
+![Bergen theme screenshot](/images/bergen.png)
+
+**Berkeley** — sidebar with title/authors/TOC, coloured header
+
+![Berkeley theme screenshot](/images/berkeley.png)
+
+**Madrid** — bottom footer band with metadata
+
+![Madrid theme screenshot](/images/madrid.png)
+
+**Montpellier** — clean header with coloured accent bar
+
+![Montpellier theme screenshot](/images/montpellier.png)
+
+**Sapienza** — dark sidebar with light content area
+
+![Sapienza theme screenshot](/images/sapienza.png)

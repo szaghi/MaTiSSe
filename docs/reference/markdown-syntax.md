@@ -15,6 +15,14 @@ Headings map to the presentation hierarchy:
 
 Each `####` heading starts a new slide. Chapters, sections, and subsections are structural — they appear in the automatically generated table of contents.
 
+::: warning Heading levels and content
+`#`, `##`, and `###` are **structural** — they define chapters, sections, and subsections, not slide content. Use `####` through `######` for in-slide headings. If you need an `<h1>`–`<h3>` inside slide content, write it as raw HTML:
+
+```html
+<h2>This is a content heading, not a section</h2>
+```
+:::
+
 ## Special slides
 
 ```markdown
