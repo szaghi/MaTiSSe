@@ -1,13 +1,13 @@
 ---
 theme:
-  - slide:
-    - border: '2px solid black'
+  layout:
+    slide:
+      border: '2px solid black'
 ---
 
 #### $titlepage
 ---
-overtheme:
-  - slide:
+overtheme: {}
 ---
 
 ##### Testing Titlepage

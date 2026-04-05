@@ -5,9 +5,9 @@ $include(theme.yaml)
 #### $titlepage
 ---
 overtheme:
-  - slide:
-    - content:
-      - padding: '0%'
+  layout:
+    content:
+      padding: '0%'
 ---
 
 $box
@@ -69,31 +69,33 @@ $endnote
 #### Prezi-effect
 ---
 overtheme:
-  - slide:
-    - transition: 'absolute'
-    - data-y: '1000'
-    - data-z: '100'
-    - data-rotate-x: '45'
-    - border-radius: '50%'
-    - data-offset: '200'
-    - background: 'white'
-    - content:
-      - border-radius: '50%'
-      - padding: '15% 20%'
-      - font-size: '180%'
+  layout:
+    slide:
+      transition: 'absolute'
+      data-y: '1000'
+      data-z: '100'
+      data-rotate-x: '45'
+      border-radius: '50%'
+      data-offset: '200'
+      background: 'white'
+    content:
+      border-radius: '50%'
+      padding: '15% 20%'
+      font-size: '180%'
 ---
 
 The *elliptic* theme of this slide is made just
 
 ```yaml
 overtheme:
-  - slide:
-    - border-radius: '50%'
-    - data-offset: '200'
-    - content:
-      - border-radius: '50%'
-      - padding: '15% 20%'
-      - font-size: '180%'
+  layout:
+    slide:
+      border-radius: '50%'
+      data-offset: '200'
+    content:
+      border-radius: '50%'
+      padding: '15% 20%'
+      font-size: '180%'
 ```
 
 This is not so complicated, rigth?
