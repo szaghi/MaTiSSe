@@ -4,6 +4,11 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.6.3] — 2026-04-05
+### Fixed
+- **presentation**: Correct pygments.css generation logic for code highlighting
+
+
 ## [1.6.2] — 2026-04-05
 ### Fixed
 - **tests**: Remove unused pytest import in code highlighting tests
