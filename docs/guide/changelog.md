@@ -4,6 +4,15 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.6.0] — 2026-04-05
+### Added
+- **themes**: Add Dracula built-in theme and update examples
+
+- **matisse**: Cleanup theme directory after presentation generation
+
+- **themes**: Introduce unified theme schema and builtin themes ⚠ BREAKING CHANGE
+
+
 ## [1.5.2] — 2026-04-04
 ### Added
 - **docs**: Add examples/build.sh script and update example documentation
