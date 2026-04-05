@@ -17,179 +17,207 @@
 # Structure: solarized-dark skeleton (left sidebar + top header + bottom footer)
 #
 theme:
-  - toc:
-    - display: 'inline-block'
-    - font-size: '90%'
-    - font-variant: 'small-caps'
-    - color: '#f8f8f2'
-    - section-emph:
-      - border: '1px solid #50fa7b'
-      - border-radius: '5px'
-      - font-weight: 'bold'
-      - color: '#50fa7b'
-    - subsection-emph:
-      - border: '1px solid #ffb86c'
-      - border-radius: '5px'
-      - color: '#ffb86c'
-  - canvas:
-    - background: 'radial-gradient(rgb(68, 71, 90), rgb(30, 31, 43))'
-  - ordered-list-items:
-    - content: 'counter(item)'
-    - color: '#ffb86c'
-    - padding-left: '1%'
-  - unordered-list-items:
-    - color: '#50fa7b'
-    - content: "'\\25A0'"
-  - slide:
-    # global slide
-    - transition: 'horizontal'
-    - width: '900px'
-    - height: '700px'
-    - font-size: '120%'
-    - data-offset: '20'
-    - border-style: 'solid'
-    - border-width: '1px'
-    - border-color: '#44475a'
-    - border-radius: '10px'
-    # elements
-    - content:
-      - background: '#282a36'
-      - color: '#f8f8f2'
-      - padding: '2%'
-    - header-1:
-      - height: '10%'
-      - background: '#44475a'
-      - color: '#f8f8f2'
-      - padding: '0'
-      - metadata:
-        - custom-1:
-          - value: '.'
-          - float: 'left'
-          - height: '100%'
-          - width: '20%'
-          - color: '#44475a'
-          - background: '#44475a'
-        - slidetitle:
-          - float: 'left'
-          - padding: '1% 2%'
-          - font-size: '190%'
-          - color: '#50fa7b'
-          - font-variant: 'small-caps'
-    - footer-1:
-      - background: '#282a36'
-      - border-radius: '0 0 10px 0'
-      - height: '6%'
-      - padding: '0.5% 0%'
-      - color: '#ffb86c'
-      - metadata:
-        - sectiontitle:
-          - padding: '0% 1% 2% 1%'
-          - font-size: '110%'
-          - float: 'left'
-          - font-variant: 'small-caps'
-          - color: '#6272a4'
-        - custom-1:
-          - value: ' | '
-          - float: 'left'
-          - padding: '0.5%'
-          - color: '#44475a'
-        - subsectiontitle:
-          - padding: '0% 1% 2% 1%'
-          - font-size: '110%'
-          - float: 'left'
-          - font-variant: 'small-caps'
-          - color: '#50fa7b'
-        - total_slides_number:
-          - float: 'right'
-          - padding: '0 1%'
-          - color: '#ffb86c'
-        - custom-2:
-          - value: ' of '
-          - float: 'right'
-          - color: '#6272a4'
-        - slidenumber:
-          - float: 'right'
-          - padding: '0 1%'
-          - color: '#f8f8f2'
-        - custom-3:
-          - value: 'slide '
-          - float: 'right'
-          - color: '#bd93f9'
-    - sidebar-1:
-      - position: 'L'
-      - width: '20%'
-      - padding: '1% 2%'
-      - background: '#282a36'
-      - color: '#f8f8f2'
-      - border-radius: '10px 0 0 0'
-      - metadata:
-        - title:
-          - font-weight: 'bold'
-          - font-variant: 'small-caps'
-          - font-size: '105%'
-          - display: 'inline-block'
-          - color: '#bd93f9'
-        - authors:
-          - font-variant: 'small-caps'
-          - font-size: '90%'
-          - display: 'inline-block'
-          - color: '#6272a4'
-        - affiliations:
-          - margin-top: '4%'
-          - margin-bottom: '10%'
-          - font-variant: 'small-caps'
-          - font-size: '80%'
-          - white-space: 'pre-wrap'
-          - display: 'inline-block'
-          - color: '#6272a4'
-        - toc:
-          - depth: '1'
-  - note:
-    - display: 'inline-block'
-    - padding: '0% 1%'
-    - margin: '0.2% 0%'
-    - caption:
-      - padding: '0 1em'
-      - width: '100%'
-      - color: '#f8f8f2'
-      - background: '#44475a'
-      - display: 'inline-block'
-      - font-size: '120%'
-      - border-bottom: '1px solid #ff79c6'
-    - content:
-      - padding: '0 1em'
-      - font-size: '120%'
-      - background: '#282a36'
-      - color: '#f8f8f2'
-  - table:
-    - display: 'inline-block'
-    - margin: '2% 0%'
-    - caption:
-      - padding: '2% 0%'
-      - color: '#ffb86c'
-      - font-size: '120%'
-      - display: 'inline-block'
-    - content:
-      - padding: '2% 0%'
-  - figure:
-    - font-variant: 'small-caps'
-    - text-align: 'center'
-    - caption:
-      - font-size: '80%'
-      - color: '#8be9fd'
-    - content:
-      - padding: '1% 5%'
-  - box:
-    - display: 'inline-block'
-    - font-variant: 'small-caps'
-    - border-radius: '10px'
-    - caption:
-      - padding: '0 2%'
-      - color: '#bd93f9'
-      - border-bottom: '1px solid #bd93f9'
-      - display: 'inline-block'
-    - content:
-      - padding: '0 2%'
-      - font-size: '120%'
-      - color: '#f8f8f2'
+  palette:
+    background:   '#282a36'
+    current-line: '#44475a'
+    foreground:   '#f8f8f2'
+    comment:      '#6272a4'
+    cyan:         '#8be9fd'
+    green:        '#50fa7b'
+    orange:       '#ffb86c'
+    pink:         '#ff79c6'
+    purple:       '#bd93f9'
+    red:          '#ff5555'
+    yellow:       '#f1fa8c'
+
+  canvas:
+    background: 'radial-gradient(rgb(68, 71, 90), rgb(30, 31, 43))'
+
+  lists:
+    ordered-items:
+      content: 'counter(item)'
+      color: '$orange'
+      padding-left: '1%'
+    unordered-items:
+      color: '$green'
+      content: "'\\25A0'"
+
+  toc:
+    display: 'inline-block'
+    font-size: '90%'
+    font-variant: 'small-caps'
+    color: '$foreground'
+    section-emph:
+      border: '1px solid $green'
+      border-radius: '5px'
+      font-weight: 'bold'
+      color: '$green'
+    subsection-emph:
+      border: '1px solid $orange'
+      border-radius: '5px'
+      color: '$orange'
+
+  layout:
+    slide:
+      transition: 'horizontal'
+      width: '900px'
+      height: '700px'
+      font-size: '120%'
+      data-offset: '20'
+      border-style: 'solid'
+      border-width: '1px'
+      border-color: '$current-line'
+      border-radius: '10px'
+    content:
+      background: '$background'
+      color: '$foreground'
+      padding: '2%'
+    header-1:
+      height: '10%'
+      background: '$current-line'
+      color: '$foreground'
+      padding: '0'
+      metadata:
+        custom-1:
+          value: '.'
+          float: 'left'
+          height: '100%'
+          width: '20%'
+          color: '$current-line'
+          background: '$current-line'
+        slidetitle:
+          float: 'left'
+          padding: '1% 2%'
+          font-size: '190%'
+          color: '$green'
+          font-variant: 'small-caps'
+    footer-1:
+      background: '$background'
+      border-radius: '0 0 10px 0'
+      height: '6%'
+      padding: '0.5% 0%'
+      color: '$orange'
+      metadata:
+        sectiontitle:
+          padding: '0% 1% 2% 1%'
+          font-size: '110%'
+          float: 'left'
+          font-variant: 'small-caps'
+          color: '$comment'
+        custom-1:
+          value: ' | '
+          float: 'left'
+          padding: '0.5%'
+          color: '$current-line'
+        subsectiontitle:
+          padding: '0% 1% 2% 1%'
+          font-size: '110%'
+          float: 'left'
+          font-variant: 'small-caps'
+          color: '$green'
+        total_slides_number:
+          float: 'right'
+          padding: '0 1%'
+          color: '$orange'
+        custom-2:
+          value: ' of '
+          float: 'right'
+          color: '$comment'
+        slidenumber:
+          float: 'right'
+          padding: '0 1%'
+          color: '$foreground'
+        custom-3:
+          value: 'slide '
+          float: 'right'
+          color: '$purple'
+    sidebar-1:
+      position: 'L'
+      width: '20%'
+      padding: '1% 2%'
+      background: '$background'
+      color: '$foreground'
+      border-radius: '10px 0 0 0'
+      metadata:
+        title:
+          font-weight: 'bold'
+          font-variant: 'small-caps'
+          font-size: '105%'
+          display: 'inline-block'
+          color: '$purple'
+        authors:
+          font-variant: 'small-caps'
+          font-size: '90%'
+          display: 'inline-block'
+          color: '$comment'
+        affiliations:
+          margin-top: '4%'
+          margin-bottom: '10%'
+          font-variant: 'small-caps'
+          font-size: '80%'
+          white-space: 'pre-wrap'
+          display: 'inline-block'
+          color: '$comment'
+        toc:
+          depth: '1'
+
+  entities:
+    box:
+      display: 'inline-block'
+      font-variant: 'small-caps'
+      border-radius: '10px'
+      caption:
+        padding: '0 2%'
+        color: '$purple'
+        border-bottom: '1px solid $purple'
+        display: 'inline-block'
+      content:
+        padding: '0 2%'
+        font-size: '120%'
+        color: '$foreground'
+    note:
+      display: 'inline-block'
+      padding: '0% 1%'
+      margin: '0.2% 0%'
+      caption:
+        padding: '0 1em'
+        width: '100%'
+        color: '$foreground'
+        background: '$current-line'
+        display: 'inline-block'
+        font-size: '120%'
+        border-bottom: '1px solid $pink'
+      content:
+        padding: '0 1em'
+        font-size: '120%'
+        background: '$background'
+        color: '$foreground'
+    table:
+      display: 'inline-block'
+      margin: '2% 0%'
+      caption:
+        padding: '2% 0%'
+        color: '$orange'
+        font-size: '120%'
+        display: 'inline-block'
+      content:
+        padding: '2% 0%'
+    figure:
+      font-variant: 'small-caps'
+      text-align: 'center'
+      caption:
+        font-size: '80%'
+        color: '$cyan'
+      content:
+        padding: '1% 5%'
+    video:
+      font-variant: 'small-caps'
+      text-align: 'center'
+      caption:
+        font-size: '100%'
+        color: '$orange'
+      content:
+        controls: ''
+        autoplay: ''
+        padding: '1% 1%'
 ---

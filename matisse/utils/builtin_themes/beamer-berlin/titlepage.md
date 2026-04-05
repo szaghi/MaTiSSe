@@ -1,7 +1,7 @@
 #### $titlepage
 ---
 overtheme:
-  - copy-from-theme: True
+  copy-from-theme: true
 ---
 
 $box

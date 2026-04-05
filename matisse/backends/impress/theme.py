@@ -9,8 +9,88 @@ This module contains the full Theme implementation moved from
 
 ImpressTheme implements AbstractTheme so it can be used interchangeably
 through the backend abstraction layer.
+
+Theme YAML schema
+-----------------
+All content lives under a top-level ``theme:`` (or ``overtheme:``) mapping.
+Every section is optional. Example::
+
+    theme:
+      palette:                    # named variables — reference with $name
+        background: '#282a36'
+        accent:     '#50fa7b'
+      canvas:                     # viewport / body background
+        background: '$background'
+      lists:
+        ordered-items:
+          content: 'counter(item)'
+          color: '$accent'
+        unordered-items:
+          color: '$accent'
+          content: "'\\25A0'"
+      toc:
+        font-variant: 'small-caps'
+        section-emph:
+          color: '$accent'
+      layout:                     # structural shell of each slide
+        slide:
+          transition: 'horizontal'
+          width: '900px'
+          height: '700px'
+        content:
+          background: '$background'
+          padding: '2%'
+        header-1:
+          height: '10%'
+          background: '$accent'
+          metadata:
+            slidetitle:
+              float: 'left'
+              font-size: '150%'
+        footer-1:
+          height: '6%'
+          metadata:
+            slidenumber:
+              float: 'right'
+        sidebar-1:
+          position: 'L'
+          width: '20%'
+          metadata:
+            toc:
+              depth: '1'
+      entities:                   # content environments
+        box:
+          display: 'inline-block'
+          caption:
+            color: '$accent'
+          content:
+            padding: '0 2%'
+        note:
+          display: 'inline-block'
+          caption:
+            background: '$accent'
+          content:
+            padding: '0 1em'
+        table:
+          display: 'inline-block'
+          caption:
+            color: '$accent'
+        figure:
+          text-align: 'center'
+          caption:
+            font-size: '80%'
+          content:
+            padding: '1% 5%'
+        video:
+          caption:
+            color: '$accent'
+
+Per-slide ``overtheme:`` blocks use the same schema, plus an optional
+top-level ``copy-from-theme: true`` flag that inherits the presentation
+theme before applying overrides.
 """
 
+import re
 from collections import OrderedDict
 from copy import deepcopy
 
@@ -266,21 +346,18 @@ class ImpressTheme(AbstractTheme):
         if len(source) > 0:
             try:
                 for data in load_all(source, Loader=FullLoader):
-                    if name in data:
-                        for element in data[name]:
-                            self.__get_copy_from(data=element)
-                            self.__get_canvas(data=element)
-                            self.__get_ordered_list(data=element)
-                            self.__get_unordered_list(data=element)
-                            self.__get_ordered_list_items(data=element)
-                            self.__get_unordered_list_items(data=element)
-                            self.__get_toc(data=element)
-                            self.__get_slide(data=element)
-                            self.__get_box_like(env="box", data=element)
-                            self.__get_box_like(env="note", data=element)
-                            self.__get_box_like(env="table", data=element)
-                            self.__get_box_like(env="figure", data=element)
-                            self.__get_box_like(env="video", data=element)
+                    if not data or name not in data:
+                        continue
+                    theme_data = data[name]
+                    if not isinstance(theme_data, dict):
+                        continue
+                    self.__parse_copy_from(theme_data)
+                    resolved = self.__resolve_palette(theme_data)
+                    self.__parse_canvas(resolved)
+                    self.__parse_lists(resolved)
+                    self.__parse_toc(resolved)
+                    self.__parse_layout(resolved)
+                    self.__parse_entities(resolved)
                 self.custom = True
             except YAMLError:
                 print("No valid definition of theme has been found")
@@ -331,7 +408,173 @@ class ImpressTheme(AbstractTheme):
         return infos
 
     # ------------------------------------------------------------------
-    # Private helpers (unchanged from original Theme)
+    # Private: new section parsers
+    # ------------------------------------------------------------------
+
+    def __parse_copy_from(self, data):
+        """Read the copy-from-theme flag (top-level in overtheme blocks)."""
+        if "copy-from-theme" in data:
+            self.copy_from_theme = data["copy-from-theme"]
+
+    @staticmethod
+    def __resolve_palette(data):
+        """Replace $varname tokens in all string values using the palette section.
+
+        If a token references an undefined palette variable, a warning is
+        printed and the raw ``$varname`` string is left in place.
+        """
+        palette = data.get("palette", {})
+
+        def _resolve(val):
+            if isinstance(val, str):
+
+                def _replacer(m):
+                    key = m.group(1)
+                    if key in palette:
+                        return str(palette[key])
+                    print(f"Warning: palette variable '${key}' not defined")
+                    return m.group(0)
+
+                return re.sub(r"\$([A-Za-z][A-Za-z0-9_-]*)", _replacer, val)
+            if isinstance(val, dict):
+                return {k: _resolve(v) for k, v in val.items()}
+            if isinstance(val, list):
+                return [_resolve(item) for item in val]
+            return val
+
+        result = {}
+        for key, val in data.items():
+            result[key] = val if key == "palette" else _resolve(val)
+        return result
+
+    @staticmethod
+    def __dict_to_css_list(d):
+        """Convert a flat {prop: value} dict to a list of single-key dicts.
+
+        Boolean values are mapped to 'yes'/'no' so that ``active: yes`` in
+        YAML (parsed as Python True) works correctly.
+        """
+        if not d:
+            return []
+        result = []
+        for k, v in d.items():
+            if isinstance(v, bool):
+                result.append({k: "yes" if v else "no"})
+            else:
+                result.append({k: str(v)})
+        return result
+
+    def __parse_canvas(self, data):
+        """Populate self.canvas from the ``canvas:`` section."""
+        if "canvas" in data and data["canvas"]:
+            self.canvas = self.__dict_to_css_list(data["canvas"])
+
+    def __parse_lists(self, data):
+        """Populate ordered/unordered list attrs from the ``lists:`` section."""
+        if "lists" not in data or not data["lists"]:
+            return
+        lists = data["lists"]
+        if lists.get("ordered"):
+            self.ordered_list = self.__dict_to_css_list(lists["ordered"])
+        if lists.get("ordered-items"):
+            self.ordered_list_items = self.__dict_to_css_list(lists["ordered-items"])
+        if lists.get("unordered"):
+            self.unordered_list = self.__dict_to_css_list(lists["unordered"])
+        if lists.get("unordered-items"):
+            self.unordered_list_items = self.__dict_to_css_list(lists["unordered-items"])
+
+    def __parse_toc(self, data):
+        """Populate TOC attrs from the ``toc:`` section."""
+        if "toc" not in data or not data["toc"]:
+            return
+        toc = data["toc"]
+        _emph = {"chapter-emph", "section-emph", "subsection-emph", "slide-emph"}
+        base = {k: v for k, v in toc.items() if k not in _emph}
+        self.toc = self.__dict_to_css_list(base)
+        if "chapter-emph" in toc:
+            self.toc_chapter_emph = self.__dict_to_css_list(toc["chapter-emph"])
+        if "section-emph" in toc:
+            self.toc_section_emph = self.__dict_to_css_list(toc["section-emph"])
+        if "subsection-emph" in toc:
+            self.toc_subsection_emph = self.__dict_to_css_list(toc["subsection-emph"])
+        if "slide-emph" in toc:
+            self.toc_slide_emph = self.__dict_to_css_list(toc["slide-emph"])
+
+    @staticmethod
+    def __parse_decorator_data(d):
+        """Convert a flat decorator dict to the internal list-of-single-key-dicts format.
+
+        The ``metadata`` sub-dict ``{name: {prop: val, ...}, ...}`` is
+        converted to the nested list structure expected by
+        ``__get_slide_decorators_metadata``.
+        """
+        if not d:
+            return []
+        result = []
+        for key, val in d.items():
+            if key == "metadata":
+                meta_list = []
+                for meta_name, meta_props in (val or {}).items():
+                    if isinstance(meta_props, dict):
+                        css_list = [{p: str(pv)} for p, pv in meta_props.items()]
+                    else:
+                        css_list = []
+                    meta_list.append({meta_name: css_list})
+                result.append({"metadata": meta_list})
+            elif isinstance(val, bool):
+                result.append({key: "yes" if val else "no"})
+            else:
+                result.append({key: str(val)})
+        return result
+
+    def __parse_layout(self, data):
+        """Populate slide/content/decorator attrs from the ``layout:`` section."""
+        if "layout" not in data or not data["layout"]:
+            return
+        layout = data["layout"]
+
+        if layout.get("slide"):
+            self.slide = self.__dict_to_css_list(layout["slide"])
+
+        if layout.get("content"):
+            self.slide_content = self.__dict_to_css_list(layout["content"])
+
+        for key, val in layout.items():
+            if key.startswith("header-"):
+                self.slide_header[key] = self.__parse_decorator_data(val)
+            elif key.startswith("footer-"):
+                self.slide_footer[key] = self.__parse_decorator_data(val)
+            elif key.startswith("sidebar-"):
+                self.slide_sidebar[key] = self.__parse_decorator_data(val)
+
+        self.__check_slide()
+        self.__get_slide_decorators_metadata()
+
+    def __parse_entities(self, data):
+        """Populate box/note/table/figure/video attrs from the ``entities:`` section."""
+        if "entities" not in data or not data["entities"]:
+            return
+        entities = data["entities"]
+        for env in ("box", "note", "table", "figure", "video"):
+            if env not in entities or not entities[env]:
+                continue
+            env_data = entities[env]
+            base = {}
+            caption = {}
+            content = {}
+            for k, v in env_data.items():
+                if k == "caption":
+                    caption = v or {}
+                elif k == "content":
+                    content = v or {}
+                else:
+                    base[k] = v
+            setattr(self, env, self.__dict_to_css_list(base))
+            setattr(self, env + "_caption", self.__dict_to_css_list(caption))
+            setattr(self, env + "_content", self.__dict_to_css_list(content))
+
+    # ------------------------------------------------------------------
+    # Private: slide dimension checks (unchanged)
     # ------------------------------------------------------------------
 
     def __get_slide_decorators_metadata(self):
@@ -355,46 +598,6 @@ class ImpressTheme(AbstractTheme):
         __get_decorators(decorator="header")
         __get_decorators(decorator="footer")
         __get_decorators(decorator="sidebar")
-
-    def __get_copy_from(self, data):
-        if "copy-from-theme" in data:
-            self.copy_from_theme = data["copy-from-theme"]
-
-    def __get_canvas(self, data):
-        if "canvas" in data:
-            self.canvas = data["canvas"]
-
-    def __get_ordered_list(self, data):
-        if "ordered-list" in data:
-            self.ordered_list = data["ordered-list"]
-
-    def __get_unordered_list(self, data):
-        if "unordered-list" in data:
-            self.unordered_list = data["unordered-list"]
-
-    def __get_ordered_list_items(self, data):
-        if "ordered-list-items" in data:
-            self.ordered_list_items = data["ordered-list-items"]
-
-    def __get_unordered_list_items(self, data):
-        if "unordered-list-items" in data:
-            self.unordered_list_items = data["unordered-list-items"]
-
-    def __get_toc(self, data):
-        if "toc" in data:
-            toc = data["toc"]
-            for toc_element in toc:
-                for key in toc_element:
-                    if "emph" not in key:
-                        self.toc.append(toc_element)
-                    if "chapter-emph" in key:
-                        self.toc_chapter_emph = toc_element[key]
-                    if "section-emph" in key and "subsection" not in key:
-                        self.toc_section_emph = toc_element[key]
-                    if "subsection-emph" in key:
-                        self.toc_subsection_emph = toc_element[key]
-                    if "slide-emph" in key:
-                        self.toc_slide_emph = toc_element[key]
 
     def __check_slide_dimensions(self):
         found_w = False
@@ -608,43 +811,6 @@ class ImpressTheme(AbstractTheme):
         self.__check_slide_footers_dimensions()
         self.__check_slide_sidebars_dimensions()
         self.__check_slide_content_dimensions()
-
-    def __get_slide(self, data):
-        if "slide" in data:
-            slide = data["slide"]
-            if slide is not None:
-                for slide_element in slide:
-                    for key in slide_element:
-                        if key is not None:
-                            if (
-                                "content" not in key
-                                and "header" not in key
-                                and "footer" not in key
-                                and "sidebar" not in key
-                            ):
-                                self.slide.append(slide_element)
-                            if "content" in key:
-                                self.slide_content = slide_element[key]
-                            if "header" in key:
-                                self.slide_header[key] = slide_element[key]
-                            if "footer" in key:
-                                self.slide_footer[key] = slide_element[key]
-                            if "sidebar" in key:
-                                self.slide_sidebar[key] = slide_element[key]
-            self.__check_slide()
-            self.__get_slide_decorators_metadata()
-
-    def __get_box_like(self, env, data):
-        if env in data:
-            env_data = data[env]
-            for env_element in env_data:
-                for key in env_element:
-                    if "caption" not in key.lower() and "content" not in key.lower():
-                        getattr(self, env).append(env_element)
-                    if "caption" in key.lower():
-                        setattr(self, env + "_caption", env_element[key])
-                    if "content" in key.lower():
-                        setattr(self, env + "_content", env_element[key])
 
     def __get_css(self):
         css = []

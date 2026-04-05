@@ -1,7 +1,8 @@
 ---
 theme:
-  - slide:
-    - border: '2px solid black'
+  layout:
+    slide:
+      border: '2px solid black'
 ---
 
 #### Test Slide Class: First
