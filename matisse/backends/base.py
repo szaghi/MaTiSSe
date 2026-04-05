@@ -40,6 +40,7 @@ def indent_html(html: str) -> str:
         indented = indented.replace(f"\x00PRE{i}\x00", block)
     return indented
 
+
 if TYPE_CHECKING:
     from ..presentation import Presentation
 

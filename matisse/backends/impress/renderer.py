@@ -98,7 +98,6 @@ class ImpressBackend(AbstractBackend):
             with tag("script"):
                 doc.attr(src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js")
 
-
     def _put_html_slide_decorators(
         self, tag, doc, decorator, presentation, position=None, overtheme=None, current=None
     ):
