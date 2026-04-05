@@ -21,6 +21,7 @@ def _complete_code_style(incomplete: str):
     """Return Pygments style names that start with *incomplete*."""
     try:
         from pygments.styles import get_all_styles
+
         return [s for s in sorted(get_all_styles()) if s.startswith(incomplete)]
     except ImportError:
         return []

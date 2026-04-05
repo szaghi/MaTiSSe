@@ -297,6 +297,7 @@ class MatisseConfig(object):
         # always write pygments.css (build-time, no CDN, works offline automatically)
         if self.code_highlight:
             from .markdown_utils import get_pygments_css
+
             css_path = os.path.join(output, "css", "pygments.css")
             with open(css_path, "w") as fh:
                 fh.write(get_pygments_css(style=self.code_style))
