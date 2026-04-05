@@ -2,10 +2,7 @@
 test_code_highlighting.py — Unit tests for Pygments-based code highlighting.
 """
 
-import pytest
-
 from matisse.markdown_utils import get_pygments_css, markdown2html
-
 
 # ---------------------------------------------------------------------------
 # get_pygments_css
