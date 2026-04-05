@@ -9,7 +9,7 @@ from typing import Annotated
 
 import typer
 
-from ._completions import _complete_highlight_style, _complete_theme
+from ._completions import _complete_code_style, _complete_theme
 
 # ---------------------------------------------------------------------------
 # I/O group
@@ -69,7 +69,7 @@ OfflineOpt = Annotated[
     bool,
     typer.Option(
         "--offline",
-        help="Bundle impress.js, MathJax, and highlight.js locally instead of loading from CDN.",
+        help="Bundle impress.js and MathJax locally instead of loading from CDN. Pygments CSS is always local.",
     ),
 ]
 
@@ -81,14 +81,14 @@ PdfOpt = Annotated[
     ),
 ]
 
-HighlightStyleOpt = Annotated[
+CodeStyleOpt = Annotated[
     str,
     typer.Option(
-        "--highlight-style",
-        "-hs",
-        help='highlight.js CSS style (default: github.css). Use "disable" to turn off highlighting.',
+        "--code-style",
+        "-cs",
+        help='Pygments style for syntax highlighting (default: default). Use "disable" to turn off highlighting.',
         metavar="STYLE",
-        autocompletion=_complete_highlight_style,
+        autocompletion=_complete_code_style,
     ),
 ]
 
@@ -135,11 +135,11 @@ PrintThemesOpt = Annotated[
     ),
 ]
 
-PrintHighlightStylesOpt = Annotated[
+PrintCodeStylesOpt = Annotated[
     bool,
     typer.Option(
-        "--print-highlight-styles",
-        help="List all available highlight.js styles and exit.",
+        "--print-code-styles",
+        help="List all available Pygments code styles and exit.",
     ),
 ]
 

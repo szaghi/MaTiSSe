@@ -10,8 +10,35 @@ Every backend must provide:
 
 from __future__ import annotations
 
+import re
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
+
+from yattag import indent as _yattag_indent
+
+
+def indent_html(html: str) -> str:
+    """Indent HTML while preserving whitespace inside ``<pre>`` blocks.
+
+    ``yattag.indent()`` reformats every element unconditionally, inserting
+    newlines between ``<span>`` tokens inside ``<pre><code>`` blocks.  Since
+    ``<pre>`` preserves whitespace, those injected newlines render as one
+    token per line in the browser.
+
+    This wrapper extracts all ``<pre>…</pre>`` subtrees before indenting and
+    restores them verbatim afterwards.
+    """
+    pre_blocks: list[str] = []
+
+    def _save(m: re.Match) -> str:
+        pre_blocks.append(m.group(0))
+        return f"\x00PRE{len(pre_blocks) - 1}\x00"
+
+    protected = re.sub(r"<pre>.*?</pre>", _save, html, flags=re.DOTALL)
+    indented = _yattag_indent(protected)
+    for i, block in enumerate(pre_blocks):
+        indented = indented.replace(f"\x00PRE{i}\x00", block)
+    return indented
 
 if TYPE_CHECKING:
     from ..presentation import Presentation

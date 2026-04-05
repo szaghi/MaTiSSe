@@ -189,8 +189,9 @@ def greet(name: str) -> str:
 ```
 ````
 
-Syntax highlighting is provided by highlight.js. Use `--highlight-style` to select a style,
-and `--print-highlight-styles` to list all available options.
+Syntax highlighting is provided by Pygments at build time — no browser JS required.
+Use `--code-style` to select a style and `--print-code-styles` to list all available options.
+See the [Code Highlighting guide](/advanced/code) for details.
 
 ## LaTeX equations
 
@@ -301,278 +302,32 @@ omitted.
 See dedicated guides: [Figures](/advanced/figures) · [Boxes & Notes](/advanced/boxes) ·
 [Tables](/advanced/tables) · [Video](/advanced/video).
 
-## Presentation-level theme
+## Themes
 
 Theme blocks use a YAML `theme:` key and can appear anywhere in the source (conventionally
-near the top, or in a separate file included with `$include`).
-
-### Canvas
+near the top, or in a separate file included with `$include`):
 
 ```yaml
 ---
 theme:
-  - canvas:
-    - background: 'radial-gradient(rgb(240,240,240), rgb(110,110,110))'
+  canvas:
+    background: 'radial-gradient(rgb(240,240,240), rgb(110,110,110))'
+  layout:
+    slide:
+      width: '900px'
+      height: '700px'
+    content:
+      background: 'white'
+      padding: '2%'
 ---
 ```
 
-The canvas maps to the HTML `<body>` and cannot be overridden per-slide.
+For a full walkthrough of all theme sections (palette, canvas, layout, decorators, entities,
+code, overtheme) see:
 
-### TOC
-
-```yaml
----
-theme:
-  - toc:
-    - font-variant: 'small-caps'
-    - chapter-emph:
-      - border: '1px solid #4788B3'
-      - border-radius: '5px'
-    - section-emph:
-      - border: '1px solid #4788B3'
-      - border-radius: '5px'
-    - subsection-emph:
-      - border: '1px solid #4788B3'
-      - border-radius: '5px'
-    - slide-emph:
-      - border: '1px solid #4788B3'
-      - border-radius: '3px'
----
-```
-
-`chapter-emph`, `section-emph`, `subsection-emph`, and `slide-emph` style the *currently
-active* entry in a rendered TOC.
-
-### Box-like environment themes
-
-Define a default style for all notes, figures, tables, or generic boxes in one place:
-
-```yaml
----
-theme:
-  - note:
-    - display: 'inline-block'
-    - font-variant: 'small-caps'
-    - box-shadow: '7px 7px 5px rgba(200,200,200,0.3)'
-    - border-radius: '20px'
-    - caption:
-      - padding: '0 2%'
-      - color: '#4788B3'
-      - border-bottom: '1px solid #4788B3'
-      - display: 'inline-block'
-    - content:
-      - padding: '0 2%'
-      - font-size: '120%'
-  - figure:
-    - text-align: 'center'
-    - caption:
-      - font-style: 'italic'
-      - font-size: '80%'
----
-```
-
-Supported keys: `box`, `note`, `figure`, `table`, `video`.
-
-### List customization
-
-```yaml
----
-theme:
-  - unordered-list:
-    - padding-bottom: '0.5em'
-  - unordered-list-items:
-    - color: '#4788B3'
-    - content: "'\\25D5'"
-  - ordered-list:
-    - padding-bottom: '0.8em'
-    - background: 'rgba(241,241,241,0.5)'
-  - ordered-list-items:
-    - content: 'counter(item, upper-roman)'
-    - color: 'pink'
----
-```
-
-The `content` property accepts any CSS `list-style-type` value or a Unicode glyph code.
-
-## Slide-level theme
-
-The global slide theme sets dimensions, fonts, transitions, and default element styles for
-*all* slides.
-
-### Slide container
-
-```yaml
----
-theme:
-  - slide:
-    - width: '900px'
-    - height: '700px'
-    - border-radius: '10px'
-    - background: 'green'
-    - color: 'rgb(102,102,102)'
-    - font-size: '100%'
-    - transition: 'horizontal'
-    - data-offset: '20'
----
-```
-
-**Special (non-CSS) options:**
-
-| Option | Values | Description |
-|---|---|---|
-| `transition` | `horizontal`, `-horizontal`, `vertical`, `-vertical`, `diagonal`, `-diagonal`, `diagonal-x`, `diagonal-y`, `absolute` | Slide placement direction on the canvas |
-| `data-offset` | number (px) | Gap between consecutive slides |
-| `data-scale` | number | Zoom factor (useful in overtheme) |
-| `data-rotate` | degrees | 2D rotation |
-| `data-rotate-x/y/z` | degrees | 3D rotation around each axis |
-
-`transition: absolute` requires explicit `data-x`, `data-y`, `data-z` per slide via overtheme.
-
-### Headers
-
-```yaml
----
-theme:
-  - slide:
-    - header-1:
-      - height: '6%'
-      - padding: '1% 2%'
-      - background: '#4788B3'
-      - color: 'white'
-      - border-radius: '10px 10px 0 0'
-      - metadata:
-        - slidetitle:
-          - font-size: '150%'
-          - float: 'left'
-          - font-variant: 'small-caps'
-        - logo:
-          - height: '100%'
-          - float: 'right'
----
-```
-
-Headers are numbered (non-consecutive numbers are allowed). `header-1` is inserted before
-`header-2`. The `width` is automatically set to 100% — do not override it.
-
-Use `metadata:` to embed presentation or auto-generated values. Any metadata key is valid,
-plus the special `custom-N` key for literal text:
-
-```yaml
-- custom-1:
-  - value: 'slide '
-  - float: 'right'
-```
-
-### Footers
-
-Footers follow the same pattern as headers, placed below the content:
-
-```yaml
----
-theme:
-  - slide:
-    - footer-1:
-      - height: '6%'
-      - padding: '1% 2%'
-      - background: '#86B2CF'
-      - color: 'white'
-      - metadata:
-        - slidenumber:
-          - float: 'right'
-          - padding: '0 1%'
-        - custom-1:
-          - value: ' of '
-          - float: 'right'
-        - total_slides_number:
-          - float: 'right'
-          - padding: '0 1%'
-        - timer:
-          - controls: ''
-          - font-size: '70%'
-          - float: 'right'
----
-```
-
-Use `active: 'no'` to suppress a footer for a specific overtheme without deleting it.
-
-### Sidebars
-
-```yaml
----
-theme:
-  - slide:
-    - sidebar-1:
-      - position: 'R'        # 'L' for left, 'R' for right
-      - width: '20%'
-      - padding: '1% 2%'
-      - background: 'linear-gradient(#4788B3,#86B2CF)'
-      - color: 'white'
-      - metadata:
-        - title:
-          - font-weight: 'bold'
-          - font-variant: 'small-caps'
-        - toc:
-          - depth: '3'
-          - font-size: '70%'
----
-```
-
-The `height` is automatically set to 100%. Left sidebars are inserted before right ones.
-Within each side, lower numbers are inserted first.
-
-### Content
-
-```yaml
----
-theme:
-  - slide:
-    - content:
-      - background: 'white'
-      - color: 'rgb(102,102,102)'
-      - padding: '1%'
----
-```
-
-`width` and `height` are computed automatically from the remaining space after headers,
-footers, and sidebars. Do not set them manually.
-
-## Per-slide overtheme
-
-Any slide can override the global theme with a YAML block placed immediately after its `####`
-heading:
-
-```markdown
-#### My custom slide
----
-overtheme:
-  - slide:
-    - transition: 'diagonal'
-    - content:
-      - font-family: 'Comic Sans MS, cursive, sans-serif'
-    - footer-1:
-      - active: 'no'
----
-
-Slide content here — rendered with the diagonal transition and comic font.
-```
-
-`copy-from-theme: True` inside an overtheme block copies all global slide settings first,
-then applies the local overrides on top.
-
-The Prezi-style elliptic slide effect is achieved entirely via overtheme:
-
-```yaml
----
-overtheme:
-  - slide:
-    - border-radius: '50%'
-    - data-offset: '200'
-    - content:
-      - border-radius: '50%'
-      - padding: '15% 20%'
-      - font-size: '180%'
----
-```
+- **[Guide: Themes](/guide/themes)** — built-in themes, your first custom theme, per-slide overtheme
+- **[Advanced: Themes](/advanced/themes)** — every section with complete examples
+- **[Reference: Theme YAML](/reference/themes)** — schema specification
 
 ## Full example
 

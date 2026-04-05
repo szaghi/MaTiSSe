@@ -361,6 +361,18 @@ class Presentation(object):
             for data in self.metadata["dirs_to_copy"].value:
                 copytree(data, os.path.join(output, data), dirs_exist_ok=True)
 
+        # regenerate pygments.css if the theme specifies a code style override
+        if config.code_highlight:
+            effective_style = (
+                self.theme.code_style
+                if config.backend != "reveal" and self.theme.code_style
+                else config.code_style
+            )
+            if effective_style != config.code_style:
+                from .markdown_utils import get_pygments_css
+                with open(os.path.join(output, "css", "pygments.css"), "w") as fh:
+                    fh.write(get_pygments_css(style=effective_style))
+
         # impress.js-specific CSS assets (theme.css + per-slide overtheme CSS)
         if config.backend != "reveal":
             with open(os.path.join(output, "css/theme.css"), "w") as css_theme:

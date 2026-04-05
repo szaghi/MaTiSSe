@@ -1,7 +1,10 @@
 # Theme YAML Reference
 
-MaTiSSe themes are defined in YAML blocks embedded in the source file between `---` delimiters.
-All theme configuration lives under a top-level `theme:` mapping with up to six named sections.
+Quick lookup for every key accepted by the `theme:` and `overtheme:` YAML blocks.
+For a conceptual introduction see [Guide: Themes](/guide/themes);
+for comprehensive examples see [Advanced: Themes](/advanced/themes).
+
+All theme configuration lives under a top-level `theme:` mapping.
 Every section is optional — include only what you need.
 
 ## Schema overview
@@ -15,6 +18,7 @@ theme:
   toc:        # table of contents styling
   layout:     # slide structure: dimensions, decorators (headers/footers/sidebars), content area
   entities:   # content environments: box, note, table, figure, video
+  code:       # fenced code block styling and Pygments style selection
 ---
 ```
 
@@ -259,69 +263,75 @@ entities:
 
 ## Per-slide overrides (`overtheme`)
 
-Any slide can override theme properties locally using an `overtheme:` block.
-The schema is identical to `theme:`, with the addition of a `copy-from-theme: true` flag
-that first copies the full presentation theme before applying the overrides.
+Schema is identical to `theme:`, plus one extra key at the top level:
+
+| Key | Type | Description |
+|---|---|---|
+| `copy-from-theme` | bool | If `true`, start from the full global theme before applying overrides. Default: `false` (start from scratch). |
+
+Place the block immediately after the `####` heading of the target slide:
 
 ```markdown
 #### My special slide
 ---
 overtheme:
-  layout:
-    slide:
-      transition: 'absolute'
-      border-radius: '50%'
-    content:
-      border-radius: '50%'
-      padding: '15% 20%'
-      font-size: '180%'
----
-
-Slide content here.
-```
-
-```markdown
-#### $titlepage
----
-overtheme:
   copy-from-theme: true
   layout:
+    slide:
+      border-radius: '50%'
     content:
-      padding: '0%'
+      padding: '15% 20%'
+      font-size: '180%'
+    footer-1:
+      active: 'no'
 ---
+```
+
+---
+
+## `code`
+
+Controls the appearance of fenced code blocks and selects the [Pygments](https://pygments.org/)
+syntax highlighting style.
+
+```yaml
+theme:
+  code:
+    style: 'monokai'      # Pygments style name (default: 'default')
+    font-size: '85%'      # any CSS property applies to the .highlight pre selector
+    border-radius: '4px'
+    padding: '0.5em 1em'
+```
+
+The `style` key is special — it selects the Pygments colour scheme and triggers regeneration
+of `css/pygments.css` in the output directory.  All other keys are emitted as plain CSS on
+the `.highlight pre` selector, letting you override font size, padding, border, etc.
+
+List all available Pygments styles:
+
+```bash
+matisse build --print-code-styles
 ```
 
 ---
 
 ## Built-in themes
 
-List all available built-in themes:
-
 ```bash
-MaTiSSe.py --print-themes
+matisse build --print-themes          # list all names
+matisse build -i talk.md --theme dracula
 ```
 
-Apply a built-in theme by name:
-
-```yaml
----
-metadata:
-  - theme: dracula
----
-```
-
-### Available themes
-
-| Name | Structure | Colors |
+| Name | Structure | Colours |
 |---|---|---|
-| `matisse` | Right sidebar, top header, bottom footer | Blue gradient |
-| `sapienza` | Top header, bottom footer | Sapienza red |
-| `dracula` | Left sidebar, top header, bottom footer | Dracula dark |
-| `solarized-dark` | Left sidebar, top header, bottom footer | Solarized dark |
+| `matisse` | Right sidebar + header + footer | Blue gradient |
+| `sapienza` | Header + footer | Sapienza red |
+| `dracula` | Left sidebar + header + footer | Dracula dark |
+| `solarized-dark` | Left sidebar + header + footer | Solarized dark |
 | `beamer-antibes` | Three stacked headers | Beamer blue |
-| `beamer-berkely` | Left sidebar, top header | Beamer blue |
-| `beamer-berlin` | Three stacked headers, two footers | Beamer dark blue |
-| `beamer-madrid` | Top header, bottom footer | Beamer blue |
+| `beamer-berkely` | Left sidebar + header | Beamer blue |
+| `beamer-berlin` | Three stacked headers + two footers | Beamer dark blue |
+| `beamer-madrid` | Header + footer | Beamer blue |
 
 ---
 
@@ -341,7 +351,7 @@ common patterns:
 
 **Key structural changes:**
 - All CSS values are now plain YAML dicts (`prop: value`) instead of lists of single-key dicts (`- prop: value`).
-- `canvas:`, `lists:`, `toc:`, `layout:`, `entities:` are top-level sections under `theme:`.
+- `canvas:`, `lists:`, `toc:`, `layout:`, `entities:`, `code:` are top-level sections under `theme:`.
 - Slide sub-elements (`content:`, `header-N`, `footer-N`, `sidebar-N`) move from under `slide:` to directly under `layout:`.
 - The new `palette:` section lets you define named colors and reference them with `$varname`.
 - `copy-from-theme:` moves to the top level of `overtheme:` (not inside a theme element list).

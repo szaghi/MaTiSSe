@@ -6,19 +6,23 @@ By default MaTiSSe generates presentations that load their JavaScript and CSS fr
 |---|---|
 | impress.js 2 | jsDelivr |
 | MathJax 3 | cdn.jsdelivr.net |
-| highlight.js 11 | cdnjs.cloudflare.com |
 
 This keeps the output directory small and always uses the pinned versions.
 
+> **Syntax highlighting is always local.**  MaTiSSe uses Pygments to highlight code blocks
+> at build time and writes a `css/pygments.css` file into the output directory.  No CDN
+> call is ever needed for highlighting — it works the same in online and offline mode.
+
 ## Enabling offline mode
 
-Pass `--offline` to copy all three bundles into the output directory:
+Pass `--offline` to copy impress.js and MathJax bundles into the output directory:
 
 ```bash
 matisse -i talk.md -o talk/ --offline
 ```
 
-The output `js/` subdirectory will contain local copies of impress.js, MathJax, and highlight.js. The generated `index.html` references these local paths instead of CDN URLs.
+The output `js/` subdirectory will contain local copies of impress.js and MathJax. The
+generated `index.html` references these local paths instead of CDN URLs.
 
 ## When to use offline mode
 
@@ -28,4 +32,6 @@ The output `js/` subdirectory will contain local copies of impress.js, MathJax, 
 
 ## Output size
 
-Bundling all three libraries adds roughly 10–15 MB to the output directory (dominated by MathJax). For CDN mode the `js/` directory contains only `countdown.js` (a small presentation timer utility).
+Bundling impress.js and MathJax adds roughly 10–15 MB to the output directory (dominated
+by MathJax). For CDN mode the `js/` directory contains only `countdown.js` (a small
+presentation timer utility) and `css/` contains the theme and Pygments stylesheets.

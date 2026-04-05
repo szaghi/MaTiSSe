@@ -86,7 +86,7 @@ matisse -i source.md -o output/
 | `--offline` | Bundle JS/CSS locally instead of using CDN |
 | `--pdf` | PDF-friendly output (no impress.js animations) |
 | `--print-themes` | List all built-in themes |
-| `--print-highlight-styles` | List all highlight.js styles |
+| `--print-code-styles` | List all Pygments code styles |
 | `--sample FILE` | Write a sample source file |
 
 ## List available themes

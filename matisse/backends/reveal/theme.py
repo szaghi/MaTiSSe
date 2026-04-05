@@ -13,7 +13,7 @@ YAML block syntax (inside the presentation source):
     reveal:
       theme: moon          # reveal.js built-in theme name (default: black)
       transition: slide    # none | fade | slide | convex | concave | zoom
-      highlight_style: monokai  # highlight.js style (overrides CLI flag)
+      code_style: monokai        # Pygments style (overrides CLI flag)
     ---
 """
 
@@ -52,9 +52,9 @@ class RevealTheme(AbstractTheme):
       Reveal.js built-in theme name (e.g. ``"black"``, ``"moon"``).
     transition : str
       Default slide transition (e.g. ``"slide"``, ``"fade"``).
-    highlight_style : str
-      highlight.js style file name (e.g. ``"monokai.css"``).  When set,
-      overrides the value from ``MatisseConfig``.
+    code_style : str
+      Pygments style name (e.g. ``"monokai"``).  When set, overrides the
+      value from ``MatisseConfig``.
     custom_css : str
       Raw CSS injected into the ``<head>`` as an inline ``<style>`` block.
     """
@@ -62,14 +62,14 @@ class RevealTheme(AbstractTheme):
     _DEFAULTS = {
         "theme": "black",
         "transition": "slide",
-        "highlight_style": "",
+        "code_style": "",
         "custom_css": "",
     }
 
     def __init__(self):
         self.theme = self._DEFAULTS["theme"]
         self.transition = self._DEFAULTS["transition"]
-        self.highlight_style = self._DEFAULTS["highlight_style"]
+        self.code_style = self._DEFAULTS["code_style"]
         self.custom_css = self._DEFAULTS["custom_css"]
 
     # ------------------------------------------------------------------
@@ -107,7 +107,7 @@ class RevealTheme(AbstractTheme):
                         f"Valid transitions: {sorted(_VALID_TRANSITIONS)}. "
                         f"Using '{self.transition}'.\n"
                     )
-                self.highlight_style = cfg.get("highlight_style", self.highlight_style)
+                self.code_style = cfg.get("code_style", self.code_style)
                 self.custom_css = cfg.get("custom_css", self.custom_css)
         except YAMLError:
             pass

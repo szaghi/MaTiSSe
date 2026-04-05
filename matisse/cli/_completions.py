@@ -17,10 +17,10 @@ def _complete_theme(incomplete: str):
         return []
 
 
-def _complete_highlight_style(incomplete: str):
-    """Return highlight.js CSS style names that start with *incomplete*."""
-    styles_dir = os.path.join(os.path.dirname(__file__), "../utils/js/highlight/styles")
+def _complete_code_style(incomplete: str):
+    """Return Pygments style names that start with *incomplete*."""
     try:
-        return [s for s in sorted(os.listdir(styles_dir)) if s.endswith(".css") and s.startswith(incomplete)]
-    except FileNotFoundError:
+        from pygments.styles import get_all_styles
+        return [s for s in sorted(get_all_styles()) if s.startswith(incomplete)]
+    except ImportError:
         return []

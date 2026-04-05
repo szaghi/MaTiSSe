@@ -153,6 +153,8 @@ class ImpressTheme(AbstractTheme):
         self.video = []
         self.video_caption = []
         self.video_content = []
+        self.code_style: str = ""
+        self.code: list = []
         self.slide_header_metadata = {}
         self.slide_footer_metadata = {}
         self.slide_sidebar_metadata = {}
@@ -211,6 +213,8 @@ class ImpressTheme(AbstractTheme):
             "slide_header_metadata",
             "slide_footer_metadata",
             "slide_sidebar_metadata",
+            "code_style",
+            "code",
             "css",
             "custom",
         ]
@@ -274,6 +278,9 @@ class ImpressTheme(AbstractTheme):
         append_css(my_element=self.video, other_element=other.video)
         append_css(my_element=self.video_caption, other_element=other.video_caption)
         append_css(my_element=self.video_content, other_element=other.video_content)
+        append_css(my_element=self.code, other_element=other.code)
+        if not self.code_style and other.code_style:
+            self.code_style = other.code_style
         for header in other.slide_header_metadata:
             if header not in self.slide_header_metadata:
                 self.slide_header_metadata[header] = other.slide_header_metadata[header]
@@ -358,6 +365,7 @@ class ImpressTheme(AbstractTheme):
                     self.__parse_toc(resolved)
                     self.__parse_layout(resolved)
                     self.__parse_entities(resolved)
+                    self.__parse_code(resolved)
                 self.custom = True
             except YAMLError:
                 print("No valid definition of theme has been found")
@@ -572,6 +580,16 @@ class ImpressTheme(AbstractTheme):
             setattr(self, env, self.__dict_to_css_list(base))
             setattr(self, env + "_caption", self.__dict_to_css_list(caption))
             setattr(self, env + "_content", self.__dict_to_css_list(content))
+
+    def __parse_code(self, data):
+        """Populate code_style and code CSS attrs from the ``code:`` section."""
+        if "code" not in data or not data["code"]:
+            return
+        code_data = dict(data["code"])
+        if "style" in code_data:
+            self.code_style = code_data.pop("style")
+        if code_data:
+            self.code = self.__dict_to_css_list(code_data)
 
     # ------------------------------------------------------------------
     # Private: slide dimension checks (unchanged)
@@ -867,4 +885,5 @@ class ImpressTheme(AbstractTheme):
         css.append(self.theme2css(div="", div_id=self.div_id, klass="video", theme_list=self.video))
         css.append(self.theme2css(div="", div_id=self.div_id, klass="video-caption", theme_list=self.video_caption))
         css.append(self.theme2css(div="", div_id=self.div_id, klass="video-content", theme_list=self.video_content))
+        css.append(self.theme2css(div="pre", div_id=self.div_id, klass="highlight", theme_list=self.code))
         self.css = "".join(css)

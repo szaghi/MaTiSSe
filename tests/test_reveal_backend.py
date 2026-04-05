@@ -26,7 +26,7 @@ def _build_sample_reveal(tmpdir):
         backend = "reveal"
         verbose = False
         offline = False
-        highlight_style = "github.css"
+        code_style = "default"
         theme = None
         toc_at_chap_beginning = None
         toc_at_sec_beginning = None
@@ -122,7 +122,7 @@ $endnote
             backend = "reveal"
             verbose = False
             offline = False
-            highlight_style = "github.css"
+            code_style = "default"
             theme = None
             toc_at_chap_beginning = None
             toc_at_sec_beginning = None
