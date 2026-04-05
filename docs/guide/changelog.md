@@ -4,6 +4,11 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.6.1] — 2026-04-05
+### Added
+- **docs**: Replace highlight.js with Pygments for code highlighting ⚠ BREAKING CHANGE
+
+
 ## [1.6.0] — 2026-04-05
 ### Added
 - **themes**: Add Dracula built-in theme and update examples

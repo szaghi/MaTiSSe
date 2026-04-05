@@ -27,6 +27,7 @@ export default defineConfig({
           { text: 'Installation', link: '/guide/installation' },
           { text: 'Quick Start',  link: '/guide/quickstart' },
           { text: 'Usage',        link: '/guide/usage' },
+          { text: 'Themes',       link: '/guide/themes' },
           { text: 'Examples',     link: '/guide/examples' },
           { text: 'FAQ',          link: '/guide/faq' },
           { text: 'Changelog',    link: '/guide/changelog' },
@@ -47,6 +48,7 @@ export default defineConfig({
             { text: 'Installation',     link: '/guide/installation' },
             { text: 'Quick Start',      link: '/guide/quickstart' },
             { text: 'Usage',            link: '/guide/usage' },
+            { text: 'Themes',           link: '/guide/themes' },
             { text: 'Examples',         link: '/guide/examples' },
             { text: 'FAQ',              link: '/guide/faq' },
           ],
@@ -89,6 +91,12 @@ export default defineConfig({
             { text: 'Columns',       link: '/advanced/columns' },
             { text: 'Video',         link: '/advanced/video' },
             { text: 'Checklists',    link: '/advanced/checklists' },
+          ],
+        },
+        {
+          text: 'Themes',
+          items: [
+            { text: 'Themes In Depth', link: '/advanced/themes' },
           ],
         },
         {

@@ -9,6 +9,8 @@ import os
 import sys
 from shutil import copyfile, copytree, rmtree
 
+from pygments.styles import get_all_styles
+
 
 class MatisseConfig(object):
     """
@@ -16,13 +18,10 @@ class MatisseConfig(object):
 
     Attributes
     ----------
-    __highlight_styles : list
-      list of available highlight.js styles
     __themes : list
       list of builtin themes
     """
 
-    __highlight_styles = []
     __themes = []
 
     def __init__(self, cliargs=None):
@@ -37,13 +36,13 @@ class MatisseConfig(object):
         verbose : bool
           more verbose printing messages (default no)
         offline : bool
-          use local bundled copies of impress.js, MathJax and highlight.js instead
-          of CDN versions; default False (CDN is used)
-        highlight : bool
-          use highlight.js for syntax highlighting of code blocks
-        highlight_style : str
-          css style file for highlight.js; the list of available styles can be printed
-          by 'str_highlight_styles' method
+          use local bundled copies of impress.js and MathJax instead of CDN
+          versions; default False (CDN is used)
+        code_highlight : bool
+          use Pygments for server-side syntax highlighting of code blocks
+        code_style : str
+          Pygments style name; the list of available styles can be obtained
+          via str_code_styles() or MaTiSSe.py --print-code-styles
         theme : str
           builtin theme chosen
         toc_at_chap_beginning : bool
@@ -56,16 +55,15 @@ class MatisseConfig(object):
         self.backend = "impress"
         self.verbose = False
         self.offline = False
-        self.highlight = True
-        self.highlight_style = "github.css"
+        self.code_highlight = True
+        self.code_style = "default"
         self.theme = None
         self.toc_at_chap_beginning = None
         self.toc_at_sec_beginning = None
         self.toc_at_subsec_beginning = None
         self.pdf = False
         self.print_parsed_source = False
-        self.__get_highlight_styles()
-        self.__check_highlight_style()
+        self.__check_code_style()
         self.__get_themes()
         self.__check_theme()
         if cliargs:
@@ -79,22 +77,13 @@ class MatisseConfig(object):
         if self.offline:
             string.append("\n  Asset mode: offline (local bundles)")
         else:
-            string.append("\n  Asset mode: online (CDN — impress.js 2, MathJax 3, highlight.js 11)")
-        if self.highlight:
-            string.append(f"\n  Highlight.js style: {self.highlight_style}")
+            string.append("\n  Asset mode: online (CDN — impress.js 2, MathJax 3)")
+        if self.code_highlight:
+            string.append(f"\n  Code highlight style (Pygments): {self.code_style}")
         string.append(f"\n  Insert TOC at chapters beginning: {self.toc_at_chap_beginning}")
         string.append(f"\n  Insert TOC at sections beginning: {self.toc_at_sec_beginning}")
         string.append(f"\n  Insert TOC at subsections beginning: {self.toc_at_subsec_beginning}")
         return "".join(string)
-
-    @staticmethod
-    def __get_highlight_styles():
-        """Get the available highlight.js styles."""
-        MatisseConfig.__highlight_styles = []
-        hilite_styles = os.path.join(os.path.dirname(__file__), "utils/js/highlight/styles")
-        for css in os.listdir(hilite_styles):
-            if css.endswith(".css"):
-                MatisseConfig.__highlight_styles.append(css)
 
     @staticmethod
     def __get_themes():
@@ -113,19 +102,16 @@ class MatisseConfig(object):
             sys.stderr.write("Falling back to 'impress'.\n")
             self.backend = "impress"
 
-    def __check_highlight_style(self):
-        """Check if the selected highlight.js style is available."""
-        if self.highlight_style != "disable":
-            avail = self.highlight_style in MatisseConfig.__highlight_styles
-            if not avail:
-                sys.stderr.write(f"Error: the selected highlight.js style '{self.highlight_style}' is not available")
-                sys.stderr.write("\nRestore the default value 'github.css'\n")
-                self.highlight_style = "github.css"
-                sys.stderr.write(self.str_highlight_styles())
-        else:
-            avail = False
-            self.highlight = False
-        return avail
+    def __check_code_style(self):
+        """Check if the selected Pygments style is available."""
+        if self.code_style == "disable":
+            self.code_highlight = False
+            return
+        available = sorted(get_all_styles())
+        if self.code_style not in available:
+            sys.stderr.write(f"Error: the selected Pygments style '{self.code_style}' is not available\n")
+            sys.stderr.write("Restoring the default value 'default'\n")
+            self.code_style = "default"
 
     def __check_theme(self):
         """Check if the selected builtin theme is available."""
@@ -138,16 +124,16 @@ class MatisseConfig(object):
                 sys.stderr.write(self.str_themes())
         return avail
 
-    def set_highlight_style(self, style: str) -> None:
-        """Set highlight.js style performing availability check.
+    def set_code_style(self, style: str) -> None:
+        """Set Pygments code style performing availability check.
 
         Parameters
         ----------
         style : str
-          style file name
+          Pygments style name, or 'disable' to turn off highlighting
         """
-        self.highlight_style = style
-        self.__check_highlight_style()
+        self.code_style = style
+        self.__check_code_style()
 
     def set_theme(self, theme: str) -> None:
         """Set builtin theme performing availability check.
@@ -200,16 +186,16 @@ class MatisseConfig(object):
                             )
         return source_themed
 
-    def str_highlight_styles(self):
-        """Stringify the available highlight.js styles.
+    def str_code_styles(self):
+        """Stringify the available Pygments code styles.
 
         Returns
         -------
         str
           string containing the list of available styles
         """
-        string = ["Available highlight.js styles"]
-        for style in sorted(self.__highlight_styles):
+        string = ["Available Pygments code styles"]
+        for style in sorted(get_all_styles()):
             string.append(style)
         return "\n  ".join(string) + "\n"
 
@@ -263,7 +249,7 @@ class MatisseConfig(object):
         self.__check_backend()
         self.verbose = cliargs.verbose
         self.offline = getattr(cliargs, "offline", False)
-        self.set_highlight_style(style=cliargs.highlight_style)
+        self.set_code_style(style=getattr(cliargs, "code_style", self.code_style))
         self.set_theme(theme=cliargs.theme)
         self.toc_at_chap_beginning = cliargs.toc_at_chap_beginning
         self.toc_at_sec_beginning = cliargs.toc_at_sec_beginning
@@ -282,16 +268,17 @@ class MatisseConfig(object):
 
         **impress backend (default)**
 
-        In online mode only ``countDown.js`` is copied; impress.js, MathJax and
-        highlight.js are loaded from CDN.  In offline mode all local bundles are
-        copied so the presentation works without a network connection.
+        In online mode only ``countDown.js`` is copied; impress.js and MathJax
+        are loaded from CDN.  In offline mode all local bundles are copied so
+        the presentation works without a network connection.  Pygments CSS is
+        always generated at build time — no CDN dependency, no extra bundle.
 
         **reveal backend**
 
-        The reveal.js presentation is entirely CDN-based (reveal.js 5, MathJax 3,
-        highlight.js 11).  Only the output directory skeleton (``css/``, ``js/``)
-        is created; no local asset bundles are copied.  ``--offline`` is not yet
-        supported for the reveal backend and will emit a warning.
+        The reveal.js presentation is entirely CDN-based (reveal.js 5, MathJax 3).
+        Only the output directory skeleton (``css/``, ``js/``) is created; no
+        local asset bundles are copied.  ``--offline`` is not yet supported for
+        the reveal backend and will emit a warning.
 
         Parameters
         ----------
@@ -306,6 +293,13 @@ class MatisseConfig(object):
             os.makedirs(os.path.join(output, "css"))
         if not os.path.exists(os.path.join(output, "js")):
             os.makedirs(os.path.join(output, "js"))
+
+        # always write pygments.css (build-time, no CDN, works offline automatically)
+        if self.code_highlight:
+            from .markdown_utils import get_pygments_css
+            css_path = os.path.join(output, "css", "pygments.css")
+            with open(css_path, "w") as fh:
+                fh.write(get_pygments_css(style=self.code_style))
 
         if self.backend == "reveal":
             if self.offline:
@@ -328,12 +322,6 @@ class MatisseConfig(object):
                 rmtree(os.path.join(output, "js/MathJax"))
             jscript = os.path.join(os.path.dirname(__file__), "utils/js/MathJax")
             copytree(jscript, os.path.join(output, "js/MathJax"))
-            # highlight.js (local bundle)
-            if self.highlight:
-                if os.path.exists(os.path.join(output, "js/highlight")):
-                    rmtree(os.path.join(output, "js/highlight"))
-                jscript = os.path.join(os.path.dirname(__file__), "utils/js/highlight")
-                copytree(jscript, os.path.join(output, "js/highlight"))
             # impress.js (local bundle)
             jscript = os.path.join(os.path.dirname(__file__), "utils/js/impress/impress.js")
             copyfile(jscript, os.path.join(output, "js/impress.js"))

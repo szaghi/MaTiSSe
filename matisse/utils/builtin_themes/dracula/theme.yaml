@@ -30,6 +30,12 @@ theme:
     red:          '#ff5555'
     yellow:       '#f1fa8c'
 
+  code:
+    style: 'dracula'
+    font-size: '85%'
+    border-radius: '4px'
+    padding: '0.5em 1em'    
+
   canvas:
     background: 'radial-gradient(rgb(68, 71, 90), rgb(30, 31, 43))'
 

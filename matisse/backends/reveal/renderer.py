@@ -20,14 +20,13 @@ not used; slide ordering is linear.
 
 from __future__ import annotations
 
-from yattag import Doc, indent
+from yattag import Doc
 
-from ..base import AbstractBackend
+from ..base import AbstractBackend, indent_html
 from .theme import RevealTheme
 
 # CDN base URLs
 _REVEAL_CDN = "https://cdn.jsdelivr.net/npm/reveal.js@5"
-_HLJS_CDN = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0"
 
 
 class RevealBackend(AbstractBackend):
@@ -70,7 +69,6 @@ class RevealBackend(AbstractBackend):
 
     def _put_head(self, doc, tag, text, presentation, theme):
         config = self.config
-        highlight_style = theme.highlight_style or config.highlight_style
         with tag("head"):
             doc.stag("meta", charset="utf-8")
             doc.stag("meta", name="viewport", content="width=device-width, initial-scale=1.0")
@@ -81,13 +79,9 @@ class RevealBackend(AbstractBackend):
             doc.stag("link", rel="stylesheet", href=f"{_REVEAL_CDN}/dist/reset.css")
             doc.stag("link", rel="stylesheet", href=f"{_REVEAL_CDN}/dist/reveal.css")
             doc.stag("link", rel="stylesheet", href=f"{_REVEAL_CDN}/dist/theme/{theme.theme}.css")
-            # highlight.js CSS
-            if config.highlight:
-                doc.stag(
-                    "link",
-                    rel="stylesheet",
-                    href=f"{_HLJS_CDN}/styles/{highlight_style}",
-                )
+            # Pygments CSS (generated at build time — always local)
+            if config.code_highlight:
+                doc.stag("link", rel="stylesheet", href="css/pygments.css")
             # optional custom CSS
             if theme.custom_css:
                 with tag("style"):
@@ -96,9 +90,6 @@ class RevealBackend(AbstractBackend):
     def _put_scripts(self, doc, tag, theme, config):
         with tag("script"):
             doc.attr(src=f"{_REVEAL_CDN}/dist/reveal.js")
-        if config.highlight:
-            with tag("script"):
-                doc.attr(src=f"{_REVEAL_CDN}/plugin/highlight/highlight.js")
         # MathJax 3 for LaTeX equations
         with tag("script"):
             doc.text(
@@ -115,14 +106,13 @@ class RevealBackend(AbstractBackend):
         with tag("script"):
             doc.attr(src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js")
         # Reveal.initialize
-        plugins = "RevealHighlight" if config.highlight else ""
         with tag("script"):
             doc.text(
                 f"""
         Reveal.initialize({{
           hash: true,
           transition: '{theme.transition}',
-          plugins: [{plugins}],
+          plugins: [],
         }});
         """
             )
@@ -163,4 +153,4 @@ class RevealBackend(AbstractBackend):
                                     backend="reveal",
                                 )
                 self._put_scripts(doc, tag, theme, config)
-        return indent(doc.getvalue())
+        return indent_html(doc.getvalue())

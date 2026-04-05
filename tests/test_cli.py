@@ -41,10 +41,11 @@ def test_print_themes():
     assert "beamer-madrid" in result.output
 
 
-def test_print_highlight_styles():
-    result = runner.invoke(app, ["build", "--print-highlight-styles"])
+def test_print_code_styles():
+    result = runner.invoke(app, ["build", "--print-code-styles"])
     assert result.exit_code == 0
-    assert "github.css" in result.output
+    assert "default" in result.output
+    assert "monokai" in result.output
 
 
 # ---------------------------------------------------------------------------

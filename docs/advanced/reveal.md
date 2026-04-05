@@ -76,7 +76,7 @@ All reveal-specific settings live under a `reveal:` key in any YAML block:
 reveal:
   theme: moon           # reveal.js built-in theme name
   transition: slide     # slide transition (see table above)
-  highlight_style: monokai.css   # overrides --highlight-style CLI flag
+  code_style: monokai            # overrides --code-style CLI flag
   custom_css: |
     .slide-content { font-size: 1.2em; }
 ---
@@ -129,9 +129,9 @@ Chromium-based browser (Chrome, Edge, Brave).
 
 ## Offline mode
 
-`--offline` is **not yet supported** for the reveal backend.  All assets (reveal.js,
-MathJax, highlight.js) are loaded from CDN.  A local bundle will be added in a future
-release.
+`--offline` is **not yet supported** for the reveal backend.  reveal.js and MathJax are
+loaded from CDN.  A local bundle will be added in a future release.  Syntax highlighting
+(Pygments) is always local regardless of this flag.
 
 ## Limitations (current release)
 

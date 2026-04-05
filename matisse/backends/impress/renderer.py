@@ -8,9 +8,9 @@ generates the complete impress.js HTML output.
 
 from __future__ import annotations
 
-from yattag import Doc, indent
+from yattag import Doc
 
-from ..base import AbstractBackend
+from ..base import AbstractBackend, indent_html
 
 
 class ImpressBackend(AbstractBackend):
@@ -34,19 +34,8 @@ class ImpressBackend(AbstractBackend):
             doc.stag("link", rel="stylesheet", href="css/normalize.css")
             doc.stag("link", rel="stylesheet", href="css/matisse_defaults.css")
             doc.stag("link", rel="stylesheet", href="css/matisse_defaults_printing.css")
-            if config.highlight:
-                if config.offline:
-                    doc.stag(
-                        "link",
-                        rel="stylesheet",
-                        href=f"js/highlight/styles/{config.highlight_style}",
-                    )
-                else:
-                    doc.stag(
-                        "link",
-                        rel="stylesheet",
-                        href=f"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{config.highlight_style}",
-                    )
+            if config.code_highlight:
+                doc.stag("link", rel="stylesheet", href="css/pygments.css")
             doc.stag("link", rel="stylesheet", href="css/theme.css")
             for css in presentation.metadata["css_overtheme"].value:
                 doc.stag("link", rel="stylesheet", href=css)
@@ -89,13 +78,8 @@ class ImpressBackend(AbstractBackend):
             with tag("script"):
                 doc.attr(("type", "text/javascript"))
                 doc.attr(src="js/MathJax/MathJax.js")
-            if config.highlight:
-                with tag("script"):
-                    doc.attr(src="js/highlight/highlight.pack.js")
-                with tag("script"):
-                    doc.text("hljs.initHighlightingOnLoad();")
         else:
-            # --- online mode (default): CDN — impress.js 2, MathJax 3, highlight.js 11 ---
+            # --- online mode (default): CDN — impress.js 2, MathJax 3 ---
             with tag("script"):
                 doc.attr(src="https://cdn.jsdelivr.net/npm/impress.js@2/dist/impress.min.js")
             if not config.pdf:
@@ -113,11 +97,7 @@ class ImpressBackend(AbstractBackend):
         """)
             with tag("script"):
                 doc.attr(src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js")
-            if config.highlight:
-                with tag("script"):
-                    doc.attr(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js")
-                with tag("script"):
-                    doc.text("hljs.highlightAll();")
+
 
     def _put_html_slide_decorators(
         self, tag, doc, decorator, presentation, position=None, overtheme=None, current=None
@@ -257,4 +237,4 @@ class ImpressBackend(AbstractBackend):
                                             overtheme=slide.overtheme,
                                         )
                 self._put_html_tags_scripts(doc, tag)
-        return indent(doc.getvalue())
+        return indent_html(doc.getvalue())

@@ -12,7 +12,7 @@ No. You write Markdown, and MaTiSSe compiles it to HTML.
 
 **Can I use it offline?**
 
-Yes. By default MaTiSSe uses a local offline copy of MathJax for equation rendering. Pass `--offline` to also bundle impress.js and highlight.js locally.
+Yes. Syntax highlighting (Pygments) is always local — no network call needed. Pass `--offline` to also bundle impress.js and MathJax locally.
 
 **Do I need to know HTML/CSS?**
 

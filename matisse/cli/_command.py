@@ -14,12 +14,12 @@ from ..matisse_config import MatisseConfig
 from ._app import _ns, app
 from ._options import (
     BackendOpt,
-    HighlightStyleOpt,
+    CodeStyleOpt,
     InputOpt,
     OfflineOpt,
     OutputOpt,
     PdfOpt,
-    PrintHighlightStylesOpt,
+    PrintCodeStylesOpt,
     PrintParsedSourceOpt,
     PrintThemesOpt,
     SampleOpt,
@@ -43,14 +43,14 @@ def build(
     backend: BackendOpt = "impress",
     offline: OfflineOpt = False,
     pdf: PdfOpt = False,
-    highlight_style: HighlightStyleOpt = "github.css",
+    code_style: CodeStyleOpt = "default",
     # TOC group
     toc_at_chap_beginning: TocAtChapOpt = None,
     toc_at_sec_beginning: TocAtSecOpt = None,
     toc_at_subsec_beginning: TocAtSubsecOpt = None,
     # Info group
     print_themes: PrintThemesOpt = False,
-    print_highlight_styles: PrintHighlightStylesOpt = False,
+    print_code_styles: PrintCodeStylesOpt = False,
     # Debug group
     verbose: VerboseOpt = False,
     print_parsed_source: PrintParsedSourceOpt = False,
@@ -62,7 +62,7 @@ def build(
         backend=backend,
         verbose=verbose,
         offline=offline,
-        highlight_style=highlight_style,
+        code_style=code_style,
         theme=theme,
         toc_at_chap_beginning=toc_at_chap_beginning,
         toc_at_sec_beginning=toc_at_sec_beginning,
@@ -77,8 +77,8 @@ def build(
         typer.echo(config.str_themes())
         raise typer.Exit()
 
-    if print_highlight_styles:
-        typer.echo(config.str_highlight_styles())
+    if print_code_styles:
+        typer.echo(config.str_code_styles())
         raise typer.Exit()
 
     # --- Sample generation ---
