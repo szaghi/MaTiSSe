@@ -12,12 +12,15 @@ from shutil import copytree
 from yaml import FullLoader, YAMLError, load_all
 
 from .chapter import Chapter
+from .diagram import Diagram
+from .labels import LabelRegistry
 from .metadata import Metadata
 from .parser import Parser
 from .position import Position
 from .section import Section
 from .slide import Slide
 from .subsection import Subsection
+from .theorem import Theorem
 from .theme import Theme
 
 
@@ -38,6 +41,8 @@ class Presentation(object):
         cls.chapters_number = 0
         Theme.reset()
         Chapter.reset()
+        Theorem.reset()
+        Diagram.reset()
 
     def __init__(self):
         """
@@ -85,6 +90,13 @@ class Presentation(object):
         self.parser = Parser()
         self.chapters = []
         self.position = Position()
+        self.source: str = ""       # fully expanded source (after $include)
+        self.yaml_source: str = ""  # concatenated YAML block content (used by reveal backend)
+        # Phase 7 — label registry for cross-references
+        self.label_registry: LabelRegistry = LabelRegistry()
+        # Phase 7b — bibliography (optional)
+        self.bibliography: str = ""   # path to .bib file
+        self.csl: str = ""            # path to .csl file
 
     def __str__(self):
         strings = [f"Chapters number {Presentation.chapters_number}"]
@@ -130,7 +142,8 @@ class Presentation(object):
         """
         codeblocks = self.parser.tokenizer(source=source, re_search=self.parser.regexs["codeblock"])
         yamlblocks = self.parser.tokenizer(source=source, re_search=self.parser.regexs["yamlblock"], exclude=codeblocks)
-        self.theme.get("".join([block["match"].group().strip("---") for block in yamlblocks]))
+        self.yaml_source = "".join([block["match"].group().strip("---") for block in yamlblocks])
+        self.theme.get(self.yaml_source)
 
     def __add_chapter(self, chapter):
         """
@@ -309,6 +322,7 @@ class Presentation(object):
         source: str
         """
         complete_source = self.parser.includes(source=source)
+        self.source = complete_source
         if config.print_parsed_source:
             print(complete_source)
         self.__get_metadata(source=complete_source)
@@ -318,6 +332,24 @@ class Presentation(object):
         tokens = self.parser.tokenize(source=complete_source)
         self.__check_bad_sectioning(tokens=tokens)
         self.__parse_chapters(tokens=tokens, complete_source=complete_source, config=config)
+        # Phase 7 — collect labels for cross-reference resolution
+        self._collect_labels()
+
+    def _collect_labels(self) -> None:
+        """Phase 7 — first pass: register all ``{#PREFIX-id}`` labels.
+
+        Walks every slide's raw contents and heading attributes so that
+        ``@PREFIX-id`` references can be resolved during rendering.
+        """
+        self.label_registry = LabelRegistry()
+        for chapter in self.chapters:
+            for section in chapter.sections:
+                for subsection in section.subsections:
+                    for slide in subsection.slides:
+                        self.label_registry.collect_from_source(slide.contents or "")
+                        # Also scan heading attrs for labeled figures, etc.
+                        for key, val in slide.heading_attrs.items():
+                            pass  # heading attrs don't carry #{} labels directly
 
     def to_html(self, config) -> str:
         """Generate a html stream of the whole presentation.
@@ -363,9 +395,7 @@ class Presentation(object):
 
         # regenerate pygments.css if the theme specifies a code style override
         if config.code_highlight:
-            effective_style = (
-                self.theme.code_style if config.backend != "reveal" and self.theme.code_style else config.code_style
-            )
+            effective_style = self.theme.code_style if self.theme.code_style else config.code_style
             if effective_style != config.code_style:
                 from .markdown_utils import get_pygments_css
 

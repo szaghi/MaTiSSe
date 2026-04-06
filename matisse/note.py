@@ -61,21 +61,34 @@ class Note(Box):
         if source:
             self.get(source=source)
 
-    def to_html(self, backend="impress"):
+    def to_html(self, backend="impress", notes_style="console"):
         """Convert self data to its html stream.
 
         Parameters
         ----------
         backend : str
           Rendering backend.  When ``"reveal"``, the note is emitted as an
-          ``<aside class="notes">`` element (reveal.js speaker notes) instead
-          of the usual visible note box.
+          ``<aside class="notes">`` element (reveal.js speaker notes).
+          When ``"impress"`` and *notes_style* is ``"console"`` (default),
+          the note is emitted as ``<div class="notes">`` for the impress.js
+          Presenter Console plugin.  When *notes_style* is ``"visible"``,
+          the legacy visible note box is rendered instead.
+        notes_style : str
+          ``"console"`` (default) or ``"visible"``.  Only used for the
+          impress backend; ignored for reveal.
         """
         if backend == "reveal":
             doc = Doc()
             with doc.tag("aside", klass="notes"):
                 doc.asis(markdown2html(self.ctn, no_p=True))
             return doc.getvalue()
+        if notes_style != "visible":
+            # impress.js Presenter Console convention
+            doc = Doc()
+            with doc.tag("div", klass="notes"):
+                doc.asis(markdown2html(self.ctn, no_p=True))
+            return doc.getvalue()
+        # Legacy visible note box
         doc = Doc()
         with doc.tag("div", id=f"note-{self.number}"):
             if self.style:
