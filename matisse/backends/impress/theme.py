@@ -96,11 +96,16 @@ from copy import deepcopy
 
 from yaml import FullLoader, YAMLError, load_all
 
-from ...backends.base import AbstractTheme
+from ...backends.base import AbstractTheme, parse_layout_decorators
 from ...box import Box
+from ...callout import Callout
 from ...figure import Figure
+from ...figure_group import FigureGroup
+from ...incremental import IncrementalList
 from ...note import Note
+from ...substep import Substep
 from ...table import Table
+from ...theorem import Theorem
 from ...video import Video
 
 
@@ -116,9 +121,14 @@ class ImpressTheme(AbstractTheme):
     def reset(cls):
         """Reset to default state."""
         Box.reset()
-        Note.reset()
+        Callout.reset()
+        FigureGroup.reset()
         Figure.reset()
+        IncrementalList.reset()
+        Note.reset()
+        Substep.reset()
         Table.reset()
+        Theorem.reset()
         Video.reset()
 
     def __init__(self, source=None, name="theme", div_id=""):
@@ -158,6 +168,53 @@ class ImpressTheme(AbstractTheme):
         self.slide_header_metadata = {}
         self.slide_footer_metadata = {}
         self.slide_sidebar_metadata = {}
+        self._decorator_specs: list = []  # DecoratorSpec objects; shared with reveal backend
+        # ------------------------------------------------------------------
+        # Canvas-level data attributes (emitted on <div id="impress">)
+        # ------------------------------------------------------------------
+        self.max_scale = None           # data-max-scale
+        self.min_scale = None           # data-min-scale
+        self.canvas_autoplay = None     # data-autoplay (global, seconds; None → omit)
+        self.autoplay_repeat = None     # data-autoplay-repeat
+        self.media_autoplay = False     # data-media-autoplay
+        self.media_autostop = False     # data-media-autostop
+        self.media_autopause = False    # data-media-autopause
+        self.console_autolaunch = False  # data-console-autolaunch
+        self.console_css = ""           # data-console-css
+        self.console_css_iframe = ""    # data-console-css-iframe
+        self.show_progress_bar = False
+        self.show_progress_counter = False
+        self.show_help_popup = False
+        self.show_navigation_toolbar = False
+        self.notes_style = "console"    # "console" | "visible"
+        # ------------------------------------------------------------------
+        # Per-slide data attributes (read from overtheme.slide)
+        # ------------------------------------------------------------------
+        self.transition_duration = None  # data-transition-duration (ms)
+        self.skip = False               # adds class="skip" to step
+        self.stop = False               # adds class="stop" to step
+        self.slide_autoplay = None      # data-autoplay (per-slide override)
+        self.slide_media_autoplay = None  # data-media-autoplay
+        self.slide_media_autostop = None  # data-media-autostop
+        self.slide_media_autopause = None  # data-media-autopause
+        self.goto = ""                  # data-goto
+        self.goto_next = ""             # data-goto-next
+        self.goto_prev = ""             # data-goto-prev
+        self.goto_key_list = ""         # data-goto-key-list
+        self.goto_next_list = ""        # data-goto-next-list
+        self.rotate_order = ""          # data-rotate-order
+        # Relative positioning (data-rel-*)
+        self.rel_x = None
+        self.rel_y = None
+        self.rel_z = None
+        self.rel_rotate_x = None
+        self.rel_rotate_y = None
+        self.rel_rotate_z = None
+        self.rel_rotate_order = ""
+        self.rel_to = ""
+        self.rel_position = ""
+        self.rel_reset = None
+        # ------------------------------------------------------------------
         self.css = None
         self.custom = False
         self.div_id = div_id
@@ -217,6 +274,46 @@ class ImpressTheme(AbstractTheme):
             "code",
             "css",
             "custom",
+            # Canvas-level data attributes
+            "max_scale",
+            "min_scale",
+            "canvas_autoplay",
+            "autoplay_repeat",
+            "media_autoplay",
+            "media_autostop",
+            "media_autopause",
+            "console_autolaunch",
+            "console_css",
+            "console_css_iframe",
+            "show_progress_bar",
+            "show_progress_counter",
+            "show_help_popup",
+            "show_navigation_toolbar",
+            "notes_style",
+            # Per-slide data attributes
+            "transition_duration",
+            "skip",
+            "stop",
+            "slide_autoplay",
+            "slide_media_autoplay",
+            "slide_media_autostop",
+            "slide_media_autopause",
+            "goto",
+            "goto_next",
+            "goto_prev",
+            "goto_key_list",
+            "goto_next_list",
+            "rotate_order",
+            "rel_x",
+            "rel_y",
+            "rel_z",
+            "rel_rotate_x",
+            "rel_rotate_y",
+            "rel_rotate_z",
+            "rel_rotate_order",
+            "rel_to",
+            "rel_position",
+            "rel_reset",
         ]
         for attr in _attrs:
             setattr(self, attr, deepcopy(getattr(other, attr)))
@@ -472,10 +569,49 @@ class ImpressTheme(AbstractTheme):
                 result.append({k: str(v)})
         return result
 
+    # Keys inside ``canvas:`` that map to HTML data attributes on the root
+    # ``<div id="impress">`` rather than to CSS properties on the body.
+    _CANVAS_DATA_KEYS = {
+        "max-scale":               ("max_scale",             "number"),
+        "min-scale":               ("min_scale",             "number"),
+        "autoplay":                ("canvas_autoplay",       "int"),
+        "autoplay-repeat":         ("autoplay_repeat",       "bool"),
+        "media-autoplay":          ("media_autoplay",        "bool"),
+        "media-autostop":          ("media_autostop",        "bool"),
+        "media-autopause":         ("media_autopause",       "bool"),
+        "console-autolaunch":      ("console_autolaunch",    "bool"),
+        "console-css":             ("console_css",           "str"),
+        "console-css-iframe":      ("console_css_iframe",    "str"),
+        "show-progress-bar":       ("show_progress_bar",     "bool"),
+        "show-progress-counter":   ("show_progress_counter", "bool"),
+        "show-help-popup":         ("show_help_popup",       "bool"),
+        "show-navigation-toolbar": ("show_navigation_toolbar", "bool"),
+        "notes-style":             ("notes_style",           "str"),
+    }
+
     def __parse_canvas(self, data):
         """Populate self.canvas from the ``canvas:`` section."""
         if "canvas" in data and data["canvas"]:
-            self.canvas = self.__dict_to_css_list(data["canvas"])
+            css_data = {}
+            for k, v in data["canvas"].items():
+                if k in self._CANVAS_DATA_KEYS:
+                    attr_name, type_hint = self._CANVAS_DATA_KEYS[k]
+                    if isinstance(v, bool):
+                        setattr(self, attr_name, v)
+                    elif type_hint == "number":
+                        # Keep int as int, float as float (avoids "2" → "2.0")
+                        setattr(self, attr_name, v)
+                    elif type_hint == "float":
+                        setattr(self, attr_name, float(v))
+                    elif type_hint == "int":
+                        setattr(self, attr_name, int(v))
+                    elif type_hint == "bool":
+                        setattr(self, attr_name, bool(v))
+                    else:
+                        setattr(self, attr_name, str(v))
+                else:
+                    css_data[k] = v
+            self.canvas = self.__dict_to_css_list(css_data)
 
     def __parse_lists(self, data):
         """Populate ordered/unordered list attrs from the ``lists:`` section."""
@@ -535,14 +671,97 @@ class ImpressTheme(AbstractTheme):
                 result.append({key: str(val)})
         return result
 
+    # Keys inside ``layout.slide:`` (and overtheme ``slide:``) that map to
+    # HTML data attributes on the step ``<div>`` rather than CSS properties.
+    _SLIDE_DATA_KEYS = {
+        "transition-duration":  ("transition_duration", "int"),
+        "skip":                 ("skip",                "bool"),
+        "stop":                 ("stop",                "bool"),
+        "autoplay":             ("slide_autoplay",      "int"),
+        "media-autoplay":       ("slide_media_autoplay","bool_or_none"),
+        "media-autostop":       ("slide_media_autostop","bool_or_none"),
+        "media-autopause":      ("slide_media_autopause","bool_or_none"),
+        "goto":                 ("goto",                "str"),
+        "goto-next":            ("goto_next",           "str"),
+        "goto-prev":            ("goto_prev",           "str"),
+        "goto-key-list":        ("goto_key_list",       "str"),
+        "goto-next-list":       ("goto_next_list",      "str"),
+        "rotate-order":         ("rotate_order",        "str"),
+        "rel-x":                ("rel_x",               "str_or_none"),
+        "rel-y":                ("rel_y",               "str_or_none"),
+        "rel-z":                ("rel_z",               "str_or_none"),
+        "rel-rotate-x":         ("rel_rotate_x",        "str_or_none"),
+        "rel-rotate-y":         ("rel_rotate_y",        "str_or_none"),
+        "rel-rotate-z":         ("rel_rotate_z",        "str_or_none"),
+        "rel-rotate-order":     ("rel_rotate_order",    "str"),
+        "rel-to":               ("rel_to",              "str"),
+        "rel-position":         ("rel_position",        "str"),
+        "rel-reset":            ("rel_reset",           "bool_or_none"),
+    }
+
+    @staticmethod
+    def __coerce_slide_data(v, type_hint):
+        """Coerce *v* to the type indicated by *type_hint*."""
+        if v is None:
+            return None
+        if isinstance(v, bool):
+            return v  # YAML true/false → Python bool; preserve as-is
+        if type_hint == "int":
+            return int(v)
+        if type_hint == "float":
+            return float(v)
+        if type_hint in ("bool", "bool_or_none"):
+            if isinstance(v, str):
+                return v.lower() in ("true", "yes", "1")
+            return bool(v)
+        # str, str_or_none
+        return str(v)
+
     def __parse_layout(self, data):
-        """Populate slide/content/decorator attrs from the ``layout:`` section."""
+        """Populate slide/content/decorator attrs from the ``layout:`` section.
+
+        Also accepts the shorthand schema used in per-slide overtheme blocks
+        where ``slide:`` appears at the top level of the overtheme dict rather
+        than nested under ``layout:``.  Both forms are supported:
+
+        Full form (main theme or verbose overtheme)::
+
+            layout:
+              slide:
+                transition-duration: 300
+
+        Shorthand form (concise per-slide overtheme)::
+
+            slide:
+              transition-duration: 300
+        """
+        # Shorthand: top-level ``slide:`` key used in per-slide overtheme blocks.
         if "layout" not in data or not data["layout"]:
+            if "slide" in data and data["slide"]:
+                slide_data = dict(data["slide"])
+                css_data = {}
+                for k, v in slide_data.items():
+                    if k in self._SLIDE_DATA_KEYS:
+                        attr_name, type_hint = self._SLIDE_DATA_KEYS[k]
+                        setattr(self, attr_name, self.__coerce_slide_data(v, type_hint))
+                    else:
+                        css_data[k] = v
+                if css_data:
+                    self.slide = self.__dict_to_css_list(css_data)
+                self.custom = True
             return
         layout = data["layout"]
 
         if layout.get("slide"):
-            self.slide = self.__dict_to_css_list(layout["slide"])
+            slide_data = dict(layout["slide"])
+            css_data = {}
+            for k, v in slide_data.items():
+                if k in self._SLIDE_DATA_KEYS:
+                    attr_name, type_hint = self._SLIDE_DATA_KEYS[k]
+                    setattr(self, attr_name, self.__coerce_slide_data(v, type_hint))
+                else:
+                    css_data[k] = v
+            self.slide = self.__dict_to_css_list(css_data)
 
         if layout.get("content"):
             self.slide_content = self.__dict_to_css_list(layout["content"])
@@ -554,6 +773,11 @@ class ImpressTheme(AbstractTheme):
                 self.slide_footer[key] = self.__parse_decorator_data(val)
             elif key.startswith("sidebar-"):
                 self.slide_sidebar[key] = self.__parse_decorator_data(val)
+
+        # Also populate the backend-agnostic DecoratorSpec list so that the
+        # reveal backend (and any future backend) can access decorator data
+        # without depending on impress-specific internal structures.
+        self._decorator_specs = parse_layout_decorators(layout)
 
         self.__check_slide()
         self.__get_slide_decorators_metadata()

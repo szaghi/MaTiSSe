@@ -12,6 +12,7 @@
 #   getting-started    impress.js feature tour (original getting-started talk)
 #   reveal-quickstart  minimal reveal.js presentation with speaker notes
 #   reveal-scientific  14-slide CFD conference talk (reveal.js)
+#   reveal-advanced    full RevealTheme reference (all options, plugins, per-slide overrides)
 #   themes/beamer-antibes    built-in theme: triple header, navy/white
 #   themes/beamer-berkely    built-in theme: left sidebar + header, blue/white
 #   themes/beamer-berlin     built-in theme: triple header + footer, navy/white
@@ -33,6 +34,7 @@ declare -a EXAMPLES=(
   "getting-started|-i examples/getting-started/getting_started.md -o examples/getting-started/out/ --toc-at-subsec-beginning 2"
   "reveal-quickstart|-i examples/reveal-quickstart/quickstart.md -o examples/reveal-quickstart/out/ --backend reveal"
   "reveal-scientific|-i examples/reveal-scientific/talk.md -o examples/reveal-scientific/out/ --backend reveal"
+  "reveal-advanced|-i examples/reveal-advanced/advanced.md -o examples/reveal-advanced/out/ --backend reveal"
   "themes/beamer-antibes|-i examples/themes/talk.md -o examples/themes/beamer-antibes/out/ --theme beamer-antibes"
   "themes/beamer-berkely|-i examples/themes/talk.md -o examples/themes/beamer-berkely/out/ --theme beamer-berkely"
   "themes/beamer-berlin|-i examples/themes/talk.md -o examples/themes/beamer-berlin/out/ --theme beamer-berlin"

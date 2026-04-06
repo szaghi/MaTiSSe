@@ -139,12 +139,39 @@ $endnote
     assert 'class="note"' not in html
 
 
-def test_impress_notes_unchanged():
-    """$note environments must still render as note boxes for the impress backend."""
+def test_impress_notes_console_default():
+    """$note environments must render as <div class="notes"> by default for impress (Presenter Console)."""
     source = """
 ---
 metadata:
   - title: "Notes test impress"
+---
+# Chapter
+## Section
+### Subsection
+#### Slide
+$note
+$content{Speaker note text}
+$endnote
+"""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config = MatisseConfig()
+        make_presentation(config=config, source=source, output=tmpdir)
+        html = open(os.path.join(tmpdir, "index.html")).read()
+
+    assert 'class="notes"' in html
+    assert '<aside class="notes">' not in html
+
+
+def test_impress_notes_visible_style():
+    """$note with notes-style: visible must render as the legacy note box."""
+    source = """
+---
+metadata:
+  - title: "Notes visible style"
+theme:
+  canvas:
+    notes-style: visible
 ---
 # Chapter
 ## Section
@@ -160,7 +187,7 @@ $endnote
         html = open(os.path.join(tmpdir, "index.html")).read()
 
     assert 'class="note"' in html
-    assert '<aside class="notes">' not in html
+    assert 'class="notes"' not in html
 
 
 # ---------------------------------------------------------------------------
