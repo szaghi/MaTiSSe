@@ -26,12 +26,12 @@ Supported prefixes and display strings:
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 _KIND_LABELS = {
     "fig": "Figure",
     "tbl": "Table",
-    "eq":  "Equation",
+    "eq": "Equation",
     "sec": "Section",
     "thm": "Theorem",
     "lem": "Lemma",
@@ -47,24 +47,20 @@ _KIND_LABELS = {
 _ALL_PREFIXES = "|".join(sorted(_KIND_LABELS, key=len, reverse=True))
 
 # Regex that detects ``{#PREFIX-id}`` attribute blocks in raw Markdown source.
-_LABEL_RE = re.compile(
-    rf"\{{#(?P<prefix>{_ALL_PREFIXES})-(?P<id>[^\s}}]+)[^}}]*\}}"
-)
+_LABEL_RE = re.compile(rf"\{{#(?P<prefix>{_ALL_PREFIXES})-(?P<id>[^\s}}]+)[^}}]*\}}")
 
 # Regex that detects ``@PREFIX-id`` reference tokens in HTML/Markdown.
-_REF_RE = re.compile(
-    rf"@(?P<prefix>{_ALL_PREFIXES})-(?P<id>[^\s,;.!?\"')\]}}]+)"
-)
+_REF_RE = re.compile(rf"@(?P<prefix>{_ALL_PREFIXES})-(?P<id>[^\s,;.!?\"')\]}}]+)")
 
 
 @dataclass
 class LabelEntry:
     """One registered label."""
 
-    label: str          # full label, e.g. "fig-results"
-    kind: str           # prefix, e.g. "fig"
-    number: int         # sequential number within this kind
-    html_id: str        # HTML element id used for the ``<a href>`` link
+    label: str  # full label, e.g. "fig-results"
+    kind: str  # prefix, e.g. "fig"
+    number: int  # sequential number within this kind
+    html_id: str  # HTML element id used for the ``<a href>`` link
 
 
 class LabelRegistry:

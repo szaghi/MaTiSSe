@@ -28,7 +28,6 @@ import re
 
 from yattag import Doc
 
-
 # CDN script snippets (injected by renderers when the flags are set)
 MERMAID_CDN_SCRIPT = """\
 <script type="module">

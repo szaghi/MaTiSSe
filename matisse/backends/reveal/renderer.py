@@ -126,9 +126,7 @@ class RevealBackend(AbstractBackend):
         Returns a string like ``$slidetitle[float:left;]$slidenumber[float:right;]``
         that the metadata parse chain will substitute with actual values.
         """
-        return "".join(
-            f"${meta_key}[{css_str}]" for meta_key, css_str in spec.metadata.items()
-        )
+        return "".join(f"${meta_key}[{css_str}]" for meta_key, css_str in spec.metadata.items())
 
     def _resolve_metadata(self, placeholder_str: str, presentation, current) -> str:
         """Substitute metadata placeholders in *placeholder_str*.
@@ -150,9 +148,7 @@ class RevealBackend(AbstractBackend):
 
     def _put_decorator_div(self, doc, tag, spec, presentation, current) -> None:
         """Emit one ``<div class="slide-{spec.name}">`` with resolved metadata."""
-        content = self._resolve_metadata(
-            self._build_placeholder_str(spec), presentation, current
-        )
+        content = self._resolve_metadata(self._build_placeholder_str(spec), presentation, current)
         with tag("div", klass=f"slide-{spec.name}"):
             doc.asis(content)
 
@@ -306,7 +302,9 @@ class RevealBackend(AbstractBackend):
                             for slide in subsec.slides:
                                 current[3] += 1
                                 self._update_metadata(presentation, chapter, sec, subsec, slide)
-                                self._render_slide(doc, tag, text, presentation, slide, chapter, sec, subsec, current, theme)
+                                self._render_slide(
+                                    doc, tag, text, presentation, slide, chapter, sec, subsec, current, theme
+                                )
 
     def _put_head(self, doc, tag, text, presentation, theme: RevealTheme, config) -> None:
         with tag("head"):

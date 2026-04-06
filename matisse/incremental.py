@@ -70,7 +70,7 @@ class IncrementalList:
         """
         item_class = "fragment" if backend == "reveal" else "substep"
         doc = Doc()
-        with doc.tag("ul", klass=f"incremental-list"):
+        with doc.tag("ul", klass="incremental-list"):
             for item in self.items:
                 with doc.tag("li", klass=item_class):
                     doc.asis(markdown2html(item, no_p=True))

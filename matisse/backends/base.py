@@ -30,7 +30,6 @@ from typing import TYPE_CHECKING
 
 from yattag import indent as _yattag_indent
 
-
 # ---------------------------------------------------------------------------
 # HTML helpers
 # ---------------------------------------------------------------------------
@@ -196,11 +195,7 @@ def parse_layout_decorators(layout: dict) -> list[DecoratorSpec]:
                     metadata[meta_key] = str(meta_props) if meta_props is not None else ""
 
         # Remaining CSS properties (exclude structural keys)
-        css: dict[str, str] = {
-            k: str(v)
-            for k, v in val.items()
-            if k not in _STRUCTURAL_KEYS
-        }
+        css: dict[str, str] = {k: str(v) for k, v in val.items() if k not in _STRUCTURAL_KEYS}
 
         specs.append(
             DecoratorSpec(
