@@ -272,9 +272,7 @@ Content B1.
 # Decorator integration
 # ---------------------------------------------------------------------------
 
-_DECORATOR_FIXTURE = os.path.join(
-    os.path.dirname(__file__), "compare", "reveal-decorators", "test.md"
-)
+_DECORATOR_FIXTURE = os.path.join(os.path.dirname(__file__), "compare", "reveal-decorators", "test.md")
 
 
 @pytest.fixture(scope="module")

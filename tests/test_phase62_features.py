@@ -14,10 +14,8 @@ Phase 7: Cross-references and label registry
 import os
 import tempfile
 
-import pytest
-
 from matisse.callout import Callout
-from matisse.diagram import GRAPHVIZ_CDN_SCRIPTS, MERMAID_CDN_SCRIPT, Diagram
+from matisse.diagram import Diagram
 from matisse.figure_group import FigureGroup
 from matisse.incremental import PAUSE_RE, IncrementalList
 from matisse.labels import LabelRegistry
@@ -25,7 +23,6 @@ from matisse.matisse import make_presentation
 from matisse.matisse_config import MatisseConfig
 from matisse.slide import Slide
 from matisse.theorem import Theorem
-
 
 # ---------------------------------------------------------------------------
 # Helpers

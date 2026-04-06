@@ -20,8 +20,8 @@ from .position import Position
 from .section import Section
 from .slide import Slide
 from .subsection import Subsection
-from .theorem import Theorem
 from .theme import Theme
+from .theorem import Theorem
 
 
 class Presentation(object):
@@ -90,13 +90,13 @@ class Presentation(object):
         self.parser = Parser()
         self.chapters = []
         self.position = Position()
-        self.source: str = ""       # fully expanded source (after $include)
+        self.source: str = ""  # fully expanded source (after $include)
         self.yaml_source: str = ""  # concatenated YAML block content (used by reveal backend)
         # Phase 7 — label registry for cross-references
         self.label_registry: LabelRegistry = LabelRegistry()
         # Phase 7b — bibliography (optional)
-        self.bibliography: str = ""   # path to .bib file
-        self.csl: str = ""            # path to .csl file
+        self.bibliography: str = ""  # path to .bib file
+        self.csl: str = ""  # path to .csl file
 
     def __str__(self):
         strings = [f"Chapters number {Presentation.chapters_number}"]

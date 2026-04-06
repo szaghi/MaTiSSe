@@ -172,37 +172,37 @@ class ImpressTheme(AbstractTheme):
         # ------------------------------------------------------------------
         # Canvas-level data attributes (emitted on <div id="impress">)
         # ------------------------------------------------------------------
-        self.max_scale = None           # data-max-scale
-        self.min_scale = None           # data-min-scale
-        self.canvas_autoplay = None     # data-autoplay (global, seconds; None → omit)
-        self.autoplay_repeat = None     # data-autoplay-repeat
-        self.media_autoplay = False     # data-media-autoplay
-        self.media_autostop = False     # data-media-autostop
-        self.media_autopause = False    # data-media-autopause
+        self.max_scale = None  # data-max-scale
+        self.min_scale = None  # data-min-scale
+        self.canvas_autoplay = None  # data-autoplay (global, seconds; None → omit)
+        self.autoplay_repeat = None  # data-autoplay-repeat
+        self.media_autoplay = False  # data-media-autoplay
+        self.media_autostop = False  # data-media-autostop
+        self.media_autopause = False  # data-media-autopause
         self.console_autolaunch = False  # data-console-autolaunch
-        self.console_css = ""           # data-console-css
-        self.console_css_iframe = ""    # data-console-css-iframe
+        self.console_css = ""  # data-console-css
+        self.console_css_iframe = ""  # data-console-css-iframe
         self.show_progress_bar = False
         self.show_progress_counter = False
         self.show_help_popup = False
         self.show_navigation_toolbar = False
-        self.notes_style = "console"    # "console" | "visible"
+        self.notes_style = "console"  # "console" | "visible"
         # ------------------------------------------------------------------
         # Per-slide data attributes (read from overtheme.slide)
         # ------------------------------------------------------------------
         self.transition_duration = None  # data-transition-duration (ms)
-        self.skip = False               # adds class="skip" to step
-        self.stop = False               # adds class="stop" to step
-        self.slide_autoplay = None      # data-autoplay (per-slide override)
+        self.skip = False  # adds class="skip" to step
+        self.stop = False  # adds class="stop" to step
+        self.slide_autoplay = None  # data-autoplay (per-slide override)
         self.slide_media_autoplay = None  # data-media-autoplay
         self.slide_media_autostop = None  # data-media-autostop
         self.slide_media_autopause = None  # data-media-autopause
-        self.goto = ""                  # data-goto
-        self.goto_next = ""             # data-goto-next
-        self.goto_prev = ""             # data-goto-prev
-        self.goto_key_list = ""         # data-goto-key-list
-        self.goto_next_list = ""        # data-goto-next-list
-        self.rotate_order = ""          # data-rotate-order
+        self.goto = ""  # data-goto
+        self.goto_next = ""  # data-goto-next
+        self.goto_prev = ""  # data-goto-prev
+        self.goto_key_list = ""  # data-goto-key-list
+        self.goto_next_list = ""  # data-goto-next-list
+        self.rotate_order = ""  # data-rotate-order
         # Relative positioning (data-rel-*)
         self.rel_x = None
         self.rel_y = None
@@ -572,21 +572,21 @@ class ImpressTheme(AbstractTheme):
     # Keys inside ``canvas:`` that map to HTML data attributes on the root
     # ``<div id="impress">`` rather than to CSS properties on the body.
     _CANVAS_DATA_KEYS = {
-        "max-scale":               ("max_scale",             "number"),
-        "min-scale":               ("min_scale",             "number"),
-        "autoplay":                ("canvas_autoplay",       "int"),
-        "autoplay-repeat":         ("autoplay_repeat",       "bool"),
-        "media-autoplay":          ("media_autoplay",        "bool"),
-        "media-autostop":          ("media_autostop",        "bool"),
-        "media-autopause":         ("media_autopause",       "bool"),
-        "console-autolaunch":      ("console_autolaunch",    "bool"),
-        "console-css":             ("console_css",           "str"),
-        "console-css-iframe":      ("console_css_iframe",    "str"),
-        "show-progress-bar":       ("show_progress_bar",     "bool"),
-        "show-progress-counter":   ("show_progress_counter", "bool"),
-        "show-help-popup":         ("show_help_popup",       "bool"),
+        "max-scale": ("max_scale", "number"),
+        "min-scale": ("min_scale", "number"),
+        "autoplay": ("canvas_autoplay", "int"),
+        "autoplay-repeat": ("autoplay_repeat", "bool"),
+        "media-autoplay": ("media_autoplay", "bool"),
+        "media-autostop": ("media_autostop", "bool"),
+        "media-autopause": ("media_autopause", "bool"),
+        "console-autolaunch": ("console_autolaunch", "bool"),
+        "console-css": ("console_css", "str"),
+        "console-css-iframe": ("console_css_iframe", "str"),
+        "show-progress-bar": ("show_progress_bar", "bool"),
+        "show-progress-counter": ("show_progress_counter", "bool"),
+        "show-help-popup": ("show_help_popup", "bool"),
         "show-navigation-toolbar": ("show_navigation_toolbar", "bool"),
-        "notes-style":             ("notes_style",           "str"),
+        "notes-style": ("notes_style", "str"),
     }
 
     def __parse_canvas(self, data):
@@ -674,29 +674,29 @@ class ImpressTheme(AbstractTheme):
     # Keys inside ``layout.slide:`` (and overtheme ``slide:``) that map to
     # HTML data attributes on the step ``<div>`` rather than CSS properties.
     _SLIDE_DATA_KEYS = {
-        "transition-duration":  ("transition_duration", "int"),
-        "skip":                 ("skip",                "bool"),
-        "stop":                 ("stop",                "bool"),
-        "autoplay":             ("slide_autoplay",      "int"),
-        "media-autoplay":       ("slide_media_autoplay","bool_or_none"),
-        "media-autostop":       ("slide_media_autostop","bool_or_none"),
-        "media-autopause":      ("slide_media_autopause","bool_or_none"),
-        "goto":                 ("goto",                "str"),
-        "goto-next":            ("goto_next",           "str"),
-        "goto-prev":            ("goto_prev",           "str"),
-        "goto-key-list":        ("goto_key_list",       "str"),
-        "goto-next-list":       ("goto_next_list",      "str"),
-        "rotate-order":         ("rotate_order",        "str"),
-        "rel-x":                ("rel_x",               "str_or_none"),
-        "rel-y":                ("rel_y",               "str_or_none"),
-        "rel-z":                ("rel_z",               "str_or_none"),
-        "rel-rotate-x":         ("rel_rotate_x",        "str_or_none"),
-        "rel-rotate-y":         ("rel_rotate_y",        "str_or_none"),
-        "rel-rotate-z":         ("rel_rotate_z",        "str_or_none"),
-        "rel-rotate-order":     ("rel_rotate_order",    "str"),
-        "rel-to":               ("rel_to",              "str"),
-        "rel-position":         ("rel_position",        "str"),
-        "rel-reset":            ("rel_reset",           "bool_or_none"),
+        "transition-duration": ("transition_duration", "int"),
+        "skip": ("skip", "bool"),
+        "stop": ("stop", "bool"),
+        "autoplay": ("slide_autoplay", "int"),
+        "media-autoplay": ("slide_media_autoplay", "bool_or_none"),
+        "media-autostop": ("slide_media_autostop", "bool_or_none"),
+        "media-autopause": ("slide_media_autopause", "bool_or_none"),
+        "goto": ("goto", "str"),
+        "goto-next": ("goto_next", "str"),
+        "goto-prev": ("goto_prev", "str"),
+        "goto-key-list": ("goto_key_list", "str"),
+        "goto-next-list": ("goto_next_list", "str"),
+        "rotate-order": ("rotate_order", "str"),
+        "rel-x": ("rel_x", "str_or_none"),
+        "rel-y": ("rel_y", "str_or_none"),
+        "rel-z": ("rel_z", "str_or_none"),
+        "rel-rotate-x": ("rel_rotate_x", "str_or_none"),
+        "rel-rotate-y": ("rel_rotate_y", "str_or_none"),
+        "rel-rotate-z": ("rel_rotate_z", "str_or_none"),
+        "rel-rotate-order": ("rel_rotate_order", "str"),
+        "rel-to": ("rel_to", "str"),
+        "rel-position": ("rel_position", "str"),
+        "rel-reset": ("rel_reset", "bool_or_none"),
     }
 
     @staticmethod

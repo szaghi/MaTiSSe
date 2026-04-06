@@ -104,8 +104,18 @@ from ..base import AbstractTheme, DecoratorSpec, parse_layout_decorators
 
 _BUILTIN_THEMES = frozenset(
     {
-        "black", "white", "league", "beige", "sky", "night", "moon",
-        "serif", "simple", "solarized", "blood", "dracula",
+        "black",
+        "white",
+        "league",
+        "beige",
+        "sky",
+        "night",
+        "moon",
+        "serif",
+        "simple",
+        "solarized",
+        "blood",
+        "dracula",
     }
 )
 
@@ -121,18 +131,18 @@ _REVEAL_CDN = "https://cdn.jsdelivr.net/npm/reveal.js@5"
 
 # CDN URL for each supported plugin JS file
 PLUGIN_CDN: dict[str, str] = {
-    "notes":  f"{_REVEAL_CDN}/plugin/notes/notes.js",
-    "zoom":   f"{_REVEAL_CDN}/plugin/zoom/zoom.js",
+    "notes": f"{_REVEAL_CDN}/plugin/notes/notes.js",
+    "zoom": f"{_REVEAL_CDN}/plugin/zoom/zoom.js",
     "search": f"{_REVEAL_CDN}/plugin/search/search.js",
-    "math":   f"{_REVEAL_CDN}/plugin/math/math.js",
+    "math": f"{_REVEAL_CDN}/plugin/math/math.js",
 }
 
 # JS global name used inside Reveal.initialize({ plugins: [...] })
 PLUGIN_JS_NAME: dict[str, str] = {
-    "notes":  "RevealNotes",
-    "zoom":   "RevealZoom",
+    "notes": "RevealNotes",
+    "zoom": "RevealZoom",
     "search": "RevealSearch",
-    "math":   "RevealMath.MathJax3",
+    "math": "RevealMath.MathJax3",
 }
 
 # ---------------------------------------------------------------------------
@@ -196,55 +206,55 @@ class RevealTheme(AbstractTheme):
     """
 
     _DEFAULTS: dict = {
-        "theme":                 "black",
-        "transition":            "slide",
-        "transition_speed":      "default",
-        "controls":              True,
-        "controls_layout":       "bottom-right",
-        "progress":              True,
-        "slide_number":          False,
-        "loop":                  False,
-        "center":                True,
-        "auto_slide":            0,
-        "width":                 960,
-        "height":                700,
-        "margin":                0.04,
-        "min_scale":             0.2,
-        "max_scale":             2.0,
+        "theme": "black",
+        "transition": "slide",
+        "transition_speed": "default",
+        "controls": True,
+        "controls_layout": "bottom-right",
+        "progress": True,
+        "slide_number": False,
+        "loop": False,
+        "center": True,
+        "auto_slide": 0,
+        "width": 960,
+        "height": 700,
+        "margin": 0.04,
+        "min_scale": 0.2,
+        "max_scale": 2.0,
         "background_transition": "fade",
-        "keyboard":              True,
-        "touch":                 True,
-        "layout":                "linear",
-        "plugins":               (),
-        "code_style":            "",
-        "custom_css":            "",
+        "keyboard": True,
+        "touch": True,
+        "layout": "linear",
+        "plugins": (),
+        "code_style": "",
+        "custom_css": "",
     }
 
     def __init__(self) -> None:
         d = self._DEFAULTS
-        self.theme:                  str        = d["theme"]
-        self.transition:             str        = d["transition"]
-        self.transition_speed:       str        = d["transition_speed"]
-        self.controls:               bool       = d["controls"]
-        self.controls_layout:        str        = d["controls_layout"]
-        self.progress:               bool       = d["progress"]
-        self.slide_number:           bool | str = d["slide_number"]
-        self.loop:                   bool       = d["loop"]
-        self.center:                 bool       = d["center"]
-        self.auto_slide:             int        = d["auto_slide"]
-        self.width:                  int | str  = d["width"]
-        self.height:                 int | str  = d["height"]
-        self.margin:                 float      = d["margin"]
-        self.min_scale:              float      = d["min_scale"]
-        self.max_scale:              float      = d["max_scale"]
-        self.background_transition:  str        = d["background_transition"]
-        self.keyboard:               bool       = d["keyboard"]
-        self.touch:                  bool       = d["touch"]
-        self.layout:                 str        = d["layout"]
-        self.plugins:                list[str]  = list(d["plugins"])
-        self.code_style:             str        = d["code_style"]
-        self.custom_css:             str        = d["custom_css"]
-        self.decorators:             list[DecoratorSpec] = []
+        self.theme: str = d["theme"]
+        self.transition: str = d["transition"]
+        self.transition_speed: str = d["transition_speed"]
+        self.controls: bool = d["controls"]
+        self.controls_layout: str = d["controls_layout"]
+        self.progress: bool = d["progress"]
+        self.slide_number: bool | str = d["slide_number"]
+        self.loop: bool = d["loop"]
+        self.center: bool = d["center"]
+        self.auto_slide: int = d["auto_slide"]
+        self.width: int | str = d["width"]
+        self.height: int | str = d["height"]
+        self.margin: float = d["margin"]
+        self.min_scale: float = d["min_scale"]
+        self.max_scale: float = d["max_scale"]
+        self.background_transition: str = d["background_transition"]
+        self.keyboard: bool = d["keyboard"]
+        self.touch: bool = d["touch"]
+        self.layout: str = d["layout"]
+        self.plugins: list[str] = list(d["plugins"])
+        self.code_style: str = d["code_style"]
+        self.custom_css: str = d["custom_css"]
+        self.decorators: list[DecoratorSpec] = []
 
     # ------------------------------------------------------------------
     # AbstractTheme interface
@@ -376,16 +386,16 @@ class RevealTheme(AbstractTheme):
                 continue
             lines: list[str] = []
             if spec.kind in ("header", "footer"):
-                lines.append(f"  flex-shrink: 0;")
+                lines.append("  flex-shrink: 0;")
                 lines.append(f"  height: {spec.size};")
-                lines.append(f"  width: 100%;")
-                lines.append(f"  box-sizing: border-box;")
-                lines.append(f"  overflow: hidden;")
+                lines.append("  width: 100%;")
+                lines.append("  box-sizing: border-box;")
+                lines.append("  overflow: hidden;")
             else:  # sidebar
-                lines.append(f"  flex-shrink: 0;")
+                lines.append("  flex-shrink: 0;")
                 lines.append(f"  width: {spec.size};")
-                lines.append(f"  overflow: auto;")
-                lines.append(f"  box-sizing: border-box;")
+                lines.append("  overflow: auto;")
+                lines.append("  box-sizing: border-box;")
             for prop, val in spec.css.items():
                 lines.append(f"  {prop}: {val};")
             body = "\n".join(lines)
@@ -431,12 +441,12 @@ class RevealTheme(AbstractTheme):
                 if not isinstance(rv, dict):
                     continue
                 _STR_KEYS = {
-                    "transition":          "data-transition",
-                    "background_color":    "data-background-color",
-                    "background_image":    "data-background-image",
-                    "background_size":     "data-background-size",
+                    "transition": "data-transition",
+                    "background_color": "data-background-color",
+                    "background_image": "data-background-image",
+                    "background_size": "data-background-size",
                     "background_position": "data-background-position",
-                    "background_video":    "data-background-video",
+                    "background_video": "data-background-video",
                 }
                 for yaml_key, attr in _STR_KEYS.items():
                     if yaml_key in rv:
@@ -501,19 +511,18 @@ class RevealTheme(AbstractTheme):
             )
 
         # transitions
-        self.transition = self._validated(
-            cfg, "transition", self.transition, _VALID_TRANSITIONS, "transition"
-        )
+        self.transition = self._validated(cfg, "transition", self.transition, _VALID_TRANSITIONS, "transition")
         self.transition_speed = self._validated(
             cfg, "transition_speed", self.transition_speed, _VALID_TRANSITION_SPEEDS, "transition_speed"
         )
         self.background_transition = self._validated(
-            cfg, "background_transition", self.background_transition,
-            _VALID_BACKGROUND_TRANSITIONS, "background_transition"
+            cfg,
+            "background_transition",
+            self.background_transition,
+            _VALID_BACKGROUND_TRANSITIONS,
+            "background_transition",
         )
-        self.layout = self._validated(
-            cfg, "layout", self.layout, _VALID_LAYOUTS, "layout"
-        )
+        self.layout = self._validated(cfg, "layout", self.layout, _VALID_LAYOUTS, "layout")
 
         # controls
         self.controls = bool(cfg.get("controls", self.controls))
@@ -521,17 +530,14 @@ class RevealTheme(AbstractTheme):
         if controls_layout in _VALID_CONTROLS_LAYOUTS:
             self.controls_layout = controls_layout
         else:
-            sys.stderr.write(
-                f"Warning: unknown controls_layout '{controls_layout}'. "
-                f"Using '{self.controls_layout}'.\n"
-            )
+            sys.stderr.write(f"Warning: unknown controls_layout '{controls_layout}'. Using '{self.controls_layout}'.\n")
 
         # booleans
-        self.progress = bool(cfg.get("progress",  self.progress))
-        self.loop     = bool(cfg.get("loop",      self.loop))
-        self.center   = bool(cfg.get("center",    self.center))
-        self.keyboard = bool(cfg.get("keyboard",  self.keyboard))
-        self.touch    = bool(cfg.get("touch",     self.touch))
+        self.progress = bool(cfg.get("progress", self.progress))
+        self.loop = bool(cfg.get("loop", self.loop))
+        self.center = bool(cfg.get("center", self.center))
+        self.keyboard = bool(cfg.get("keyboard", self.keyboard))
+        self.touch = bool(cfg.get("touch", self.touch))
 
         # slide_number: accept bool or str
         sn = cfg.get("slide_number", self.slide_number)
@@ -548,11 +554,11 @@ class RevealTheme(AbstractTheme):
 
         # sizing / timing
         self.auto_slide = int(cfg.get("auto_slide", self.auto_slide))
-        self.width      = cfg.get("width",     self.width)
-        self.height     = cfg.get("height",    self.height)
-        self.margin     = float(cfg.get("margin",    self.margin))
-        self.min_scale  = float(cfg.get("min_scale", self.min_scale))
-        self.max_scale  = float(cfg.get("max_scale", self.max_scale))
+        self.width = cfg.get("width", self.width)
+        self.height = cfg.get("height", self.height)
+        self.margin = float(cfg.get("margin", self.margin))
+        self.min_scale = float(cfg.get("min_scale", self.min_scale))
+        self.max_scale = float(cfg.get("max_scale", self.max_scale))
 
         # plugins
         plugins_raw = cfg.get("plugins", None)
@@ -563,8 +569,7 @@ class RevealTheme(AbstractTheme):
                     self.plugins.append(p)
                 else:
                     sys.stderr.write(
-                        f"Warning: unknown reveal plugin '{p}'. "
-                        f"Valid plugins: {sorted(_VALID_PLUGINS)}. Skipping.\n"
+                        f"Warning: unknown reveal plugin '{p}'. Valid plugins: {sorted(_VALID_PLUGINS)}. Skipping.\n"
                     )
 
         # misc
@@ -577,8 +582,6 @@ class RevealTheme(AbstractTheme):
         if val in valid_set:
             return val
         sys.stderr.write(
-            f"Warning: unknown reveal.js {label} '{val}'. "
-            f"Valid values: {sorted(valid_set)}. "
-            f"Using '{current}'.\n"
+            f"Warning: unknown reveal.js {label} '{val}'. Valid values: {sorted(valid_set)}. Using '{current}'.\n"
         )
         return current

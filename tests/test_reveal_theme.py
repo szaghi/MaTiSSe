@@ -14,10 +14,10 @@ import pytest
 
 from matisse.backends.reveal.theme import RevealTheme
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _theme_from_yaml(yaml: str) -> RevealTheme:
     t = RevealTheme()
@@ -120,8 +120,20 @@ class TestRevealThemeParsing:
         assert t.theme == "moon"
 
     def test_all_builtin_themes_accepted(self):
-        for name in ["black", "white", "league", "beige", "sky", "night", "moon",
-                     "serif", "simple", "solarized", "blood", "dracula"]:
+        for name in [
+            "black",
+            "white",
+            "league",
+            "beige",
+            "sky",
+            "night",
+            "moon",
+            "serif",
+            "simple",
+            "solarized",
+            "blood",
+            "dracula",
+        ]:
             t = _theme_from_yaml(f"reveal:\n  theme: {name}\n")
             assert t.theme == name
 
@@ -515,13 +527,7 @@ class TestParseSlideOverrides:
         assert _slide_overrides_from_yaml("") == {}
 
     def test_multiple_overrides(self):
-        yaml_src = (
-            "overtheme:\n"
-            "  reveal:\n"
-            "    transition: fade\n"
-            "    background_color: '#000'\n"
-            "    auto_animate: true\n"
-        )
+        yaml_src = "overtheme:\n  reveal:\n    transition: fade\n    background_color: '#000'\n    auto_animate: true\n"
         overrides = _slide_overrides_from_yaml(yaml_src)
         assert overrides["data-transition"] == "fade"
         assert overrides["data-background-color"] == "#000"

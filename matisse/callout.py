@@ -24,18 +24,18 @@ from .markdown_utils import markdown2html
 
 # Left-border colours per callout type (applied inline as CSS variables).
 _CALLOUT_COLORS = {
-    "note":      "#0070c0",
-    "tip":       "#2e8b57",
-    "warning":   "#e69500",
-    "caution":   "#cc0000",
+    "note": "#0070c0",
+    "tip": "#2e8b57",
+    "warning": "#e69500",
+    "caution": "#cc0000",
     "important": "#7b2d8b",
 }
 
 _CALLOUT_ICONS = {
-    "note":      "ℹ",
-    "tip":       "💡",
-    "warning":   "⚠",
-    "caution":   "🔴",
+    "note": "ℹ",
+    "tip": "💡",
+    "warning": "⚠",
+    "caution": "🔴",
     "important": "❗",
 }
 
@@ -99,7 +99,7 @@ class Callout:
         if hm:
             if self.title is None:
                 self.title = hm.group("h").strip()
-            content = content[hm.end():].strip()
+            content = content[hm.end() :].strip()
         self.content = content
 
     def to_html(self, backend="impress"):

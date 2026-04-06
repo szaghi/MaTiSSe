@@ -79,12 +79,12 @@ class Theorem:
     def __init__(self, source=None):
         Theorem.theorems_number += 1
         self.number = Theorem.theorems_number
-        self.prefix = None       # e.g. "thm"
-        self.env_id = ""         # e.g. "cauchy"
+        self.prefix = None  # e.g. "thm"
+        self.env_id = ""  # e.g. "cauchy"
         self.is_proof = False
         self.title = None
         self.content = ""
-        self.env_number = None   # sequential number within prefix
+        self.env_number = None  # sequential number within prefix
         if source:
             self.get(source=source)
 
@@ -127,9 +127,7 @@ class Theorem:
                 if self.title:
                     header_parts.append(f" ({self.title})")
                 with doc.tag("div", klass="theorem-header"):
-                    doc.asis(
-                        f'<strong>{"".join(header_parts)}</strong>'
-                    )
+                    doc.asis(f"<strong>{''.join(header_parts)}</strong>")
             with doc.tag("div", klass="theorem-body"):
                 content_html = markdown2html(self.content)
                 doc.asis(content_html)

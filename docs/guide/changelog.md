@@ -4,6 +4,11 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.1] — 2026-04-06
+### Fixed
+- **lint**: Resolve all ruff CI errors across source and test files
+
+
 ## [1.7.0] — 2026-04-06
 ### Added
 - Implement impress.js plugins (#51–#61) and Quarto-inspired authoring features (#62)

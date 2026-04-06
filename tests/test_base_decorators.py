@@ -2,10 +2,7 @@
 Unit tests for backends/base.py — DecoratorSpec and parse_layout_decorators().
 """
 
-import pytest
-
 from matisse.backends.base import DecoratorSpec, parse_layout_decorators
-
 
 # ---------------------------------------------------------------------------
 # DecoratorSpec dataclass

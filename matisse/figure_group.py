@@ -59,7 +59,7 @@ class FigureGroup:
         self.number = FigureGroup.groups_number
         self.gid = ""
         self.ncol: int = 1
-        self.layout: list | None = None   # [[60,40],[100]] style
+        self.layout: list | None = None  # [[60,40],[100]] style
         self.figures: list[Figure] = []
         self.group_caption = ""
         if source:

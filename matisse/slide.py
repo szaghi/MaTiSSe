@@ -16,8 +16,8 @@ from .markdown_utils import markdown2html
 from .note import Note
 from .substep import Substep
 from .table import Table
-from .theorem import Theorem
 from .theme import Theme
+from .theorem import Theorem
 from .video import Video
 
 # Regex that captures a ``{key=value ...}`` attribute block at the end of a
@@ -212,9 +212,7 @@ class Slide(object):
             obj = Env(source=source)
 
         if Env is Note:
-            notes_style = getattr(
-                self.overtheme if self.overtheme.custom else theme, "notes_style", "console"
-            )
+            notes_style = getattr(self.overtheme if self.overtheme.custom else theme, "notes_style", "console")
             return obj.to_html(backend=backend, notes_style=notes_style)
 
         # Environments whose to_html() accepts a backend parameter
