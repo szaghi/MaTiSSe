@@ -165,3 +165,19 @@ class TestTokenize:
         source = "---\nkey: value\n---\n# Chapter\n"
         tokens = parser.tokenize(source=source)
         assert len(tokens["yamlblocks"]) == 1
+
+    def test_heading_inside_fenced_div_not_parsed_as_section(self, parser):
+        # ## inside ::: ... ::: must not become a section token (regression for known_bugs.md)
+        source = (
+            "# Chapter\n"
+            "## Section\n"
+            "### Subsection\n"
+            "#### My Slide\n"
+            "::: {.callout-note}\n"
+            "## This heading must be ignored\n"
+            "Body text.\n"
+            ":::\n"
+        )
+        tokens = parser.tokenize(source=source)
+        assert len(tokens["sections"]) == 1
+        assert tokens["sections"][0]["match"].group("expr").strip() == "Section"
