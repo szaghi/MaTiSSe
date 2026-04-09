@@ -100,6 +100,11 @@ info "Generating docs/guide/changelog.md with git-cliff"
 mkdir -p docs/guide
 git-cliff --tag "v${NEW_VER}" -o docs/guide/changelog.md
 
+# ── lint / format check ───────────────────────────────────────────────────────
+info "Running ruff lint + format check"
+ruff check matisse/ tests/ || die "ruff lint failed — run 'make fmt' to fix, then retry"
+ruff format --check matisse/ tests/ || die "ruff format check failed — run 'make fmt' to fix, then retry"
+
 # ── run tests ─────────────────────────────────────────────────────────────────
 info "Running test suite"
 python -m pytest

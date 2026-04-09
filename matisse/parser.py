@@ -37,6 +37,7 @@ class Parser(object):
             "codeblock": re.compile(r"(?P<block>[`]{3}.*?[`]{3})", re.DOTALL),
             "code": re.compile(r"(?P<block>`.*?`)"),
             "yamlblock": re.compile(r"(?P<block>[-]{3}\n.*?\n[-]{3})", re.DOTALL),
+            "fenceddiv": re.compile(r"(?P<block>:::[^\n]*\n.*?:::)", re.DOTALL),
             "includeblock": re.compile(r"\$include\((?P<include>.*?)\)"),
         }
 
@@ -168,19 +169,21 @@ class Parser(object):
         """
         codeblocks = self.tokenizer(source=source, re_search=self.regexs["codeblock"])
         yamlblocks = self.tokenizer(source=source, re_search=self.regexs["yamlblock"], exclude=codeblocks)
+        fenceddivs = self.tokenizer(source=source, re_search=self.regexs["fenceddiv"], exclude=codeblocks)
+        exclude_all = codeblocks + yamlblocks + fenceddivs
         chapters = self.tokenizer(
-            source=source, re_search=self.regexs["chapter"], exclude=codeblocks + yamlblocks, force_all=True
+            source=source, re_search=self.regexs["chapter"], exclude=exclude_all, force_all=True
         )
         chapters = self.tokens_end_update(tokens=chapters, end=len(source))
         sections = self.tokenizer(
-            source=source, re_search=self.regexs["section"], exclude=codeblocks + yamlblocks, force_all=True
+            source=source, re_search=self.regexs["section"], exclude=exclude_all, force_all=True
         )
         sections = self.tokens_end_update(tokens=sections, end=len(source))
         subsections = self.tokenizer(
-            source=source, re_search=self.regexs["subsection"], exclude=codeblocks + yamlblocks, force_all=True
+            source=source, re_search=self.regexs["subsection"], exclude=exclude_all, force_all=True
         )
         subsections = self.tokens_end_update(tokens=subsections, end=len(source))
-        slides = self.tokenizer(source=source, re_search=self.regexs["slide"], exclude=codeblocks + yamlblocks)
+        slides = self.tokenizer(source=source, re_search=self.regexs["slide"], exclude=exclude_all)
         slides = self.tokens_end_update(tokens=slides, end=len(source))
         slides = self.slides_end_update(slides=slides, others=chapters)
         slides = self.slides_end_update(slides=slides, others=sections)
