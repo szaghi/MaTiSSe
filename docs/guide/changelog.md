@@ -4,6 +4,11 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.2] — 2026-04-09
+### Added
+- **parser**: Add fenced div support and update tokenization logic
+
+
 ## [1.7.1] — 2026-04-06
 ### Fixed
 - **lint**: Resolve all ruff CI errors across source and test files
