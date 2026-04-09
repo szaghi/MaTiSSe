@@ -100,6 +100,12 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Text Formatting',
+          items: [
+            { text: 'Inline Formatting', link: '/advanced/inline-formatting' },
+          ],
+        },
+        {
           text: 'Scientific Content',
           items: [
             { text: 'Math & LaTeX',       link: '/advanced/math' },
