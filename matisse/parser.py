@@ -171,13 +171,9 @@ class Parser(object):
         yamlblocks = self.tokenizer(source=source, re_search=self.regexs["yamlblock"], exclude=codeblocks)
         fenceddivs = self.tokenizer(source=source, re_search=self.regexs["fenceddiv"], exclude=codeblocks)
         exclude_all = codeblocks + yamlblocks + fenceddivs
-        chapters = self.tokenizer(
-            source=source, re_search=self.regexs["chapter"], exclude=exclude_all, force_all=True
-        )
+        chapters = self.tokenizer(source=source, re_search=self.regexs["chapter"], exclude=exclude_all, force_all=True)
         chapters = self.tokens_end_update(tokens=chapters, end=len(source))
-        sections = self.tokenizer(
-            source=source, re_search=self.regexs["section"], exclude=exclude_all, force_all=True
-        )
+        sections = self.tokenizer(source=source, re_search=self.regexs["section"], exclude=exclude_all, force_all=True)
         sections = self.tokens_end_update(tokens=sections, end=len(source))
         subsections = self.tokenizer(
             source=source, re_search=self.regexs["subsection"], exclude=exclude_all, force_all=True
