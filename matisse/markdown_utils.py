@@ -8,6 +8,9 @@ from pygments.formatters import HtmlFormatter
 
 from .mdx_custom_span_class import CustomSpanClassExtension
 from .mdx_mathjax import MathJaxExtension
+from .mdx_quarto_span import QuartoSpanExtension
+from .mdx_strikethrough import StrikethroughExtension
+from .mdx_sup_sub import SupSubExtension
 
 try:
     from markdown_checklist.extension import ChecklistExtension
@@ -42,8 +45,15 @@ def markdown2html(source, no_p=False, code_style="default"):
     extensions = [
         "smarty",
         "fenced_code",
+        "footnotes",
+        "def_list",
+        "attr_list",
+        "tables",
         CustomSpanClassExtension(),
         MathJaxExtension(),
+        StrikethroughExtension(),
+        SupSubExtension(),
+        QuartoSpanExtension(),
         "codehilite",
     ]
     if __mdx_checklist__:

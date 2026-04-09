@@ -209,6 +209,23 @@ $$
 Equations work inside slide content, box captions, figure captions, notes, and headers.
 See the [Math & LaTeX guide](/advanced/math) for more details.
 
+## Inline text formatting
+
+Beyond standard bold and italic, MaTiSSe supports:
+
+| Syntax | Result |
+|---|---|
+| `~~text~~` | ~~strikethrough~~ |
+| `^text^` | superscript (e.g. m^2^) |
+| `~text~` | subscript (e.g. H~2~O) |
+| `[text]{.underline}` | underlined span |
+| `[text]{.mark}` | highlighted span |
+| `text[^1]` + `[^1]: note` | footnote |
+| `Term\n: definition` | definition list |
+| `![](img.png){width="60%"}` | image with explicit width |
+
+See the [Inline Formatting guide](/advanced/inline-formatting) for the full reference.
+
 ## Special environments
 
 ### Columns

@@ -103,6 +103,52 @@ theme_slide_global:
 
 A theme block defines or overrides visual properties. Multiple theme blocks may appear throughout the document.
 
+## Inline text formatting
+
+| Syntax | Output | Element |
+|---|---|---|
+| `~~text~~` | strikethrough | `<del>` |
+| `^text^` | superscript | `<sup>` |
+| `~text~` | subscript | `<sub>` |
+| `[text]{.underline}` | underlined | `<span class="underline">` |
+| `[text]{.mark}` | highlighted | `<span class="mark">` |
+| `[text]{.smallcaps}` | small caps | `<span class="smallcaps">` |
+| `[text]{.any-class}` | custom class | `<span class="any-class">` |
+| `!!class\|text!!` | custom class (legacy) | `<span class="class">` |
+
+`^` and `~` inside `$...$` math are consumed by MathJax and never touched by
+the superscript/subscript processors.
+
+## Footnotes
+
+```markdown
+Statement requiring a citation.[^ref]
+
+[^ref]: Full citation text here.
+```
+
+Footnote definitions are collected and rendered at the bottom of the slide content area.
+
+## Definition lists
+
+```markdown
+Term
+:   Definition of the term.
+
+Another term
+:   First definition.
+:   Second definition.
+```
+
+## Image attributes
+
+```markdown
+![alt text](path/to/image.png){width="60%" .my-class #img-id}
+```
+
+Attributes are passed directly to the `<img>` element.
+Supported: `width`, `height`, `style`, `.class`, `#id`, and any valid HTML attribute.
+
 ## Math
 
 Inline math uses single dollar signs:

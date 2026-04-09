@@ -11,6 +11,10 @@ This section covers MaTiSSe's rich content environments and scientific authoring
 - [Video](/advanced/video) — embedded video
 - [Checklists](/advanced/checklists) — interactive checklist lists
 
+## Text Formatting
+
+- [Inline Formatting](/advanced/inline-formatting) — strikethrough, superscript, subscript, footnotes, definition lists, image attributes, Quarto-style spans
+
 ## Scientific content
 
 - [Math & LaTeX](/advanced/math) — equation authoring with MathJax 3

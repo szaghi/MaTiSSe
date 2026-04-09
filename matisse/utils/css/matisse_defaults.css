@@ -61,6 +61,38 @@ li {
   padding-left: 0.8em;
 }
 
+/* inline text formatting */
+del {
+  text-decoration: line-through;
+}
+sup, sub {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+/* Quarto-style span classes */
+.underline { text-decoration: underline; }
+.mark      { background-color: #ff0; color: #000; padding: 0 0.1em; }
+.smallcaps { font-variant: small-caps; }
+
+/* definition lists */
+dl { padding: 1% 0; }
+dt { font-weight: bold; }
+dd { padding-left: 2em; padding-bottom: 0.5%; }
+
+/* footnotes */
+.footnote {
+  font-size: 0.8em;
+  border-top: 1px solid currentColor;
+  margin-top: 1em;
+  padding-top: 0.5em;
+  opacity: 0.8;
+}
+
 /* codes */
 pre {
   display:flex;
