@@ -34,7 +34,7 @@ features:
     linkText: Theme reference
   - icon: 💻
     title: Syntax highlighting
-    details: Code blocks are highlighted by highlight.js 11 with support for dozens of languages. Choose from all built-in highlight.js styles.
+    details: Code blocks are highlighted server-side by Pygments with support for 50+ languages and 48 colour schemes. No JavaScript dependency — highlighting CSS is always generated locally.
     link: /advanced/code
     linkText: Code highlighting
   - icon: 🖥️
@@ -42,6 +42,21 @@ features:
     details: "`--backend impress` (default) gives full impress.js 3D canvas effects and spatial transitions. `--backend reveal` switches to reveal.js: speaker notes, overview mode, and built-in PDF export — same Markdown source, one flag."
     link: /advanced/reveal
     linkText: reveal.js guide
+  - icon: 📢
+    title: Callouts & semantic blocks
+    details: "Draw attention with five callout types: note, tip, warning, caution, important. Each has a coloured border, icon, and optional title."
+    link: /advanced/callouts
+    linkText: Callout blocks
+  - icon: 📐
+    title: Theorems & proofs
+    details: Number theorems, lemmas, corollaries, definitions, examples, and more with auto-incrementing counters. Cross-reference any block with `@PREFIX-id` syntax.
+    link: /advanced/theorems
+    linkText: Theorems & proofs
+  - icon: 📊
+    title: Diagrams
+    details: Embed Mermaid flowcharts, sequence diagrams, Gantt charts, and Graphviz dot graphs directly in slide source. CDN scripts are injected automatically.
+    link: /advanced/diagrams
+    linkText: Diagrams
   - icon: 🆓
     title: Free and open source
     details: Released under the GNU GPL v3 license. Free to use, study, modify, and distribute. Contributions welcome.
@@ -55,7 +70,7 @@ Scientific presentations demand more than a typical slide tool offers — inline
 
 ```bash
 # Install
-pip install MaTiSSe.py
+pipx install MaTiSSe.py
 
 # Generate a sample presentation to start from
 matisse --sample mytalk.md
@@ -64,17 +79,21 @@ matisse --sample mytalk.md
 matisse -i mytalk.md -o mytalk/
 ```
 
-A minimal slide source looks like this:
+A minimal slide source:
 
 ```markdown
 ---
 title:   My Talk
 authors: Stefano Zaghi
+date:    April 2026
 ---
+
 ---
-theme_slide_global:
-  width:  900px
-  height: 600px
+theme:
+  layout:
+    slide:
+      width: '900px'
+      height: '600px'
 ---
 
 # Introduction
@@ -83,17 +102,16 @@ theme_slide_global:
 
 #### First Slide
 
-Content with inline math $E = mc^2$ and a code block:
-
-```python
-print("Hello, MaTiSSe!")
-```
+Content goes here. Use $title to reference metadata, $math with $E = mc^2$.
 ```
 
 ## Author
 
-**Stefano Zaghi** — [stefano.zaghi@cnr.it](mailto:stefano.zaghi@cnr.it) · [GitHub](https://github.com/szaghi)
+**[Stefano Zaghi](https://github.com/szaghi)** · stefano.zaghi@gmail.com
+> *Chief Yak Shaver & Accidental Research Scientist, HPC farmer* at CNR-IAC, National Research Council of Italy
 
 ## Copyrights
 
 MaTiSSe is an open source project distributed under the [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) license.
+
+© [Stefano Zaghi](https://github.com/szaghi)

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'MaTiSSe.py',
+  title: 'MaTiSSe',
   description: 'Markdown To Impressive Scientific Slides — LaTeX math, syntax highlighting, and rich layouts from plain Markdown',
   base: '/MaTiSSe/',
   markdown: {
@@ -26,6 +26,7 @@ export default defineConfig({
           { text: 'About',        link: '/guide/' },
           { text: 'Installation', link: '/guide/installation' },
           { text: 'Quick Start',  link: '/guide/quickstart' },
+          { text: 'Core Concepts', link: '/guide/concepts' },
           { text: 'Usage',        link: '/guide/usage' },
           { text: 'Themes',       link: '/guide/themes' },
           { text: 'Examples',     link: '/guide/examples' },
@@ -44,13 +45,14 @@ export default defineConfig({
         {
           text: 'Introduction',
           items: [
-            { text: 'About MaTiSSe.py', link: '/guide/' },
-            { text: 'Installation',     link: '/guide/installation' },
-            { text: 'Quick Start',      link: '/guide/quickstart' },
-            { text: 'Usage',            link: '/guide/usage' },
-            { text: 'Themes',           link: '/guide/themes' },
-            { text: 'Examples',         link: '/guide/examples' },
-            { text: 'FAQ',              link: '/guide/faq' },
+            { text: 'About MaTiSSe',  link: '/guide/' },
+            { text: 'Installation',   link: '/guide/installation' },
+            { text: 'Quick Start',    link: '/guide/quickstart' },
+            { text: 'Core Concepts',  link: '/guide/concepts' },
+            { text: 'Usage',          link: '/guide/usage' },
+            { text: 'Themes',         link: '/guide/themes' },
+            { text: 'Examples',       link: '/guide/examples' },
+            { text: 'FAQ',            link: '/guide/faq' },
           ],
         },
         {
@@ -78,13 +80,24 @@ export default defineConfig({
             { text: 'Metadata',        link: '/reference/metadata' },
           ],
         },
+        {
+          text: 'Quick Lookup',
+          items: [
+            { text: 'Feature Matrix',  link: '/reference/feature-matrix' },
+          ],
+        },
       ],
 
       '/advanced/': [
         {
-          text: 'Environments',
+          text: 'Overview',
           items: [
-            { text: 'Overview',      link: '/advanced/' },
+            { text: 'Advanced Topics', link: '/advanced/' },
+          ],
+        },
+        {
+          text: 'Content Environments',
+          items: [
             { text: 'Figures',       link: '/advanced/figures' },
             { text: 'Boxes & Notes', link: '/advanced/boxes' },
             { text: 'Tables',        link: '/advanced/tables' },
@@ -94,9 +107,12 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Themes',
+          text: 'Advanced Syntax',
           items: [
-            { text: 'Themes In Depth', link: '/advanced/themes' },
+            { text: 'Callout Blocks',       link: '/advanced/callouts' },
+            { text: 'Theorems & Proofs',    link: '/advanced/theorems' },
+            { text: 'Diagrams',             link: '/advanced/diagrams' },
+            { text: 'Incremental Reveals',  link: '/advanced/incremental' },
           ],
         },
         {
@@ -108,8 +124,14 @@ export default defineConfig({
         {
           text: 'Scientific Content',
           items: [
-            { text: 'Math & LaTeX',       link: '/advanced/math' },
-            { text: 'Code Highlighting',  link: '/advanced/code' },
+            { text: 'Math & LaTeX',      link: '/advanced/math' },
+            { text: 'Code Highlighting', link: '/advanced/code' },
+          ],
+        },
+        {
+          text: 'Themes',
+          items: [
+            { text: 'Themes In Depth', link: '/advanced/themes' },
           ],
         },
         {

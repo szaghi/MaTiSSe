@@ -32,19 +32,24 @@ Open `mytalk/index.html` in a browser. Use arrow keys or spacebar to navigate sl
 
 A minimal presentation source:
 
-```markdown
+```yaml
 ---
 title:    My Talk
 subtitle: A Subtitle
 authors:  Stefano Zaghi
 ---
+```
+```yaml
 ---
-theme_slide_global:
-  width:  900px
-  height: 600px
-  data-transition-duration: 500
+theme:
+  layout:
+    slide:
+      width:  '900px'
+      height: '600px'
 ---
+```
 
+````markdown
 $titlepage
 
 # Introduction
@@ -69,7 +74,7 @@ Code listing:
 def greet(name: str) -> str:
     return f"Hello, {name}!"
 ```
-```
+````
 
 Build:
 

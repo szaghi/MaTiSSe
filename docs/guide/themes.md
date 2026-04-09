@@ -140,6 +140,13 @@ Without `copy-from-theme`, the overtheme starts from scratch (all layout default
 
 ## Next steps
 
-- **[Advanced: Themes](/advanced/themes)** — comprehensive walkthrough of every section,
-  palette variables, decorator metadata, and real-world examples.
-- **[Reference: Theme YAML](/reference/themes)** — complete schema specification.
+There are two deeper resources depending on what you need:
+
+- **[Reference: Theme YAML](/reference/themes)** — complete schema specification: every
+  accepted key, value type, and default for `palette`, `canvas`, `lists`, `toc`,
+  `layout`, `entities`, and `code`.  The authoritative lookup when you want to know
+  exactly what a key does.
+- **[Advanced: Themes In Depth](/advanced/themes)** — comprehensive walkthrough with
+  real-world examples: palette variable patterns, sidebar/header/footer metadata
+  placeholders, Prezi-style round slides, absolute positioning, and a full
+  conference-talk theme you can copy and adapt.

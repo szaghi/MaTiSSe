@@ -49,6 +49,7 @@ All keys are optional. String keys are plain values; keys marked with `[]` accep
 | `logo` | string | Path to a logo image (relative to source file) |
 | `max_time` | integer | Presentation duration in minutes — drives the countdown timer |
 | `dirs_to_copy` | list | Directories copied into the output directory (use for images, videos, etc.) |
+| `css_overtheme` | list | Custom CSS files appended to the generated stylesheet |
 
 ### `max_time` and `dirs_to_copy`
 
@@ -60,6 +61,33 @@ All keys are optional. String keys are plain values; keys marked with `[]` accep
 ---
 dirs_to_copy: ['images', 'videos', 'data']
 ---
+```
+
+### `css_overtheme` — custom CSS files
+
+`css_overtheme` accepts a list of CSS file paths (relative to the source file).
+Each file is copied into the output `css/` directory and linked from `index.html`.
+Use it to override generated styles, style callouts and theorems, or add
+presentation-specific CSS that would be awkward to express in the YAML theme:
+
+```yaml
+---
+css_overtheme: ['custom.css']
+---
+```
+
+Example `custom.css`:
+
+```css
+/* Style all theorem blocks with a subtle tint */
+.theorem-thm  { background: rgba(74, 144, 217, 0.06); }
+.theorem-def  { background: rgba(46, 139,  87, 0.06); }
+
+/* Increase callout body font size */
+.callout-body { font-size: 105%; }
+
+/* Override Pygments code block border radius */
+.highlight pre { border-radius: 6px; }
 ```
 
 ## Auto-generated metadata

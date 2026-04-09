@@ -15,7 +15,7 @@ This keeps the output directory small and always uses the pinned versions.
 
 ## Enabling offline mode
 
-Pass `--offline` to copy impress.js and MathJax bundles into the output directory:
+Pass `--offline` to copy the impress.js and MathJax bundles into the output directory:
 
 ```bash
 matisse -i talk.md -o talk/ --offline
@@ -32,6 +32,29 @@ generated `index.html` references these local paths instead of CDN URLs.
 
 ## Output size
 
-Bundling impress.js and MathJax adds roughly 10–15 MB to the output directory (dominated
-by MathJax). For CDN mode the `js/` directory contains only `countdown.js` (a small
-presentation timer utility) and `css/` contains the theme and Pygments stylesheets.
+Bundling impress.js and MathJax adds roughly **10–15 MB** to the output directory
+(dominated by MathJax's font and script files — ~13 MB).  For CDN mode the `js/`
+directory contains only `countdown.js` (a small presentation timer utility) plus the
+theme and Pygments stylesheets in `css/`.
+
+## Backend support
+
+| Backend | `--offline` support |
+|---|---|
+| `impress` (default) | ✓ Full — impress.js + MathJax bundled locally |
+| `reveal` | ✗ Not yet supported — reveal.js and MathJax are always loaded from CDN |
+
+For reveal.js presentations that must work offline, download the reveal.js distribution
+and serve the output directory with a local web server rather than using `--offline`.
+
+## Diagram CDN scripts
+
+[Mermaid](/advanced/diagrams) and [Graphviz](/advanced/diagrams) diagram engines are
+injected from CDN **even in offline mode**.  They are not bundled by `--offline`.
+For fully air-gapped environments, download the scripts manually and reference them via
+`css_overtheme` or a custom HTML injection.
+
+| Diagram engine | CDN | Bundled by `--offline`? |
+|---|---|---|
+| Mermaid | jsDelivr (`mermaid@11`) | ✗ |
+| Graphviz (d3-graphviz) | jsDelivr (`d3`, `@hpcc-js/wasm-graphviz`, `d3-graphviz`) | ✗ |
