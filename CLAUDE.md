@@ -147,13 +147,13 @@ Supports Python 3.9+. CI tests on 3.9, 3.10, 3.11, 3.12, 3.13.
 
 ## Release Workflow
 
-Uses **GitFlow**: `develop` → `release/vX.Y.Z` → merge to `master` (no-ff) → tag → push → merge back to `develop` → delete release branch.
-
-Full release procedure is defined in the global `~/.claude/CLAUDE.md` under **Release workflow**. The standard entry point is:
+Uses **trunk-based development** on `master`. No release branches, no develop branch.
 
 ```bash
 ./release.sh --major | --minor | --patch | X.Y.Z
 ```
+
+The script: pre-flight checks → lint → confirm → bump `matisse/__init__.py` → generate `docs/guide/changelog.md` → run tests → commit → tag → `git push origin master --follow-tags`.
 
 PyPI publish is triggered automatically by the tag push via CI — never publish locally.
 

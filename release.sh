@@ -12,6 +12,7 @@
 set -euo pipefail
 
 MATISSE_INIT="matisse/__init__.py"
+TRUNK="master"
 
 die()  { echo "ERROR: $*" >&2; exit 1; }
 info() { echo "==> $*"; }
@@ -38,7 +39,6 @@ bump() {
 
 # ── stage tracking + recovery trap ───────────────────────────────────────────
 STAGE="preflight"
-RELEASE_BRANCH=""
 NEW_VER=""
 
 on_error() {
@@ -48,69 +48,27 @@ on_error() {
   echo "================================================================"
   case "$STAGE" in
     preflight | lint | confirm)
-      echo "  Nothing was changed. Fix the issue above and re-run:"
-      echo "    ./release.sh $*"
+      echo "  Nothing was changed. Fix the issue above and re-run."
       ;;
-    branched | tests)
-      echo "  The release branch '$RELEASE_BRANCH' was created but nothing"
-      echo "  was committed yet. To clean up and start over:"
-      echo "    git checkout develop"
-      echo "    git branch -D $RELEASE_BRANCH"
-      echo "  Then fix the issue above and re-run:"
-      echo "    ./release.sh $*"
+    bumped)
+      echo "  Version bump and changelog were modified locally but not committed."
+      echo "  To discard and start over:"
+      echo "    git checkout -- $MATISSE_INIT docs/guide/changelog.md"
       ;;
     committed)
-      echo "  The release branch '$RELEASE_BRANCH' has the version-bump commit."
-      echo "  To clean up and start over:"
-      echo "    git checkout develop"
-      echo "    git branch -D $RELEASE_BRANCH"
-      echo "  Or to resume manually from here:"
-      echo "    git checkout master"
-      echo "    git pull origin master --ff-only"
-      echo "    git merge --no-ff $RELEASE_BRANCH -m \"Merge branch '$RELEASE_BRANCH'\""
+      echo "  Version bump was committed but not tagged/pushed. To resume:"
       echo "    git tag -a v${NEW_VER} -m \"Release v${NEW_VER}\""
-      echo "    git push origin master"
-      echo "    git push origin v${NEW_VER}"
-      echo "    git checkout develop"
-      echo "    git merge --no-ff master -m 'Merge branch master into develop'"
-      echo "    git push origin develop"
-      echo "    git branch -d $RELEASE_BRANCH"
+      echo "    git push origin ${TRUNK} --follow-tags"
       ;;
-    merged | tagged)
-      echo "  master has been merged/tagged locally but not yet pushed."
-      echo "  To resume:"
-      echo "    git push origin master"
-      echo "    git push origin v${NEW_VER}"
-      echo "    git checkout develop"
-      echo "    git merge --no-ff master -m 'Merge branch master into develop'"
-      echo "    git push origin develop"
-      echo "    git branch -d $RELEASE_BRANCH"
-      ;;
-    pushed_master)
-      echo "  master was pushed but the tag was not. To resume:"
-      echo "    git push origin v${NEW_VER}"
-      echo "    git checkout develop"
-      echo "    git merge --no-ff master -m 'Merge branch master into develop'"
-      echo "    git push origin develop"
-      echo "    git branch -d $RELEASE_BRANCH"
-      ;;
-    pushed_tag)
-      echo "  Tag v${NEW_VER} was pushed (CI/PyPI triggered). Still need to:"
-      echo "    git checkout develop"
-      echo "    git merge --no-ff master -m 'Merge branch master into develop'"
-      echo "    git push origin develop"
-      echo "    git branch -d $RELEASE_BRANCH"
-      ;;
-    merged_develop)
-      echo "  develop was merged locally but not pushed. To resume:"
-      echo "    git push origin develop"
-      echo "    git branch -d $RELEASE_BRANCH"
+    tagged)
+      echo "  Tag v${NEW_VER} was created locally but not pushed. To resume:"
+      echo "    git push origin ${TRUNK} --follow-tags"
       ;;
   esac
   echo "================================================================"
 }
 
-trap 'on_error "$@"' ERR
+trap 'on_error' ERR
 
 # ── argument parsing ──────────────────────────────────────────────────────────
 [[ $# -ge 1 ]] || usage
@@ -135,31 +93,28 @@ case "$BUMP_ARG" in
   *)                     NEW_VER="$BUMP_ARG" ;;
 esac
 
-RELEASE_BRANCH="release/v${NEW_VER}"
-
 # ── pre-flight checks ─────────────────────────────────────────────────────────
 STAGE="preflight"
 [[ -f "$MATISSE_INIT" ]]        || die "$MATISSE_INIT not found — run from the repo root"
 command -v git-cliff >/dev/null || die "'git-cliff' not found (install: pipx install git-cliff)"
 
 CURRENT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || true)
-[[ "$CURRENT_BRANCH" == "develop" ]] \
-  || die "must be on 'develop' branch (currently on '$CURRENT_BRANCH')"
+[[ "$CURRENT_BRANCH" == "$TRUNK" ]] \
+  || die "must be on '$TRUNK' branch (currently on '$CURRENT_BRANCH')"
 [[ -z "$(git status --porcelain)" ]] \
   || die "working tree is not clean — commit or stash changes first"
 
 git fetch --tags --quiet
 [[ -z "$(git tag -l "v${NEW_VER}")" ]] || die "tag v${NEW_VER} already exists"
 
-DEVELOP_BEHIND=$(git rev-list --count HEAD..origin/develop 2>/dev/null || echo 0)
-MASTER_BEHIND=$(git rev-list --count master..origin/master 2>/dev/null || echo 0)
-[[ "$DEVELOP_BEHIND" -eq 0 ]] || die "develop is ${DEVELOP_BEHIND} commit(s) behind origin/develop — run: git pull origin develop"
-[[ "$MASTER_BEHIND"  -eq 0 ]] || die "master is ${MASTER_BEHIND} commit(s) behind origin/master — run: git pull origin master"
+BEHIND=$(git rev-list --count HEAD..origin/${TRUNK} 2>/dev/null || echo 0)
+[[ "$BEHIND" -eq 0 ]] \
+  || die "${TRUNK} is ${BEHIND} commit(s) behind origin/${TRUNK} — run: git pull origin ${TRUNK}"
 
-# ── lint / format check (before any branch is created) ───────────────────────
+# ── lint / format check ───────────────────────────────────────────────────────
 STAGE="lint"
 info "Running ruff lint + format check"
-ruff check matisse/ tests/ || die "lint failed — run 'make fmt' to fix, then retry"
+ruff check matisse/ tests/   || die "lint failed — run 'make fmt' to fix, then retry"
 ruff format --check matisse/ tests/ || die "format check failed — run 'make fmt' to fix, then retry"
 
 # ── confirm ───────────────────────────────────────────────────────────────────
@@ -170,56 +125,27 @@ echo
 read -r -p "Proceed? [y/N] " confirm
 [[ "$confirm" =~ ^[Yy]$ ]] || { echo "Aborted."; exit 0; }
 
-# ── create release branch ─────────────────────────────────────────────────────
-STAGE="branched"
-info "Creating branch $RELEASE_BRANCH"
-git checkout -b "$RELEASE_BRANCH"
-
-# ── bump version ──────────────────────────────────────────────────────────────
+# ── bump version + changelog ──────────────────────────────────────────────────
+STAGE="bumped"
 info "Bumping version ($CUR_VER → $NEW_VER)"
 sed -i "s/__version__ = \"${CUR_VER}\"/__version__ = \"${NEW_VER}\"/" "$MATISSE_INIT"
 
-# ── generate changelog ────────────────────────────────────────────────────────
 info "Generating docs/guide/changelog.md with git-cliff"
 mkdir -p docs/guide
 git-cliff --tag "v${NEW_VER}" -o docs/guide/changelog.md
 
-# ── run tests ─────────────────────────────────────────────────────────────────
-STAGE="tests"
 info "Running test suite"
 python -m pytest
 
-# ── commit release ────────────────────────────────────────────────────────────
+# ── commit, tag, push ─────────────────────────────────────────────────────────
 STAGE="committed"
 git add "$MATISSE_INIT" docs/guide/changelog.md
 git commit -m "chore(release): bump version to v${NEW_VER}"
 
-# ── merge to master, tag, push ────────────────────────────────────────────────
-STAGE="merged"
-info "Merging to master and tagging v${NEW_VER}"
-git checkout master
-git pull origin master --ff-only
-git merge --no-ff "$RELEASE_BRANCH" -m "Merge branch '${RELEASE_BRANCH}'"
-
 STAGE="tagged"
 git tag -a "v${NEW_VER}" -m "Release v${NEW_VER}"
 
-STAGE="pushed_master"
-info "Pushing master + tag to origin"
-git push origin master
+info "Pushing ${TRUNK} + tag to origin (CI will publish to PyPI)"
+git push origin "${TRUNK}" --follow-tags
 
-STAGE="pushed_tag"
-git push origin "v${NEW_VER}"
-
-# ── merge back to develop, push ───────────────────────────────────────────────
-STAGE="merged_develop"
-info "Merging master back to develop"
-git checkout develop
-git merge --no-ff master -m "Merge branch 'master' into develop"
-git push origin develop
-
-# ── remove local release branch ───────────────────────────────────────────────
-git branch -d "$RELEASE_BRANCH"
-
-# ── PyPI upload is triggered by the tag push via CI ───────────────────────────
-info "Done — v${NEW_VER} released (PyPI upload triggered by tag push via CI)"
+info "Done — v${NEW_VER} released"
