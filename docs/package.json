@@ -13,6 +13,6 @@
   },
   "overrides": {
     "esbuild": ">=0.25.0",
-    "@xmldom/xmldom": ">=0.9.9"
+    "@xmldom/xmldom": ">=0.9.10"
   }
 }
