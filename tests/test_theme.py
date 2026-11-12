@@ -9,6 +9,8 @@ Covers:
 - section parsers: canvas, lists, toc, layout, entities
 """
 
+from copy import deepcopy
+
 from matisse.theme import Theme
 
 # ---------------------------------------------------------------------------
@@ -496,3 +498,139 @@ overtheme:
         t.get(source=source, name="overtheme")
         info = t.get_slide_transition()
         assert info["transition"] == "absolute"
+
+
+# ---------------------------------------------------------------------------
+# Overtheme: inheritance of layout dimensions via copy_from
+# ---------------------------------------------------------------------------
+
+
+def _values(css_list, key):
+    """Return every value stored under exactly ``key`` in a CSS list."""
+    return [css[key] for css in css_list if key in css]
+
+
+def _theme(source, name="theme"):
+    t = Theme()
+    t.get(source=source, name=name)
+    return t
+
+
+_PARENT = """
+---
+theme:
+  layout:
+    slide:
+      width: 1200px
+      height: 800px
+    header-1:
+      height: '15%'
+      margin-top: '2%'
+      active: 'yes'
+    footer-1:
+      height: '12%'
+      active: 'yes'
+    sidebar-1:
+      width: '20%'
+      margin-left: '1%'
+      active: 'yes'
+---
+"""
+
+
+def _overtheme(layout):
+    return f"""
+---
+overtheme:
+  copy-from-theme: true
+  layout:
+{layout}
+---
+"""
+
+
+class TestOverthemeInheritance:
+    def test_inherits_parent_slide_dimensions(self):
+        parent = _theme(_PARENT)
+        over = _theme(_overtheme("    slide:\n      border-radius: '50%'"), name="overtheme")
+        over.copy_from(other=parent)
+        info = over.get_slide_transition()
+        assert (info["width"], info["height"]) == (1200, 800)
+
+    def test_own_slide_dimensions_win_over_parent(self):
+        parent = _theme(_PARENT)
+        over = _theme(_overtheme("    slide:\n      width: 640px"), name="overtheme")
+        over.copy_from(other=parent)
+        assert _values(over.slide, "width") == ["640px"]
+        assert _values(over.slide, "height") == ["800px"]
+
+    def test_partially_declared_header_inherits_parent_height(self):
+        parent = _theme(_PARENT)
+        over = _theme(_overtheme("    header-1:\n      background: red"), name="overtheme")
+        over.copy_from(other=parent)
+        # parent raw height 15% minus its 2% top margin, subtracted exactly once
+        assert _values(over.slide_header["header-1"], "height") == ["13%"]
+        assert _values(over.slide_header["header-1"], "background") == ["red"]
+
+    def test_partially_declared_footer_and_sidebar_inherit_parent(self):
+        parent = _theme(_PARENT)
+        layout = "    footer-1:\n      color: blue\n    sidebar-1:\n      color: blue"
+        over = _theme(_overtheme(layout), name="overtheme")
+        over.copy_from(other=parent)
+        assert _values(over.slide_footer["footer-1"], "height") == ["12%"]
+        assert _values(over.slide_sidebar["sidebar-1"], "width") == ["19%"]
+
+    def test_own_margins_subtracted_once(self):
+        parent = _theme(_PARENT)
+        layout = "    header-1:\n      height: '20%'\n      margin-top: '3%'"
+        over = _theme(_overtheme(layout), name="overtheme")
+        over.copy_from(other=parent)
+        assert _values(over.slide_header["header-1"], "height") == ["17%"]
+
+    def test_copy_from_does_not_mutate_parent(self):
+        parent = _theme(_PARENT)
+        snapshot = {
+            attr: deepcopy(getattr(parent, attr))
+            for attr in ("slide", "slide_content", "slide_header", "slide_footer", "slide_sidebar")
+        }
+        # header-1/footer-1 undeclared: copied wholesale from the parent, the path
+        # that used to alias the parent's lists and re-subtract its margins.
+        layout = "    sidebar-1:\n      margin-right: '3%'"
+        for _ in range(2):
+            over = _theme(_overtheme(layout), name="overtheme")
+            over.copy_from(other=parent)
+        for attr, before in snapshot.items():
+            assert getattr(parent, attr) == before, attr
+
+    def test_repeated_overthemes_are_identical(self):
+        parent = _theme(_PARENT)
+        layout = "    header-1:\n      margin-bottom: '4%'"
+        results = []
+        for _ in range(2):
+            over = _theme(_overtheme(layout), name="overtheme")
+            over.copy_from(other=parent)
+            results.append(over.css)
+        assert results[0] == results[1]
+
+    def test_set_from_clone_inherits_like_original(self):
+        parent = _theme(_PARENT)
+        clone = Theme()
+        clone.set_from(other=parent)
+        layout = "    header-1:\n      background: red"
+        results = []
+        for base in (parent, clone):
+            over = _theme(_overtheme(layout), name="overtheme")
+            over.copy_from(other=base)
+            results.append(over.css)
+        assert results[0] == results[1]
+
+
+class TestDecoratorDefaults:
+    def test_footer_without_height_gets_default_height(self):
+        t = _theme("---\ntheme:\n  layout:\n    footer-1:\n      active: 'yes'\n---\n")
+        assert _values(t.slide_footer["footer-1"], "height") == ["10%"]
+        assert _values(t.slide_footer["footer-1"], "width") == ["100%"]
+
+    def test_sidebar_without_width_gets_single_default_width(self):
+        t = _theme("---\ntheme:\n  layout:\n    sidebar-1:\n      margin-left: '2%'\n      active: 'yes'\n---\n")
+        assert _values(t.slide_sidebar["sidebar-1"], "width") == ["8%"]

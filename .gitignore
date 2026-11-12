@@ -39,3 +39,6 @@ wiki/
 
 # Test data
 sample/
+
+# Rendered example presentations
+examples/**/out/

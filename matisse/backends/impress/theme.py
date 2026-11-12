@@ -131,8 +131,17 @@ class ImpressTheme(AbstractTheme):
         Theorem.reset()
         Video.reset()
 
+    _LAYOUT_ATTRS = ("slide", "slide_content", "slide_header", "slide_footer", "slide_sidebar")
+
     def __init__(self, source=None, name="theme", div_id=""):
         self.copy_from_theme = None
+        # Layout lists as declared by the user, captured just before
+        # __check_slide() normalises them in place (injects defaults, subtracts
+        # margins). copy_from() merges these raw lists and normalises once, so
+        # inheritance never sees defaults that would shadow the parent's values
+        # and margins are never subtracted twice. None means the live
+        # attributes are still raw.
+        self._raw_layout = None
         self.canvas = []
         self.ordered_list = []
         self.unordered_list = []
@@ -252,6 +261,7 @@ class ImpressTheme(AbstractTheme):
             "slide_header",
             "slide_footer",
             "slide_sidebar",
+            "_raw_layout",
             "box",
             "box_caption",
             "box_content",
@@ -319,7 +329,17 @@ class ImpressTheme(AbstractTheme):
             setattr(self, attr, deepcopy(getattr(other, attr)))
 
     def copy_from(self, other):
-        """Copy attributes from other theme if self has not already set those attributes."""
+        """Copy attributes from other theme if self has not already set those attributes.
+
+        Layout lists (slide, content, headers, footers, sidebars) are merged from
+        both themes' raw, pre-normalisation state and normalised once afterwards.
+        Everything taken from ``other`` is deep-copied, so ``other`` is never
+        mutated by later normalisation of ``self``.
+        """
+        own_raw = self._raw_layout_copy()
+        other_raw = other._raw_layout_copy()
+        for attr in self._LAYOUT_ATTRS:
+            setattr(self, attr, own_raw[attr])
 
         def append_css(my_element, other_element):
             if len(other_element) > 0:
@@ -333,9 +353,9 @@ class ImpressTheme(AbstractTheme):
                             found = True
                     if not found:
                         if isinstance(my_element, list):
-                            my_element.append(css)
+                            my_element.append(deepcopy(css))
                         else:
-                            my_element[css] = other_element[css]
+                            my_element[css] = deepcopy(other_element[css])
 
         append_css(my_element=self.canvas, other_element=other.canvas)
         append_css(my_element=self.toc, other_element=other.toc)
@@ -343,23 +363,15 @@ class ImpressTheme(AbstractTheme):
         append_css(my_element=self.toc_section_emph, other_element=other.toc_section_emph)
         append_css(my_element=self.toc_subsection_emph, other_element=other.toc_subsection_emph)
         append_css(my_element=self.toc_slide_emph, other_element=other.toc_slide_emph)
-        append_css(my_element=self.slide, other_element=other.slide)
-        append_css(my_element=self.slide_content, other_element=other.slide_content)
-        for header in other.slide_header:
-            if header not in self.slide_header:
-                self.slide_header[header] = other.slide_header[header]
-            else:
-                append_css(my_element=self.slide_header[header], other_element=other.slide_header[header])
-        for footer in other.slide_footer:
-            if footer not in self.slide_footer:
-                self.slide_footer[footer] = other.slide_footer[footer]
-            else:
-                append_css(my_element=self.slide_footer[footer], other_element=other.slide_footer[footer])
-        for sidebar in other.slide_sidebar:
-            if sidebar not in self.slide_sidebar:
-                self.slide_sidebar[sidebar] = other.slide_sidebar[sidebar]
-            else:
-                append_css(my_element=self.slide_sidebar[sidebar], other_element=other.slide_sidebar[sidebar])
+        append_css(my_element=self.slide, other_element=other_raw["slide"])
+        append_css(my_element=self.slide_content, other_element=other_raw["slide_content"])
+        for kind in ("slide_header", "slide_footer", "slide_sidebar"):
+            mine = getattr(self, kind)
+            for decor, css_list in other_raw[kind].items():
+                if decor not in mine:
+                    mine[decor] = css_list
+                else:
+                    append_css(my_element=mine[decor], other_element=css_list)
         append_css(my_element=self.box, other_element=other.box)
         append_css(my_element=self.box_caption, other_element=other.box_caption)
         append_css(my_element=self.box_content, other_element=other.box_content)
@@ -380,7 +392,7 @@ class ImpressTheme(AbstractTheme):
             self.code_style = other.code_style
         for header in other.slide_header_metadata:
             if header not in self.slide_header_metadata:
-                self.slide_header_metadata[header] = other.slide_header_metadata[header]
+                self.slide_header_metadata[header] = deepcopy(other.slide_header_metadata[header])
             else:
                 append_css(
                     my_element=self.slide_header_metadata[header],
@@ -388,7 +400,7 @@ class ImpressTheme(AbstractTheme):
                 )
         for footer in other.slide_footer_metadata:
             if footer not in self.slide_footer_metadata:
-                self.slide_footer_metadata[footer] = other.slide_footer_metadata[footer]
+                self.slide_footer_metadata[footer] = deepcopy(other.slide_footer_metadata[footer])
             else:
                 append_css(
                     my_element=self.slide_footer_metadata[footer],
@@ -396,14 +408,25 @@ class ImpressTheme(AbstractTheme):
                 )
         for sidebar in other.slide_sidebar_metadata:
             if sidebar not in self.slide_sidebar_metadata:
-                self.slide_sidebar_metadata[sidebar] = other.slide_sidebar_metadata[sidebar]
+                self.slide_sidebar_metadata[sidebar] = deepcopy(other.slide_sidebar_metadata[sidebar])
             else:
                 append_css(
                     my_element=self.slide_sidebar_metadata[sidebar],
                     other_element=other.slide_sidebar_metadata[sidebar],
                 )
+        self._snapshot_layout()
         self.__check_slide()
         self.__get_css()
+
+    def _snapshot_layout(self):
+        """Record the current (raw) layout lists before they are normalised."""
+        self._raw_layout = {attr: deepcopy(getattr(self, attr)) for attr in self._LAYOUT_ATTRS}
+
+    def _raw_layout_copy(self):
+        """Return a deep copy of the raw layout lists (live ones if never normalised)."""
+        if self._raw_layout is not None:
+            return deepcopy(self._raw_layout)
+        return {attr: deepcopy(getattr(self, attr)) for attr in self._LAYOUT_ATTRS}
 
     @staticmethod
     def theme2css(div, div_id, klass, theme_list):
@@ -748,6 +771,8 @@ class ImpressTheme(AbstractTheme):
                         css_data[k] = v
                 if css_data:
                     self.slide = self.__dict_to_css_list(css_data)
+                    if self._raw_layout is not None:
+                        self._raw_layout["slide"] = deepcopy(self.slide)
                 self.custom = True
             return
         layout = data["layout"]
@@ -779,6 +804,7 @@ class ImpressTheme(AbstractTheme):
         # without depending on impress-specific internal structures.
         self._decorator_specs = parse_layout_decorators(layout)
 
+        self._snapshot_layout()
         self.__check_slide()
         self.__get_slide_decorators_metadata()
 
@@ -915,7 +941,7 @@ class ImpressTheme(AbstractTheme):
             if not found_w:
                 self.slide_footer[footer].append({"width": str(100 - margin[2] - margin[3]) + "%"})
             if not found_h:
-                self.slide_footer[footer].append({"width": str(10 - margin[0] - margin[1]) + "%"})
+                self.slide_footer[footer].append({"height": str(10 - margin[0] - margin[1]) + "%"})
 
     @staticmethod
     def __check_active(decorator):
@@ -999,7 +1025,6 @@ class ImpressTheme(AbstractTheme):
                         h = int(css[key].strip("%"))
                         css[key] = str(h - margin[0] - margin[1]) + "%"
             if not found_w:
-                self.slide_sidebar[sidebar].append({"width": "10%"})
                 self.slide_sidebar[sidebar].append({"width": str(10 - margin[2] - margin[3]) + "%"})
             if not found_h:
                 self.slide_sidebar[sidebar].append({"height": str(height - margin[0] - margin[1]) + "%"})

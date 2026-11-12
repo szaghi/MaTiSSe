@@ -18,13 +18,14 @@ make dev                  # same, via Makefile
 
 ### Run
 ```bash
-MaTiSSe.py -i source.md -o output_dir        # Convert markdown to presentation (impress.js)
-MaTiSSe.py -i source.md -o output --reveal   # Use reveal.js backend
-MaTiSSe.py --sample mytalk.md                # Generate a sample presentation
-MaTiSSe.py --print-themes                    # List builtin themes
-MaTiSSe.py --print-highlight-styles          # List code highlight styles
-MaTiSSe.py -i source.md -o output --pdf      # Generate PDF-friendly output (no impress.js)
-MaTiSSe.py -i source.md -o output --offline  # Copy JS/CSS bundles locally instead of using CDN
+MaTiSSe.py build -i source.md -o output_dir         # Convert markdown to presentation (impress.js)
+MaTiSSe.py build -i source.md -o output -b reveal   # Use reveal.js backend
+MaTiSSe.py build --sample mytalk.md                 # Generate a sample presentation
+MaTiSSe.py build --print-themes                     # List builtin themes
+MaTiSSe.py build --print-code-styles                # List code highlight styles
+MaTiSSe.py build -i source.md -o output --pdf       # Generate PDF-friendly output (no impress.js)
+MaTiSSe.py build -i source.md -o output --offline   # Copy JS/CSS bundles locally instead of using CDN
+python -m matisse build ...                         # Run THIS checkout (the PATH binary may be a separate pipx install)
 ```
 
 ### Tests
