@@ -18,7 +18,7 @@ This keeps the output directory small and always uses the pinned versions.
 Pass `--offline` to copy the impress.js and MathJax bundles into the output directory:
 
 ```bash
-matisse -i talk.md -o talk/ --offline
+matisse build -i talk.md -o talk/ --offline
 ```
 
 The output `js/` subdirectory will contain local copies of impress.js and MathJax. The

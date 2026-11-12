@@ -1,0 +1,37 @@
+/* MaTiSSe · Torii in Shiden · sumi family */
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@800&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap");
+
+:root {
+  --vp-c-bg: #f3ede1;
+  --vp-c-bg-alt: #ebe3d3;
+  --vp-c-bg-elv: #f7f2e8;
+  --vp-c-bg-soft: #ebe3d3;
+  --vp-c-divider: #ddd4c3;
+  --vp-c-text-1: #1d1b18;
+  --vp-c-text-2: #5f5a52;
+  --vp-c-brand-1: #7124c2;
+  --vp-c-brand-2: #5d1aa6;
+  --vp-c-brand-3: #7124c2;
+  --vp-c-brand-soft: rgba(138, 43, 226, 0.14);
+  --vp-button-brand-text: #ffffff;
+  --vp-home-hero-name-color: #1d1b18;
+  --vp-font-family-base: Inter, ui-sans-serif, system-ui, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+.dark {
+  --vp-c-bg: #0c0b14;
+  --vp-c-bg-alt: #09080f;
+  --vp-c-bg-elv: #15131f;
+  --vp-c-bg-soft: #15131f;
+  --vp-c-divider: #262338;
+  --vp-c-text-1: #ebe7f3;
+  --vp-c-text-2: #aaa5bf;
+  --vp-c-brand-1: #c07bff;
+  --vp-c-brand-2: #d4a3ff;
+  --vp-c-brand-3: #c07bff;
+  --vp-c-brand-soft: rgba(192, 123, 255, 0.16);
+  --vp-button-brand-text: #140a22;
+  --vp-home-hero-name-color: #ebe7f3;
+}
+.VPHero .name { font-family: 'Shippori Mincho', serif; font-weight: 800; letter-spacing: 0.04em; }
+.dark .VPHero .image-src { filter: drop-shadow(0 0 18px rgba(192, 123, 255, 0.35)); }

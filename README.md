@@ -1,5 +1,10 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="logo/logo-dark.png">
+  <img src="logo/logo.png" alt="MaTiSSe logo: a torii on an unrolled scroll" width="200">
+</picture>
+
 # MaTiSSe
 
 [![CI](https://github.com/szaghi/MaTiSSe/actions/workflows/ci.yml/badge.svg)](https://github.com/szaghi/MaTiSSe/actions/workflows/ci.yml)

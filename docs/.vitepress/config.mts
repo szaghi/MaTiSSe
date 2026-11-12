@@ -4,6 +4,14 @@ export default defineConfig({
   title: 'MaTiSSe',
   description: 'Markdown To Impressive Scientific Slides — LaTeX math, syntax highlighting, and rich layouts from plain Markdown',
   base: '/MaTiSSe/',
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/MaTiSSe/favicon.svg', media: '(prefers-color-scheme: light)' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/MaTiSSe/favicon-dark.svg', media: '(prefers-color-scheme: dark)' }],
+    ['link', { rel: 'icon', href: '/MaTiSSe/favicon.ico', sizes: '48x48' }],
+    ['link', { rel: 'apple-touch-icon', href: '/MaTiSSe/apple-touch-icon.png' }],
+    ['meta', { name: 'theme-color', content: '#f3ede1', media: '(prefers-color-scheme: light)' }],
+    ['meta', { name: 'theme-color', content: '#0c0b14', media: '(prefers-color-scheme: dark)' }],
+  ],
   markdown: {
     math: true,
   },
@@ -18,6 +26,8 @@ export default defineConfig({
     },
   },
   themeConfig: {
+    logo: { light: '/logo-mark.svg', dark: '/logo-mark-dark.svg', alt: 'MaTiSSe' },
+
     nav: [
       { text: 'Home', link: '/' },
       {
