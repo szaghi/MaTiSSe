@@ -4,6 +4,23 @@ All notable changes to MaTiSSe.py are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.4] — 2026-11-12
+### Added
+- **docs**: Overhaul documentation structure and document missing features
+
+- **docs**: Adopt the torii-in-shiden visual identity
+
+
+### Documentation
+- Update CLAUDE.md with v1.7.3 release notes and backend architecture changes
+
+- Update release workflow to trunk-based development
+
+
+### Fixed
+- **theme**: Merge overtheme layout from raw values in copy_from
+
+
 ## [1.7.3] — 2026-04-09
 ### Added
 - **docs**: Add inline formatting documentation and extend markdown syntax reference
