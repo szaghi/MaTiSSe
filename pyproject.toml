@@ -26,7 +26,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-cov", "ruff"]
+dev = ["pytest", "pytest-cov", "ruff==0.17.5"]  # pinned: CI lint installs this extra
 
 [project.scripts]
 "MaTiSSe.py" = "matisse.matisse:main"
@@ -74,6 +74,9 @@ fail_under = 60
 [tool.ruff]
 line-length = 120
 target-version = "py39"
+# Markdown files are slide sources: their code blocks are presentation
+# content, not project code, so ruff (>=0.17 formats Markdown) must not touch them.
+extend-exclude = ["*.md"]
 
 [tool.ruff.lint]
 select = ["E", "W", "F", "I"]

@@ -16,7 +16,7 @@ jobs:
       with:
         python-version: "3.12"
     - name: Install ruff
-      run: pip install ruff
+      run: pip install -e ".[dev]"   # ruff version pinned in pyproject.toml
     - name: Lint
       run: ruff check matisse/ tests/
     - name: Format check
